@@ -34,10 +34,7 @@ const MainSection = () => {
             <h2 className="m-4 text-2xl w-full lg:w-[33vw] font-semibold text-zinc-200 text-center">
                 New Releases
             </h2>
-        
-            
                 <Slider releases={releases} />
-         
 
         </div>
     );

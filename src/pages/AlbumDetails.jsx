@@ -8,7 +8,7 @@ const AlbumDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(id);
+ 
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -31,9 +31,10 @@ const AlbumDetail = () => {
 
   return (
     <div>
+      <img src={albumDetails.images[0]?.url} alt={albumDetails.name} />
       <h2>{albumDetails.name}</h2>
       <p>Artists: {albumDetails.artists.map(artist => artist.name).join(', ')}</p>
-      <img src={albumDetails.images[0]?.url} alt={albumDetails.name} />
+      
       <div>
         <h3>Tracks:</h3>
         <ul>
