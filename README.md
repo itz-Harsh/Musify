@@ -1,8 +1,27 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Music Web Application project 
+
+npm install
+npm i axios 
+npm install @mui/icons-material  
+npm i react-router-dom
+npm i install-react-icons 
+npm install prop-types
+pip install flask-cors
+pip install requests python-dotenv
+npm install vite
+python.exe -m pip install --upgrade pip
+pip install flask
+pip install requests
+pip install python-dotenv
+
+
+![Musify](https://github.com/user-attachments/assets/3d71b1b6-d289-4277-9086-f47563c32498)
+
 
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
