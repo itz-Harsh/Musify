@@ -1,14 +1,19 @@
-import {BrowserRouter , Routes ,Route} from "react-router-dom"
-import Home from "./pages/Home"
-import AlbumDetails from "./pages/AlbumDetails"
-import { Album } from "@mui/icons-material"
-export default function App() {
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AlbumDetail from './pages/AlbumDetails';
+import Home from './pages/Home';
+
+function App() {
   return (
-    <BrowserRouter>
-    <Routes>
-        <Route path="/" element={<Home />}  />
-        <Route path="album" element={<AlbumDetails />}  />
-    </Routes>
-    </BrowserRouter>
-  )
+    <Router>
+      <Routes>
+        
+        <Route path="/" element={<Home />} />
+
+        <Route path="/albums/:id" element={<AlbumDetail />} />
+
+      </Routes>
+    </Router>
+  );
 }
+
+export default App;

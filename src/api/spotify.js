@@ -11,3 +11,8 @@ export const fetchNewReleases = async () => {
         throw error;
     }
 };
+
+export const fetchAlbumDetails = async (albumId) => {
+    const response = await axios.get(`${API_BASE_URL}/albums/${albumId}`);
+    return response.data;
+  };
