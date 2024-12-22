@@ -1,0 +1,128 @@
+{
+    "success": true,
+    "data": {
+        "id": "",
+        "name": "",
+        "description": "0 ·  Album",
+        "type": "album",
+        "year": 0,
+        "playCount": 0,
+        "language": "",
+        "explicitContent": false,
+        "url": "https://www.jiosaavn.com/album//",
+        "songCount": 1,
+        "artists": {
+            "primary": [
+                {
+                    "id": "",
+                    "name": "",
+                    "role": "",
+                    "image": [],
+                    "type": "artist",
+                    "url": "https://www.jiosaavn.com/artist/-songs/"
+                }
+            ],
+            "featured": [],
+            "all": [
+                {
+                    "id": "",
+                    "name": "",
+                    "role": "",
+                    "image": [],
+                    "type": "artist",
+                    "url": "https://www.jiosaavn.com/artist/-songs/"
+                }
+            ]
+        },
+        "image": [
+            {
+                "quality": "50x50",
+                "url": "https://c.saavncdn.com/669/You-Only-Love-Me-English-2023-20230329052429-50x50.jpg"
+            },
+            {
+                "quality": "150x150",
+                "url": "https://c.saavncdn.com/669/You-Only-Love-Me-English-2023-20230329052429-150x150.jpg"
+            },
+            {
+                "quality": "500x500",
+                "url": "https://c.saavncdn.com/669/You-Only-Love-Me-English-2023-20230329052429-500x500.jpg"
+            }
+        ],
+        "songs": [
+            {
+                "id": "dsf7m88e",
+                "name": "This is a sample trailer - testing",
+                "type": "song",
+                "year": 0,
+                "releaseDate": "",
+                "duration": 4518,
+                "label": "",
+                "explicitContent": false,
+                "playCount": 351,
+                "language": "",
+                "hasLyrics": false,
+                "lyricsId": null,
+                "url": "https://www.jiosaavn.com/song/this-is-a-sample-trailer-testing/FBsNBhkID1Y",
+                "copyright": "©  0 ",
+                "album": {
+                    "id": "0",
+                    "name": "",
+                    "url": ""
+                },
+                "artists": {
+                    "primary": [],
+                    "featured": [],
+                    "all": [
+                        {
+                            "id": "NULL",
+                            "name": "NULL",
+                            "role": "music",
+                            "image": [],
+                            "type": "artist",
+                            "url": "https://www.jiosaavn.com/artist/null-songs/bzf6ckifhyo_"
+                        },
+                        {
+                            "id": "NULL",
+                            "name": "NULL",
+                            "role": "director",
+                            "image": [],
+                            "type": "artist",
+                            "url": "https://www.jiosaavn.com/artist/null-songs/bzf6ckifhyo_"
+                        },
+                        {
+                            "id": "NULL",
+                            "name": "NULL",
+                            "role": "lyricist",
+                            "image": [],
+                            "type": "artist",
+                            "url": "https://www.jiosaavn.com/artist/null-songs/bzf6ckifhyo_"
+                        },
+                        {
+                            "id": "NULL",
+                            "name": "NULL",
+                            "role": "starring",
+                            "image": [],
+                            "type": "artist",
+                            "url": "https://www.jiosaavn.com/artist/null-songs/bzf6ckifhyo_"
+                        }
+                    ]
+                },
+                "image": [
+                    {
+                        "quality": "50x50",
+                        "url": "https://c.saavncdn.com/669/You-Only-Love-Me-English-2023-20230329052429-50x50.jpg"
+                    },
+                    {
+                        "quality": "150x150",
+                        "url": "https://c.saavncdn.com/669/You-Only-Love-Me-English-2023-20230329052429-150x150.jpg"
+                    },
+                    {
+                        "quality": "500x500",
+                        "url": "https://c.saavncdn.com/669/You-Only-Love-Me-English-2023-20230329052429-500x500.jpg"
+                    }
+                ],
+                "downloadUrl": []
+            }
+        ]
+    }
+}
