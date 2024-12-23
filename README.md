@@ -17,7 +17,7 @@ pip install requests
 pip install python-dotenv
 
 
-![Musify](https://github.com/user-attachments/assets/64952fa5-0054-40d8-b3f2-5e4ccd537486)
+![Homepage](/public/home.png)
 
 
 
