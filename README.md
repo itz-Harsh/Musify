@@ -17,7 +17,7 @@ pip install requests
 pip install python-dotenv
 
 
-![Homepage](/public/home.png)
+![Homepage](/public/Home.png)
 
 
 
