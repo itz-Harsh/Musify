@@ -16,9 +16,11 @@ pip install flask
 pip install requests
 pip install python-dotenv
 
-
+Homepage
 ![Homepage](/public/Home.png)
 
+
+Album Details
 ![Album Details](/public/AlbumDetails.png)
 
 Currently, two official plugins are available:
