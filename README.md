@@ -19,7 +19,7 @@ pip install python-dotenv
 
 ![Homepage](/public/Home.png)
 
-
+![Album Details](/public/AlbumDetails.png)
 
 Currently, two official plugins are available:
 
