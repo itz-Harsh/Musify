@@ -10,7 +10,7 @@ npm i install-react-icons
 npm install prop-types
 pip install flask-cors
 pip install requests python-dotenv
-npm install vite
+npm create vite@latest
 python.exe -m pip install --upgrade pip
 pip install flask
 pip install requests
