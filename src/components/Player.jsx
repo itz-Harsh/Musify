@@ -6,7 +6,7 @@ import { FaDownload } from "react-icons/fa"
 import { HiSpeakerWave } from "react-icons/hi2"
 import VolumeController from "./VolumeController"
 import { useState } from "react"
-
+import { DragHandle } from "@mui/icons-material"
 
 
 const Player = () => {
@@ -16,8 +16,9 @@ const Player = () => {
 
     return (
         <div className=" flex flex-col fixed justify-between player bottom-0 w-full ">
+            <form action="" onChange={DragHandle}>
             <input type="range" name="progress" id="progress" min={0} max={100} step="0.1" value={0} className=" h-[3px] w-full text-emerald-500 range " />
-
+            </form>
             <div className=" flex justify-between items-center mb-3 px-3">
                 {/* 1st Div */}
                 <div className="flex justify-start items-center gap-5 lg:w-[30vw]">

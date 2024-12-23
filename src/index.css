@@ -55,3 +55,23 @@ input[type="range"]::-webkit-slider-thumb {
      z-index: 2;
      background-color: rgb(12, 12, 12);
 }
+.albumImg{
+     height: 350px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin: 4rem;
+     border-radius: 25px;
+     box-shadow: 0  0  25px rgb(0, 0, 0);
+}
+.albumDetails{
+     
+     /* background-color: aqua; */
+     display: flex;
+     margin: 4rem 0 0 5rem;
+     align-items: center;
+}
+.song-info:hover{
+
+     background-color: rgb(18, 18, 18);
+}
