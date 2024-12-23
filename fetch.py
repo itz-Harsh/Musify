@@ -23,8 +23,8 @@ def get_access_token():
     else:
         raise Exception(f"Failed to get access token: {response.json()}")
 
-def fetch_data(access_token, endpoint, limit=50):
-    url = f"https://api.spotify.com/v1/{endpoint}?limit={limit}"
+def fetch_data(access_token, endpoint, offset=20 ,  limit=50):
+    url = f"https://api.spotify.com/v1/{endpoint}?limit={limit}&offset={offset}"
     headers = {"Authorization": f"Bearer {access_token}"}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
