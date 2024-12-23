@@ -45,11 +45,7 @@ if __name__ == "__main__":
     token = get_access_token()
     print("Access Token:", token)
     
-    # Example: Fetch data from Spotify API
     new_releases = fetch_data(token, "browse/new-releases")
 
-
-    # Fetch album details using a valid album ID
-  # Replace with an actual album ID from Spotify
     album_details = fetch_album_details(token, album_id)
     print("Album Details:", album_details)

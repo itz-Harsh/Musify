@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="flex items-center ml-3" >
         <Link to="/" className="flex items-center gap-2">
           <img src="/White_musify.svg" alt="Musify" className="h-16" />
-          <h2 className="text-white font-bold text-lg hover:text-emerald-400">Musify</h2>
+          <h2 className="text-white font-bold text-2xl hover:text-emerald-400">Musify</h2>
         </Link>
       </div>
 
