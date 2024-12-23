@@ -17,7 +17,7 @@ pip install requests
 pip install python-dotenv
 
 
-![Musify](https://github.com/user-attachments/assets/3d71b1b6-d289-4277-9086-f47563c32498)
+![Musify](https://github.com/itz-Harsh/Musify/public/Musify.png)
 
 
 Currently, two official plugins are available:
