@@ -10,14 +10,15 @@ npm i install-react-icons
 npm install prop-types
 pip install flask-cors
 pip install requests python-dotenv
-npm install vite
+npm create vite@latest
 python.exe -m pip install --upgrade pip
 pip install flask
 pip install requests
 pip install python-dotenv
 
 
-![Musify](https://github.com/user-attachments/assets/3d71b1b6-d289-4277-9086-f47563c32498)
+![Homepage](/public/Home.png)
+
 
 
 Currently, two official plugins are available:
