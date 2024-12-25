@@ -18,12 +18,8 @@ body {
 #search {
      width: 30rem;
 }
-
-input[type="text"]:hover{
-     box-shadow: 0px 0px 3px rgb(16 185 129) ;
-}
-input[type="text"]:focus{
-     box-shadow: 0px 0px 3px rgb(16 185 129) ;
+input[type=text]{
+     border: 1px solid #4d4d4d ;
 }
 
 .range[type="range"] {

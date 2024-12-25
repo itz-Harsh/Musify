@@ -1,43 +1,30 @@
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 const AlbumItems = ({ name, artists, id, image }) => {
-    return (
-        <Link
-            to={`/albums/${id}`}
-            className="w-[160px] max-h-[190px] overflow-y-clip flex flex-col justify-center items-center gap-3 rounded-lg"
-        >
-            {/* Display the album image */}
-            <div>
-            <img
-                src={image || '/placeholder.jpg'} // Fallback to a placeholder image if no image URL
-                alt={name} // Add alt text for better accessibility
-                className="rounded-ml "
-            />
+  // Ensure 'artists' is an array and fallback if empty or undefined
+  const artistNames = Array.isArray(artists?.primary) 
+    ? artists.primary.map((artist) => artist.name).join(" , ") 
+    : "Unknown Artist";
 
-            <div className="text-[13px] w-full flex flex-col justify-center items-center">
-                {/* Display the album name */}
-                <span className="font-semibold ">{name}</span>
+  // Ensure image is an array with at least 3 elements, or provide a fallback image
+  const imageUrl = image[2].url;
 
-                {/* Map through the artists and display their names */}
-                <p className="text-center">
-                    {artists?.map((artist) => artist.name).join(", ")}
-                </p>
-            </div>
-            </div>
-        </Link>
-    );
-};
-
-AlbumItems.propTypes = {
-    name: PropTypes.string.isRequired,
-    artists: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired
-        })
-    ).isRequired,
-    id: PropTypes.string.isRequired,
-    image: PropTypes.string // Now it's a string because `url` is passed directly
+  return (
+    <Link
+      to={`/albums/${id}`}
+      className="w-[160px] max-h-[200px] overflow-y-clip flex flex-col justify-center items-center gap-3 rounded-lg"
+    >
+      <img
+        src={imageUrl}
+        alt={name}
+        className="rounded-lg"
+      />
+      <div className="text-[13px] w-full flex flex-col justify-center items-center">
+        <span className="font-semibold overflow-x-clip">{name}</span>
+        <p>{artistNames}</p>
+      </div>
+    </Link>
+  );
 };
 
 export default AlbumItems;

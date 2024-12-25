@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';  // to fetch album ID from URL
-import { fetchAlbumDetails } from '../api/spotify';  // Import the function
 import Navbar from '../components/Navbar';
 import SongsList from '../components/SongsList';
 import Player from '../components/Player';

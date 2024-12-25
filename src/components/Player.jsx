@@ -51,10 +51,10 @@ const Player = () => {
         {/* 1st Div */}
         <div className="flex justify-start items-center gap-5 lg:w-[30vw]">
           <img
-            src={currentSong?.image || "/White_musify.svg"}
+            src={currentSong?.image || "/public/Pushpa-2-The-Rule-Hindi-2024-20241205211002-500x500.jpg"}
             alt={currentSong?.name || ""}
-            width={80}
-            className="rounded-3xl"
+            width={55}
+            className="rounded-xl"
           />
           <div className="hidden lg:block">
             <span>{currentSong?.name || "No Song Playing"}</span>

@@ -2,7 +2,7 @@ import { MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft } from "react-i
 import AlbumItems from "./AlbumItems";
 import { useRef } from "react";
 
-const Slider = ({ releases }) => {
+const Slider = ({ albums , artists}) => {
   const scrollRef = useRef(null);
 
   const scrollLeft = () => {
@@ -18,6 +18,8 @@ const Slider = ({ releases }) => {
   };
 
   return (
+    <>
+
     <div className="flex justify-center items-center gap-3">
       {/* Left Arrow */}
       <MdOutlineKeyboardArrowLeft
@@ -30,14 +32,11 @@ const Slider = ({ releases }) => {
         className="grid grid-rows-2 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-4 w-full lg:w-[78vw] px-5 scroll-smooth"
         ref={scrollRef}
       >
-        {releases.map((album) => (
+        {albums.map((album) => (
           <AlbumItems
-            key={album.id}
-            name={album.name}
-            artists={album.artists}
-            id={album.id}
-            image={album.images?.[0]?.url}
-          />
+          key={album.id}
+          {...album}// Fallback image
+        />
         ))}
       </div>
 
@@ -47,6 +46,8 @@ const Slider = ({ releases }) => {
         onClick={scrollRight}
       />
     </div>
+    
+    </>
   );
 };
 
