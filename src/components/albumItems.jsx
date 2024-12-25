@@ -4,7 +4,7 @@ const AlbumItems = ({ name, artists, id, image }) => {
   // Ensure 'artists' is an array and fallback if empty or undefined
   const artistNames = Array.isArray(artists?.primary) 
     ? artists.primary.map((artist) => artist.name).join(" , ") 
-    : "Unknown Artist";
+    : "";
 
   // Ensure image is an array with at least 3 elements, or provide a fallback image
   const imageUrl = image[2].url;
