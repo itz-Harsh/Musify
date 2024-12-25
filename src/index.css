@@ -51,12 +51,12 @@ input[type="range"]::-webkit-slider-thumb {
      z-index: 2;
      background-color: rgb(12, 12, 12);
 }
-.albumImg{
-     height: 350px;
+.DetailImg{
+     height: 360px;
      display: flex;
      justify-content: center;
      align-items: center;
-     margin: 4rem;
+     margin: 0rem;
      border-radius: 25px;
      box-shadow: 0  0  25px rgb(0, 0, 0);
 }
@@ -70,4 +70,8 @@ input[type="range"]::-webkit-slider-thumb {
 .song-info:hover{
 
      background-color: rgb(18, 18, 18);
+}
+.artistDetails{
+     height: 230px;
+     margin: 0;
 }

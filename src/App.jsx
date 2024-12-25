@@ -3,20 +3,21 @@ import AlbumDetail from './pages/AlbumDetails';
 import Home from './pages/Home';
 import MusicContext from './context/MusicContext';
 import { useState } from 'react';
+import ArtistsDetails from './pages/ArtistsDetails';
 
 function App() {
   const [tracks, setTracks] = useState([]); // All available tracks
   const [isPlaying, setIsPlaying] = useState(false); // Playback status
   const [currentSong, setCurrentSong] = useState(null); // Currently playing song
 
-  const playMusic = async (track, name, duration, image, id, artists) => {
+  const playMusic = async (song, name, duration, image, id, artists) => {
     try {
-      if (!track) {
+      if (!song) {
         console.error('No track provided.');
         return;
       }
 
-      if (!track.preview_url) {
+      if (!song.downloadUrl) {
         console.log('Preview URL is not available for this track.');
         return;
       }
@@ -36,7 +37,7 @@ function App() {
         }
       } else {
         // Create new audio object and play it
-        const newAudio = new Audio(track.preview_url);
+        const newAudio = new Audio(song.downloadUrl);
         newAudio.onended = () => setIsPlaying(false); // Stop when done
 
         setCurrentSong({
@@ -70,7 +71,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/artists/:id" element={<ArtistsDetails />} />
           <Route path="/albums/:id" element={<AlbumDetail />} />
+          
         </Routes>
       </Router>
     </MusicContext.Provider>

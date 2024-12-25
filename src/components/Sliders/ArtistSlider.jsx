@@ -1,8 +1,8 @@
 import { MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft } from "react-icons/md";
-import AlbumItems from "./AlbumItems";
 import { useRef } from "react";
+import ArtistItems from "../Items/ArtistItems";
 
-const Slider = ({ albums , artists}) => {
+const ArtistSlider = ({ artists }) => {
   const scrollRef = useRef(null);
 
   const scrollLeft = () => {
@@ -27,15 +27,15 @@ const Slider = ({ albums , artists}) => {
         onClick={scrollLeft}
       />
 
-      {/* Album Items */}
+  
       <div
-        className="grid grid-rows-2 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-4 w-full lg:w-[78vw] px-5 scroll-smooth"
+        className="grid grid-rows-1 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-4 w-full lg:w-[78vw] px-5 scroll-smooth"
         ref={scrollRef}
       >
-        {albums.map((album) => (
-          <AlbumItems
-          key={album.id}
-          {...album}// Fallback image
+        {artists.map((artist) => (
+          <ArtistItems
+          key={artist.id}
+          {...artist}// Fallback image
         />
         ))}
       </div>
@@ -47,8 +47,9 @@ const Slider = ({ albums , artists}) => {
       />
     </div>
     
+    
     </>
   );
 };
 
-export default Slider;
+export default ArtistSlider;

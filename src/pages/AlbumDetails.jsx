@@ -1,25 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';  // to fetch album ID from URL
+import { useParams } from 'react-router-dom';  // To fetch album ID from URL
 import Navbar from '../components/Navbar';
 import SongsList from '../components/SongsList';
 import Player from '../components/Player';
-// import MusicContext from '../context/MusicContext';
+import { fetchAlbumByID } from '../../fetch'; // Assuming the fetch function exists
 
 const AlbumDetail = () => {
   const { id } = useParams();  // Extract the album ID from the URL
-  const [albumDetails, setAlbumDetails] = useState([]);
+  const [details, setDetails] = useState(null);  // Set initial state to null to avoid errors
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const data = await fetchAlbumDetails(id);  // Fetch album details based on the album ID
-        setAlbumDetails(data);
-        console.log(data);
-        
+        const data = await fetchAlbumByID(id);  // Fetch album details based on the album ID
+        setDetails(data);
         
       } catch (err) {
         setError('Error fetching album details');
@@ -27,35 +23,39 @@ const AlbumDetail = () => {
         setLoading(false);
       }
     };
-
+    
     fetchDetails();
-  }, [id]); 
+  }, [id]); // Fetch details when the id changes (when navigating to a different album)
 
-  if (loading) return <div className='flex h-screen w-screen justify-center items-center '>Loading album details...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className='flex h-screen w-screen justify-center items-center'>Loading album details...</div>;
+  if (error) return <div className='flex h-screen w-screen justify-center items-center'>{error}</div>;
 
   return (
     <>
       <Navbar />
-
+      
       <div className='albumDetails gap-5 text-zinc-300'>
-        <img src={albumDetails.images[0]?.url} alt={albumDetails.name} className='albumImg' />
-        <div className='flex flex-col h-[400px] gap-4'>
-          <h1 className='text-2xl font-bold text-white  '>{albumDetails.name}</h1>
-          <pre className='font-sans font-semibold '>by {albumDetails.artists.map(artist => artist.name).join(' , ')}  .  {albumDetails.total_tracks} Songs </pre>
+        {details && details.data.image && details.data.image[2]?.url && (
+          <img src={details.data.image[2].url} alt={details.name} className='DetailImg' />
+        )}
         
-          <div className='overflow-y-scroll scroll-hide'>
-            { albumDetails.tracks.items.map((tracks) => (
-              <SongsList 
-              key={tracks.id} {...tracks}/>
-            ))}
-
+         <div className='flex flex-col h-[400px] gap-4'>
+          <h1 className='text-2xl font-bold text-white'>{details.data.name}</h1>
+          <pre className='font-sans font-semibold'>
+            by  {details.data.artists.primary[0].name}    {details.data.songCount} Songs
+          </pre>
+        
+          <div className='overflow-y-scroll scroll-hide w-[30rem]' >
+            {details.data.songs?.map((song) => (
+              <SongsList key={song.id} {...song} />
+            ))} 
           </div>
         </div>
       </div>
 
-            <Player />
+      <Player />
     </>
   );
 };
+
 export default AlbumDetail;

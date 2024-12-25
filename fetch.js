@@ -51,6 +51,35 @@ export const searchArtistByQuery = async (query) => {
     }
 };
 
+export const fetchAlbumByID = async (ID) => { 
+    try{
+        const Album = await fetch(`${api_url}albums?id=${ID}`);
+        const data = await Album.json();
+        if(!Album.ok) {
+            throw new Error(data.message || 'Failed to Fetch Artist Data');
+        }
+        return data;
+    }
+    catch{
+        console.log('API Error: ', error );
+        throw error;
+    }
+};
+
+export const fetchArtistByID = async (ID) => { 
+    try{
+        const Artists = await fetch(`${api_url}artists?id=${ID}&limit=1`);
+        const data = await Artists.json();
+        if(!Artists.ok) {
+            throw new Error(data.message || 'Failed to Fetch Artist Data');
+        }
+        return data;
+    }
+    catch{
+        console.log('API Error: ', error );
+        throw error;
+    }
+};
 
 
 

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { searchAlbumByQuery, searchArtistByQuery } from '../../fetch'; // Assuming the function is imported correctly
-import Slider from './Slider';
+import AlbumSlider from './Sliders/AlbumSlider';
+import ArtistSlider from './Sliders/artistSlider';
+
 
 const MainSection = () => {
     const [albums, setAlbums] = useState([]);
@@ -12,8 +14,8 @@ const MainSection = () => {
         const fetchAlbumData = async () => {
             try {
                 // Fetch New Releases using 'latest' query from JioSaavn API
-                const data = await searchAlbumByQuery('latest');
-                setAlbums(data.data.results); // Assuming the response has 'data.results' with album data
+                const Album = await searchAlbumByQuery('latest');
+                setAlbums(Album.data.results); // Assuming the response has 'data.results' with album data
             } catch (err) {
                 setError(err.message); // Handle fetch error
             } finally {
@@ -24,13 +26,12 @@ const MainSection = () => {
         const fetchArtistData = async () => {
             try {
                 // Fetch New Releases using 'top-artists' query from JioSaavn API
-                const data = await searchArtistByQuery('top-artists');
-                console.log("Artist Data : ", data.data);
-                setArtists(data.data.results); // Corrected to set artists
+                const Artist = await searchArtistByQuery('top-artists');
+                setArtists(Artist.data.results); // Corrected to set artists
             } catch (err) {
                 setError(err.message); // Handle fetch error
             } finally {
-                setLoading(false); // Set loading to false
+                setLoading(true); // Set loading to false
             }
         };
 
@@ -47,14 +48,14 @@ const MainSection = () => {
                 <h2 className="m-4 text-2xl m-8 w-full lg:w-[33vw] font-semibold text-zinc-200 text-center">
                     New Releases
                 </h2>
-                <Slider albums={albums} /> {/* Pass albums prop correctly */}
+                <AlbumSlider albums={albums} /> {/* Pass albums prop correctly */}
             </div>
 
             <div>
                 <h2 className="m-4 text-2xl  w-full lg:w-[33vw] font-semibold text-zinc-200 text-center">
                     Top Artists
                 </h2>
-                <Slider albums={artists} />
+                <ArtistSlider artists={artists} />
             </div>
 
         </div>
