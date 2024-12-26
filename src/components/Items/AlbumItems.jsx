@@ -12,7 +12,7 @@ const AlbumItems = ({ name, artists, id, image }) => {
   return (
     <Link
       to={`/albums/${id}`}
-      className="w-[160px] max-h-[200px] overflow-y-clip flex flex-col justify-center items-center gap-3 rounded-lg"
+      className="w-[134px] max-h-[200px] overflow-y-clip flex flex-col justify-center items-center gap-3 rounded-lg"
     >
       <img
         src={imageUrl}

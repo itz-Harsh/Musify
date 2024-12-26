@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // To fetch artist ID from URL
 import Navbar from '../components/Navbar';
 import Player from '../components/Player';
-import { fetchArtistByID } from '../../fetch'; // Assuming the fetch function exists
+import { fetchplaylistsByID } from '../../fetch'; // Assuming the fetch function exists
+// import SongGrid from '../components/SongGrid';
 import SongsList from '../components/SongsList';
 
-const ArtistsDetails = () => {
+const PlaylistDetails = () => {
     const { id } = useParams(); // Extract the artist ID from the URL
     const [details, setDetails] = useState({}); // Initialize as an empty object
     const [loading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ const ArtistsDetails = () => {
     useEffect(() => {
         const fetchDetails = async () => {
             try {
-                const data = await fetchArtistByID(id); // Fetch artist details based on the ID
+                const data = await fetchplaylistsByID(id); // Fetch artist details based on the ID
                 setDetails(data);
                 console.log(data); // Log data for debugging
             } catch (err) {
@@ -43,42 +44,35 @@ const ArtistsDetails = () => {
         );
     }
 
-    const artistData = details.data || {}; // Fallback to an empty object if `data` is undefined
-    const artistImage = artistData.image?.[2]?.url || ""; // Safely access image URL
+    const playlistData = details.data || {}; // Fallback to an empty object if `data` is undefined
+    const playlistImage = playlistData.image?.[2]?.url || ""; // Safely access image URL
 
     return (
         <>
             <Navbar />
 
             <div className="mt-[6rem] ml-[2rem] flex gap-[2rem] text-zinc-300 overflow-clip">
-                {artistImage && (
-                    <img src={artistImage} alt={artistData.name} className="DetailImg artistDetails" />
+                {playlistImage && (
+                    <img src={playlistImage} alt={playlistData.name} className="h-[20rem] rounded-[50px]" />
                 )}
 
-                <div className="flex flex-col h-[400px] gap-4 h-[30rem]">
-                    <h1 className="text-2xl font-bold text-white">{artistData.name}</h1>
-                    <div className="font-sans font-semibold w-[33rem]">
-                        {artistData.bio[0].text|| "No bio"}
-                    </div>
+                <div className="flex flex-col gap-4 h-[30rem]">
+                    <h1 className="text-2xl font-bold  text-white">{playlistData.name}</h1>
+                    <h2 className="text-xl font-semibold flex ">Top Songs</h2>
                 </div>
                 <div >
-                <h2 className="text-xl font-semibold mt-[1rem] block">Top Songs</h2>
-                <div className="h-[14.5rem] w-[33rem] ml-[-1rem] overflow-y-scroll scroll-hide m-[1rem]">
-
-                    {artistData.topSongs.map((album) => (
-                        <SongsList key={album.id} {...album} />
+                
+                <div className="h-[24.5rem] w-[33rem] ml-[-1rem] overflow-y-scroll scroll-hide m-[1rem] grid grid-flow-row-dense">
+                {playlistData.songs.map((playlist) => (
+                        <SongsList key={playlist.id} {...playlist} />
                     ))}
+                    
                     </div>
                 </div>
             </div>
     
                 <>
-                
-                <div></div>
-                
-                
-                
-                
+                   
                 
                 </>
 
@@ -88,4 +82,4 @@ const ArtistsDetails = () => {
     );
 };
 
-export default ArtistsDetails;
+export default PlaylistDetails

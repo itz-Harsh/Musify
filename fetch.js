@@ -5,11 +5,17 @@ if (!api_url) {
 };
 
 export const getSongbyQuery = async (e) => {
-    try {
-        return await fetch(`${api_url}search/songs?query=` + e);
+    try{
+        const song = await fetch(`${api_url}search/songs?query=` + e);
+        const data = await song.json();
+        if(!song.ok) {
+            throw new Error(data.message || 'Failed to Fetch Artist Data');
+        }
+        return data;
     }
-    catch (e) {
-        console.log(e);
+    catch{
+        console.log('API Error: ', error );
+        throw error;
     }
 };
 
@@ -23,7 +29,7 @@ export const getSongbyId = async (e) => {
 
 export const searchAlbumByQuery = async (query) => {
     try {
-        const Albums = await fetch(`${api_url}search/albums?query=${query}&limit=20`);
+        const Albums = await fetch(`${api_url}search/albums?query=${query}&limit=30`);
         const data = await Albums.json();
         if (!Albums.ok) {
             throw new Error(data.message || 'Failed to fetch Album data');
@@ -68,7 +74,7 @@ export const fetchAlbumByID = async (ID) => {
 
 export const fetchArtistByID = async (ID) => { 
     try{
-        const Artists = await fetch(`${api_url}artists?id=${ID}&limit=1`);
+        const Artists = await fetch(`${api_url}artists?id=${ID}&limit=10`);
         const data = await Artists.json();
         if(!Artists.ok) {
             throw new Error(data.message || 'Failed to Fetch Artist Data');
@@ -81,5 +87,34 @@ export const fetchArtistByID = async (ID) => {
     }
 };
 
+export const searchPlayListByQuery = async (query) => { 
+    try{
+        const playlists = await fetch(`${api_url}search/playlists?query=${query}`);
+        const data = await playlists.json();
+        if(!playlists.ok) {
+            throw new Error(data.message || 'Failed to Fetch Artist Data');
+        }
+        return data;
+    }
+    catch{
+        console.log('API Error: ', error );
+        throw error;
+    }
+};
+
+export const fetchplaylistsByID = async (ID) => { 
+    try{
+        const playlists = await fetch(`${api_url}playlists?id=${ID}&limit=30`);
+        const data = await playlists.json();
+        if(!playlists.ok) {
+            throw new Error(data.message || 'Failed to Fetch Artist Data');
+        }
+        return data;
+    }
+    catch{
+        console.log('API Error: ', error );
+        throw error;
+    }
+};
 
 

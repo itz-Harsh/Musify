@@ -24,15 +24,16 @@ input[type=text]{
 
 .range[type="range"] {
      -webkit-appearance: none;
+     height: 2px;
      width: 100%;
-     margin-bottom: 10px;
+     margin-bottom: 5px;
      background-color: #f1f1f1c0;
 }
 
 input[type="range"]::-webkit-slider-thumb {
      appearance: none;
-     width: 13px;
-     height: 13px;
+     width: 10px;
+     height: 10px;
      border-radius: 30px;
      background-color: rgba(12, 211, 128, 0.986);
 }
@@ -64,8 +65,9 @@ input[type="range"]::-webkit-slider-thumb {
      
      /* background-color: aqua; */
      display: flex;
-     margin: 4rem 0 0 5rem;
+     margin: 5rem 0 0 2rem;
      align-items: center;
+     gap: 5rem;
 }
 .song-info:hover{
 
@@ -75,3 +77,37 @@ input[type="range"]::-webkit-slider-thumb {
      height: 230px;
      margin: 0;
 }
+
+/* General range input styles */
+.range-input {
+     width: 80px; /* Adjust slider width */
+     background: linear-gradient(to right, #10b981, #d1d5db); /* Green gradient */
+     border: none;
+     border-radius: 10px;
+     transition: background 0.3s ease;
+   }
+   
+   /* Thumb (slider handle) styling */
+   .range-input::-webkit-slider-thumb {
+     appearance: none;
+     width: 1px;
+     height: 12px;
+     background: #10b981; /* Emerald-green */
+     border-radius: 50%;
+     cursor: pointer;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+   }
+   
+   .range-input::-moz-range-thumb {
+     width: 2px;
+     height: 2px;
+     background: #10b981;
+     border-radius: 50%;
+     cursor: pointer;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+   }
+   
+   .range-input::-ms-thumb {
+     width: 5px;
+     height: 5px;
+   }
