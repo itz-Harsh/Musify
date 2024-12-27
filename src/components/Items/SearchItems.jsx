@@ -18,7 +18,7 @@ const SearchItems = ({ search }) => {
         const linkPath = type === "album" ? `/albums/${id}` : `/songs/${id}`;
 
         return (
-          <>
+         
           <Link
             key={id}
             to={linkPath}
@@ -32,12 +32,7 @@ const SearchItems = ({ search }) => {
               <p className="text-center text-gray-400">{artistNames}</p>
             </div>
           </Link>
-          <>
-            if (type === ) {
-              
-            }
-          </>
-          </>);
+       
       })}
     </div>
   );
