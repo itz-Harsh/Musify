@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center fixed  h-auto  p-1 navbar top-0 w-full flex-col lg:flex-row">
+    <nav className="flex justify-between items-center fixed  h-[4.5em]  p-1 navbar top-0 w-full flex-col lg:flex-row">
       <div className="flex items-center ml-3">
         <Link to="/" className="flex items-center gap-2">
           <img src="/White_musify.svg" alt="Musify" className="h-16" />

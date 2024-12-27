@@ -10,7 +10,7 @@
 
 body {
      font-family: "Roboto", sans-serif;
-     background-color: rgb(14, 14, 14);
+     background-color: #1B1B1B;
      color: white;
 
 }
@@ -23,34 +23,33 @@ input[type=text]{
 }
 
 .range[type="range"] {
+     display: flex;
+     
      -webkit-appearance: none;
      height: 2px;
-     width: 100%;
+     width: 10 0%;
      margin-bottom: 5px;
      background-color: #f1f1f1c0;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+.range[type="range"]::-webkit-slider-thumb {
      appearance: none;
      width: 10px;
      height: 10px;
      border-radius: 30px;
-     background-color: rgba(12, 211, 128, 0.986);
+     background-color: #FE4559;
 }
-.volume[type="range"]{
-     width: 80px;
-     -webkit-appearance: none;
-     background-color: #4d4d4d59;
-}
+
 .scroll-hide::-webkit-scrollbar{
      display: none;
 }
 .navbar{
-     background: rgb(12, 12, 12);
+     background: #18191b;
 }
 .player{
+     height: 70px;
      z-index: 2;
-     background-color: rgb(12, 12, 12);
+     background-color: #18191b;
 }
 .DetailImg{
      height: 360px;
@@ -59,7 +58,8 @@ input[type="range"]::-webkit-slider-thumb {
      align-items: center;
      margin: 0rem;
      border-radius: 25px;
-     box-shadow: 0  0  25px rgb(0, 0, 0);
+     box-shadow: 0  0  20px rgb(0, 0, 0);
+
 }
 .albumDetails{
      
@@ -71,43 +71,24 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .song-info:hover{
 
-     background-color: rgb(18, 18, 18);
+     background-color: #18191b;
 }
 .artistDetails{
      height: 230px;
      margin: 0;
 }
 
-/* General range input styles */
-.range-input {
-     width: 80px; /* Adjust slider width */
-     background: linear-gradient(to right, #10b981, #d1d5db); /* Green gradient */
-     border: none;
-     border-radius: 10px;
-     transition: background 0.3s ease;
-   }
-   
-   /* Thumb (slider handle) styling */
-   .range-input::-webkit-slider-thumb {
+.volume[type="range"]::-webkit-slider-thumb {
      appearance: none;
-     width: 1px;
-     height: 12px;
-     background: #10b981; /* Emerald-green */
-     border-radius: 50%;
-     cursor: pointer;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-   }
-   
-   .range-input::-moz-range-thumb {
-     width: 2px;
+     width: 10px;
+     height: 10px;
+     border-radius: 30px;
+     background-color: #FE4559;
+}
+.volume[type="range"] {
+     display: flex;
+     -webkit-appearance: none;
      height: 2px;
-     background: #10b981;
-     border-radius: 50%;
-     cursor: pointer;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-   }
-   
-   .range-input::-ms-thumb {
-     width: 5px;
-     height: 5px;
-   }
+     width: 5rem;
+     background-color: #f1f1f1c0;
+}

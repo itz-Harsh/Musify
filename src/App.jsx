@@ -7,6 +7,9 @@ import ArtistsDetails from "./pages/ArtistsDetails";
 import SearchResult from "./pages/searchResult";
 import SongsList from "./components/SongsList";
 import PlaylistDetails from "./pages/PlaylistDetails";
+import SongDetails from "./pages/SongDetails";
+
+
 
 export default function App() {
   const [songs, setSongs] = useState([]); 
@@ -114,6 +117,8 @@ export default function App() {
     setShuffle((prevState) => !prevState);
   };
   return (
+    <>
+    
     <MusicContext.Provider
       value={{
         songs,
@@ -135,15 +140,17 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/artists/:id" element={<ArtistsDetails />} />
+          
           <Route path="/albums/:id" element={<AlbumDetail />} />
           <Route path="/search/:query" element={<SearchResult />} />
+          <Route path="/songs/:id" element={<SongDetails />} />
           <Route path="/albums/:id" element={<AlbumDetail /> || <SongsList />} />
           <Route path="/playlists/:id" element={<PlaylistDetails />} />
 
         </Routes>
       </Router>
     </MusicContext.Provider>
-  );
+    </>);
 }
 
 

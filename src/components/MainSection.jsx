@@ -63,6 +63,7 @@ const MainSection = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
+    
     <div className="my-24 ">
       <div>
         <h2 className="m-4 text-2xl m-4 w-full lg:w-[33vw] font-semibold text-zinc-200 text-center">

@@ -21,8 +21,9 @@ const Player = () => {
     toggleRepeatMode,
     downloadSong,
   } = useContext(MusicContext); // Destructure context values
-  
+
   const [volume, setVolume] = useState(50);
+
   const inputRef = useRef();
 
   useEffect(() => {
@@ -58,6 +59,8 @@ const Player = () => {
     }
   };
 
+ 
+
   const handlePlayPause = () => {
     if (currentSong?.audio) {
       const audioElement = currentSong.audio;
@@ -65,9 +68,7 @@ const Player = () => {
       if (audioElement.paused) {
         audioElement
           .play()
-          .then(() => {
-            setIsPlaying(true);
-          })
+          .then(() => setIsPlaying(true))
           .catch((error) => {
             console.error("Error playing audio:", error);
           });
@@ -83,104 +84,106 @@ const Player = () => {
     : "Unknown Artist";
 
   return (
-    <div className="flex flex-col fixed justify-between player bottom-0 w-full">
-      <form className="flex">
+    <div className="flex flex-col fixed bottom-0 w-full player">
+      {/* Playback Progress */}
+      <form className="flex justify-center">
+      
         <input
           type="range"
-          name="progress"
-          id="progress"
           min={0}
           max={100}
           step="0.1"
-          value={0}
           ref={inputRef}
           onChange={handleProgressChange}
-          className="h-[3px] w-full text-emerald-500 range m-0"
-          readOnly
+          className="h-[3px] w-full  text-emerald-500 range m-0"
         />
       </form>
 
+      {/* Player Controls */}
       <div className="flex justify-between items-center h-[65px] px-3">
-        {/* 1st Div */}
-        <div className="flex justify-start items-center gap-5 lg:w-[30vw]">
+        {/* Current Song Info */}
+        <div className="flex items-center gap-5 lg:w-[25vw]">
+        
           <img
-            src={currentSong?.image || ""}
+            src={currentSong?.image || " "}
             alt={currentSong?.name || ""}
             width={55}
             className="rounded-lg"
           />
           <div className="hidden lg:block">
             <span>{currentSong?.name || "No Song Playing"}</span>
-            <p className="text-xs">{artistNames || "Unknown Artist"}</p>
+            <p className="text-xs text-gray-400">{artistNames}</p>
           </div>
         </div>
 
-        {/* 2nd Div */}
-        <div className="flex text-xl lg:text-2xl gap-4 lg:gap-6 lg:w-[40vw] justify-center">
-          <BiRepeat
-            className={`hover:text-emerald-400 cursor-pointer ${
-              repeatMode === "one"
-                ? "text-emerald-500"
-                : repeatMode === "all"
-                ? "text-blue-500"
-                : ""
-            }`}
-            onClick={toggleRepeatMode}
-            title={`Repeat Mode: ${
-              repeatMode === "none"
-                ? "Off"
-                : repeatMode === "one"
-                ? "Repeat One"
-                : "Repeat All"
-            }`}
-          />
-          <IoMdSkipBackward
-            className="hover:text-emerald-400 cursor-pointer"
-            onClick={prevSong}
-          />
-          {isPlaying ? (
-            <FaPause
-              className="hover:text-emerald-400 cursor-pointer"
-              onClick={handlePlayPause}
+        {/* Playback Buttons */}
+        <div className="flex flex-col items-center lg:w-[40vw]">
+          <div className="flex gap-5 ml-[-4rem]">
+            <BiRepeat
+              className={` text-2xl cursor-pointer ${
+                repeatMode === "one"
+                  ? "text-[#f84d5e]"
+                  : repeatMode === "all"
+                  ? "text-[#fd3a4e]"
+                  : ""
+              }`}
+              onClick={toggleRepeatMode}
+              title={`Repeat Mode: ${
+                repeatMode === "none"
+                  ? "Off"
+                  : repeatMode === "one"
+                  ? "Repeat One"
+                  : "Repeat All"
+              }`}
             />
-          ) : (
-            <FaPlay
-              className="hover:text-emerald-400 cursor-pointer"
-              onClick={handlePlayPause}
+            <IoMdSkipBackward
+              className="hover:text-white hover:scale-110 text-2xl cursor-pointer"
+              onClick={prevSong}
             />
-          )}
-          <IoMdSkipForward
-            className="hover:text-emerald-400 cursor-pointer"
-            onClick={nextSong}
-          />
-          <PiShuffleBold
-            className={`hover:text-emerald-400 cursor-pointer ${
-              shuffle ? "text-emerald-500" : ""
-            }`}
-            onClick={toggleShuffle}
-          />
+            {isPlaying ? (
+              <FaPause
+                className="hover:text-white hover:scale-110 text-2xl cursor-pointer"
+                onClick={handlePlayPause}
+              />
+            ) : (
+              <FaPlay
+                className="hover:text-white hover:scale-110 text-2xl cursor-pointer"
+                onClick={handlePlayPause}
+              />
+            )}
+            <IoMdSkipForward
+              className="hover:text-white hover:scale-110 text-2xl cursor-pointer"
+              onClick={nextSong}
+            />
+            <PiShuffleBold
+              className={`hover:text-white hover:scale-110 text-2xl cursor-pointer ${
+                shuffle ? "text-emerald-500" : ""
+              }`}
+              onClick={toggleShuffle}
+            />
+          </div>
         </div>
 
-        {/* 3rd Div */}
-        <div
-          className="flex text-xl lg:text-2xl cursor-pointer lg:mr-2 gap-5 pr-4 lg:w-[30vw] justify-end items-center" >
+        {/* Volume and Download */}
+        <div className="flex items-center gap-5 lg:w-[20vw] justify-end">
           <MdDownload
-            className="hover:text-emerald-400 text-xl lg:text-3xl "
+            className="hover:text-[#fd3a4e] text-2xl cursor-pointer"
             onClick={downloadSong}
             title="Download Song"
           />
-          <div className="flex items-center gap-1 mr-[-1rem]">
-          <PiSpeakerLowFill className="hidden lg:block lg:text-2xl" />
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            className="h-[2px] bg-gray-300 rounded-lg  appearance-none cursor-pointer range-input
-               focus:outline-none "
-               onChange={handleVolumeChange} 
-            title="Volume"
-          /></div>
+          <div className="flex items-center gap-2">
+            <PiSpeakerLowFill className="text-xl" />
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={1}
+              value={volume}
+              onChange={handleVolumeChange}
+              className="h-[2px] bg-gray-300 rounded-lg appearance-none cursor-pointer hidden lg:block w-[] volume "
+              title="Volume"
+            />
+          </div>
         </div>
       </div>
     </div>
