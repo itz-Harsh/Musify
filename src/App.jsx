@@ -143,7 +143,7 @@ export default function App() {
           
           <Route path="/albums/:id" element={<AlbumDetail />} />
           <Route path="/search/:query" element={<SearchResult />} />
-          <Route path="/songs/:id" element={<SongDetails />} />
+
           <Route path="/albums/:id" element={<AlbumDetail /> || <SongsList />} />
           <Route path="/playlists/:id" element={<PlaylistDetails />} />
 

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
-import SongItems from "../Items/SearchItems";
+import SearchItems from "../Items/SearchItems";
 
 const SongSlider = ({ results }) => {
   const scrollRef = useRef(null);
@@ -29,9 +29,8 @@ const SongSlider = ({ results }) => {
         className="grid grid-rows-1 grid-flow-col-dense overflow-x-scroll scroll-hide gap-4 w-full lg:w-[87vw]  items-center  scroll-smooth"
         ref={scrollRef}
       >
-        {results.map((result) => (
-          <SongItems key={result.id} {...result} />
-        ))}
+          <SearchItems search={results}  />
+        
       </div>
 
       <MdOutlineKeyboardArrowRight

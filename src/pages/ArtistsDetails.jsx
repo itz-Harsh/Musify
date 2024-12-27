@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Player from '../components/Player';
 import { fetchArtistByID } from '../../fetch'; // Assuming the fetch function exists
 import SongsList from '../components/SongsList';
+import ArtistSlider from '../components/Sliders/ArtistSlider';
 
 const ArtistsDetails = () => {
     const { id } = useParams(); // Extract the artist ID from the URL
@@ -16,7 +17,7 @@ const ArtistsDetails = () => {
             try {
                 const data = await fetchArtistByID(id); // Fetch artist details based on the ID
                 setDetails(data);
-                console.log(data); // Log data for debugging
+                console.log(data.data); // Log data for debugging
             } catch (err) {
                 setError('Error fetching artist details');
             } finally {
@@ -49,38 +50,37 @@ const ArtistsDetails = () => {
     return (
         <>
             <Navbar />
-
-            <div className="mt-[6rem] ml-[2rem] flex gap-[2rem] text-zinc-300 overflow-clip">
+  <div>
+            <div className="mt-[6rem] ml-[2rem] flex gap-[2rem] text-zinc-300 overflow-clip p-7 ">
                 {artistImage && (
-                    <img src={artistImage} alt={artistData.name} className="DetailImg artistDetails" />
+                    <img src={artistImage} alt={artistData.name} className="artistDetails" />
                 )}
-
-                <div className="flex flex-col h-[400px] gap-4 h-[30rem]">
-                    <h1 className="text-2xl font-bold text-white">{artistData.name}</h1>
-                    <div className="font-sans font-semibold w-[33rem]">
-                        {artistData.bio[0].text|| "No bio"}
-                    </div>
-                </div>
-                <div >
-                <h2 className="text-xl font-semibold mt-[1rem] block">Top Songs</h2>
-                <div className="h-[14.5rem] w-[33rem] ml-[-1rem] overflow-y-scroll scroll-hide m-[1rem]">
+            
+                <div className="flex flex-col h-[400px] ml-4 mt-[-1rem] gap-4 h-[30rem]">
+                    <h1 className="text-3xl font-bold text-white">{artistData.name}</h1>
+                    
+                <h2 className="text-xl font-semibold block">Top Songs</h2>
+                <div className="h-[14.5rem] w-[30rem]  overflow-y-scroll scroll-hide ">
 
                     {artistData.topSongs.map((album) => (
                         <SongsList key={album.id} {...album} />
                     ))}
                     </div>
-                </div>
+               </div>
+               
             </div>
-    
-                <>
-                
-                <div></div>
-                
-                
-                
-                
-                
-                </>
+                    
+                    
+      
+                    <h2  className="text-xl font-semibold ml-[10rem] pb-6 " >Similar Artists</h2>
+                    <div>
+                        <ArtistSlider artists={artistData.similarArtists} />
+                    </div>
+
+
+        </div>
+                    
+
 
 
             <Player />
