@@ -7,7 +7,8 @@ import {
 import AlbumSlider from "./Sliders/AlbumSlider";
 
 import PlaylistSlider from "./Sliders/PlaylistSlider";
-import ArtistSlider from "./Sliders/artistSlider.jsx";
+import ArtistSlider from "./Sliders/artistSlider";
+
 
 const MainSection = () => {
   const [albums, setAlbums] = useState([]);
@@ -79,6 +80,7 @@ const MainSection = () => {
           Top Artists
         </h2>
         <ArtistSlider artists={artists} />
+
       </div>
       <br />
       <div>
