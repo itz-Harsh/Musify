@@ -7,7 +7,7 @@ import {
 import AlbumSlider from "./Sliders/AlbumSlider";
 
 import PlaylistSlider from "./Sliders/PlaylistSlider";
-import ArtistSlider from "./Sliders/artistSlider";
+import ArtistSlider from "./Sliders/artistSlider.jsx";
 
 const MainSection = () => {
   const [albums, setAlbums] = useState([]);
