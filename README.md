@@ -1,4 +1,4 @@
-# React + Vite
+# Musify Web Application Project
 
 Music Web Application project 
 
@@ -17,11 +17,20 @@ pip install requests
 pip install python-dotenv
 
 **Homepage**
-![Homepage](/public/Home.png)
+![Homepage](/public/HomePage1.png)
+![Homepage](/public/HomePage2.png)
 
+**Search Result**
+![Search result](/public/SearchResult.png)
 
 **Album Details**
 ![Album Details](/public/AlbumDetails.png)
+
+**Playlist**
+![Playlist](/public/Playlist.png)
+
+**Artist Details**
+![Artist Details](/public/ArtistDetails.png)
 
 Currently, two official plugins are available:
 
