@@ -5,8 +5,9 @@ import {
   searchPlayListByQuery,
 } from "../../fetch"; // Assuming the function is imported correctly
 import AlbumSlider from "./Sliders/AlbumSlider";
-import ArtistSlider from "./Sliders/artistSlider";
+
 import PlaylistSlider from "./Sliders/PlaylistSlider";
+import ArtistSlider from "./Sliders/artistSlider";
 
 const MainSection = () => {
   const [albums, setAlbums] = useState([]);
