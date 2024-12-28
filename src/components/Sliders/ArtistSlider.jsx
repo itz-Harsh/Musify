@@ -32,7 +32,7 @@ const ArtistSlider = ({ artists }) => {
         className="grid grid-rows-1 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-4 w-full lg:w-[78vw] px-5 scroll-smooth"
         ref={scrollRef}
       >
-        {artists.map((artist) => (
+        {artists?.map((artist) => (
           <ArtistItems
           key={artist.id}
           {...artist}// Fallback image

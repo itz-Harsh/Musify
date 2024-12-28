@@ -32,7 +32,7 @@ const AlbumSlider = ({ albums }) => {
         className="grid grid-rows-2 grid-flow-col-dense justify-between overflow-x-clip scroll-hide items-center gap-5 w-full lg:w-[78vw]  scroll-smooth"
         ref={scrollRef}
       >
-        {albums.map((album) => (
+        {albums?.map((album) => (
           <AlbumItems
           key={album.id}
           {...album}// Fallback image
