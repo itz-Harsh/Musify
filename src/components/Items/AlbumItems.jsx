@@ -12,13 +12,16 @@ const AlbumItems = ({ name, artists, id, image }) => {
   return (
     <Link
       to={`/albums/${id}`}
-      className="w-[134px] max-h-[200px] overflow-y-clip flex flex-col justify-center items-center gap-3 rounded-lg"
+      className=" w-[10rem] pl-5 h-[12.5rem] overflow-clip"
     >
+      <div>
       <img
         src={imageUrl}
         alt={name}
-        className="rounded-lg"
+        className="rounded-lg card "
       />
+      
+      </div>
       <div className="text-[13px] w-full flex flex-col justify-center items-center">
         <span className="font-semibold overflow-x-clip">{name}</span>
         <p>{artistNames}</p>

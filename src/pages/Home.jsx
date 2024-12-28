@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Player from "../components/Player";
+import Footer from "../components/footer";
 import MainSection from "../components/MainSection";
 import { useState, useEffect } from "react";
 
@@ -34,6 +35,7 @@ const Home = () => {
     <>
       <Navbar />
       <MainSection />
+      <Footer />
       <Player />
     </>
   );

@@ -3,7 +3,7 @@ import {useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = () => {
-  const [query, setQuery] = useState(null); // State to handle the search query
+  const [query, setQuery] = useState([null]); // State to handle the search query
   const navigate = useNavigate(); // useNavigate to programmatically navigate to the search route
 
   const handleSearch = (event) => {
@@ -11,6 +11,18 @@ const Navbar = () => {
      
     if (query.trim()) {
       navigate(`/search/${query}`); // Navigate to the search results page
+    }
+  };
+
+  const getGreeting = () => {
+    const hours = new Date().getHours();
+
+    if (hours < 12) {
+      return "Good Morning";
+    } else if (hours < 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
     }
   };
 
@@ -25,8 +37,10 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
-
+      <div className="text-xl text-[#cecece] font-semibold flex pt-2 w-[25rem] ">{getGreeting()}</div>
       <div className="flex gap-5">
+
+
         <div>
           <form
             onSubmit={handleSearch}

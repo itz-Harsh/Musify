@@ -29,7 +29,7 @@ const AlbumSlider = ({ albums }) => {
 
       {/* Album Items */}
       <div
-        className="grid grid-rows-2 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-4 w-full lg:w-[78vw] px-5 scroll-smooth"
+        className="grid grid-rows-2 grid-flow-col-dense justify-between overflow-x-clip scroll-hide items-center gap-5 w-full lg:w-[78vw]  scroll-smooth"
         ref={scrollRef}
       >
         {albums.map((album) => (

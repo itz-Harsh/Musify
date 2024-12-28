@@ -6,6 +6,7 @@ import Player from '../components/Player';
 import { fetchAlbumByID } from '../../fetch'; 
 import { useContext } from 'react';
 import MusicContext from '../context/MusicContext';
+import Footer from '../components/footer';
  
   const AlbumDetail = () => {
   const { id } = useParams();  // Extract the album ID from the URL
@@ -34,13 +35,13 @@ import MusicContext from '../context/MusicContext';
 
   if (loading) return <div className='flex h-screen w-screen justify-center items-center '> <img src="/public/Loading.gif" alt="" /> </div>;
   if (error) return <div className='flex h-screen w-screen justify-center items-center'>{error}</div>;
-  const ArtistName = details.data.artists.primary[0].name;
-  const artistId = details.data.artists.primary[0].id; 
+  const artistId = details.data.artists.primary.id; 
+  console.log(details.data)
   return (
     <>
       <Navbar />
       
-      <div className='albumDetails gap-5 text-zinc-300'>
+      <div className='albumDetails gap-5 text-zinc-300  '>
         {details && details.data.image && details.data.image[2]?.url && (
           <img src={details.data.image[2].url} alt={details.name} className='DetailImg' />
         )}
@@ -48,7 +49,7 @@ import MusicContext from '../context/MusicContext';
          <div className='flex flex-col h-[400px] gap-4 '>
           <h1 className='text-2xl font-bold text-white'>{details.data.name}</h1>
           <pre className='font-sans font-semibold'>
-            by  <Link to={`/artists/${artistId}`} className='hover:underline' >{ArtistName}</Link>   {details.data.songCount} Songs
+            by  <Link to={`/artists/${artistId}`} className='hover:underline' >{details.data.artists.primary.map((artist) => artist.name).join(", ")}</Link>   {details.data.songCount} Songs
             
             
           </pre>
@@ -62,6 +63,7 @@ import MusicContext from '../context/MusicContext';
       </div>
 
       <Player />
+      <Footer />
     </>
   );
 };

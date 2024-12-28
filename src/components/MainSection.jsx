@@ -20,7 +20,8 @@ const MainSection = () => {
       try {
         // Fetch New Releases using 'latest' query from JioSaavn API
         const Album = await searchAlbumByQuery("latest");
-        setAlbums(Album.data.results); // Assuming the response has 'data.results' with album data
+        setAlbums(Album.data.results);
+        setLoading(false);
       } catch (err) {
         setError(err.message); // Handle fetch error
       } finally {
@@ -36,7 +37,7 @@ const MainSection = () => {
       } catch (err) {
         setError(err.message); // Handle fetch error
       } finally {
-        setLoading(true); // Set loading to false
+        setLoading(false); // Set loading to false
       }
     };
 

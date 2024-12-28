@@ -7,8 +7,6 @@ import ArtistsDetails from "./pages/ArtistsDetails";
 import SearchResult from "./pages/searchResult";
 import SongsList from "./components/SongsList";
 import PlaylistDetails from "./pages/PlaylistDetails";
-import SongDetails from "./pages/SongDetails";
-
 
 
 export default function App() {
