@@ -35,7 +35,8 @@ import Footer from '../components/footer';
 
   if (loading) return <div className='flex h-screen w-screen justify-center items-center '> <img src="/public/Loading.gif" alt="" /> </div>;
   if (error) return <div className='flex h-screen w-screen justify-center items-center'>{error}</div>;
-  const artistId = details.data.artists.primary.id; 
+  const artistId = details.data.artists.primary[0].id; 
+  const artistName = details.data.artists.primary[0].name;
   console.log(details.data)
   return (
     <>
@@ -49,7 +50,7 @@ import Footer from '../components/footer';
          <div className='flex flex-col h-[400px] gap-4 '>
           <h1 className='text-2xl font-bold text-white'>{details.data.name}</h1>
           <pre className='font-sans font-semibold'>
-            by  <Link to={`/artists/${artistId}`} className='hover:underline' >{details.data.artists.primary.map((artist) => artist.name).join(", ")}</Link>   {details.data.songCount} Songs
+            by  <Link to={`/artists/${artistId}`} className='hover:underline' >{artistName}</Link>   {details.data.songCount} Songs
             
             
           </pre>

@@ -74,7 +74,7 @@ export const fetchAlbumByID = async (ID) => {
 
 export const fetchArtistByID = async (ID) => { 
     try{
-        const Artists = await fetch(`${api_url}artists?id=${ID}&limit=10`);
+        const Artists = await fetch(`${api_url}artists?id=${ID}`);
         const data = await Artists.json();
         if(!Artists.ok) {
             throw new Error(data.message || 'Failed to Fetch Artist Data');
