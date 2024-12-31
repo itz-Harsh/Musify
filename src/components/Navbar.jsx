@@ -44,7 +44,7 @@ const Navbar = () => {
         <div>
           <form
             onSubmit={handleSearch}
-            className="flex items-center w-full m-3"
+            className="hidden lg:flex items-center w-full m-3"
           >
             <input
               type="text"
