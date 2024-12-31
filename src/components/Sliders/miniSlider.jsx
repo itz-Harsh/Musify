@@ -1,25 +1,23 @@
-import { MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft } from "react-icons/md";
-import { useRef } from "react";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import AlbumItems from "../Items/AlbumItems";
+import { useRef } from "react";
 
-const AlbumSlider = ({ albums }) => {
+const MiniSlider = ({ albums }) => {
   const scrollRef = useRef(null);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft -= 800; // Scroll left by 800px
+      scrollRef.current.scrollBy({ left: -800, behavior: "smooth" }); // Smooth scroll left
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft += 800; // Scroll right by 800px
+      scrollRef.current.scrollBy({ left: 800, behavior: "smooth" }); // Smooth scroll right
     }
   };
 
   return (
-    <>
-
     <div className="flex justify-center items-center gap-3">
       {/* Left Arrow */}
       <MdOutlineKeyboardArrowLeft
@@ -27,16 +25,16 @@ const AlbumSlider = ({ albums }) => {
         onClick={scrollLeft}
       />
 
-  
+      {/* Albums Grid */}
       <div
-        className="grid grid-rows-2 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-4 w-full lg:w-[78vw] px-5 scroll-smooth"
+        className="grid grid-rows-1 grid-flow-col gap-4 overflow-x-auto scroll-hide w-full lg:w-[78vw] px-5 scroll-smooth"
         ref={scrollRef}
       >
         {albums?.map((album) => (
           <AlbumItems
-          key={album.id}
-          {...album}// Fallback image
-        />
+            key={album.id}
+            {...album} // Pass album props
+          />
         ))}
       </div>
 
@@ -46,10 +44,7 @@ const AlbumSlider = ({ albums }) => {
         onClick={scrollRight}
       />
     </div>
-    
-    
-    </>
   );
 };
 
-export default AlbumSlider;
+export default MiniSlider;

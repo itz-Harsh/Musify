@@ -20,28 +20,26 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
   // console.log(artistNames);
   return (
     <span
-      className="text-3xl ml-1 text-zinc-200 cursor-pointer "
+      className="w-[10rem] h-[12.5rem] overflow-clip bg-[#242424] border-[0.1px] border-[#444444] p-1  rounded-lg cursor-pointer"
       onClick={() =>
         playMusic(downloadUrl, name, duration, imageUrl, id, artists)
       }
     >
       <div className="">
-        <div className="w-[10rem] pl-5 h-[12rem] overflow-y-clip ">
+        <div className="p-1 ">
           <img
             src={imageUrl}
             alt=""
             className=" top-0 rounded-lg card"
           />
-          <h3
-            className={`text-sm font-medium text-white ${
-              id === currentSong?.id && "text-[#46c7b6ff]"
-            }`}
-          >
-            {name}
-          </h3>
-          <p className="text-xs text-gray-400">{artistNames}</p>
-        </div>
+
+          </div>
+      <div className="text-[13px] w-full flex flex-col justify-center pl-2">
+        <span className="font-semibold overflow-x-clip">{name}</span>
+        <span className="flex gap-1">by<p className="font-semibold">{artistNames}</p></span>
       </div>
+        </div>
+  
     </span>
   );
 };

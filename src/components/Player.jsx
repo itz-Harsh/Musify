@@ -38,13 +38,7 @@ const Player = () => {
     }
   }, [currentSong, isPlaying]);
 
-  useEffect(() => {
-    // Load last played song from localStorage
-    const savedSong = JSON.parse(localStorage.getItem("currentSong"));
-    if (savedSong) {
-      savedSong;
-    }
-  }, [setCurrentSong]);
+  
 
   useEffect(() => {
     if (currentSong) {
@@ -161,14 +155,14 @@ const Player = () => {
                   width={55}
                   className="rounded-lg"
                 />
-                <div className="overflow-y-clip">
+                <div className="overflow-y-clip w-[14rem] h-[3.5rem]">
                   <span>{currentSong?.name || "No Song Playing"}</span>
                   <p className="text-xs text-gray-400">{artistNames}</p>
                 </div>
               </div>
 
               {/* Playback Buttons */}
-              <div className="flex flex-col items-center gap-5">
+              <div className="flex flex-col items-center gap-5 w-[10rem]">
                 <div className="flex gap-5">
                   <BiRepeat
                     className={`text-2xl cursor-pointer ${

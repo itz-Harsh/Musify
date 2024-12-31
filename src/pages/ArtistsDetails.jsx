@@ -4,8 +4,8 @@ import Navbar from "../components/Navbar";
 import Player from "../components/Player";
 import { fetchArtistByID } from "../../fetch"; // Assuming the fetch function exists
 import SongsList from "../components/SongsList";
-
-import AlbumSlider from "../components/Sliders/AlbumSlider";
+import Footer from "../components/footer";
+import MiniSlider from "../components/Sliders/miniSlider";
 
 const ArtistsDetails = () => {
   const { id } = useParams(); // Extract the artist ID from the URL
@@ -51,7 +51,7 @@ const ArtistsDetails = () => {
   return (
     <>
       <Navbar />
-      <div className="mb-28">
+      <div className="mb-10">
         <div className="mt-[6rem] ml-[5rem] flex gap-[6rem] text-zinc-300 overflow-clip p-8 ">
           <div>
             {artistImage && (
@@ -78,11 +78,12 @@ const ArtistsDetails = () => {
 
         <h2 className="text-2xl font-bold ml-[10rem] pb-6">Top Albums</h2>
         <div>
-          <AlbumSlider albums={artistData.topAlbums} />
+          <MiniSlider albums={artistData.topAlbums} />
         </div>
       </div>
 
       <Player />
+      <Footer />
     </>
   );
 };

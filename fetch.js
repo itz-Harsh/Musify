@@ -59,7 +59,7 @@ export const searchArtistByQuery = async (query) => {
 
 export const fetchAlbumByID = async (ID) => { 
     try{
-        const Album = await fetch(`${api_url}albums?id=${ID}`);
+        const Album = await fetch(`${api_url}albums?id=${ID}&limit=30`);
         const data = await Album.json();
         if(!Album.ok) {
             throw new Error(data.message || 'Failed to Fetch Artist Data');

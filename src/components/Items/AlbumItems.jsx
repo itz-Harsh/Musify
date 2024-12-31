@@ -12,19 +12,19 @@ const AlbumItems = ({ name, artists, id, image }) => {
   return (
     <Link
       to={`/albums/${id}`}
-      className=" w-[10rem] pl-5 h-[12.5rem] overflow-clip"
+      className=" w-[10rem] h-[12.5rem] overflow-clip bg-[#242424] border-[0.1px] border-[#444444] p-1  rounded-lg"
     >
-      <div>
+      <div className="p-1" >
       <img
         src={imageUrl}
         alt={name}
-        className="rounded-lg card "
+        className="rounded-lg card"
       />
       
       </div>
-      <div className="text-[13px] w-full flex flex-col justify-center items-center">
+      <div className="text-[13px] w-full flex flex-col justify-center pl-2">
         <span className="font-semibold overflow-x-clip">{name}</span>
-        <p>{artistNames}</p>
+        <span className="flex gap-1">by<p className="font-semibold">{artistNames}</p></span>
       </div>
     </Link>
   );
