@@ -22,18 +22,17 @@ const MainSection = () => {
   const scrollRef = useRef(null);
 
   
-  const scrollLeft = (ref) => {
-    if (ref.current) {
-      ref.current.scrollLeft -= 800; // Scroll left by 800px
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft -= 800; // Scroll left by 800px
     }
   };
 
-  const scrollRight = (ref) => {
-    if (ref.current) {
-      ref.current.scrollLeft += 800; // Scroll right by 800px
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft += 800; // Scroll right by 800px
     }
   };
-
 
   useEffect(() => {
     const fetchSongData = async () => {
