@@ -34,7 +34,7 @@ const Player = () => {
     if (currentSong && isPlaying) {
       setIsVisible(true); // Show player when a song is playing
     } else {
-      setIsVisible(false); // Hide when no song is playing
+      setIsVisible(true); // Hide when no song is playing
     }
   }, [currentSong, isPlaying]);
 
