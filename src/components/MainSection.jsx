@@ -39,7 +39,7 @@ const MainSection = () => {
       try {
         const song = await fetchplaylistsByID(110858205);
         setSongs(song.data.songs);
-        console.log(song.data.songs);
+        // console.log(song.data.songs);
         
       } catch (err) {
         setError(err.message);

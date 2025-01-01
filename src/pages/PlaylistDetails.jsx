@@ -37,7 +37,7 @@ const PlaylistDetails = () => {
       try {
         const data = await fetchplaylistsByID(id); // Fetch artist details based on the ID
         setDetails(data);
-        console.log(data); // Log data for debugging
+        // console.log(data); // Log data for debugging
       } catch (err) {
         setError("Error fetching Playlists details");
       } finally {

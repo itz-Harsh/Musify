@@ -18,7 +18,7 @@ const ArtistsDetails = () => {
       try {
         const data = await fetchArtistByID(id); // Fetch artist details based on the ID
         setDetails(data);
-        console.log(data.data); // Log data for debugging
+        // console.log(data.data); // Log data for debugging
       } catch (err) {
         setError("Error fetching artist details");
       } finally {

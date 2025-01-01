@@ -21,7 +21,7 @@ import Footer from '../components/footer';
         const data = await fetchAlbumByID(id);  // Fetch album details based on the album ID
         setDetails(data);
         setSongs(data.data.songs);
-        console.log(data.data.songs)
+        // console.log(data.data.songs)
         
       } catch (err) {
         setError('Error fetching album details');

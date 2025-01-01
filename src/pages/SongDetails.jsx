@@ -20,7 +20,7 @@ import MusicContext from '../context/MusicContext';
         const data = await getSongbyId(id);  // Fetch album details based on the album ID
         setDetails(data);
         setSongs(data);
-        console.log("Song Details" , data);
+        // console.log("Song Details" , data);
         
       } catch (err) {
         setError('Error fetching Song details');
