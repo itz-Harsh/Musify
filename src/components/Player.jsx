@@ -23,7 +23,7 @@ const Player = () => {
   } = useContext(MusicContext);
 
   const [volume, setVolume] = useState(() => {
-    return Number(localStorage.getItem("volume")) || 5;
+    return Number(localStorage.getItem("volume")) || 50;
   });
   const [isVisible, setIsVisible] = useState(false); // For showing and hiding the player
   const [isMinimized, setIsMinimized] = useState(false); // For minimizing the player
