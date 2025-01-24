@@ -1,0 +1,203 @@
+import { useContext, useEffect, useState } from "react";
+import {
+  fetchplaylistsByID,
+  searchAlbumByQuery,
+  searchArtistByQuery,
+  searchPlayListByQuery,
+} from "../../fetch"; // Assuming the function is imported correctly
+import AlbumSlider from "./Sliders/AlbumSlider";
+import PlaylistSlider from "./Sliders/PlaylistSlider";
+import ArtistSlider from "./Sliders/ArtistSlider";
+import SongGrid from "./SongGrid";
+import { useRef } from "react";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import MusicContext from "../context/MusicContext";
+
+
+const MainSection = () => {
+  const [songs, setSong] = useState([]);
+  const [latestSongs , setlatestSongs] = useState([]);
+  const [albums, setAlbums] = useState([]);
+  const [artists, setArtists] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { setSongs } = useContext(MusicContext);
+  // Create separate refs for each scrollable section
+  const latestSongsScrollRef = useRef(null);
+  const songsScrollRef = useRef(null);
+
+  const scrollLeft = (scrollRef) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft -= 1000; // Scroll left by 800px
+    }
+  };
+
+  const scrollRight = (scrollRef) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft += 1000; // Scroll right by 800px
+    }
+  };
+
+  useEffect(() => {
+    const fetchSongData = async () => {
+      try {
+        const song = await fetchplaylistsByID(110858205);
+        setSong(song.data.songs);
+        setSongs(song.data.songs);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchlatestSongData = async () => {
+      try {
+        const latestSongs = await fetchplaylistsByID(6689255);
+        setlatestSongs(latestSongs.data.songs);
+        setSongs(latestSongs.data.songs);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchAlbumData = async () => {
+      try {
+        const album = await searchAlbumByQuery("latest");
+        setAlbums(album.data.results);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchArtistData = async () => {
+      try {
+        const artist = await searchArtistByQuery("top-artists");
+        setArtists(artist.data.results);
+        // console.log(artist.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchPlaylistData = async () => {
+      try {
+        const playlist = await searchPlayListByQuery("Top");
+        setPlaylists(playlist.data.results);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Fetch all data simultaneously
+    fetchSongData();
+    fetchAlbumData();
+    fetchArtistData();
+    fetchPlaylistData();
+    fetchlatestSongData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <div className="my-[2rem] mt-[8rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
+      {/* New Songs Section */}
+      <div className="flex flex-col items-center w-full">
+        
+          <h2 className="m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[11rem]">
+            New Songs
+          </h2>
+        
+        <div className="flex justify-center items-center gap-3 w-full">
+          {/* Left Arrow */}
+          <MdOutlineKeyboardArrowLeft
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            onClick={() => scrollLeft(latestSongsScrollRef)}
+          />
+          <div
+            className="grid grid-rows-1 sm:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-2 sm:gap-[1.1rem] w-full sm:w-[75rem] px-3 sm:px-5 scroll-smooth"
+            ref={latestSongsScrollRef}
+          >
+            {latestSongs?.map((song) => (
+              <SongGrid key={song.id} {...song} />
+            ))}
+          </div>
+          {/* Right Arrow */}
+          <MdOutlineKeyboardArrowRight
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            onClick={() => scrollRight(latestSongsScrollRef)}
+          />
+        </div>
+      </div>
+  
+      <br />
+  
+      {/* Today Trending Section */}
+      <div className="flex flex-col justify-center items-center w-full">
+        <h2 className=" lg:ml-[11rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
+          Today Trending
+        </h2>
+        <div className="flex justify-center items-center gap-3 w-full">
+          {/* Left Arrow */}
+          <MdOutlineKeyboardArrowLeft
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            onClick={() => scrollLeft(songsScrollRef)}
+          />
+          <div
+            className="grid grid-rows-1 sm:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-2 sm:gap-[1.1rem] w-full sm:w-[75rem] px-3 sm:px-5 scroll-smooth"
+            ref={songsScrollRef}
+          >
+            {songs?.map((song) => (
+              <SongGrid key={song.id} {...song} />
+            ))}
+          </div>
+          {/* Right Arrow */}
+          <MdOutlineKeyboardArrowRight
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            onClick={() => scrollRight(songsScrollRef)}
+          />
+        </div>
+      </div>
+  
+      <br />
+  
+      {/* Top Albums Section */}
+      <div className="w-full">
+        <h2 className="m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+          Top Albums
+        </h2>
+        <AlbumSlider albums={albums} />
+      </div>
+      <br />
+  
+      {/* Top Artists Section */}
+      <div className="w-full">
+        <h2 className="m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+          Top Artists
+        </h2>
+        <ArtistSlider artists={artists} />
+      </div>
+      <br />
+  
+      {/* Top Playlists Section */}
+      <div className="w-full">
+        <h2 className="m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+          Top Playlists
+        </h2>
+        <PlaylistSlider playlists={playlists} />
+      </div>
+    </div>
+  );  
+};
+
+export default MainSection;

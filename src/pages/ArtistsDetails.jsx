@@ -1,0 +1,140 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"; // To fetch artist ID from URL
+import Navbar from "../components/Navbar";
+import Player from "../components/Player";
+import { fetchArtistByID } from "../../fetch"; // Assuming the fetch function exists
+import SongsList from "../components/SongsList";
+import Footer from "../components/footer";
+import MiniSlider from "../components/Sliders/miniSlider";
+import { useContext } from "react";
+import MusicContext from "../context/MusicContext";
+import AlbumSlider from "../components/Sliders/AlbumSlider";
+
+const ArtistsDetails = () => {
+  const { id } = useParams(); // Extract the artist ID from the URL
+  const [details, setDetails] = useState({}); // Initialize as an empty object
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { setSongs } = useContext(MusicContext);
+
+  const FollowerCount = (followerCount) => {
+    if (!followerCount || isNaN(followerCount)) {
+      return "Not available"; // Fallback for invalid or missing data
+    }
+
+    const count = parseInt(followerCount, 10);
+    const Million = 1000000;
+    const follower = (count / Million).toFixed(2);
+    return follower;
+  };
+
+const FanCount = (fanCount) => {
+    if (!fanCount || isNaN(fanCount)) {
+      return "Not available"; // Fallback for invalid or missing data
+    }
+
+    const count = parseInt(fanCount, 10);
+    const Thousand = 100000;
+    const fan = (count / Thousand).toFixed(2);
+    return fan;
+  };
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const data = await fetchArtistByID(id); // Fetch artist details based on the ID
+        setDetails(data);
+        setSongs(data.data.topSongs);
+        // console.log(data.data);
+      } catch (err) {
+        setError("Error fetching artist details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDetails();
+  }, [id]); // Fetch details whenever the ID changes
+
+  if (loading) {
+    return (
+      <div className="flex h-screen w-screen justify-center items-center">
+        <img src="/public/Loading.gif" alt="" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-screen w-screen justify-center items-center">
+        {error}
+      </div>
+    );
+  }
+
+  const artistData = details.data || {}; // Fallback to an empty object if `data` is undefined
+  const artistImage = artistData.image?.[2]?.url || ""; // Safely access image URL
+
+  return (
+    <>
+      <Navbar />
+      <div className=" mb-10">
+        <div className="mt-[8rem] lg:mt-[6rem]  flex flex-col justify-center gap-[2rem] text-zinc-300   pt-5 ">
+          <div className="pl-[2rem] flex gap-8 items-center">
+                <img
+                  src={artistImage}
+                  alt={artistData.name}
+                  className="artistDetails h-[8rem] lg:h-[15rem] lg:rounded rounded-full"
+                />
+      
+            <div className="flex flex-col gap-2 ">
+            <h1 className="text-3xl font-bold text-white mt-5 flex items-baseline">
+              {artistData.name}
+              {artistData.isVerified && (
+                <img
+                  src="/verified.svg"
+                  alt="Verified"
+                  className="ml-2 w-[1.3rem] flex "
+                />
+              )}
+            </h1>
+            <div className="flex flex-col">
+            <span className="text-[0.70rem] lg:text-[0.90rem] font-medium">
+              Followers : {FollowerCount(artistData.followerCount)} Million
+            </span>
+            <span className="text-[0.70rem] lg:text-[0.90rem] font-medium ">
+            Listeners : {FanCount(artistData.fanCount)} K
+            </span>
+            </div>
+           </div>
+          </div>
+
+          <div className="flex flex-col mt-[1rem] gap-[1rem] h-[40rem]">
+            <h2 className="text-2xl font-bold pl-[1.5rem] block">Top Songs</h2>
+            <div className="p-2 w-full overflow-y-scroll scroll-hide ">
+              {artistData.topSongs.map((album) => (
+                <SongsList key={album.id} {...album} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="gap-4 flex flex-col">
+            <div>
+            <h2 className=" lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[6rem] pb-[1rem] pb-[1rem] ">Top Albums</h2>
+            <MiniSlider albums={artistData.topAlbums} />
+            </div>
+            <div>
+            <h2 className="lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[6rem] pb-[1rem] pb-[1rem] ">Singles</h2>
+            <AlbumSlider albums={details.data.singles} />
+           </div>
+          </div>
+        </div>
+      </div>
+      <Player />
+      <Footer />
+    </>
+  );
+};
+
+export default ArtistsDetails;
