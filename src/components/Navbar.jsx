@@ -5,7 +5,7 @@ import MusicContext from "../context/MusicContext";
 
 const Navbar = () => {
   const { playMusic } = useContext(MusicContext); // Ensure correct usage
-  const [query, setQuery] = useState(""); // State to handle the search query
+  const [query, setQuery] = useState([]); // State to handle the search query
   const [suggestions, setSuggestions] = useState([]); // State for search suggestions
   const navigate = useNavigate(); // useNavigate to programmatically navigate
   const fetchSuggestions = async (query) => {
