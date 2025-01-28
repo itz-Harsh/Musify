@@ -36,7 +36,7 @@ const AlbumDetail = () => {
     return (
       <div className="flex h-screen w-screen justify-center items-center ">
         {" "}
-        <img src="/public/Loading.gif" alt="" />{" "}
+        <img src="/Loading.gif" alt="" />{" "}
       </div>
     );
   if (error)

@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import { fetchAlbumByID, getSearchData, getSongbyQuery } from "../../fetch";
+import {  getSearchData, getSongbyQuery } from "../../fetch";
 import MusicContext from "../context/MusicContext";
+// import { ThemeToggle } from "";
 
 const Navbar = () => {
   const { playMusic } = useContext(MusicContext); // Ensure correct usage
@@ -193,6 +194,7 @@ const Navbar = () => {
           </div>
         </form>
       </div>
+      
     </nav>
   );
   

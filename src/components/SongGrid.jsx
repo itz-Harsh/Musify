@@ -20,7 +20,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
   // console.log(artistNames);
   return (
     <span
-      className="w-[9.5rem] h-[11.9rem] overflow-clip bg-[#242424] border-[0.1px] border-[#444444] p-1  rounded-lg cursor-pointer"
+      className="card w-[9.5rem] h-[11.9rem] overflow-clip p-1  rounded-lg cursor-pointer"
       onClick={() =>
         playMusic(downloadUrl, name, duration, imageUrl, id, artists)
       }
@@ -30,7 +30,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
           <img
             src={imageUrl}
             alt=""
-            className=" top-0 rounded-lg card  "
+            className=" top-0 rounded-lg imgs  "
           />
 
           </div>

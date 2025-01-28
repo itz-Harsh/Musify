@@ -12,13 +12,13 @@ const AlbumItems = ({ name, artists, id, image }) => {
   return (
     <Link
       to={`/albums/${id}`}
-      className=" w-[9.5rem] h-[11.96rem] overflow-clip bg-[#242424] border-[0.1px] border-[#444444] p-1  rounded-lg"
+      className="card  w-[9.5rem] h-[11.96rem] overflow-clip  border-[0.1px]  p-1  rounded-lg"
     >
       <div className="p-1" >
       <img
         src={imageUrl}
         alt={name}
-        className="rounded-lg card"
+        className="rounded-lg imgs"
       />
       
       </div>

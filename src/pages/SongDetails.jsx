@@ -32,7 +32,7 @@ import MusicContext from '../context/MusicContext';
     fetchDetails();
   }, [id]); // Fetch details when the id changes (when navigating to a different album)
 
-  if (loading) return <div className='flex h-screen w-screen justify-center items-center '> <img src="/public/Loading.gif" alt="" /> </div>;
+  if (loading) return <div className='flex h-screen w-screen justify-center items-center '> <img src="/Loading.gif" alt="" /> </div>;
   if (error) return <div className='flex h-screen w-screen justify-center items-center'>{error}</div>;
 
   return (

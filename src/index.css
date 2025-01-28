@@ -90,18 +90,12 @@ li{
   width: 5rem;
   background-color: #f1f1f1c0;
 }
-.card:hover {
+.imgs:hover {
   display: block;
   filter: brightness(0.60);
 }
-.card:hover .play {
+.imgs:hover .play {
   display: flex;
-}
-.play {
-  /* display: none; */
-
-  height: 50px;
-  z-index: 10;
 }
 
 
@@ -161,4 +155,13 @@ li{
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 10;
+}
+
+
+.card{
+  /* in Dark theme */
+
+  background-color: #242424;
+  border: 1px solid #444444;
+  color: rgba(253, 253, 253, 0.932);
 }
