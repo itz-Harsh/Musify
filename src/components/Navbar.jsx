@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import {  getSearchData, getSongbyQuery } from "../../fetch";
 import MusicContext from "../context/MusicContext";
+import { ThemeToggle } from "./Theme/Toggle";
 // import { ThemeToggle } from "";
 
 const Navbar = () => {
@@ -124,7 +125,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex flex-col justify-between lg:gap-[14rem] lg:flex-row lg:items-center top-0 z-20 fixed w-full bg-[#1B1B1B] pl-1 pr-1   lg:h-[4.5em]">
+    <nav className="navbar flex flex-col  gap-[3rem]  lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-4 pr-4   lg:h-[4.5em]">
       {/* Logo */}
       <div className="flex  items-center gap-2 mb-2 lg:mb-0">
         <div className="flex items-center gap-[10rem]">
@@ -150,7 +151,7 @@ const Navbar = () => {
           onSubmit={handleSearchSubmit}
           className="relative  flex flex-col lg:flex-row items-center gap-2"
         >
-          <div className="flex w-full lg:w-auto">
+          <div className="flex w-full ">
             <input
               type="text"
               name="search"
@@ -170,7 +171,7 @@ const Navbar = () => {
   
           {/* Suggestions Dropdown */}
           <div
-            className={ ` absolute scroll-hide top-[3.8rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg shadow-lg w-full lg:w-[36rem] max-h-[20rem] overflow-auto transition-transform duration-200 ${
+            className={ ` absolute scroll-hide top-[3.8rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg shadow-lg w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
               suggestions.length > 0 ? "visible opacity-100" : "invisible opacity-0"
             }`}
           >
@@ -193,8 +194,9 @@ const Navbar = () => {
             ))}
           </div>
         </form>
+        
       </div>
-      
+    
     </nav>
   );
   

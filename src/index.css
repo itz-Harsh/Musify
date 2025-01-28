@@ -159,9 +159,16 @@ li{
 
 
 .card{
+  
   /* in Dark theme */
 
   background-color: #242424;
   border: 1px solid #444444;
   color: rgba(253, 253, 253, 0.932);
+}
+
+[data-theme="dark"]{
+  .card{
+    background-color: yellow;
+  }
 }
