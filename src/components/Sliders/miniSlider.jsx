@@ -21,13 +21,13 @@ const MiniSlider = ({ albums }) => {
     <div className="flex justify-center items-center gap-3">
       {/* Left Arrow */}
       <MdOutlineKeyboardArrowLeft
-        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+        className="text-3xl hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b] hidden lg:block hover:text-white"
         onClick={scrollLeft}
       />
 
       {/* Albums Grid */}
       <div
-        className="grid grid-rows-1 grid-flow-col gap-2 lg:gap-4 overflow-x-auto scroll-hide w-full  lg:w-[90vw] px-3 lg:px-6 scroll-smooth"
+        className="grid grid-rows-1 grid-flow-col gap-3 lg:gap-2 overflow-x-auto scroll-hide w-full  px-3 lg:px-0 scroll-smooth"
         ref={scrollRef}
       >
         {albums?.map((album) => (
@@ -40,7 +40,7 @@ const MiniSlider = ({ albums }) => {
 
       {/* Right Arrow */}
       <MdOutlineKeyboardArrowRight
-        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+        className="text-3xl hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b] hidden lg:block hover:text-white"
         onClick={scrollRight}
       />
     </div>

@@ -23,13 +23,13 @@ const AlbumSlider = ({ albums }) => {
     <div className="flex justify-center items-center gap-3">
       {/* Left Arrow */}
       <MdOutlineKeyboardArrowLeft
-        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+        className="text-3xl h-[9rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
         onClick={scrollLeft}
       />
 
   
       <div
-        className="grid lg:grid-rows-2 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-2 lg:gap-[1.1rem] w-full lg:w-[75rem] px-[0.8rem] lg:px-5 scroll-smooth"
+        className="grid lg:grid-rows-2  grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full px-3 lg:px-0 scroll-smooth"
         ref={scrollRef}
       >
         {albums?.map((album) => (
@@ -42,7 +42,7 @@ const AlbumSlider = ({ albums }) => {
 
       {/* Right Arrow */}
       <MdOutlineKeyboardArrowRight
-        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+        className="text-3xl   hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
         onClick={scrollRight}
       />
     </div>

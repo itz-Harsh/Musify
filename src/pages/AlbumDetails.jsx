@@ -8,6 +8,7 @@ import { useContext } from "react";
 import MusicContext from "../context/MusicContext";
 import Footer from "../components/footer";
 import Navigator from "../components/Navigator";
+import ArtistItems from "../components/Items/ArtistItems";
 
 const AlbumDetail = () => {
   const { id } = useParams(); // Extract the album ID from the URL
@@ -22,7 +23,7 @@ const AlbumDetail = () => {
         const data = await fetchAlbumByID(id); // Fetch album details based on the album ID
         setDetails(data);
         setSongs(data.data.songs);
-        // console.log(data);
+        console.log(data);
       } catch (err) {
         setError("Error fetching album details");
       } finally {
@@ -74,7 +75,7 @@ const AlbumDetail = () => {
           </div>
         </div>
 
-        <div className="flex flex-col h-[400px] gap-4 ">
+        <div className="flex flex-col h-auto gap-4 ">
           <div className="overflow-y-scroll scroll-smooth scroll-hide  pt-3 ">
             {details.data.songs?.map((song) => (
               <SongsList key={song.id} {...song} />
@@ -82,7 +83,19 @@ const AlbumDetail = () => {
           </div>
         </div>
       </div>
-
+      <div className="flex flex-col lg:p-3 gap-5 mb-7">
+                  <h2 className="text-3xl font-medium lg:ml-14 mt-10 lg:w-full w-[50%] flex lg:justify-start justify-center">
+                      Artists
+                    </h2>
+                    <div className="grid grid-flow-col justify-between lg:w-max scroll-smooth gap-[1.5rem] pl-[2.5rem] overflow-x-auto scroll ">
+                      {details?.data?.artists?.all.map((artist, index) => (
+                        <ArtistItems
+                          key={`${artist.id || index}`}
+                          {...artist}
+                        />
+                      ))}
+                    </div>
+                  </div>
       <Player />
       <Navigator />
       <Footer />

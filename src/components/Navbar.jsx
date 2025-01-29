@@ -114,35 +114,36 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar flex flex-col  lg:gap-[14rem]  lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-4 pr-4   lg:h-[4.5em]">
+    <nav className="navbar flex flex-col lg:gap-[14rem]  lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-2 pr-2   lg:h-[4.5em]">
       {/* Logo */}
-      <div className="flex  items-center gap-2 mb-2 lg:mb-0">
-        <div className="flex items-center gap-[10rem]">
+      <div className="flex  items-center gap-[4rem] mb-2 lg:mb-0 w-fit">
+        <div className="flex items-center gap-[10rem] ">
           <Link to="/" className="flex items-center ">
             <img
               src="/White_musify.svg"
               alt="Musify"
               className="h-[3.6rem] lg:h-[4rem]"
             />
-            <div>
-              <span className="text-zinc-200 font-extrabold text-2xl lg:text-3xl">
+            <div className="">
+              <span className="Musi text-zinc-300 font-extrabold text-2xl lg:text-3xl">
                 Musi
               </span>
-              <span className="text-zinc-600 font-extrabold text-2xl lg:text-3xl">
+              <span className="fy text-zinc-600 font-extrabold text-2xl lg:text-3xl">
                 fy
               </span>
             </div>
           </Link>
         </div>
-      </div>
-      <div className="flex gap-[3rem] ">
+        <div className="lg:flex gap-[2rem] w-fit grey hidden ">
         <Link to="/Browse">
-          <h2>Browse</h2>
+          <h2 className="lg:text-xl text-lg">Browse</h2>
         </Link>
         <Link>
-          <h2>Liked</h2>
+          <h2 className="lg:text-xl text-lg ">My Music</h2>
         </Link>
       </div>
+      </div>
+      
 
       <div className="flex-grow  ">
         <form

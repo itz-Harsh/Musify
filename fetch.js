@@ -4,6 +4,10 @@ if (!api_url) {
     console.log("Error Fetching API");
 };
 
+
+
+
+
 export const getSearchData = async (e) => {
     try{
         const result = await fetch(`${api_url}search?query=${e}&limit=30`);

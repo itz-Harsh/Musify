@@ -30,23 +30,29 @@ const Player = () => {
     return Number(localStorage.getItem("volume")) || 100;
   });
 
-
-
-
-
   const [isVisible, setIsVisible] = useState(false); // For showing and hiding the player
   const [isMaximized, setisMaximized] = useState(false); // For minimizing the player
   const [currentTime, setCurrentTime] = useState(0); // Real-time song progress
   const inputRef = useRef();
 
+
+
+
+
+ 
+
   useEffect(() => {
     setIsVisible(!!(currentSong || isPlaying));
+    
   }, [currentSong, isPlaying]);
 
   const artistNames = currentSong?.artists?.primary
     ? currentSong.artists.primary.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
   // const artist = currentSong?.artists;
+
+
+
 
   useEffect(() => {
     if (currentSong) {
@@ -121,6 +127,8 @@ const Player = () => {
       .padStart(2, "0");
     return `${minutes}:${seconds}`;
   };
+
+ 
 
   return (
     <div
@@ -198,28 +206,28 @@ const Player = () => {
                         }`}
                       />
                       <IoMdSkipBackward
-                        className="hover:text-white hidden lg:block hover:scale-110 text-2xl cursor-pointer"
+                        className=" hidden lg:block hover:scale-110 text-2xl cursor-pointer"
                         onClick={prevSong}
                       />
                       <div className="  bg-[#292929] active:bg-[#1d1d1d] rounded-full p-2">
                         {isPlaying ? (
                           <FaPause
-                            className="hover:text-white   p-[0.1rem] text-zinc-200 hover:scale-110 text-xl lg:text-2xl cursor-pointer"
+                            className="  p-[0.1rem] text-zinc-200 hover:scale-110 text-xl lg:text-2xl cursor-pointer"
                             onClick={handlePlayPause}
                           />
                         ) : (
                           <FaPlay
-                            className="hover:text-white text-zinc-200 p-[0.1rem] hover:scale-110 text-xl lg:text-2xl cursor-pointer"
+                            className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-xl lg:text-2xl cursor-pointer"
                             onClick={handlePlayPause}
                           />
                         )}
                       </div>
                       <IoMdSkipForward
-                        className="hover:text-white hidden lg:block hover:scale-110 text-2xl cursor-pointer"
+                        className=" hidden lg:block hover:scale-110 text-2xl cursor-pointer"
                         onClick={nextSong}
                       />
                       <PiShuffleBold
-                        className={`hover:text-white hidden lg:block hover:scale-110 text-2xl cursor-pointer ${
+                        className={` hidden lg:block hover:scale-110 text-2xl cursor-pointer ${
                           shuffle ? "text-[#fd3a4e]" : ""
                         }`}
                         onClick={toggleShuffle}
@@ -358,8 +366,9 @@ const Player = () => {
                       />
                     </div>
                   </div>
+
                   <div className="flex flex-col pt-3 -pl-1">
-                    <h2 className="text-3xl font-medium pl-[2rem] lg:w-full w-[50%] flex lg:justify-start justify-center">
+                  <h2 className="text-3xl font-medium pl-[2rem] lg:w-full w-[50%] flex lg:justify-start justify-center">
                       Artists
                     </h2>
                     <div className="grid grid-flow-col justify-between lg:w-max scroll-smooth gap-[1.5rem] p-[2.5rem] overflow-x-auto scroll ">

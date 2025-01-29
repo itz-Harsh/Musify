@@ -124,8 +124,8 @@ const MainSection = () => {
     <div className="my-[2rem] mt-[5rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
       {/* New Songs Section */}
       <div className="flex flex-col items-center w-full">
-        <h2 className=" m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[11rem]">
-          <div className="text-2xl lg:text-3xl w-[auto] text-[#cecece] font-semibold lg:p-3 pt-8 lg:ml-[6rem]">
+        <h2 className=" m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[3rem]">
+          <div className="text-2xl lg:text-3xl w-[auto] text-[#cecece] font-semibold pb-4 lg:p-3 pt-8 lg:ml-[6rem]">
             {getGreeting()}
           </div>
           New Songs
@@ -134,11 +134,11 @@ const MainSection = () => {
         <div className="flex justify-center items-center gap-3 w-full">
           {/* Left Arrow */}
           <MdOutlineKeyboardArrowLeft
-            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
             onClick={() => scrollLeft(latestSongsScrollRef)}
           />
           <div
-            className="grid grid-rows-1 sm:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-2 sm:gap-[1.1rem] w-full sm:w-[75rem] px-3 sm:px-5 scroll-smooth"
+            className="grid grid-rows-1 lg:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full px-3 lg:px-0 scroll-smooth"
             ref={latestSongsScrollRef}
           >
             {latestSongs?.map((song) => (
@@ -147,7 +147,7 @@ const MainSection = () => {
           </div>
           {/* Right Arrow */}
           <MdOutlineKeyboardArrowRight
-            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
             onClick={() => scrollRight(latestSongsScrollRef)}
           />
         </div>
@@ -157,17 +157,17 @@ const MainSection = () => {
 
       {/* Today Trending Section */}
       <div className="flex flex-col justify-center items-center w-full">
-        <h2 className=" lg:ml-[11rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
+        <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
           Today Trending
         </h2>
         <div className="flex justify-center items-center gap-3 w-full">
           {/* Left Arrow */}
           <MdOutlineKeyboardArrowLeft
-            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
             onClick={() => scrollLeft(songsScrollRef)}
           />
           <div
-            className="grid grid-rows-1 sm:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-2 sm:gap-[1.1rem] w-full sm:w-[75rem] px-3 sm:px-5 scroll-smooth"
+            className="grid grid-rows-1 sm:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full  px-3 lg:px-0 scroll-smooth"
             ref={songsScrollRef}
           >
             {songs?.map((song) => (
@@ -176,7 +176,7 @@ const MainSection = () => {
           </div>
           {/* Right Arrow */}
           <MdOutlineKeyboardArrowRight
-            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
             onClick={() => scrollRight(songsScrollRef)}
           />
         </div>
@@ -186,7 +186,7 @@ const MainSection = () => {
 
       {/* Top Albums Section */}
       <div className="w-full">
-        <h2 className="lg:ml-[10.5rem] m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 lg:pl-3 ">
+        <h2 className="lg:ml-[3.5rem] m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 lg:pl-3 ">
           Top Albums
         </h2>
         <AlbumSlider albums={albums} />

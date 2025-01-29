@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="flex items-center ml-[-10px]">
         <img src="/White_musify.svg" alt="Musify" className=" h-[3rem] lg:h-[4rem] " />
         <div className="gap-1">
-          <span className="text-zinc-200 font-extrabold text-2xl lg:text-3xl ">Musi</span>
-          <span className="text-zinc-600 font-extrabold text-2xl lg:text-3xl ">fy</span>
+          <span className="Musi text-zinc-300 font-extrabold text-2xl lg:text-3xl ">Musi</span>
+          <span className="fy  text-zinc-600 font-extrabold text-2xl lg:text-3xl ">fy</span>
         </div>
         </div>
 
@@ -24,9 +24,9 @@ const Footer = () => {
         </div></div>
       </div>
 
-      <div>
+      <div className="lg:block hidden">
         <ul className="flex flex-col gap-[0.2rem] pb-5">
-          <p className=" font-sans text-[#fafafa] text-xs font-semibold pb-2">TOP ARTISTS</p>
+          <p className=" font-sans text-xs font-semibold pb-2">TOP ARTISTS</p>
         <li><Link to={`/artists/459320`} >Arijit Singh</Link> </li>
         <li><Link to={`/artists/456863`} >Badshah</Link> </li>
         <li><Link to={`/artists/485956`} >Honey Singh </Link> </li>

@@ -14,7 +14,7 @@ const PlaylistItems = ({name , image , id}) => {
       <img
         src={imageUrl || "/Unknown.png"}
         alt={name}
-        className="rounded-full"
+        className="rounded"
       />
       <div className="text-[13px] h-[2.5rem] w-full flex flex-col justify-center items-center">
         <span className="font-semibold overflow-hidden w-[6rem]">{name}</span>

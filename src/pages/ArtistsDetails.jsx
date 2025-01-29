@@ -46,7 +46,7 @@ const FanCount = (fanCount) => {
         const data = await fetchArtistByID(id); // Fetch artist details based on the ID
         setDetails(data);
         setSongs(data.data.topSongs);
-        // console.log(data.data);
+        console.log(data.data);
       } catch (err) {
         setError("Error fetching artist details");
       } finally {
@@ -89,13 +89,13 @@ const FanCount = (fanCount) => {
                 />
       
             <div className="flex flex-col gap-2 ">
-            <h1 className="text-3xl font-bold text-white mt-5 flex items-baseline">
+            <h1 className="text-2xl font-bold text-white mt-5 flex items-baseline">
               {artistData.name}
               {artistData.isVerified && (
                 <img
                   src="/verified.svg"
                   alt="Verified"
-                  className="ml-2 w-[1.3rem] flex "
+                  className="ml-2 w-[1.2rem] flex "
                 />
               )}
             </h1>
@@ -122,11 +122,11 @@ const FanCount = (fanCount) => {
         <div>
           <div className="gap-4 flex flex-col">
             <div>
-            <h2 className=" lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[6rem] pb-[1rem] pb-[1rem] ">Top Albums</h2>
+            <h2 className=" lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[3rem] pb-[1rem] pb-[1rem] ">Top Albums</h2>
             <MiniSlider albums={artistData.topAlbums} />
             </div>
             <div>
-            <h2 className="lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[6rem] pb-[1rem] pb-[1rem] ">Singles</h2>
+            <h2 className="lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[3rem] pb-[1rem] pb-[1rem] ">Singles</h2>
             <AlbumSlider albums={details.data.singles} />
            </div>
           </div>

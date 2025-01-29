@@ -23,13 +23,13 @@ const ArtistSlider = ({ artists }) => {
     <div className="flex justify-center items-center gap-4">
       {/* Left Arrow */}
       <MdOutlineKeyboardArrowLeft
-        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-[#1b1b1b] hidden lg:block hover:text-white"
         onClick={scrollLeft}
       />
 
   
       <div
-        className="grid grid-rows-1 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-[1.1rem] w-full lg:w-[75rem] px-10 scroll-smooth"
+        className="grid grid-rows-1 grid-flow-col-dense justify-between overflow-x-scroll scroll-hide items-center gap-3 w-full  px-3 scroll-smooth"
         ref={scrollRef}
       >
         {artists?.map((artist) => (
@@ -42,7 +42,7 @@ const ArtistSlider = ({ artists }) => {
 
       {/* Right Arrow */}
       <MdOutlineKeyboardArrowRight
-        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+        className="text-3xl hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer text-[#1b1b1b] hidden lg:block hover:text-white"
         onClick={scrollRight}
       />
     </div>
