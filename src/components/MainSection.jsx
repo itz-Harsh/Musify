@@ -124,8 +124,8 @@ const MainSection = () => {
     <div className="my-[2rem] mt-[5rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
       {/* New Songs Section */}
       <div className="flex flex-col items-center w-full">
-        <h2 className=" m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[3rem]">
-          <div className="text-2xl lg:text-3xl w-[auto] text-[#cecece] font-semibold pb-4 lg:p-3 pt-8 lg:ml-[6rem]">
+        <h2 className="pt-8 lg:pt-0 m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[3rem]">
+          <div className="hidden lg:block text-3xl w-[auto] text-[#cecece] font-semibold pb-4 lg:p-3  lg:ml-[6rem]">
             {getGreeting()}
           </div>
           New Songs

@@ -10,6 +10,8 @@ import { useContext } from "react";
 import MusicContext from "../context/MusicContext";
 import AlbumSlider from "../components/Sliders/AlbumSlider";
 import Navigator from "../components/Navigator";
+import ArtistSlider from "../components/Sliders/ArtistSlider";
+import ArtistItems from "../components/Items/ArtistItems";
 
 const ArtistsDetails = () => {
   const { id } = useParams(); // Extract the artist ID from the URL
@@ -29,7 +31,7 @@ const ArtistsDetails = () => {
     return follower;
   };
 
-const FanCount = (fanCount) => {
+  const FanCount = (fanCount) => {
     if (!fanCount || isNaN(fanCount)) {
       return "Not available"; // Fallback for invalid or missing data
     }
@@ -46,7 +48,7 @@ const FanCount = (fanCount) => {
         const data = await fetchArtistByID(id); // Fetch artist details based on the ID
         setDetails(data);
         setSongs(data.data.topSongs);
-        console.log(data.data);
+        console.log(data);
       } catch (err) {
         setError("Error fetching artist details");
       } finally {
@@ -82,32 +84,34 @@ const FanCount = (fanCount) => {
       <div className=" mb-10">
         <div className="mt-[8rem] lg:mt-[6rem]  flex flex-col justify-center gap-[2rem] text-zinc-300   pt-5 ">
           <div className="pl-[2rem] flex gap-8 items-center">
-                <img
-                  src={artistImage}
-                  alt={artistData.name}
-                  className="artistDetails h-[8rem] lg:h-[15rem] lg:rounded rounded-full"
-                />
-      
+            <img
+              src={artistImage}
+              alt={artistData.name}
+              className="artistDetails h-[8rem] lg:h-[15rem] lg:rounded rounded-full"
+            />
+
             <div className="flex flex-col gap-2 ">
-            <h1 className="text-2xl font-bold text-white mt-5 flex items-baseline">
-              {artistData.name}
-              {artistData.isVerified && (
-                <img
-                  src="/verified.svg"
-                  alt="Verified"
-                  className="ml-2 w-[1.2rem] flex "
-                />
-              )}
-            </h1>
-            <div className="flex flex-col">
-            <span className="text-[0.70rem] lg:text-[0.90rem] font-medium">
-              Followers : {FollowerCount(artistData.followerCount)} Million
-            </span>
-            <span className="text-[0.70rem] lg:text-[0.90rem] font-medium ">
-            Listeners : {FanCount(artistData.fanCount)} K
-            </span>
+              <h1 className="text-2xl font-bold text-white mt-5 flex ">
+                {artistData.name}
+                {artistData.isVerified && (
+                  <div className="flex ">
+                    <img
+                      src="/verified.svg"
+                      alt="Verified"
+                      className="ml-2 mt-1 w-[1.2rem]   flex  "
+                    />
+                  </div>
+                )}
+              </h1>
+              <div className="flex flex-col">
+                <span className="text-[0.70rem] lg:text-[0.90rem] font-medium">
+                  Followers : {FollowerCount(artistData.followerCount)} Million
+                </span>
+                <span className="text-[0.70rem] lg:text-[0.90rem] font-medium ">
+                  Listeners : {FanCount(artistData.fanCount)} K
+                </span>
+              </div>
             </div>
-           </div>
           </div>
 
           <div className="flex flex-col mt-[1rem] gap-[1rem] h-[40rem]">
@@ -119,16 +123,35 @@ const FanCount = (fanCount) => {
             </div>
           </div>
         </div>
-        <div>
+        <div  className="flex flex-col gap-7">
           <div className="gap-4 flex flex-col">
-            <div>
-            <h2 className=" lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[3rem] pb-[1rem] pb-[1rem] ">Top Albums</h2>
+            {details.data.similarArtists.length > 0 && (
+              <>
+                <h2 className=" lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[3rem] pb-[1rem] ">
+                  Similar Artists
+                </h2>
+                <div className="grid grid-flow-col lg:w-max gap-4 pl-[1.2rem] lg:pl-[3rem] overflow-x-scroll scroll-hide ">
+                  {details.data.similarArtists?.map((artist) => (
+                    <ArtistItems
+                      key={artist.id}
+                      {...artist} // Fallback image
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+          <div>
+            <h2 className=" lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[3rem] pb-[1rem] ">
+              Top Albums
+            </h2>
             <MiniSlider albums={artistData.topAlbums} />
-            </div>
-            <div>
-            <h2 className="lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[3rem] pb-[1rem] pb-[1rem] ">Singles</h2>
+          </div>
+          <div>
+            <h2 className="lg:font-bold font-semibold lg:text-xl pl-[1.5rem] lg:pl-[3rem] pb-[1rem] ">
+              Singles
+            </h2>
             <AlbumSlider albums={details.data.singles} />
-           </div>
           </div>
         </div>
       </div>

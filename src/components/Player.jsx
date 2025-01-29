@@ -2,7 +2,7 @@ import { useContext, useRef, useState, useEffect } from "react";
 import { BiRepeat } from "react-icons/bi";
 import { IoIosClose, IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { PiShuffleBold } from "react-icons/pi";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay, FaPause, FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
 import { CiMaximize1 } from "react-icons/ci";
 import { PiSpeakerLowFill } from "react-icons/pi";
@@ -33,26 +33,20 @@ const Player = () => {
   const [isVisible, setIsVisible] = useState(false); // For showing and hiding the player
   const [isMaximized, setisMaximized] = useState(false); // For minimizing the player
   const [currentTime, setCurrentTime] = useState(0); // Real-time song progress
+  const [likedSongs, setLikedSongs] = useState(() => {
+    return JSON.parse(localStorage.getItem("likedSongs")) || [];
+  });
+
   const inputRef = useRef();
-
-
-
-
-
- 
 
   useEffect(() => {
     setIsVisible(!!(currentSong || isPlaying));
-    
   }, [currentSong, isPlaying]);
 
   const artistNames = currentSong?.artists?.primary
     ? currentSong.artists.primary.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
   // const artist = currentSong?.artists;
-
-
-
 
   useEffect(() => {
     if (currentSong) {
@@ -128,7 +122,18 @@ const Player = () => {
     return `${minutes}:${seconds}`;
   };
 
- 
+  const toggleLikeSong = () => {
+    if (!currentSong) return;
+
+    const updatedLikedSongs = likedSongs.some(
+      (song) => song.id === currentSong.id
+    )
+      ? likedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
+      : [...likedSongs, currentSong]; // Add song if not liked
+
+    setLikedSongs(updatedLikedSongs);
+    localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
+  };
 
   return (
     <div
@@ -236,6 +241,15 @@ const Player = () => {
                   </div>
 
                   <div className="lg:flex hidden  items-center gap-5 justify-end">
+                    <button onClick={toggleLikeSong} title="Like Song">
+                      {likedSongs.some(
+                        (song) => song.id === currentSong?.id
+                      ) ? (
+                        <FaHeart className="text-red-500" />
+                      ) : (
+                        <FaRegHeart className="text-white" />
+                      )}
+                    </button>
                     <MdDownload
                       className="hover:text-[#fd3a4e]  text-2xl cursor-pointer"
                       onClick={downloadSong}
@@ -266,6 +280,11 @@ const Player = () => {
               </div>
             </>
           )}
+
+
+
+
+
           {isMaximized && (
             <>
               {/* <Navbar /> */}
@@ -289,7 +308,17 @@ const Player = () => {
                     </p>
                     <p className="overflow-hidden  flex  w-[95%]  text-base font-medium text-zinc-400 justify-between h-[1.84rem] pl-[2.5rem]    ">
                       {artistNames}
-                      <div className="">
+                      
+                      <div className="flex gap-4 items-center">
+                      <button onClick={toggleLikeSong} title="Like Song">
+                      {likedSongs.some(
+                        (song) => song.id === currentSong?.id
+                      ) ? (
+                        <FaHeart className="text-red-500 text-2xl" />
+                      ) : (
+                        <FaRegHeart className="text-white text-2xl" />
+                      )}
+                    </button>  
                         <MdDownload
                           className="hover:text-[#fd3a4e]  flex place-self-start text-[1.8rem] cursor-pointer text-white"
                           onClick={downloadSong}
@@ -368,7 +397,7 @@ const Player = () => {
                   </div>
 
                   <div className="flex flex-col pt-3 -pl-1">
-                  <h2 className="text-3xl font-medium pl-[2rem] lg:w-full w-[50%] flex lg:justify-start justify-center">
+                    <h2 className="text-3xl font-medium pl-[2rem] lg:w-full w-[50%] flex lg:justify-start justify-center">
                       Artists
                     </h2>
                     <div className="grid grid-flow-col justify-between lg:w-max scroll-smooth gap-[1.5rem] p-[2.5rem] overflow-x-auto scroll ">

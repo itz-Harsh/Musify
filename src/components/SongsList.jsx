@@ -22,21 +22,22 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
     : "Unknown Artist";
   // console.log(artistNames);
   return (
-    <div className="overflow-clip h-[3.5rem] w-full song-item flex justify-between items-center p-2 border-b-[1px] border-zinc-800 song-info">
-      <div
-        onClick={() =>
-          playMusic(downloadUrl, name, duration, imageUrl, id, artists)
-        }
-        className="relative cursor-pointer"
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-      >
-        <img src={imageUrl} alt="" className="w-[5rem] object-cover transition-all duration-700" />
+    <div
+      onClick={() =>
+        playMusic(downloadUrl, name, duration, imageUrl, id, artists)
+      }
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      className="overflow-clip h-[3.5rem] w-full song-item flex justify-between items-center p-2 border-b-[1px] border-zinc-800 song-info"
+    >
+      <div className="relative cursor-pointer">
+        <img
+          src={imageUrl}
+          alt=""
+          className="w-[5rem] object-cover transition-all duration-700"
+        />
         {hovering && (
-          <GoPlay
-            className="  transition-all duration-700 absolute inset-0 hidden lg:flex items-center justify-center w-[2.35rem] h-[2.35rem] text-zinc-400 opacity-95 backdrop-brightness-[0.3]"
-            
-          />
+          <GoPlay className="  transition-all duration-700 absolute inset-0 hidden lg:flex items-center justify-center w-[2.35rem] h-[2.35rem] text-zinc-400 opacity-95 backdrop-brightness-[0.3]" />
         )}
       </div>
 

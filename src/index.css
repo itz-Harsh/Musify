@@ -12,6 +12,7 @@
 body {
   background-color: #1b1b1b;
   color: white;
+  
 }
 body::-webkit-scrollbar{
   display: none;
@@ -48,7 +49,7 @@ background: linear-gradient(0deg, rgb(15, 15, 15) 0%, rgb(27, 27, 27) 45%, rgb(2
 }
 .Navigator{
   background: #161616;
-/* background: linear-gradient(0deg, rgb(15, 15, 15) 0%, rgb(27, 27, 27) 45%, rgb(26, 26, 26) 100%); */
+
 }
 
 li{
@@ -71,10 +72,14 @@ li{
 }
 
 .song-info:hover {
-  background-color: #1f2022;
+  box-sizing: border-box;
+  background-color: #161616;
+  border: 1px solid #1f2022;
+  cursor: pointer;
+  border-radius: 5px;
 }
 .artistDetails {
-  box-shadow: 1px 1px 35px rgb(0, 0, 0);
+  box-shadow: 1px 1px 45px rgb(0, 0, 0);
 }
 
 .volume[type="range"]::-webkit-slider-thumb {
@@ -93,7 +98,7 @@ li{
 }
 .imgs:hover {
   display: block;
-  filter: brightness(0.60);
+  filter: brightness(0.50);
 }
 .imgs:hover .play {
   display: flex;

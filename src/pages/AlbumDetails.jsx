@@ -83,19 +83,7 @@ const AlbumDetail = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col lg:p-3 gap-5 mb-7">
-                  <h2 className="text-3xl font-medium lg:ml-14 mt-10 lg:w-full w-[50%] flex lg:justify-start justify-center">
-                      Artists
-                    </h2>
-                    <div className="grid grid-flow-col justify-between lg:w-max scroll-smooth gap-[1.5rem] pl-[2.5rem] overflow-x-auto scroll ">
-                      {details?.data?.artists?.all.map((artist, index) => (
-                        <ArtistItems
-                          key={`${artist.id || index}`}
-                          {...artist}
-                        />
-                      ))}
-                    </div>
-                  </div>
+     
       <Player />
       <Navigator />
       <Footer />

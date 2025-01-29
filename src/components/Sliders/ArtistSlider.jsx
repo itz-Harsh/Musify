@@ -23,7 +23,7 @@ const ArtistSlider = ({ artists }) => {
     <div className="flex justify-center items-center gap-4">
       {/* Left Arrow */}
       <MdOutlineKeyboardArrowLeft
-        className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-[#1b1b1b] hidden lg:block hover:text-white"
+        className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-[#1b1b1b] hidden lg:block hover:text-white"
         onClick={scrollLeft}
       />
 
@@ -42,7 +42,7 @@ const ArtistSlider = ({ artists }) => {
 
       {/* Right Arrow */}
       <MdOutlineKeyboardArrowRight
-        className="text-3xl hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer text-[#1b1b1b] hidden lg:block hover:text-white"
+        className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer text-[#1b1b1b] hidden lg:block hover:text-white"
         onClick={scrollRight}
       />
     </div>

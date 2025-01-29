@@ -1,6 +1,5 @@
-import {  FaRegHeart } from "react-icons/fa6";
 import { GoHome } from "react-icons/go";
-import { IoIosCompass } from "react-icons/io";
+
 import { IoCompassOutline ,IoHeartOutline } from "react-icons/io5";
 import { Link } from "react-router";
 
@@ -21,10 +20,10 @@ const Navigator = () => {
         </div>
       </Link>
 
-      <Link>
+      <Link to="/My_Music">
         <div className="flex flex-col items-center text-sm  ">
           <IoHeartOutline className="text-2xl " />
-          Liked
+          My Music
         </div>
       </Link>
     </div>

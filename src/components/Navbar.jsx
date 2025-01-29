@@ -84,6 +84,16 @@ const Navbar = () => {
       setSuggestions([]); // Clear suggestions after search
     }
   };
+  
+  const getGreeting = () => {
+      const hours = new Date().getHours();
+      return hours < 12
+        ? "Good Morning"
+        : hours < 18
+        ? "Good Afternoon"
+        : "Good Evening";
+    };
+  
 
   const handleSuggestionClick = (suggestion) => {
     switch (suggestion.type) {
@@ -114,10 +124,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar flex flex-col lg:gap-[14rem]  lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-2 pr-2   lg:h-[4.5em]">
+    <nav className="navbar flex flex-col lg:gap-10 lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-2 pr-2   lg:h-[4.5em]">
       {/* Logo */}
       <div className="flex  items-center gap-[4rem] mb-2 lg:mb-0 w-fit">
-        <div className="flex items-center gap-[10rem] ">
+        <div className="flex items-center gap-[4rem]  ">
           <Link to="/" className="flex items-center ">
             <img
               src="/White_musify.svg"
@@ -133,8 +143,13 @@ const Navbar = () => {
               </span>
             </div>
           </Link>
+
+          <div className="text-xl w-[10rem] flex self-center lg:hidden text-[#cecece]  font-semibold ">
+            {getGreeting()}
+          </div>
         </div>
-        <div className="lg:flex gap-[2rem] w-fit grey hidden ">
+        
+        <div className="lg:flex gap-[2rem] w-[15rem] grey hidden ">
         <Link to="/Browse">
           <h2 className="lg:text-xl text-lg">Browse</h2>
         </Link>
