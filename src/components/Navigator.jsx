@@ -20,7 +20,7 @@ const Navigator = () => {
         </div>
       </Link>
 
-      <Link to="/My_Music">
+      <Link to="/Music">
         <div className="flex flex-col items-center text-sm  ">
           <IoHeartOutline className="text-2xl " />
           My Music

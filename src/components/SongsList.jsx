@@ -16,7 +16,7 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
 
   const { isPlaying, currentSong, playMusic } = useContext(MusicContext);
 
-  const imageUrl = image[2].url || ""; // Safely access the image URL
+  const imageUrl = image[2].url || image ; // Safely access the image URL
   const artistNames = Array.isArray(artists?.primary)
     ? artists.primary.map((artist) => artist.name).join(", ")
     : "Unknown Artist";

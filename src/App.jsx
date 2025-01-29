@@ -8,6 +8,7 @@ import SearchResult from "./pages/searchResult";
 import SongsList from "./components/SongsList";
 import PlaylistDetails from "./pages/PlaylistDetails";
 import Browse from "./pages/Browse";
+import MyMusic from "./pages/myMusic";
 
 
 
@@ -19,6 +20,7 @@ export default function App() {
   const [repeatMode, setRepeatMode] = useState("none");
 
   const playMusic = async (downloadUrl, name, duration, image, id, artists) => {
+    
     if (currentSong?.audio) {
       currentSong.audio.pause();
       currentSong.audio.src = ""; // Clear audio source to release memory
@@ -156,6 +158,7 @@ export default function App() {
           <Route path="/playlists/:id" element={<PlaylistDetails />} />
           
           <Route path="/Browse" element={<Browse />} />
+          <Route path="/Music" element={<MyMusic />} />
           
         </Routes>
       </Router>

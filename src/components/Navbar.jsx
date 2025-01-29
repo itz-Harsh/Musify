@@ -153,7 +153,7 @@ const Navbar = () => {
         <Link to="/Browse">
           <h2 className="lg:text-xl text-lg">Browse</h2>
         </Link>
-        <Link>
+        <Link to="/Music">
           <h2 className="lg:text-xl text-lg ">My Music</h2>
         </Link>
       </div>

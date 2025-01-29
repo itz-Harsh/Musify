@@ -122,18 +122,27 @@ const Player = () => {
     return `${minutes}:${seconds}`;
   };
 
-  const toggleLikeSong = () => {
-    if (!currentSong) return;
+ const toggleLikeSong = () => {
+  if (!currentSong) return;
 
-    const updatedLikedSongs = likedSongs.some(
-      (song) => song.id === currentSong.id
-    )
-      ? likedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
-      : [...likedSongs, currentSong]; // Add song if not liked
-
-    setLikedSongs(updatedLikedSongs);
-    localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
+  // Extract only necessary properties
+  const songData = {
+    id: currentSong.id,
+    name: currentSong.name,
+    audio: currentSong.audio.currentSrc, // Ensure this is a URL
+    duration: currentSong.duration,
+    image: currentSong.image,
+    artists: currentSong.artists,
   };
+
+  const updatedLikedSongs = likedSongs.some((song) => song.id === currentSong.id)
+    ? likedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
+    : [...likedSongs, songData]; // Add cleaned song data
+
+  setLikedSongs(updatedLikedSongs);
+  localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
+};
+
 
   return (
     <div
@@ -151,9 +160,9 @@ const Player = () => {
           {!isMaximized && (
             <>
               <form className="flex items-center w-full mb-4 gap-3 h-[0px]">
-                <p className="text-white text-xs ">
+                <span className="text-white text-xs ">
                   {formatTime(currentTime)}{" "}
-                </p>
+                </span>
                 <input
                   type="range"
                   min={0}
@@ -168,9 +177,9 @@ const Player = () => {
                   onChange={handleProgressChange}
                   className="h-[3px] flex w-full text-emerald-500 range "
                 />
-                <p className="text-white text-xs">
+                <span className="text-white text-xs">
                   {formatTime(currentSong?.duration || 0)}
-                </p>
+                </span>
               </form>
               <div className="h-[3rem] w-full">
                 <div className="flex justify-between items-center  mb-4">
@@ -185,9 +194,9 @@ const Player = () => {
                         width={55}
                         className="rounded"
                       />
-                      <div className="overflow-y-clip w-[15rem] h-[2.9rem]">
+                      <div className="flex flex-col overflow-y-clip w-[15rem] h-[2.9rem]">
                         <span>{currentSong?.name || "No Song Playing"}</span>
-                        <p className="text-xs text-gray-400">{artistNames}</p>
+                        <span className="text-xs text-gray-400">{artistNames}</span>
                       </div>
                     </div>
                   </div>
@@ -303,10 +312,10 @@ const Player = () => {
                     />
                   </div>
                   <div className="flex  flex-col  gap-[0.5rem]">
-                    <p className=" text-2xl font-semibold h-auto  justify-start  pl-[2.5rem] flex  overflow-clip  ">
+                    <span className=" text-2xl font-semibold h-auto  justify-start  pl-[2.5rem] flex  overflow-clip  ">
                       {currentSong?.name}
-                    </p>
-                    <p className="overflow-hidden  flex  w-[95%]  text-base font-medium text-zinc-400 justify-between h-[1.84rem] pl-[2.5rem]    ">
+                    </span>
+                    <span className="overflow-hidden  flex  w-[95%]  text-base font-medium text-zinc-400 justify-between h-[1.84rem] pl-[2.5rem]    ">
                       {artistNames}
                       
                       <div className="flex gap-4 items-center">
@@ -325,13 +334,13 @@ const Player = () => {
                           title="Download Song"
                         />
                       </div>
-                    </p>
+                    </span>
                   </div>
                   <div className="flex flex-col justify-center items-center ">
                     <form className="flex items-center w-full  mb-1 gap-3 p-3 h-[0px]">
-                      <p className="text-white text-xs ">
+                      <span className="text-white text-xs ">
                         {formatTime(currentTime)}{" "}
-                      </p>
+                      </span>
                       <input
                         type="range"
                         min={0}
@@ -346,9 +355,9 @@ const Player = () => {
                         onChange={handleProgressChange}
                         className="h-[3px] flex w-full translate-y-[2px] text-emerald-500 range "
                       />
-                      <p className="text-white text-xs">
+                      <span className="text-white text-xs">
                         {formatTime(currentSong?.duration || 0)}
-                      </p>
+                      </span>
                     </form>
                     <div className="flex items-center gap-5 bg-zinc800 p-8">
                       <BiRepeat
