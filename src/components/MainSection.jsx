@@ -10,13 +10,15 @@ import PlaylistSlider from "./Sliders/PlaylistSlider";
 import ArtistSlider from "./Sliders/ArtistSlider";
 import SongGrid from "./SongGrid";
 import { useRef } from "react";
-import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
 import MusicContext from "../context/MusicContext";
-
 
 const MainSection = () => {
   const [songs, setSong] = useState([]);
-  const [latestSongs , setlatestSongs] = useState([]);
+  const [latestSongs, setlatestSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artists, setArtists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
@@ -37,6 +39,15 @@ const MainSection = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollLeft += 1000; // Scroll right by 800px
     }
+  };
+
+  const getGreeting = () => {
+    const hours = new Date().getHours();
+    return hours < 12
+      ? "Good Morning"
+      : hours < 18
+      ? "Good Afternoon"
+      : "Good Evening";
   };
 
   useEffect(() => {
@@ -110,14 +121,16 @@ const MainSection = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="my-[2rem] mt-[8rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
+    <div className="my-[2rem] lg:mt-[3rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
       {/* New Songs Section */}
       <div className="flex flex-col items-center w-full">
-        
-          <h2 className="m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[11rem]">
-            New Songs
-          </h2>
-        
+        <h2 className=" m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[11rem]">
+          <div className="text-2xl lg:text-3xl w-[auto] text-[#cecece] font-semibold lg:pt-3 pt-8 lg:ml-[4.5rem]">
+            {getGreeting()}
+          </div>
+          New Songs
+        </h2>
+
         <div className="flex justify-center items-center gap-3 w-full">
           {/* Left Arrow */}
           <MdOutlineKeyboardArrowLeft
@@ -139,9 +152,9 @@ const MainSection = () => {
           />
         </div>
       </div>
-  
+
       <br />
-  
+
       {/* Today Trending Section */}
       <div className="flex flex-col justify-center items-center w-full">
         <h2 className=" lg:ml-[11rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
@@ -168,36 +181,36 @@ const MainSection = () => {
           />
         </div>
       </div>
-  
+
       <br />
-  
+
       {/* Top Albums Section */}
       <div className="w-full">
-        <h2 className="m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+        <h2 className="lg:ml-[10.5rem] m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 lg:pl-3 ">
           Top Albums
         </h2>
         <AlbumSlider albums={albums} />
       </div>
       <br />
-  
+
       {/* Top Artists Section */}
       <div className="w-full">
-        <h2 className="m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
           Top Artists
         </h2>
         <ArtistSlider artists={artists} />
       </div>
       <br />
-  
+
       {/* Top Playlists Section */}
       <div className="w-full">
-        <h2 className="m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
           Top Playlists
         </h2>
         <PlaylistSlider playlists={playlists} />
       </div>
     </div>
-  );  
+  );
 };
 
 export default MainSection;

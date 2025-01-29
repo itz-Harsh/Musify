@@ -2,8 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import {  getSearchData, getSongbyQuery } from "../../fetch";
 import MusicContext from "../context/MusicContext";
-import { ThemeToggle } from "./Theme/Toggle";
-// import { ThemeToggle } from "";
+
 
 const Navbar = () => {
   const { playMusic } = useContext(MusicContext); // Ensure correct usage
@@ -115,21 +114,13 @@ const Navbar = () => {
     setSuggestions([]); // Clear suggestions
   };
 
-  const getGreeting = () => {
-    const hours = new Date().getHours();
-    return hours < 12
-      ? "Good Morning"
-      : hours < 18
-        ? "Good Afternoon"
-        : "Good Evening";
-  };
 
   return (
-    <nav className="navbar flex flex-col  gap-[3rem]  lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-4 pr-4   lg:h-[4.5em]">
+    <nav className="navbar flex flex-col  lg:gap-[14rem]  lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-4 pr-4   lg:h-[4.5em]">
       {/* Logo */}
       <div className="flex  items-center gap-2 mb-2 lg:mb-0">
         <div className="flex items-center gap-[10rem]">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center ">
           <img src="/White_musify.svg" alt="Musify" className="h-[3.6rem] lg:h-[4rem]" />
           <div>
             <span className="text-zinc-200 font-extrabold text-2xl lg:text-3xl">Musi</span>
@@ -137,16 +128,12 @@ const Navbar = () => {
           </div>
         </Link>
       
-         <div className="text-[0.9rem] lg:text-xl w-[10rem] text-[#cecece] font-semibold lg:mb-0 lg:ml-4">
-        {getGreeting()}
-      </div>
+         
   </div>
       </div>
   
-      {/* Greeting */}
-     
-      {/* Search Bar */}
-      <div className="flex-grow ">
+
+      <div className="flex-grow hidden lg:block ">
         <form
           onSubmit={handleSearchSubmit}
           className="relative  flex flex-col lg:flex-row items-center gap-2"

@@ -124,7 +124,7 @@ export default function App() {
   };
   return (
     <>
-    <div className="" >
+    
     <MusicContext.Provider
       value={{
         songs,
@@ -156,7 +156,7 @@ export default function App() {
         </Routes>
       </Router>
     </MusicContext.Provider>
-    </div>
+  
     </>);
 }
 
