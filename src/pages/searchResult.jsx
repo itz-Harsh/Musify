@@ -69,9 +69,9 @@ const SearchResult = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-[8rem] lg:mt-[4rem] p-4 gap-5 flex flex-col">
+      <div className="mt-[8rem] lg:mt-[6rem]  p-1 gap-5 flex flex-col">
         <h2 className="text-2xl font-semibold ml-[1rem] lg:ml-[7rem] flex flex-col gap-3">
-          Top Search Results <p className="text-lg">Songs</p>
+          Top Search Results <p className="text-xl">Songs</p>
         </h2>
         <div className="flex justify-center items-center gap-3 w-full">
           {/* Left Arrow */}
@@ -95,7 +95,7 @@ const SearchResult = () => {
         {/* Conditionally Render Albums Section */}
          {AlbumResults.length > 0 && (
           <>
-            <p className="text-lg font-semibold  ml-[1rem] lg:ml-[7rem]">Albums</p>
+            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Albums</p>
             <AlbumSlider albums={AlbumResults} />
           </>
         )} 
@@ -103,7 +103,7 @@ const SearchResult = () => {
         {/* Conditionally Render Playlists Section */}
         {PlaylistsResults.length > 0 && (
           <>
-            <p className="text-lg font-semibold  ml-[1rem] lg:ml-[7rem]">Playlists</p>
+            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Playlists</p>
             <PlaylistSlider playlists={PlaylistsResults} />
           </>
         )}
@@ -111,7 +111,7 @@ const SearchResult = () => {
         {/* Conditionally Render Artists Section */}
         {ArtistsResults.length > 0 && (
           <>
-            <p className="text-lg font-semibold  ml-[1rem] lg:ml-[7rem]">Artists</p>
+            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Artists</p>
             <ArtistSlider artists={ArtistsResults} />
           </>
         )}

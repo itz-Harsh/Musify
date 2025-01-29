@@ -125,7 +125,7 @@ const MainSection = () => {
       {/* New Songs Section */}
       <div className="flex flex-col items-center w-full">
         <h2 className=" m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[11rem]">
-          <div className="text-2xl lg:text-3xl w-[auto] text-[#cecece] font-semibold lg:pt-3 pt-8 lg:ml-[4.5rem]">
+          <div className="text-2xl lg:text-3xl w-[auto] text-[#cecece] font-semibold lg:p-3 pt-8 lg:ml-[6rem]">
             {getGreeting()}
           </div>
           New Songs
