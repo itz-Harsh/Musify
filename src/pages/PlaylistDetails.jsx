@@ -6,6 +6,7 @@ import { fetchplaylistsByID } from "../../fetch";
 import Footer from "../components/footer";
 import MusicContext from "../context/MusicContext";
 import SongsList from "../components/SongsList";
+import Navigator from "../components/Navigator";
 
 const PlaylistDetails = () => {
   const { id } = useParams();
@@ -90,6 +91,7 @@ const PlaylistDetails = () => {
       </div>
 
       <Player />
+      <Navigator />
       <Footer />
     </>
   );

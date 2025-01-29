@@ -9,6 +9,7 @@ import MiniSlider from "../components/Sliders/miniSlider";
 import { useContext } from "react";
 import MusicContext from "../context/MusicContext";
 import AlbumSlider from "../components/Sliders/AlbumSlider";
+import Navigator from "../components/Navigator";
 
 const ArtistsDetails = () => {
   const { id } = useParams(); // Extract the artist ID from the URL
@@ -132,6 +133,7 @@ const FanCount = (fanCount) => {
         </div>
       </div>
       <Player />
+      <Navigator />
       <Footer />
     </>
   );

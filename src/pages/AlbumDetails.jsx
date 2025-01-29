@@ -7,6 +7,7 @@ import { fetchAlbumByID } from "../../fetch";
 import { useContext } from "react";
 import MusicContext from "../context/MusicContext";
 import Footer from "../components/footer";
+import Navigator from "../components/Navigator";
 
 const AlbumDetail = () => {
   const { id } = useParams(); // Extract the album ID from the URL
@@ -83,6 +84,7 @@ const AlbumDetail = () => {
       </div>
 
       <Player />
+      <Navigator />
       <Footer />
     </>
   );

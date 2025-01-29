@@ -42,9 +42,13 @@ input[type="text"] {
   background-color: #fe4559;
 }
 
-.mPlayer{
+.Player{
   background: rgb(38,38,38);
 background: linear-gradient(0deg, rgb(15, 15, 15) 0%, rgb(27, 27, 27) 45%, rgb(26, 26, 26) 100%);
+}
+.Navigator{
+  background: #161616;
+/* background: linear-gradient(0deg, rgb(15, 15, 15) 0%, rgb(27, 27, 27) 45%, rgb(26, 26, 26) 100%); */
 }
 
 li{
@@ -60,11 +64,7 @@ li{
   background-color: #1b1b1b;
   z-index: 3;
 }
-.player {
-  height: 5rem;
-  z-index: 3;
-  background-color: #18191b;
-}
+
 .DetailImg{
   
   box-shadow: 1px 2px 35px rgb(0, 0, 0);

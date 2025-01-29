@@ -133,7 +133,7 @@ const Navbar = () => {
       </div>
   
 
-      <div className="flex-grow hidden lg:block ">
+      <div className="flex-grow  ">
         <form
           onSubmit={handleSearchSubmit}
           className="relative  flex flex-col lg:flex-row items-center gap-2"

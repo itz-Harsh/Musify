@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';  // To fetch album ID from URL
 import Navbar from '../components/Navbar';
-import SongsList from '../components/SongsList';
 import Player from '../components/Player';
 import { getSongbyId } from '../../fetch'; 
 import { useContext } from 'react';
@@ -56,7 +55,7 @@ import MusicContext from '../context/MusicContext';
           </div>
         </div>
       </div>
-
+      
       <Player />
     </>
   );

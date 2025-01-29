@@ -9,6 +9,7 @@ import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-i
 import AlbumSlider from "../components/Sliders/AlbumSlider";
 import PlaylistSlider from "../components/Sliders/PlaylistSlider";
 import ArtistSlider from "../components/Sliders/ArtistSlider";
+import Navigator from "../components/Navigator";
 
 const SearchResult = () => {
   const { query } = useParams();
@@ -116,6 +117,7 @@ const SearchResult = () => {
         )}
       </div>
       <Footer />
+      <Navigator />
       <Player />
     </>
   );

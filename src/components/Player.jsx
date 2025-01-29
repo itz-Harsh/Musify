@@ -125,16 +125,16 @@ const Player = () => {
   return (
     <div
       className={`fixed ${isVisible ? "lg:flex " : "hidden"}
-       bottom-0 left-0 w-full z-20 flex   justify-center items-center  mt-10 bg-transparent  `}
+       bottom-14 left-0 w-screen z-20 flex   justify-center items-center   `}
     >
       <div
-        className={`flex flex-col h-auto w-full bg-auto rounded-tl-xl rounded-tr-xl  relative transition-all ease-in-out duration-700 ${
+        className={`flex flex-col h-auto w-screen bg-auto rounded-tl-xl rounded-tr-xl  relative transition-all ease-in-out duration-500  ${
           isMaximized
             ? "  pt-[26rem] backdrop-brightness-[0.4]"
-            : "lg:h-[6rem] h-[5.69rem] p-4 mPlayer"
+            : "lg:h-[6rem] h-auto p-4 Player"
         }`}
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           {!isMaximized && (
             <>
               <form className="flex items-center w-full mb-4 gap-3 h-[0px]">
@@ -159,7 +159,7 @@ const Player = () => {
                   {formatTime(currentSong?.duration || 0)}
                 </p>
               </form>
-              <div>
+              <div className="h-[3rem] w-full">
                 <div className="flex justify-between items-center  mb-4">
                   <div
                     className="flex w-full  lg:w-auto"
@@ -261,7 +261,7 @@ const Player = () => {
           {isMaximized && (
             <>
               {/* <Navbar /> */}
-              <div className="flex w-full bottom-0 flex-col p-2 pt-2 lg:h-auto h-[46rem] gap-4 scroll-hide overflow-y-scroll rounded-tl-2xl rounded-tr-2xl mPlayer">
+              <div className="flex w-full bottom-0 flex-col p-2 pt-2 lg:h-auto h-[46rem] gap-4 scroll-hide overflow-y-scroll rounded-tl-2xl rounded-tr-2xl Player">
                 <div className=" flex w-[97%] justify-end ">
                   <IoIosClose
                     className="  text-white text-[3rem] cursor-pointer"
