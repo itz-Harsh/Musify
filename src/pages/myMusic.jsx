@@ -20,6 +20,7 @@ const MyMusic = () => {
   return (
     <>
       <Navbar />
+      <div className="mb-[8rem]">
       <div className="lg:ml-[3rem] ml-[2rem] flex items-center gap-5 mt-[9rem] lg:mt-[6rem]">
         <span className="gradient flex justify-center items-center h-[8rem] w-[8rem] lg:h-[12rem] lg:w-[12rem] rounded-lg">
           <FaHeart className="text-5xl" />
@@ -50,6 +51,7 @@ const MyMusic = () => {
         )}
         </div>
       </div >
+      </div>
       <Player />
       <Navigator />
     </>
