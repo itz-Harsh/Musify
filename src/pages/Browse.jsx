@@ -12,6 +12,7 @@ const Browse = () => {
         </div>
       <Player />
       <Navigator />
+   
     </>
   )
 }

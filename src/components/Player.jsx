@@ -46,7 +46,7 @@ const Player = () => {
   const artistNames = currentSong?.artists?.primary
     ? currentSong.artists.primary.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
-  // const artist = currentSong?.artists;
+  
 
   useEffect(() => {
     if (currentSong) {

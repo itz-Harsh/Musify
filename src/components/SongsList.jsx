@@ -23,7 +23,7 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
 
     
   downloadUrl =  downloadUrl || songs.audio;
-  // console.log(downloadUrl);
+  
   return (
     <div
       onClick={() =>

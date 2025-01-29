@@ -47,12 +47,11 @@ export default function App() {
   const saveToLocalStorage = (song) => {
     let playedSongs = JSON.parse(localStorage.getItem("playedSongs")) || [];
   
-    // Check if the song is already in the list by its unique id
+  
     if (!playedSongs.some(existingSong => existingSong.id === song.id)) {
-      playedSongs.unshift(song); // Add the new song to the beginning of the array
+      playedSongs.unshift(song);
     }
   
-    // Keep only the last 20 played songs (if more than 20, slice the array)
     if (playedSongs.length > 20) {
       playedSongs = playedSongs.slice(0, 20);
     }

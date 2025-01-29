@@ -49,7 +49,7 @@ const MyMusic = () => {
           <span>No liked songs yet.</span>
         )}
         </div>
-      </div>
+      </div >
       <Player />
       <Navigator />
     </>
