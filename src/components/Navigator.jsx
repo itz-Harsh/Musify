@@ -14,7 +14,7 @@ const Navigator = () => {
         </div>
       </Link>
 
-      <Link to="/search/New">
+      <Link to="/Browse">
         <div className="flex flex-col items-center text-sm  ">
           <IoCompassOutline className="text-2xl " />
           Browse

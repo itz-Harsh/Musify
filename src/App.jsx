@@ -7,6 +7,8 @@ import ArtistsDetails from "./pages/ArtistsDetails";
 import SearchResult from "./pages/searchResult";
 import SongsList from "./components/SongsList";
 import PlaylistDetails from "./pages/PlaylistDetails";
+import Browse from "./pages/Browse";
+
 
 
 export default function App() {
@@ -152,6 +154,8 @@ export default function App() {
 
           <Route path="/albums/:id" element={<AlbumDetail /> || <SongsList />} />
           <Route path="/playlists/:id" element={<PlaylistDetails />} />
+          
+          <Route path="/Browse" element={<Browse />} />
           
         </Routes>
       </Router>

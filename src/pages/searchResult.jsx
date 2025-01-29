@@ -92,7 +92,7 @@ const SearchResult = () => {
           />
         </div>
 
-        {/* Conditionally Render Albums Section */}
+       
          {AlbumResults.length > 0 && (
           <>
             <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Albums</p>
@@ -100,7 +100,7 @@ const SearchResult = () => {
           </>
         )} 
 
-        {/* Conditionally Render Playlists Section */}
+        
         {PlaylistsResults.length > 0 && (
           <>
             <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Playlists</p>
@@ -108,7 +108,7 @@ const SearchResult = () => {
           </>
         )}
 
-        {/* Conditionally Render Artists Section */}
+      
         {ArtistsResults.length > 0 && (
           <>
             <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Artists</p>

@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import {  getSearchData, getSongbyQuery } from "../../fetch";
+import { getSearchData, getSongbyQuery } from "../../fetch";
 import MusicContext from "../context/MusicContext";
-
 
 const Navbar = () => {
   const { playMusic } = useContext(MusicContext); // Ensure correct usage
@@ -114,24 +113,36 @@ const Navbar = () => {
     setSuggestions([]); // Clear suggestions
   };
 
-
   return (
     <nav className="navbar flex flex-col  lg:gap-[14rem]  lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-4 pr-4   lg:h-[4.5em]">
       {/* Logo */}
       <div className="flex  items-center gap-2 mb-2 lg:mb-0">
         <div className="flex items-center gap-[10rem]">
-        <Link to="/" className="flex items-center ">
-          <img src="/White_musify.svg" alt="Musify" className="h-[3.6rem] lg:h-[4rem]" />
-          <div>
-            <span className="text-zinc-200 font-extrabold text-2xl lg:text-3xl">Musi</span>
-            <span className="text-zinc-600 font-extrabold text-2xl lg:text-3xl">fy</span>
-          </div>
-        </Link>
-      
-         
-  </div>
+          <Link to="/" className="flex items-center ">
+            <img
+              src="/White_musify.svg"
+              alt="Musify"
+              className="h-[3.6rem] lg:h-[4rem]"
+            />
+            <div>
+              <span className="text-zinc-200 font-extrabold text-2xl lg:text-3xl">
+                Musi
+              </span>
+              <span className="text-zinc-600 font-extrabold text-2xl lg:text-3xl">
+                fy
+              </span>
+            </div>
+          </Link>
+        </div>
       </div>
-  
+      <div className="flex gap-[3rem] ">
+        <Link to="/Browse">
+          <h2>Browse</h2>
+        </Link>
+        <Link>
+          <h2>Liked</h2>
+        </Link>
+      </div>
 
       <div className="flex-grow  ">
         <form
@@ -155,11 +166,13 @@ const Navbar = () => {
               <img src="/search.svg" alt="search" className="h-6 w-6" />
             </button>
           </div>
-  
+
           {/* Suggestions Dropdown */}
           <div
-            className={ ` absolute scroll-hide top-[3.8rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg shadow-lg w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
-              suggestions.length > 0 ? "visible opacity-100" : "invisible opacity-0"
+            className={` absolute scroll-hide top-[3.8rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg shadow-lg w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
+              suggestions.length > 0
+                ? "visible opacity-100"
+                : "invisible opacity-0"
             }`}
           >
             {suggestions.map((suggestion, index) => (
@@ -175,18 +188,17 @@ const Navbar = () => {
                 />
                 <div className="flex flex-col overflow-hidden">
                   <span className="text-sm truncate ">{suggestion.name}</span>
-                  <span className="text-gray-500 text-xs">{suggestion.type}</span>
+                  <span className="text-gray-500 text-xs">
+                    {suggestion.type}
+                  </span>
                 </div>
               </div>
             ))}
           </div>
         </form>
-        
       </div>
-    
     </nav>
   );
-  
 };
 
 export default Navbar;
