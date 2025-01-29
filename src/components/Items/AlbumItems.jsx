@@ -16,7 +16,7 @@ const AlbumItems = ({ name, artists, id, image }) => {
     >
       <div className="p-1" >
       <img
-        src={imageUrl}
+        src={imageUrl  || "/Unknown.png" }
         alt={name}
         className="rounded-lg imgs"
       />

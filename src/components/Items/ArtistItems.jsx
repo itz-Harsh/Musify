@@ -15,7 +15,7 @@ const ArtistItems = ({ name, artists, id, image }) => {
       className=" w-[8rem] overflow-y-clip flex flex-col justify-center items-center gap-4 rounded-lg"
     >
       <img
-        src={imageUrl || "/Unknown.jpg"}
+        src={imageUrl || "/Unknown.png"}
         alt={name}
         className="rounded-full "
       />

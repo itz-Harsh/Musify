@@ -12,7 +12,7 @@ const PlaylistItems = ({name , image , id}) => {
       className="w-[7rem]   flex flex-col justify-center items-center gap-3 rounded-lg"
     >
       <img
-        src={imageUrl}
+        src={imageUrl || "/Unknown.png"}
         alt={name}
         className="rounded-full"
       />

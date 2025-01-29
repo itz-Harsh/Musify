@@ -124,8 +124,8 @@ const Player = () => {
 
   return (
     <div
-      className={`fixed ${isVisible ? "lg:flex " : "hidden"}
-       bottom-14 left-0 w-screen z-20 flex   justify-center items-center   `}
+      className={` ${isVisible ? "lg:flex " : "hidden"}
+      fixed bottom-14 lg:bottom-0 left-0 w-screen z-20 flex   justify-center items-center   `}
     >
       <div
         className={`flex flex-col h-auto w-screen bg-auto rounded-tl-xl rounded-tr-xl  relative transition-all ease-in-out duration-500  ${

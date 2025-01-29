@@ -56,7 +56,7 @@ const AlbumDetail = () => {
       <div className="flex flex-col   gap-[2rem] lg:gap-[4rem] text-zinc-300 pt-[10rem] lg:pt-[6rem]   ">
         <div className="flex items-center pl-[2rem]">
           <img
-            src={details.data.image[2].url}
+            src={details.data.image[2].url || "/Unknown.png"}
             alt={details.name}
             className="DetailImg h-[8rem] lg:h-[15rem] lg:rounded rounded-full "
           />
