@@ -195,7 +195,7 @@ const MainSection = () => {
 
       {/* Top Artists Section */}
       <div className="w-full">
-        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 lg:pl-[3rem]">
           Top Artists
         </h2>
         <ArtistSlider artists={artists} />
@@ -204,7 +204,7 @@ const MainSection = () => {
 
       {/* Top Playlists Section */}
       <div className="w-full">
-        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[11rem]">
+        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 lg:pl-[3rem]">
           Top Playlists
         </h2>
         <PlaylistSlider playlists={playlists} />
