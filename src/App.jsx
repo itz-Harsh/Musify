@@ -19,16 +19,16 @@ export default function App() {
   const [shuffle, setShuffle] = useState(false);
   const [repeatMode, setRepeatMode] = useState("none");
 
-  const playMusic = async (downloadUrl, name, duration, image, id, artists) => {
-    
+  const playMusic = async (downloadUrl, name, duration, image, id, artists ) => {
+    const audioUrl = downloadUrl[4]?.url || downloadUrl;
+  
+    // Pause the current song and clear the source to release memory
     if (currentSong?.audio) {
       currentSong.audio.pause();
       currentSong.audio.src = ""; // Clear audio source to release memory
     }
   
-    const newAudio = new Audio(downloadUrl[4]?.url || downloadUrl);
-    newAudio.addEventListener("ended", nextSong); // Auto-play next song when current song ends
-
+    const newAudio = new Audio(audioUrl || downloadUrl);
     setCurrentSong({
       name,
       duration,
@@ -40,9 +40,27 @@ export default function App() {
   
     setIsPlaying(true);
     await newAudio.play();
+  
+    saveToLocalStorage({ downloadUrl, id, name, duration, image, artists });
   };
   
-
+  const saveToLocalStorage = (song) => {
+    let playedSongs = JSON.parse(localStorage.getItem("playedSongs")) || [];
+  
+    // Check if the song is already in the list by its unique id
+    if (!playedSongs.some(existingSong => existingSong.id === song.id)) {
+      playedSongs.unshift(song); // Add the new song to the beginning of the array
+    }
+  
+    // Keep only the last 20 played songs (if more than 20, slice the array)
+    if (playedSongs.length > 20) {
+      playedSongs = playedSongs.slice(0, 20);
+    }
+  
+    // Save the updated list back to localStorage
+    localStorage.setItem("playedSongs", JSON.stringify(playedSongs));
+  };
+  
   const downloadSong = async () => {
     if (currentSong?.audio?.currentSrc) {
       try {
@@ -73,49 +91,74 @@ export default function App() {
 
 
   const nextSong = () => {
-    if (!currentSong) return;
+    if (!currentSong || songs.length === 0) return;
   
     const currentIndex = songs.findIndex((song) => song.id === currentSong.id);
   
+    // Shuffle Mode: Randomly select a song
     if (shuffle) {
-      // Shuffle mode: Pick a random song
       const randomIndex = Math.floor(Math.random() * songs.length);
-      const { downloadUrl, name, duration, image, id, artists } = songs[randomIndex];
-      playMusic(downloadUrl, name, duration, image, id, artists);
-    } else if (repeatMode === "one") {
-      // Repeat current song
-      const { downloadUrl, name, duration, image, id, artists } = currentSong;
-      playMusic(downloadUrl, name, duration, image, id, artists);
+      const nextTrack = songs[randomIndex];
+      if (!nextTrack) return;
+  
+      const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl[0]?.url : nextTrack.audio;
+      const { name, duration, image, id, artists } = nextTrack;
+      
+      playMusic(audioSource, name, duration, image, id, artists);
+  
     } else {
-      // Normal mode or Repeat All
-      const nextIndex = (currentIndex + 1) % songs.length;
-      const { downloadUrl, name, duration, image, id, artists } = songs[nextIndex];
-      playMusic(downloadUrl, name, duration, image, id, artists);
+      // Repeat Mode: "one" will repeat the current song
+      if (repeatMode === "one") {
+        const audioSource = currentSong.audio.src;  // Use the current song's audio source
+        const { name, duration, image, id, artists } = currentSong;
+        playMusic(audioSource, name, duration, image, id, artists);
+  
+      } else if (repeatMode === "all") {
+        // Repeat Mode "all" will go to next song and loop the playlist
+        let nextIndex = (currentIndex + 1) % songs.length;  // Move to next song, wrap to the start if needed
+        const nextTrack = songs[nextIndex];
+        if (!nextTrack) return;
+  
+        const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl[0]?.url : nextTrack.audio;
+        const { name, duration, image, id, artists } = nextTrack;
+  
+        playMusic(audioSource, name, duration, image, id, artists);
+      } else {
+        // Normal mode (no repeat or shuffle): go to the next song sequentially
+        let nextIndex = (currentIndex + 1) % songs.length;  // Sequential next
+        const nextTrack = songs[nextIndex];
+        if (!nextTrack) return;
+  
+        const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl[0]?.url : nextTrack.audio;
+        const { name, duration, image, id, artists } = nextTrack;
+  
+        playMusic(audioSource, name, duration, image, id, artists);
+      }
     }
   };
   
 
   const prevSong = () => {
-    if (currentSong) {
-      const index = songs.findIndex((song) => song.id === currentSong.id);
-
-      if (shuffle) {
-        // Shuffle mode: Pick a random song
-        const randomIndex = Math.floor(Math.random() * songs.length);
-        const { downloadUrl, name, duration, image, id, artists } = songs[randomIndex];
-        playMusic(downloadUrl, name, duration, image, id, artists);
-      } else {
-        // Regular mode: Go to previous song
-        if (index === 0) {
-          const { downloadUrl, name, duration, image, id, artists } = songs[songs.length - 1];
-          playMusic(downloadUrl, name, duration, image, id, artists);
-        } else {
-          const { downloadUrl, name, duration, image, id, artists } = songs[index - 1];
-          playMusic(downloadUrl, name, duration, image, id, artists);
-        }
-      }
+    if (!currentSong || songs.length === 0) return;
+  
+    const index = songs.findIndex((song) => song.id === currentSong.id);
+  
+    let prevIndex;
+    if (shuffle) {
+      // Shuffle mode: Pick a random song
+      prevIndex = Math.floor(Math.random() * songs.length);
+    } else {
+      // Regular mode: Go to previous song (loop back to last song if at index 0)
+      prevIndex = index === 0 ? songs.length - 1 : index - 1;
     }
+  
+    // Extract the song data correctly
+    const song = songs[prevIndex];
+    const audioSource = song.downloadUrl?.[4]?.url || song.audio; // Handle both types of song data
+  
+    playMusic(audioSource, song.name, song.duration, song.image, song.id, song.artists);
   };
+  
 
   const toggleRepeatMode = () => {
     setRepeatMode((nextSong) =>

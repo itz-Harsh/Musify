@@ -122,27 +122,28 @@ const Player = () => {
     return `${minutes}:${seconds}`;
   };
 
- const toggleLikeSong = () => {
-  if (!currentSong) return;
+  const toggleLikeSong = () => {
+    if (!currentSong) return;
 
-  // Extract only necessary properties
-  const songData = {
-    id: currentSong.id,
-    name: currentSong.name,
-    audio: currentSong.audio.currentSrc, // Ensure this is a URL
-    duration: currentSong.duration,
-    image: currentSong.image,
-    artists: currentSong.artists,
+    // Extract only necessary properties
+    const songData = {
+      id: currentSong.id,
+      name: currentSong.name,
+      audio: currentSong.audio.currentSrc, // Ensure this is a URL
+      duration: currentSong.duration,
+      image: currentSong.image,
+      artists: currentSong.artists,
+    };
+
+    const updatedLikedSongs = likedSongs.some(
+      (song) => song.id === currentSong.id
+    )
+      ? likedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
+      : [...likedSongs, songData]; // Add cleaned song data
+
+    setLikedSongs(updatedLikedSongs);
+    localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
   };
-
-  const updatedLikedSongs = likedSongs.some((song) => song.id === currentSong.id)
-    ? likedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
-    : [...likedSongs, songData]; // Add cleaned song data
-
-  setLikedSongs(updatedLikedSongs);
-  localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
-};
-
 
   return (
     <div
@@ -196,7 +197,9 @@ const Player = () => {
                       />
                       <div className="flex flex-col overflow-y-clip w-[15rem] h-[2.9rem]">
                         <span>{currentSong?.name || "No Song Playing"}</span>
-                        <span className="text-xs text-gray-400">{artistNames}</span>
+                        <span className="text-xs text-gray-400">
+                          {artistNames}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -289,11 +292,6 @@ const Player = () => {
               </div>
             </>
           )}
-
-
-
-
-
           {isMaximized && (
             <>
               {/* <Navbar /> */}
@@ -317,17 +315,17 @@ const Player = () => {
                     </span>
                     <span className="overflow-hidden  flex  w-[95%]  text-base font-medium text-zinc-400 justify-between h-[1.84rem] pl-[2.5rem]    ">
                       {artistNames}
-                      
+
                       <div className="flex gap-4 items-center">
-                      <button onClick={toggleLikeSong} title="Like Song">
-                      {likedSongs.some(
-                        (song) => song.id === currentSong?.id
-                      ) ? (
-                        <FaHeart className="text-red-500 text-2xl" />
-                      ) : (
-                        <FaRegHeart className="text-white text-2xl" />
-                      )}
-                    </button>  
+                        <button onClick={toggleLikeSong} title="Like Song">
+                          {likedSongs.some(
+                            (song) => song.id === currentSong?.id
+                          ) ? (
+                            <FaHeart className="text-red-500 text-2xl" />
+                          ) : (
+                            <FaRegHeart className="text-white text-2xl" />
+                          )}
+                        </button>
                         <MdDownload
                           className="hover:text-[#fd3a4e]  flex place-self-start text-[1.8rem] cursor-pointer text-white"
                           onClick={downloadSong}
@@ -359,49 +357,64 @@ const Player = () => {
                         {formatTime(currentSong?.duration || 0)}
                       </span>
                     </form>
-                    <div className="flex items-center gap-5 bg-zinc800 p-8">
-                      <BiRepeat
-                        className={`text-3xl cursor-pointer ${
-                          repeatMode === "one"
-                            ? "text-[#f84d5e]"
-                            : repeatMode === "all"
-                            ? "text-[#fd3a4e]"
-                            : ""
-                        }`}
-                        onClick={toggleRepeatMode}
-                        title={`Repeat Mode: ${
-                          repeatMode === "none"
-                            ? "Off"
-                            : repeatMode === "one"
-                            ? "Repeat One"
-                            : "Repeat All"
-                        }`}
-                      />
-                      <IoMdSkipBackward
-                        className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
-                        onClick={prevSong}
-                      />
-                      {isPlaying ? (
-                        <FaPause
-                          className="hover:text-white  hover:scale-110 text-3xl cursor-pointer"
-                          onClick={handlePlayPause}
+                    <div className="flex flex-col  gap-10 justify-center">
+                      <div className="flex  items-center gap-5 bg-zinc800 p-8">
+                        <BiRepeat
+                          className={`text-3xl cursor-pointer ${
+                            repeatMode === "one"
+                              ? "text-[#f84d5e]"
+                              : repeatMode === "all"
+                              ? "text-[#fd3a4e]"
+                              : ""
+                          }`}
+                          onClick={toggleRepeatMode}
+                          title={`Repeat Mode: ${
+                            repeatMode === "none"
+                              ? "Off"
+                              : repeatMode === "one"
+                              ? "Repeat One"
+                              : "Repeat All"
+                          }`}
                         />
-                      ) : (
-                        <FaPlay
+                        <IoMdSkipBackward
                           className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
-                          onClick={handlePlayPause}
+                          onClick={prevSong}
                         />
-                      )}
-                      <IoMdSkipForward
-                        className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
-                        onClick={nextSong}
-                      />
-                      <PiShuffleBold
-                        className={`hover:text-white hover:scale-110 text-3xl cursor-pointer ${
-                          shuffle ? "text-[#fd3a4e]" : ""
-                        }`}
-                        onClick={toggleShuffle}
-                      />
+                        {isPlaying ? (
+                          <FaPause
+                            className="hover:text-white  hover:scale-110 text-3xl cursor-pointer"
+                            onClick={handlePlayPause}
+                          />
+                        ) : (
+                          <FaPlay
+                            className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
+                            onClick={handlePlayPause}
+                          />
+                        )}
+                        <IoMdSkipForward
+                          className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
+                          onClick={nextSong}
+                        />
+                        <PiShuffleBold
+                          className={`hover:text-white hover:scale-110 text-3xl cursor-pointer ${
+                            shuffle ? "text-[#fd3a4e]" : ""
+                          }`}
+                          onClick={toggleShuffle}
+                        />
+                      </div>
+                      <div className="items-center gap-1 lg:flex hidden relative -translate-y-[6rem] translate-x-[30rem]  ">
+                        <PiSpeakerLowFill className="text-xl" />
+                        <input
+                          type="range"
+                          min={0}
+                          max={100}
+                          step={1}
+                          value={volume}
+                          onChange={handleVolumeChange}
+                          className="volume bg-gray-300 rounded-lg appearance-none cursor-pointer w-[9rem]"
+                          title="Volume"
+                        />
+                      </div>
                     </div>
                   </div>
 

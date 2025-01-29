@@ -93,7 +93,7 @@ li{
   display: flex;
   -webkit-appearance: none;
   height: 2px;
-  width: 5rem;
+  
   background-color: #f1f1f1c0;
 }
 .imgs:hover {

@@ -23,7 +23,7 @@ const AlbumDetail = () => {
         const data = await fetchAlbumByID(id); // Fetch album details based on the album ID
         setDetails(data);
         setSongs(data.data.songs);
-        console.log(data);
+        // console.log(data.data);
       } catch (err) {
         setError("Error fetching album details");
       } finally {

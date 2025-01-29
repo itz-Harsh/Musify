@@ -4,7 +4,7 @@ import MusicContext from "../context/MusicContext";
 
 const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
   const [hovering, setHovering] = useState(false);
-
+  const { songs } = useContext(MusicContext);
   const convertTime = (seconds) => {
     if (!seconds || typeof seconds !== "number") {
       return "0:00"; // Fallback for invalid duration
@@ -20,7 +20,10 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
   const artistNames = Array.isArray(artists?.primary)
     ? artists.primary.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
-  // console.log(artistNames);
+
+    
+  downloadUrl =  downloadUrl || songs.audio;
+  // console.log(downloadUrl);
   return (
     <div
       onClick={() =>

@@ -28,6 +28,16 @@ const MainSection = () => {
   // Create separate refs for each scrollable section
   const latestSongsScrollRef = useRef(null);
   const songsScrollRef = useRef(null);
+  const scrollRef = useRef(null);
+
+  const getRecentlyPlayedSongs = () => {
+    const playedSongs = JSON.parse(localStorage.getItem("playedSongs")) || [];
+    return playedSongs;
+  };
+
+  // You can then use this function to display the songs on the UI, for example:
+  const recentlyPlayedSongs = getRecentlyPlayedSongs();
+
 
   const scrollLeft = (scrollRef) => {
     if (scrollRef.current) {
@@ -121,13 +131,41 @@ const MainSection = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="my-[2rem] mt-[5rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
-      {/* New Songs Section */}
-      <div className="flex flex-col items-center w-full">
-        <h2 className="pt-8 lg:pt-0 m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[3rem]">
-          <div className="hidden lg:block text-3xl w-[auto] text-[#cecece] font-semibold pb-4 lg:p-3  lg:ml-[6rem]">
+    <div className="pt-8 my-[2rem] mt-[5rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
+      <div className="hidden lg:block text-xl w-full text-[#d6d6d6] font-semibold lg:mt-3 lg:ml-[5.5rem]">
             {getGreeting()}
           </div>
+      {recentlyPlayedSongs.length > 0 && (
+        <div className="flex flex-col justify-center items-center w-full">
+        <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
+          Recently Played
+        </h2>
+        <div className="flex justify-center items-center gap-3 w-full">
+          {/* Left Arrow */}
+          <MdOutlineKeyboardArrowLeft
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+            onClick={() => scrollLeft(scrollRef)}
+          />
+          <div
+            className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full  px-3 lg:px-0 scroll-smooth"
+            ref={scrollRef}
+          >
+            {recentlyPlayedSongs?.map((song, index) => (
+              <SongGrid key={song.id || index} {...song} />
+            ))}
+          </div>
+          {/* Right Arrow */}
+          <MdOutlineKeyboardArrowRight
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+            onClick={() => scrollRight(scrollRef)}
+          />
+        </div>
+      </div>
+      )}
+      
+
+      <div className="flex flex-col items-center w-full">
+        <h2 className="pt-4 lg:pt-0 m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[3rem]">
           New Songs
         </h2>
 

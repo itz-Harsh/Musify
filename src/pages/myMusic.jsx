@@ -1,21 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
 import Player from "../components/Player";
 import Navigator from "../components/Navigator";
 import SongsList from "../components/SongsList";
+import MusicContext from "../context/MusicContext";
 
 const MyMusic = () => {
   const [likedSongs, setLikedSongs] = useState([]);
-  
+  const { setSongs } = useContext(MusicContext);
   useEffect(() => {
     const storedLikedSongs = JSON.parse(localStorage.getItem("likedSongs")) || [];
     setLikedSongs(storedLikedSongs);
-    console.log(storedLikedSongs);
+    setSongs(storedLikedSongs);
+    // console.log(storedLikedSongs);
   }, []);
  
   return (
     <>
       <Navbar />
+      <div>
+        
+      </div>
       <div className="flex flex-col gap-[1rem] lg:mt-[5rem] mt-[8rem] ">
         <h2 className="text-2xl font-semibold ml-4">Liked Songs</h2>
         {likedSongs.length > 0 ? (
