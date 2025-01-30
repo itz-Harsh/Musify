@@ -5,7 +5,6 @@ import MusicContext from "./context/MusicContext";
 import { useState } from "react";
 import ArtistsDetails from "./pages/ArtistsDetails";
 import SearchResult from "./pages/searchResult";
-import SongsList from "./components/SongsList";
 import PlaylistDetails from "./pages/PlaylistDetails";
 import Browse from "./pages/Browse";
 import MyMusic from "./pages/myMusic";
@@ -20,16 +19,19 @@ export default function App() {
   const [repeatMode, setRepeatMode] = useState("none");
 
   const playMusic = async (downloadUrl, name, duration, image, id, artists ) => {
-
+    
     const audioUrl = downloadUrl[4]?.url || downloadUrl;
-  
+   
     // Pause the current song and clear the source to release memory
     if (currentSong?.audio) {
       currentSong.audio.pause();
       currentSong.audio.src = ""; // Clear audio source to release memory
     }
-  
+    
     const newAudio = new Audio(audioUrl || downloadUrl);
+    newAudio.addEventListener("ended", nextSong);
+    newAudio.addEventListener('ended', nextSong);
+
     setCurrentSong({
       name,
       duration,
@@ -103,35 +105,35 @@ export default function App() {
       const nextTrack = songs[randomIndex];
       if (!nextTrack) return;
   
-      const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl[0]?.url : nextTrack.audio;
+      const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl : nextTrack.audio;
       const { name, duration, image, id, artists } = nextTrack;
       
       playMusic(audioSource, name, duration, image, id, artists);
   
     } else {
-      // Repeat Mode: "one" will repeat the current song
+
       if (repeatMode === "one") {
-        const audioSource = currentSong.audio.src;  // Use the current song's audio source
+        const audioSource = currentSong.audio.src; 
         const { name, duration, image, id, artists } = currentSong;
         playMusic(audioSource, name, duration, image, id, artists);
   
       } else if (repeatMode === "all") {
-        // Repeat Mode "all" will go to next song and loop the playlist
-        let nextIndex = (currentIndex + 1) % songs.length;  // Move to next song, wrap to the start if needed
+
+        let nextIndex = (currentIndex + 1) % songs.length;  
         const nextTrack = songs[nextIndex];
         if (!nextTrack) return;
   
-        const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl[0]?.url : nextTrack.audio;
+        const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl : nextTrack.audio;
         const { name, duration, image, id, artists } = nextTrack;
   
         playMusic(audioSource, name, duration, image, id, artists);
       } else {
-        // Normal mode (no repeat or shuffle): go to the next song sequentially
-        let nextIndex = (currentIndex + 1) % songs.length;  // Sequential next
+       
+        let nextIndex = (currentIndex + 1) % songs.length;
         const nextTrack = songs[nextIndex];
         if (!nextTrack) return;
   
-        const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl[0]?.url : nextTrack.audio;
+        const audioSource = nextTrack.downloadUrl ? nextTrack.downloadUrl[4].url || nextTrack.downloadUrl : nextTrack.audio;
         const { name, duration, image, id, artists } = nextTrack;
   
         playMusic(audioSource, name, duration, image, id, artists);
@@ -156,17 +158,19 @@ export default function App() {
   
     // Extract the song data correctly
     const song = songs[prevIndex];
-    const audioSource = song.downloadUrl?.[4]?.url || song.audio; // Handle both types of song data
+    const audioSource = song.downloadUrl ? song.downloadUrl[4]?.url || song.downloadUrl  : song.audio;
   
     playMusic(audioSource, song.name, song.duration, song.image, song.id, song.artists);
   };
   
 
   const toggleRepeatMode = () => {
-    setRepeatMode((nextSong) =>
-      nextSong === "none" ? "one" : nextSong === "one" ? "all" : "none"
-    );
-  };
+  setRepeatMode((prevState) => {
+    if (prevState === "none") return "one"; // Change to repeat the current song
+    if (prevState === "one") return "all"; // Change to repeat the entire playlist
+    return "none"; // No repeat
+  });
+};
 
   const toggleShuffle = () => {
     setShuffle((prevState) => !prevState);

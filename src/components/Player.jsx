@@ -91,16 +91,11 @@ const Player = () => {
       const audioElement = currentSong.audio;
 
       if (audioElement.paused) {
-        audioElement
-          .play()
-          .then(() => {
+        audioElement.play().then(() => {
             setIsPlaying(true);
-            localStorage.setItem("currentSong", JSON.stringify(currentSong)); // Save current song to localStorage
+            localStorage.setItem("currentSong", JSON.stringify(currentSong)); 
           })
-          .catch((error) => {
-            console.error("Error playing audio:", error);
-          });
-      } else {
+      } else  {
         audioElement.pause();
         setIsPlaying(false);
       }

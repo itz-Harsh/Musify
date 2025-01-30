@@ -37,7 +37,10 @@ const MainSection = () => {
 
   // You can then use this function to display the songs on the UI, for example:
   const recentlyPlayedSongs = getRecentlyPlayedSongs();
-
+  useEffect(() => {
+    setSongs(recentlyPlayedSongs);
+  }, [])
+  
 
   const scrollLeft = (scrollRef) => {
     if (scrollRef.current) {
