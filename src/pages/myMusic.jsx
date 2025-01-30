@@ -23,7 +23,11 @@ const MyMusic = () => {
   const { setSongs } = useContext(MusicContext);
 
   useEffect(() => {
-    setLikedSongs(JSON.parse(localStorage.getItem("likedSongs")) || []);
+    const storedLikedSongs =
+      JSON.parse(localStorage.getItem("likedSongs")) || [];
+    setLikedSongs(storedLikedSongs);
+    setSongs(storedLikedSongs);
+    
     setLikedAlbums(JSON.parse(localStorage.getItem("likedAlbums")) || []);
     setLikedPlaylists(JSON.parse(localStorage.getItem("likedPlaylists")) || []);
   }, []);

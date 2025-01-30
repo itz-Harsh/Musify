@@ -20,6 +20,7 @@ export default function App() {
   const [repeatMode, setRepeatMode] = useState("none");
 
   const playMusic = async (downloadUrl, name, duration, image, id, artists ) => {
+
     const audioUrl = downloadUrl[4]?.url || downloadUrl;
   
     // Pause the current song and clear the source to release memory
@@ -96,7 +97,7 @@ export default function App() {
   
     const currentIndex = songs.findIndex((song) => song.id === currentSong.id);
   
-    // Shuffle Mode: Randomly select a song
+   
     if (shuffle) {
       const randomIndex = Math.floor(Math.random() * songs.length);
       const nextTrack = songs[randomIndex];
