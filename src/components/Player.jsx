@@ -7,9 +7,8 @@ import { MdDownload } from "react-icons/md";
 import { CiMaximize1 } from "react-icons/ci";
 import { PiSpeakerLowFill } from "react-icons/pi";
 import MusicContext from "../context/MusicContext";
-import { Link } from "react-router";
 import ArtistItems from "./Items/ArtistItems";
-import ArtistSlider from "./Sliders/ArtistSlider";
+
 
 const Player = () => {
   const {

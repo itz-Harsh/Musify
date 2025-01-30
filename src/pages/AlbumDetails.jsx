@@ -9,6 +9,7 @@ import MusicContext from "../context/MusicContext";
 import Footer from "../components/footer";
 import Navigator from "../components/Navigator";
 import ArtistItems from "../components/Items/ArtistItems";
+import { FaHeart, FaRegHeart } from "react-icons/fa6";
 
 const AlbumDetail = () => {
   const { id } = useParams(); // Extract the album ID from the URL
@@ -16,6 +17,10 @@ const AlbumDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { setSongs } = useContext(MusicContext);
+  const [likedAlbums, setLikedAlbums] = useState(() => {
+    return JSON.parse(localStorage.getItem("likedSongs")) || [];
+  });
+
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -33,6 +38,21 @@ const AlbumDetail = () => {
 
     fetchDetails();
   }, [id]); // Fetch details when the id changes (when navigating to a different album)
+
+
+  const toggleLikeAlbum = (album) => {
+    let updatedAlbums = [...likedAlbums];
+  
+    if (updatedAlbums.some((a) => a.id === album.id)) {
+      updatedAlbums = updatedAlbums.filter((a) => a.id !== album.id);
+    } else {
+      updatedAlbums.push(album);
+    }
+  
+    setLikedAlbums(updatedAlbums);
+    localStorage.setItem("likedAlbums", JSON.stringify(updatedAlbums));
+  };
+
 
   if (loading)
     return (
@@ -57,7 +77,7 @@ const AlbumDetail = () => {
       <div className="flex flex-col   gap-[2rem] lg:gap-[4rem] text-zinc-300 pt-[10rem] lg:pt-[6rem]   ">
         <div className="flex items-center pl-[2rem]">
           <img
-            src={ details.data.image[2].url}
+            src={details.data.image[2].url}
             alt={details.name}
             className="DetailImg h-[8rem] lg:h-[15rem] lg:rounded rounded-full "
           />
@@ -72,6 +92,13 @@ const AlbumDetail = () => {
                 {artistName}
               </Link>{" "}
             </pre>
+            <button onClick={toggleLikeAlbum} title="Like Song">
+              {likedAlbums.some((album) => album.id === details.data?.id) ? (
+                <FaHeart className="text-red-500 text-2xl" />
+              ) : (
+                <FaRegHeart className="text-white text-2xl" />
+              )}
+            </button>
           </div>
         </div>
 
@@ -83,7 +110,7 @@ const AlbumDetail = () => {
           </div>
         </div>
       </div>
-     
+
       <Player />
       <Navigator />
       <Footer />

@@ -8,6 +8,10 @@ import { FaHeart } from "react-icons/fa6";
 
 const MyMusic = () => {
   const [likedSongs, setLikedSongs] = useState([]);
+  const [likedAlbums, setLikedAlbums] = useState(
+    JSON.parse(localStorage.getItem("likedAlbums")) || []
+  );
+  
   const { setSongs } = useContext(MusicContext);
   useEffect(() => {
     const storedLikedSongs =
@@ -16,6 +20,9 @@ const MyMusic = () => {
     setSongs(storedLikedSongs);
     // console.log(storedLikedSongs);
   }, []);
+
+
+  
 
   return (
     <>

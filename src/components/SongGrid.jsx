@@ -11,7 +11,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
     return `${minutes}:${remainingSeconds}`;
   };
 
-  const { isPlaying, currentSong, playMusic } = useContext(MusicContext);
+  const { playMusic } = useContext(MusicContext);
 
   const imageUrl = image[2]?.url || image; 
   const artistNames = Array.isArray(artists?.primary)
