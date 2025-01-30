@@ -18,9 +18,8 @@ const AlbumDetail = () => {
   const [error, setError] = useState(null);
   const { setSongs } = useContext(MusicContext);
   const [likedAlbums, setLikedAlbums] = useState(() => {
-    return JSON.parse(localStorage.getItem("likedSongs")) || [];
+    return JSON.parse(localStorage.getItem("likedAlbums")) || [];
   });
-
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -39,20 +38,23 @@ const AlbumDetail = () => {
     fetchDetails();
   }, [id]); // Fetch details when the id changes (when navigating to a different album)
 
+  const toggleLikeAlbum = () => {
+    let likedAlbums = JSON.parse(localStorage.getItem("likedAlbums")) || [];
 
-  const toggleLikeAlbum = (album) => {
-    let updatedAlbums = [...likedAlbums];
-  
-    if (updatedAlbums.some((a) => a.id === album.id)) {
-      updatedAlbums = updatedAlbums.filter((a) => a.id !== album.id);
+    if (likedAlbums.some((album) => album.id === details.data.id)) {
+      likedAlbums = likedAlbums.filter((album) => album.id !== details.data.id);
     } else {
-      updatedAlbums.push(album);
+      likedAlbums.push({
+        id: details.data.id,
+        name: details.data.name,
+        image: details.data.image[2].url,
+        artists: details.data.artists,
+      });
     }
-  
-    setLikedAlbums(updatedAlbums);
-    localStorage.setItem("likedAlbums", JSON.stringify(updatedAlbums));
-  };
 
+    setLikedAlbums(likedAlbums);
+    localStorage.setItem("likedAlbums", JSON.stringify(likedAlbums));
+  };
 
   if (loading)
     return (
@@ -67,6 +69,7 @@ const AlbumDetail = () => {
         {error}
       </div>
     );
+  const albumdata = details.data || [];
   const artistId = details.data.artists.primary[0].id;
   const artistName = details.data.artists.primary[0].name;
 
@@ -83,21 +86,24 @@ const AlbumDetail = () => {
           />
 
           <div className="flex flex-col pl-[2rem]">
-            <h1 className="text-xl lg:text-2xl font-medium lg:font-semibold text-white">
-              {details.data.name}
-            </h1>
-            <pre className="font-sans font-semibold text-sm lg:text-lg">
-              {details.data.songCount} Songs by{" "}
-              <Link to={`/artists/${artistId}`} className="hover:underline">
-                {artistName}
-              </Link>{" "}
-            </pre>
-            <button onClick={toggleLikeAlbum} title="Like Song">
-              {likedAlbums.some((album) => album.id === details.data?.id) ? (
+            <div>
+              <h1 className="text-xl lg:text-2xl font-medium lg:font-semibold text-white">
+                {details.data.name}
+              </h1>
+              <pre className="font-sans font-semibold text-sm lg:text-lg">
+                {details.data.songCount} Songs by{" "}
+                <Link to={`/artists/${artistId}`} className="hover:underline">
+                  {artistName}
+                </Link>{" "}
+              </pre>
+            </div>
+            <button onClick={toggleLikeAlbum} title="Like Album" className=" border-[1px] mt-3 border-[#2c2c2c] h-[3rem] w-[3rem] flex justify-center items-center rounded-full  ">
+              {likedAlbums.some((album) => album.id === albumdata.id) ? (
                 <FaHeart className="text-red-500 text-2xl" />
               ) : (
-                <FaRegHeart className="text-white text-2xl" />
+                <FaRegHeart className="text-[#b6b6b6] text-2xl" />
               )}
+
             </button>
           </div>
         </div>

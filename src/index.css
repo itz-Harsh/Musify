@@ -68,7 +68,7 @@ li{
 }
 
 .DetailImg{
-  
+  object-fit: cover;
   box-shadow: 1px 2px 35px rgb(0, 0, 0);
 }
 
