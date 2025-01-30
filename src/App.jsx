@@ -42,6 +42,8 @@ export default function App() {
     await newAudio.play();
   
     saveToLocalStorage({ downloadUrl, id, name, duration, image, artists });
+
+    
   };
   
   const saveToLocalStorage = (song) => {
@@ -196,7 +198,7 @@ export default function App() {
           <Route path="/albums/:id" element={<AlbumDetail />} />
           <Route path="/search/:query" element={<SearchResult />} />
 
-          <Route path="/albums/:id" element={<AlbumDetail /> || <SongsList />} />
+          {/* <Route path="/albums/:id" element={<AlbumDetail /> || <SongsList />} /> */}
           <Route path="/playlists/:id" element={<PlaylistDetails />} />
           
           <Route path="/Browse" element={<Browse />} />

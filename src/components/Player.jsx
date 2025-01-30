@@ -168,6 +168,7 @@ const Player = () => {
                   min={0}
                   max={100}
                   step="0.1"
+                  
                   ref={inputRef}
                   value={
                     currentSong?.audio?.currentTime
