@@ -82,7 +82,7 @@ const AlbumDetail = () => {
           <img
             src={details.data.image[2].url}
             alt={details.name}
-            className="DetailImg h-[8rem] lg:h-[15rem] lg:rounded rounded-full "
+            className=" h-[8rem] lg:h-[15rem] lg:rounded rounded-full object-cover  shadow-2xl shadow-zinc-600"
           />
 
           <div className="flex flex-col pl-[2rem]">

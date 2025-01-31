@@ -1,10 +1,12 @@
 import { GoPlay } from "react-icons/go";
 import { useContext, useState } from "react";
 import MusicContext from "../context/MusicContext";
+import he from "he";
 
 const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
   const [hovering, setHovering] = useState(false);
   const { songs } = useContext(MusicContext);
+
   const convertTime = (seconds) => {
     if (!seconds || typeof seconds !== "number") {
       return "0:00"; // Fallback for invalid duration
@@ -16,14 +18,15 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
 
   const { isPlaying, currentSong, playMusic } = useContext(MusicContext);
 
-  const imageUrl = image[2].url || image ; // Safely access the image URL
+  const imageUrl = image[2]?.url || image; // Safely access the image URL
   const artistNames = Array.isArray(artists?.primary)
-    ? artists.primary.map((artist) => artist.name).join(", ")
+    ? artists.primary?.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
 
-    
-  downloadUrl =  downloadUrl || songs.audio;
-  
+  downloadUrl = downloadUrl || songs.audio;
+
+  const decodeName = (name) => he.decode(name);
+ 
   return (
     <div
       onClick={() =>
@@ -46,11 +49,12 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
 
       <div className="flex w-full pl-5 ">
         <h3
+          autoCorrect=""
           className={` text-[0.75rem] lg:text-[0.875rem] font-medium text-white ${
             id === currentSong?.id && "text-[#46c7b6ff]"
           }`}
         >
-          {name}
+          {decodeName(name)}
         </h3>
       </div>
       <div className="flex w-full">

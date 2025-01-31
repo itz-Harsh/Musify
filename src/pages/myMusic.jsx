@@ -46,7 +46,7 @@ const MyMusic = () => {
       <div className="flex flex-col mb-[12rem] gap-[2rem] ">
         {/* Header */}
         <div className="lg:ml-[3rem] ml-[2rem] flex items-center gap-5 mt-[9rem] lg:mt-[6rem]">
-          <span className="gradient flex justify-center items-center h-[8rem] w-[8rem] lg:h-[12rem] lg:w-[12rem] rounded DetailImg ">
+          <span className="gradient flex justify-center items-center h-[8rem] w-[8rem] lg:h-[12rem] lg:w-[12rem] rounded shadow-2xl shadow-zinc-700 ">
             <FaHeart className="text-5xl" />
           </span>
           <h2 className="text-[1.8rem] lg:text-3xl font-semibold lg:font-bold ml-4">

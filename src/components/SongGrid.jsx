@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import MusicContext from "../context/MusicContext";
+import he from "he";
 
 const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
   const convertTime = (seconds) => {
@@ -35,7 +36,9 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
 
           </div>
       <div className="text-[13px] w-full flex flex-col justify-center pl-2">
-        <span className="font-semibold overflow-x-clip">{name}</span>
+        <span className="font-semibold overflow-clip w-[9rem] h-[1.2rem] pr-2">{name
+                                    ? he.decode(name)
+                                    : "Empty"}</span>
         <span className="flex gap-1">by<p className="font-semibold">{artistNames}</p></span>
       </div>
         </div>

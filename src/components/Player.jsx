@@ -8,7 +8,7 @@ import { CiMaximize1 } from "react-icons/ci";
 import { PiSpeakerLowFill } from "react-icons/pi";
 import MusicContext from "../context/MusicContext";
 import ArtistItems from "./Items/ArtistItems";
-
+import he from "he";
 
 const Player = () => {
   const {
@@ -45,7 +45,6 @@ const Player = () => {
   const artistNames = currentSong?.artists?.primary
     ? currentSong.artists.primary.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
-  
 
   useEffect(() => {
     if (currentSong) {
@@ -92,10 +91,10 @@ const Player = () => {
 
       if (audioElement.paused) {
         audioElement.play().then(() => {
-            setIsPlaying(true);
-            localStorage.setItem("currentSong", JSON.stringify(currentSong)); 
-          })
-      } else  {
+          setIsPlaying(true);
+          localStorage.setItem("currentSong", JSON.stringify(currentSong));
+        });
+      } else {
         audioElement.pause();
         setIsPlaying(false);
       }
@@ -139,6 +138,8 @@ const Player = () => {
     localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
   };
 
+
+
   return (
     <div
       className={` ${isVisible ? "lg:flex " : "hidden"}
@@ -163,7 +164,6 @@ const Player = () => {
                   min={0}
                   max={100}
                   step="0.1"
-                  
                   ref={inputRef}
                   value={
                     currentSong?.audio?.currentTime
@@ -190,15 +190,20 @@ const Player = () => {
                         width={55}
                         className="rounded"
                       />
-                      <div className="flex flex-col overflow-y-clip w-[15rem] h-[2.9rem]">
-                        <span>{currentSong?.name || "No Song Playing"}</span>
+                      <div className="flex flex-col overflow-y-clip w-[14rem] h-[2.9rem]">
+                        <span className=" w-fit h-[1.5rem] overflow-hidden">
+                          {currentSong?.name
+                            ? he.decode(currentSong.name)
+                            : "Empty"}
+                        </span>
+
                         <span className="text-xs text-gray-400">
                           {artistNames}
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col lg:items-center gap-5  w-full lg:w-[90rem] p-2">
+                  <div className="flex flex-col lg:items-center gap-5   p-2">
                     <div className="flex gap-5 justify-end lg:justify-center items-center">
                       <BiRepeat
                         className={`text-2xl hidden lg:block cursor-pointer ${
@@ -301,7 +306,7 @@ const Player = () => {
                   <div className=" flex  justify-center items-center">
                     <img
                       src={currentSong?.image || " "}
-                      className=" h-[22rem] lg:h-[24.5rem]  rounded-lg object-cover shadow-2xl shadow-zinc-700"
+                      className=" h-[22rem] lg:h-[24.5rem]  rounded-lg object-cover shadow-2xl shadow-zinc-600"
                     />
                   </div>
                   <div className="flex  flex-col  gap-[0.5rem]">
@@ -397,7 +402,7 @@ const Player = () => {
                           onClick={toggleShuffle}
                         />
                       </div>
-                      <div className="items-center gap-1 lg:flex hidden relative -translate-y-[6rem] translate-x-[30rem]  ">
+                      <div className="items-center gap-1 lg:flex hidden relative -translate-y-[6rem] translate-x-[37.39rem]  ">
                         <PiSpeakerLowFill className="text-xl" />
                         <input
                           type="range"

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import he from "he";
 
 const AlbumItems = ({ name, artists, id, image }) => {
   // Ensure 'artists' is an array and fallback if empty or undefined
@@ -23,7 +24,9 @@ const AlbumItems = ({ name, artists, id, image }) => {
       
       </div>
       <div className="text-[13px] w-full flex flex-col justify-center pl-2">
-        <span className="font-semibold overflow-x-clip">{name}</span>
+        <span className="font-semibold overflow-x-clip">{name
+                                    ? he.decode(name)
+                                    : "Empty"}</span>
         <span className="flex gap-1">by<p className="font-semibold">{artistNames}</p></span>
       </div>
     </Link>
