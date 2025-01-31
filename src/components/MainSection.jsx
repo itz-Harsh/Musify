@@ -135,8 +135,8 @@ const MainSection = () => {
 
   
   return (
-    <div className="pt-8 my-[2rem] mt-[5rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
-      <div className="hidden lg:block text-xl w-full text-[#d6d6d6] font-semibold lg:mt-3 lg:ml-[5.5rem]">
+    <div className="pt-8 lg:pt-6 my-[2rem] mt-[5rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
+      <div className="hidden lg:block text-2xl w-full text-[#d6d6d6] font-semibold lg:ml-[5.5rem]">
             {getGreeting()}
           </div>
       {recentlyPlayedSongs.length > 0 && (

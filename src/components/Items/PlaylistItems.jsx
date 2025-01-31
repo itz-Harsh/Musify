@@ -4,7 +4,7 @@ const PlaylistItems = ({name , image , id}) => {
 
 
   // Ensure image is an array with at least 3 elements, or provide a fallback image
-  const imageUrl = image[2].url;
+  const imageUrl = image[2]?.url;
 
   return (
     <Link

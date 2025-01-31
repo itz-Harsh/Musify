@@ -144,7 +144,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="text-xl w-[10rem] flex self-center lg:hidden text-[#cecece]  font-semibold ">
+          <div className="text-xl pl-6 w-max flex self-center lg:hidden text-[#cecece]  font-semibold ">
             {getGreeting()}
           </div>
         </div>
