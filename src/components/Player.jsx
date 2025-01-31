@@ -171,7 +171,7 @@ const Player = () => {
                       : 0
                   }
                   onChange={handleProgressChange}
-                  className="h-[3px] flex w-full text-emerald-500 range "
+                  className=" h-[3px] flex w-full text-emerald-500 range  "
                 />
                 <span className="text-white text-xs">
                   {formatTime(currentSong?.duration || 0)}
@@ -190,14 +190,14 @@ const Player = () => {
                         width={55}
                         className="rounded"
                       />
-                      <div className="flex flex-col overflow-y-clip w-[14rem] h-[2.9rem]">
+                      <div className="flex flex-col overflow-y-clip p-1 w-[14rem] h-[2.9rem]">
                         <span className=" w-fit h-[1.5rem] overflow-hidden">
                           {currentSong?.name
                             ? he.decode(currentSong.name)
                             : "Empty"}
                         </span>
 
-                        <span className="text-xs text-gray-400">
+                        <span className="text-xs h-1 text-gray-400">
                           {artistNames}
                         </span>
                       </div>
@@ -419,7 +419,7 @@ const Player = () => {
                   </div>
 
                   <div className="flex flex-col pt-3 -pl-1">
-                    <h2 className="text-3xl font-medium pl-[2rem] lg:w-full w-[50%] flex lg:justify-start justify-center">
+                    <h2 className="text-3xl font-medium lg:pl-[3.5rem] lg:w-full w-[50%] flex lg:justify-start justify-center">
                       Artists
                     </h2>
                     <div className="grid grid-flow-col justify-between lg:w-max scroll-smooth gap-[1.5rem] p-[2.5rem] overflow-x-auto scroll ">

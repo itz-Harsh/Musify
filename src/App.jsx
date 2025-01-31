@@ -21,14 +21,13 @@ export default function App() {
   const playMusic = async (downloadUrl, name, duration, image, id, artists ) => {
     
     const audioUrl = downloadUrl[4]?.url || downloadUrl;
-   
-    // Pause the current song and clear the source to release memory
-    if (currentSong?.audio) {
+    if (currentSong?.audio instanceof HTMLAudioElement) {
       currentSong.audio.pause();
-      currentSong.audio.src = ""; // Clear audio source to release memory
+      currentSong.audio.src = ""; // Clear the source to release memory
+      currentSong.audio.load(); // Ensure the browser releases the resource
     }
     
-    const newAudio = new Audio(audioUrl || downloadUrl);
+    const newAudio = new Audio(audioUrl || downloadUrl );
     newAudio.addEventListener("ended", nextSong);
     newAudio.addEventListener('ended', nextSong);
 

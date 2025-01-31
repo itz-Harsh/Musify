@@ -12,13 +12,15 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
     return `${minutes}:${remainingSeconds}`;
   };
 
-  const { playMusic } = useContext(MusicContext);
+  const { playMusic , songs } = useContext(MusicContext);
 
   const imageUrl = image[2]?.url || image; 
   const artistNames = Array.isArray(artists?.primary)
     ? artists?.primary.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
-  // console.log(artistNames);
+
+ 
+    downloadUrl = downloadUrl ? downloadUrl || downloadUrl[4]?.url : songs.audio;
   return (
     <span
       className="card w-[9.5rem] h-[11.9rem] overflow-clip p-1  rounded-lg cursor-pointer"

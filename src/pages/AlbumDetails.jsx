@@ -3,40 +3,74 @@ import { Link, useParams } from "react-router-dom"; // To fetch album ID from UR
 import Navbar from "../components/Navbar";
 import SongsList from "../components/SongsList";
 import Player from "../components/Player";
-import { fetchAlbumByID } from "../../fetch";
+import { fetchAlbumByID, getSuggestionSong } from "../../fetch";
 import { useContext } from "react";
 import MusicContext from "../context/MusicContext";
 import Footer from "../components/footer";
 import Navigator from "../components/Navigator";
 import ArtistItems from "../components/Items/ArtistItems";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
-
+import SongGrid from "../components/SongGrid";
+import { useRef } from "react";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 const AlbumDetail = () => {
   const { id } = useParams(); // Extract the album ID from the URL
-  const [details, setDetails] = useState(null); // Set initial state to null to avoid errors
+  const [details, setDetails] = useState(null);
+  const [suggetions, setSuggetion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setSongs } = useContext(MusicContext);
+  const { setSongs ,currentSong } = useContext(MusicContext);
+  
   const [likedAlbums, setLikedAlbums] = useState(() => {
     return JSON.parse(localStorage.getItem("likedAlbums")) || [];
   });
+  const scrollRef = useRef(null);
+  const scrollLeft = (scrollRef) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft -= 1000; // Scroll left by 800px
+    }
+  };
+
+  const scrollRight = (scrollRef) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft += 1000; // Scroll right by 800px
+    }
+  };
+
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const data = await fetchAlbumByID(id); // Fetch album details based on the album ID
+        const data = await fetchAlbumByID(id);
         setDetails(data);
-        setSongs(data.data.songs);
-        // console.log(data.data);
+  
+        const sugid = data?.data?.songs[0]?.id;
+        const suggestions = await getSuggestionSong(sugid);
+        setSuggetion(suggestions.data);
+  
+        console.log(suggestions);
+  
+        if (data?.data?.songs.some(song => song.id === currentSong?.id)) {
+          setSongs(details.data.songs);
+        }
+        else
+         if(suggestions?.data.some(song => song.id === currentSong?.id)) {
+          setSongs(suggetions);
+        }
+  
       } catch (err) {
         setError("Error fetching album details");
+        console.error(err);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchDetails();
-  }, [id]); // Fetch details when the id changes (when navigating to a different album)
+  }, [id]); // Dependencies: only runs when `id` changes
+  
+
+
 
   const toggleLikeAlbum = () => {
     let likedAlbums = JSON.parse(localStorage.getItem("likedAlbums")) || [];
@@ -77,8 +111,9 @@ const AlbumDetail = () => {
     <>
       <Navbar />
 
-      <div className="flex flex-col   gap-[2rem] lg:gap-[4rem] text-zinc-300 pt-[10rem] lg:pt-[6rem]   ">
-        <div className="flex items-center pl-[2rem]">
+      <div className="flex flex-col   gap-[2rem] lg:gap-[2rem] text-zinc-300 pt-[10rem] lg:pt-[6rem]   ">
+        <div className="flex items-center pl-[2rem] ">
+          
           <img
             src={details.data.image[2].url}
             alt={details.name}
@@ -115,6 +150,39 @@ const AlbumDetail = () => {
             ))}
           </div>
         </div>
+
+      {
+        suggetions.length >= 0 && (
+          <div className="flex flex-col justify-center items-center w-full mb-[5rem]">
+        <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
+          You Might Like
+        </h2>
+        <div className="flex justify-center items-center gap-3 w-full">
+          {/* Left Arrow */}
+          <MdOutlineKeyboardArrowLeft
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+            onClick={() => scrollLeft(scrollRef)}
+          />
+          <div
+            className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full  px-3 lg:px-0 scroll-smooth"
+            ref={scrollRef}
+          >
+            {suggetions?.map((song, index) => (
+              <SongGrid key={song.id || index} {...song} />
+            ))}
+          </div>
+          {/* Right Arrow */}
+          <MdOutlineKeyboardArrowRight
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+            onClick={() => scrollRight(scrollRef)}
+          />
+        </div>
+      </div>
+        )}
+        
+          
+
+
       </div>
 
       <Player />

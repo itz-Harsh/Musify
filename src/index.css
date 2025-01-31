@@ -28,7 +28,7 @@ input[type="text"] {
 
 .range[type="range"] {
   display: flex;
-
+  cursor: pointer;
   -webkit-appearance: none;
   height: 2px;
   width: 10 0%;
@@ -40,6 +40,7 @@ input[type="text"] {
   appearance: none;
   width: 10px;
   height: 10px;
+  
   border-radius: 30px;
   background-color: #fe4559;
 }

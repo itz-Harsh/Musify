@@ -6,6 +6,21 @@ if (!api_url) {
 
 
 
+export const getSuggestionSong = async (id) => {
+    try{
+        const result = await fetch(`${api_url}songs/${id}/suggestions?&limit=30`);
+        const data = await result.json();
+        if(!result.ok) {
+            throw new Error(data.message || 'Failed to Fetch Artist Data');
+        }
+        return data;
+    }
+    catch{
+        console.log('API Error: ', error );
+        throw error;
+    }
+};
+
 
 
 export const getSearchData = async (e) => {

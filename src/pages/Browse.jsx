@@ -7,8 +7,9 @@ const Browse = () => {
   return (
     <>
       <Navbar />
-        <div className="text-5xl font-bold flex justify-center items-center h-screen w-full">
-          Work On Progress
+        <div className="">
+          <span>Genre</span>
+
         </div>
       <Player />
       <Navigator />
