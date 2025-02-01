@@ -9,7 +9,7 @@ import PlaylistDetails from "./pages/PlaylistDetails";
 import Browse from "./pages/Browse";
 import MyMusic from "./pages/myMusic";
 import he from "he";
-
+import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
   const [songs, setSongs] = useState([null]); 
@@ -178,7 +178,7 @@ export default function App() {
   };
   return (
     <>
-    
+    <Analytics />
     <MusicContext.Provider
       value={{
         songs,
