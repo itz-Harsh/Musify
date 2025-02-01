@@ -70,17 +70,17 @@ const SearchResult = () => {
     <>
       <Navbar />
       <div className="mt-[8rem] lg:mt-[6rem]  p-1 gap-5 flex flex-col">
-        <h2 className="text-2xl font-semibold ml-[1rem] lg:ml-[7rem] flex flex-col gap-3">
+        <h2 className="text-2xl font-semibold ml-[1rem] lg:ml-[3rem] flex flex-col gap-3">
           Top Search Results <p className="text-xl">Songs</p>
         </h2>
         <div className="flex justify-center items-center gap-3 w-full">
           {/* Left Arrow */}
           <MdOutlineKeyboardArrowLeft
-            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-900 hidden lg:block hover:text-white"
             onClick={() => scrollLeft(scrollLeft)}
           />
           <div
-            className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-2 sm:gap-[1.1rem] w-full sm:w-[75rem] px-3 sm:px-5 scroll-smooth"
+            className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-2 w-full lg:w-max px-3 lg:px-1 scroll-smooth"
             ref={scrollRef}
           >
             {songResults.length > 0 ? ( songResults.map((song) => <SongGrid key={song.id} {...song} />) ) : ( <div className="text-center col-span-full text-gray-500"> No results found. </div> )}
@@ -95,7 +95,7 @@ const SearchResult = () => {
        
          {AlbumResults.length > 0 && (
           <>
-            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Albums</p>
+            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[3rem]">Albums</p>
             <AlbumSlider albums={AlbumResults} />
           </>
         )} 
@@ -103,7 +103,7 @@ const SearchResult = () => {
         
         {PlaylistsResults.length > 0 && (
           <>
-            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Playlists</p>
+            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[3rem]">Playlists</p>
             <PlaylistSlider playlists={PlaylistsResults} />
           </>
         )}
@@ -111,7 +111,7 @@ const SearchResult = () => {
       
         {ArtistsResults.length > 0 && (
           <>
-            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[7rem]">Artists</p>
+            <p className="text-xl font-semibold  ml-[1rem] lg:ml-[3rem]">Artists</p>
             <ArtistSlider artists={ArtistsResults} />
           </>
         )}
