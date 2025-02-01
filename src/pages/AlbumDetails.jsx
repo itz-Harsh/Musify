@@ -48,7 +48,7 @@ const AlbumDetail = () => {
         const suggestions = await getSuggestionSong(sugid);
         setSuggetion(suggestions.data);
   
-        console.log(suggestions);
+        // console.log(suggestions);
   
         if (data?.data.songs.some(song => song.id === currentSong?.id)) {
           setSongs(data.data.songs);
