@@ -159,7 +159,7 @@ export default function App() {
   
     // Extract the song data correctly
     const song = songs[prevIndex];
-    const audioSource = song.downloadUrl ? song.downloadUrl[4]?.url || song.downloadUrl  : song.audio;
+    const audioSource = song.downloadUrl ? song.downloadUrl || song.downloadUrl[4]?.url  : song.audio;
   
     playMusic(audioSource, song.name, song.duration, song.image, song.id, song.artists);
   };

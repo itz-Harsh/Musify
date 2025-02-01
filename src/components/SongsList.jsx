@@ -23,7 +23,7 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
     ? artists.primary?.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
 
-    downloadUrl = downloadUrl ? downloadUrl || downloadUrl[4]?.url : songs.audio;
+    downloadUrl = downloadUrl ? downloadUrl[4]?.url  || downloadUrl : songs.audio;
 
   const decodeName = (name) => he.decode(name);
  

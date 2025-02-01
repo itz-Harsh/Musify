@@ -20,7 +20,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
     : "Unknown Artist";
 
  
-    downloadUrl = downloadUrl ? downloadUrl || downloadUrl[4]?.url : songs.audio;
+    downloadUrl = downloadUrl ? downloadUrl[4]?.url ||  downloadUrl: songs.audio;
   return (
     <span
       className="card w-[9.5rem] h-[11.9rem] overflow-clip p-1  rounded-lg cursor-pointer"

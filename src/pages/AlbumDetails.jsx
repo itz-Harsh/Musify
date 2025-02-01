@@ -50,11 +50,11 @@ const AlbumDetail = () => {
   
         console.log(suggestions);
   
-        if (data?.data?.songs.some(song => song.id === currentSong?.id)) {
-          setSongs(details.data.songs);
+        if (data?.data.songs.some(song => song.id === currentSong?.id)) {
+          setSongs(data.data.songs);
         }
-        else
-         if(suggestions?.data.some(song => song.id === currentSong?.id)) {
+        
+        if(suggestions?.data.some(song => song.id === currentSong?.id)) {
           setSongs(suggetions);
         }
   
