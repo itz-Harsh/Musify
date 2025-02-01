@@ -8,7 +8,7 @@ import SearchResult from "./pages/searchResult";
 import PlaylistDetails from "./pages/PlaylistDetails";
 import Browse from "./pages/Browse";
 import MyMusic from "./pages/myMusic";
-
+import he from "he";
 
 
 export default function App() {
@@ -72,7 +72,9 @@ export default function App() {
   
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob); // Create an object URL from the Blob
-        link.download = `${currentSong.name}.mp3`; // Set the download filename
+        link.download = `${currentSong?.name
+                                    ? he.decode(currentSong.name)
+                                    : "Empty"}.mp3`; // Set the download filename
   
         document.body.appendChild(link);
         link.click(); // Trigger the download

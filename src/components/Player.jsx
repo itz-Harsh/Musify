@@ -311,7 +311,9 @@ const Player = () => {
                   </div>
                   <div className="flex  flex-col  gap-[0.5rem]">
                     <span className=" text-2xl font-semibold h-auto  justify-start  pl-[2.5rem] flex  overflow-clip  ">
-                      {currentSong?.name}
+                    {currentSong?.name
+                            ? he.decode(currentSong.name)
+                            : "Empty"}
                     </span>
                     <span className="overflow-hidden  flex  w-[95%]  text-base font-medium text-zinc-400 justify-between h-[1.84rem] pl-[2.5rem]    ">
                       {artistNames}
