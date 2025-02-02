@@ -83,7 +83,7 @@ function Browse() {
         ))}
          </ul> 
         <div className="flex flex-col gap-5 ">
-          <h2 className="text-2xl font-semibold ml-[1.5rem] lg:ml-[4rem] grey  mt-3 " >• {genres}</h2>
+          <h2 className="text-2xl font-semibold ml-[1.5rem] lg:ml-[4rem] grey  mt-3 " >• {selectedGenre}</h2>
           <div className="flex justify-center items-center">
 
             <MdOutlineKeyboardArrowLeft
