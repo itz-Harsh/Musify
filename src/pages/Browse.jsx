@@ -65,7 +65,7 @@ function Browse() {
     return (
       <>
         <Navbar />
-        <div className="mt-[8.3rem] lg:mt-[6em] mb-[12rem] lg:mb-1">
+        <div className="mt-[8.3rem] lg:mt-[6em] mb-[12rem] lg:mb-[4rem]">
         <ul className=" flex scroll-smooth items-center lg:justify-center gap-[1.5rem] border-b-[1px] px-4 pb-5 border-[#2c2c2c] overflow-scroll scroll-hide lg:overflow-auto lg:flex-wrap ">
         {genres.map((genre) => (
           <pre
