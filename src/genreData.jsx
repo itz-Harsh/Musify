@@ -393,6 +393,236 @@ export const genreData = {
         "language": "punjabi",
         "explicitContent": false
       },
+      {
+        "id": "88850418",
+        "name": "House Party - English",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/HousePartyEnglish_20241225100050_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/HousePartyEnglish_20241225100050_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/HousePartyEnglish_20241225100050_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/house-party-english/IPm9oKHppSA_",
+        "songCount": 80,
+        "language": "english",
+        "explicitContent": false
+      },
+      {
+        "id": "1079336813",
+        "name": "Chill Maaro: Lo-Fi Mix",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/ChillMaaro-LoFiMix_20240527063141_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/ChillMaaro-LoFiMix_20240527063141_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/ChillMaaro-LoFiMix_20240527063141_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/chill-maaro-lo-fi-mix/mAA3xzx2Asqm0KYf4sgO,Q__",
+        "songCount": 30,
+        "language": "hindi",
+        "explicitContent": false
+      },
+      {
+        "id": "51363504",
+        "name": "Dil Ka Sukoon",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/FILTRDilKaSukoon_20241107054854_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/FILTRDilKaSukoon_20241107054854_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/FILTRDilKaSukoon_20241107054854_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/dil-ka-sukoon/cA4jJ-aMLJI_",
+        "songCount": 30,
+        "language": "hindi",
+        "explicitContent": false
+      },
+      {
+        "id": "950698071",
+        "name": "Best Indian Lo-Fi Hits",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/BestIndianLoFiHits_20241121053632_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/BestIndianLoFiHits_20241121053632_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/BestIndianLoFiHits_20241121053632_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/best-indian-lo-fi-hits/yh7x7lXtCVkGSw2I1RxdhQ__",
+        "songCount": 40,
+        "language": "hindi",
+        "explicitContent": false
+      },
+      {
+        "id": "1191141825",
+        "name": "Chill Karo Na",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/ChillKaroNa_20240315054046_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/ChillKaroNa_20240315054046_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/ChillKaroNa_20240315054046_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/chill-karo-na/0gxR348ZZu1613W6L-cCSw__",
+        "songCount": 34,
+        "language": "hindi",
+        "explicitContent": false
+      },
+      {
+        "id": "1181196711",
+        "name": "Rock Hits 2023 - English",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/RockHits2023English_20231211065054_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/RockHits2023English_20231211065054_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/RockHits2023English_20231211065054_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/rock-hits-2023-english/Khe-X1,Oj3OrB59Sr2unUQ__",
+        "songCount": 20,
+        "language": "english",
+        "explicitContent": false
+      },
+      {
+        "id": "330056058",
+        "name": "Best Of Rock - Hindi",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/BestOfRockHindi_20231005121959_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/BestOfRockHindi_20231005121959_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/BestOfRockHindi_20231005121959_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/best-of-rock-hindi/DGl4UBWnRqlFo9wdEAzFBA__",
+        "songCount": 30,
+        "language": "hindi",
+        "explicitContent": false
+      },
+      {
+        "id": "149267518",
+        "name": "Indipop Sad Songs",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/IndipopSadSongs_20240726114416_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/IndipopSadSongs_20240726114416_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/IndipopSadSongs_20240726114416_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/indipop-sad-songs/QTZoJQAOnmZFo9wdEAzFBA__",
+        "songCount": 25,
+        "language": "hindi",
+        "explicitContent": false
+      },
+      {
+        "id": "1208889681",
+        "name": "Monsoon Lofi Beats",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/MonsoonLofiBeats_20231129150222_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/MonsoonLofiBeats_20231129150222_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/MonsoonLofiBeats_20231129150222_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/monsoon-lofi-beats/68cGlQtgV9-b5bdQKACHDA__",
+        "songCount": 57,
+        "language": "hindi",
+        "explicitContent": false
+      },
+      {
+        "id": "1214335916",
+        "name": "Lofi India Hits",
+        "type": "playlist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/editorial/LofiIndiaHits_20240307035844_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/editorial/LofiIndiaHits_20240307035844_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/editorial/LofiIndiaHits_20240307035844_500x500.jpg"
+          }
+        ],
+        "url": "https://www.jiosaavn.com/featured/lofi-india-hits/GgjOqTwtdqcZNLR,rP3WSg__",
+        "songCount": 23,
+        "language": "hindi",
+        "explicitContent": false
+      },
 
     ]
 };
