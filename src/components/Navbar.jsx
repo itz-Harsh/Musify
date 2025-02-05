@@ -124,7 +124,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar flex flex-col lg:gap-10 lg:flex-row lg:items-center top-0 z-20 fixed w-full  pl-2 pr-2   lg:h-[4.5em]">
+    <nav className="navbar flex flex-col lg:gap-10 lg:flex-row lg:items-center top-0 z-20 fixed w-full pl-1 pr-1 lg:pl-2 lg:pr-2   lg:h-[4.5em]">
       {/* Logo */}
       <div className="flex  items-center gap-[4rem] mb-2 lg:mb-0 w-fit">
         <div className="flex items-center gap-[4rem]  ">
@@ -183,15 +183,17 @@ const Navbar = () => {
             </button>
           </div>
 
+          
           {/* Suggestions Dropdown */}
           <div
-            className={` absolute scroll-hide top-[3.8rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg shadow-lg w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
+            className={`suggestionSection lg:shadow-xl  lg:shadow-black absolute scroll-hide top-[2.74rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg  w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
               suggestions.length > 0
-                ? "visible opacity-100"
+                ? "visible opacity-100 left-1 "
                 : "invisible opacity-0"
             }`}
-          >
+          > 
             {suggestions.map((suggestion, index) => (
+              
               <div
                 key={index}
                 className="flex items-center gap-3 bg-zinc-700 p-3 rounded cursor-pointer hover:bg-zinc-600"

@@ -48,7 +48,7 @@ const AlbumDetail = () => {
         const suggestions = await getSuggestionSong(sugid);
         setSuggetion(suggestions.data);
   
-        // console.log(suggestions);
+        // console.log(details.data);
   
         if (data?.data.songs.some(song => song.id === currentSong?.id)) {
           setSongs(data.data.songs);
@@ -94,7 +94,7 @@ const AlbumDetail = () => {
     return (
       <div className="flex h-screen w-screen justify-center items-center ">
        
-        <img src="/Loading.gif" alt="" className="h-[1rem]"/>
+        <img src="/Loading.gif" alt="" className=""/>
      
       </div>
     );

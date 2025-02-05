@@ -71,7 +71,7 @@ const SearchResult = () => {
       <Navbar />
       <div className="mt-[8rem] lg:mt-[6rem]  p-1 gap-5 flex flex-col">
         <h2 className="text-2xl font-semibold ml-[1rem] lg:ml-[3rem] flex flex-col gap-3">
-          Top Search Results <p className="text-xl">Songs</p>
+           Search Results for  "{query}" <p className="text-xl">Songs</p>
         </h2>
         <div className="flex justify-center items-center gap-3 w-full">
           {/* Left Arrow */}
@@ -80,7 +80,7 @@ const SearchResult = () => {
             onClick={() => scrollLeft(scrollLeft)}
           />
           <div
-            className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-2 w-full lg:w-max px-3 lg:px-1 scroll-smooth"
+            className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 w-full lg:w-max px-3 lg:px-1 scroll-smooth"
             ref={scrollRef}
           >
             {songResults.length > 0 ? ( songResults.map((song) => <SongGrid key={song.id} {...song} />) ) : ( <div className="text-center col-span-full text-gray-500"> No results found. </div> )}
