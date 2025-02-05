@@ -18,14 +18,14 @@ import MusicContext from "../context/MusicContext";
 
 const MainSection = () => {
   const [songs, setSong] = useState([]);
-  const [latestSongs, setlatestSongs] = useState([]);
+  const [latestSongs, setLatestSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artists, setArtists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { setSongs } = useContext(MusicContext);
-  // Create separate refs for each scrollable section
+  
   const latestSongsScrollRef = useRef(null);
   const songsScrollRef = useRef(null);
   const scrollRef = useRef(null);
@@ -35,22 +35,20 @@ const MainSection = () => {
     return playedSongs;
   };
 
-  // You can then use this function to display the songs on the UI, for example:
   const recentlyPlayedSongs = getRecentlyPlayedSongs();
-  useEffect(() => {
-    setSongs(recentlyPlayedSongs);
-  }, [])
-  
+  // useEffect(() => {
+  //   setSongs(recentlyPlayedSongs);
+  // })
 
   const scrollLeft = (scrollRef) => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft -= 1000; // Scroll left by 800px
+      scrollRef.current.scrollLeft -= 1000; // Scroll left by 1000px
     }
   };
 
   const scrollRight = (scrollRef) => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft += 1000; // Scroll right by 800px
+      scrollRef.current.scrollLeft += 1000; // Scroll right by 1000px
     }
   };
 
@@ -68,7 +66,6 @@ const MainSection = () => {
       try {
         const song = await fetchplaylistsByID(110858205);
         setSong(song.data.songs);
-        setSongs(song.data.songs);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -76,11 +73,10 @@ const MainSection = () => {
       }
     };
 
-    const fetchlatestSongData = async () => {
+    const fetchLatestSongData = async () => {
       try {
         const latestSongs = await fetchplaylistsByID(6689255);
-        setlatestSongs(latestSongs.data.songs);
-        setSongs(latestSongs.data.songs);
+        setLatestSongs(latestSongs.data.songs);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -103,7 +99,6 @@ const MainSection = () => {
       try {
         const artist = await searchArtistByQuery("top-artists");
         setArtists(artist.data.results);
-        // console.log(artist.data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -122,18 +117,34 @@ const MainSection = () => {
       }
     };
 
-
     fetchSongData();
     fetchAlbumData();
     fetchArtistData();
     fetchPlaylistData();
-    fetchlatestSongData();
+    fetchLatestSongData();
   }, []);
+
+  useEffect(() => {
+    // Combine arrays and remove duplicates
+    const combineArray = [
+      ...recentlyPlayedSongs,
+      ...songs,
+      ...latestSongs
+    ];
+    const uniqueSongs = combineArray.filter((song, index, self) => 
+      index === self.findIndex((t) => (
+        t.id === song.id
+      ))
+    );
+  
+    setSongs(uniqueSongs);
+  }, [songs , recentlyPlayedSongs, latestSongs , setSongs]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  
+
+
   return (
     <div className="pt-8 lg:pt-6 my-[2rem] mt-[5rem] lg:my-[4rem] flex flex-col items-center overflow-x-clip ">
       <div className="hidden lg:block text-2xl w-full text-[#d6d6d6] font-semibold lg:ml-[5.5rem]">
@@ -144,7 +155,7 @@ const MainSection = () => {
         <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
           Recently Played
         </h2>
-        <div className="flex justify-center items-center gap-3 w-full">
+        <div className="flex justify-center items-center gap-3 w-full scroll-smooth">
           {/* Left Arrow */}
           <MdOutlineKeyboardArrowLeft
             className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
