@@ -32,7 +32,8 @@ Music Web Application project
 **Mobile View**
 <br/>
 
-**Homepage**(/public/Mobile/HomePage.png)
+**Homepage**
+[](/public/Mobile/HomePage.png)
 
 **Browse**
 ![Browse](/public/Mobile/BrowsePage.png)
