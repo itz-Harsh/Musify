@@ -138,7 +138,7 @@ const MainSection = () => {
     );
   
     setSongs(uniqueSongs);
-  }, [songs , recentlyPlayedSongs, latestSongs , setSongs]);
+  }, [songs , latestSongs , setSongs]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
