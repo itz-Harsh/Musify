@@ -4,20 +4,19 @@ Music Web Application project
 
 **PC**
 **Homepage**
-![Homepage](/public/HomePage1.png)
-![Homepage](/public/HomePage2.png)
+![Homepage](/public/HomePage.png)
 
 **Search Result**
-![Search result](/public/SearchResult.png)
+![Search result](/public/SearchPage.png)
 
 **Album Details**
-![Album Details](/public/AlbumDetails.png)
+![Album Details](/public/AlbumPage.png)
 
 **Playlist**
-![Playlist](/public/Playlist.png)
+![Playlist](/public/PlaylistPage.png)
 
 **Artist Details**
-![Artist Details](/public/ArtistDetails.png)
+![Artist Details](/public/ArtistPage.png)
 
 **Mobile View**
 
