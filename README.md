@@ -6,7 +6,7 @@ Music Web Application project
 <br/>
 
 **Homepage**
-![Homepage](/public/HomePage.png) ![Search result](/public/SearchPage.png)
+![Homepage](/public/HomePage.png)
 
 **Browse**
 ![Browse](/public/BrowsePage.png)
@@ -27,11 +27,33 @@ Music Web Application project
 ![Search](/public/SearchSection.png)
 
 **Search Result**
-
+![Search result](/public/SearchPage.png)
 
 **Mobile View**
 <br/>
 
+**Homepage**
+![Homepage](/public/Mobile/HomePage.png)
 
+**Browse**
+![Browse](/public/Mobile/BrowsePage.png)
+
+**My Music**
+![Liked](/public/Mobile/MyMusic.png)
+
+**Album Details**
+![Album Details](/public/Mobile/AlbumPage.png)
+
+**Playlist**
+![Playlist](/public/Mobile/Playlists.png)
+
+**Artist Details**
+![Artist Details](/public/Mobile/ArtistPage.png)
+
+**Search Section**
+![Search](/public/Mobile/SearchSection.png)
+
+**Search Result**
+![Search result](/public/Mobile/SearchPage.png)
 
 
