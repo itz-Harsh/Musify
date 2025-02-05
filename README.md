@@ -32,8 +32,7 @@ Music Web Application project
 **Mobile View**
 <br/>
 
-**Homepage**
-![Homepage](/public/Mobile/HomePage.png)
+**Homepage**(/public/Mobile/HomePage.png)
 
 **Browse**
 ![Browse](/public/Mobile/BrowsePage.png)
@@ -45,7 +44,7 @@ Music Web Application project
 ![Album Details](/public/Mobile/AlbumPage.png)
 
 **Playlist**
-![Playlist](/public/Mobile/Playlists.png)
+![Playlist](/public/Mobile/PlaylistsPage.png)
 
 **Artist Details**
 ![Artist Details](/public/Mobile/ArtistPage.png)
