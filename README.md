@@ -6,7 +6,7 @@ Music Web Application project
 <br/>
 
 **Homepage**
-![Homepage](/public/HomePage.png)
+![Homepage](/public/HomePage.png) ![Search result](/public/SearchPage.png)
 
 **Browse**
 ![Browse](/public/BrowsePage.png)
@@ -27,10 +27,11 @@ Music Web Application project
 ![Search](/public/SearchSection.png)
 
 **Search Result**
-![Search result](/public/SearchPage.png)
+
 
 **Mobile View**
 <br/>
+
 
 
 
