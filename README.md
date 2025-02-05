@@ -3,6 +3,7 @@
 Music Web Application project 
 
 **PC**
+       
 **Homepage**
 ![Homepage](/public/HomePage.png)
 
@@ -13,7 +14,7 @@ Music Web Application project
 ![Album Details](/public/AlbumPage.png)
 
 **Playlist**
-![Playlist](/public/PlaylistPage.png)
+![Playlist](/public/Playlist.png)
 
 **Artist Details**
 ![Artist Details](/public/ArtistPage.png)
