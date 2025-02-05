@@ -13,7 +13,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         // Simulate an async task (e.g., fetch API)
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulates a 2-second delay
+        await new Promise((resolve) => setTimeout(resolve, 300)); // Simulates a 2-second delay
       } catch (error) {
         console.error("Error loading data:", error);
       } finally {
@@ -27,7 +27,7 @@ const Home = () => {
   if (loading) {
     return (
       <div className="flex h-screen w-screen justify-center items-center">
-        <img src="/Loading.gif" alt="" />
+        {/* <img src="/Loading.gif" alt="" /> */}
       </div>
     );
   }

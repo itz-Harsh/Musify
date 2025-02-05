@@ -122,7 +122,7 @@ const MainSection = () => {
       }
     };
 
-    // Fetch all data simultaneously
+
     fetchSongData();
     fetchAlbumData();
     fetchArtistData();
