@@ -18,7 +18,7 @@ import MusicContext from "../context/MusicContext";
 
 const MainSection = () => {
   const [songs, setSong] = useState([]);
-  const [latestSongs, setLatestSongs] = useState([]);
+  const [latestSongs, setlatestSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artists, setArtists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
@@ -73,10 +73,10 @@ const MainSection = () => {
       }
     };
 
-    const fetchLatestSongData = async () => {
+    const fetchlatestSongData = async () => {
       try {
         const latestSongs = await fetchplaylistsByID(6689255);
-        setLatestSongs(latestSongs.data.songs);
+        setlatestSongs(latestSongs.data.songs);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -121,7 +121,7 @@ const MainSection = () => {
     fetchAlbumData();
     fetchArtistData();
     fetchPlaylistData();
-    fetchLatestSongData();
+    fetchlatestSongData();
   }, []);
 
   useEffect(() => {
