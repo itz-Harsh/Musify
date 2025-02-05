@@ -33,27 +33,27 @@ Music Web Application project
 <br/>
 
 **Homepage**
-[](/public/Mobile/HomePage.png)
+![Homepage](/public/Mobile/HomePage.png)
 
 **Browse**
-[Browse](/public/Mobile/BrowsePage.png)
+![Browse](/public/Mobile/BrowsePage.png)
 
 **My Music**
-[Liked](/public/Mobile/MyMusic.png)
+![Liked](/public/Mobile/MyMusic.png)
 
 **Album Details**
-[Album Details](/public/Mobile/AlbumPage.png)
+![Album Details](/public/Mobile/AlbumPage.png)
 
 **Playlist**
-[Playlist](/public/Mobile/PlaylistsPage.png)
+![Playlist](/public/Mobile/PlaylistsPage.png)
 
 **Artist Details**
-[Artist Details](/public/Mobile/ArtistPage.png)
+![Artist Details](/public/Mobile/ArtistPage.png)
 
 **Search Section**
-[Search](/public/Mobile/SearchSection.png)
+![Search](/public/Mobile/SearchSection.png)
 
 **Search Result**
-[Search result](/public/Mobile/SearchPage.png)
+![Search result](/public/Mobile/SearchPage.png)
 
 
