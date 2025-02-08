@@ -174,6 +174,8 @@ const Navbar = () => {
               className="flex-grow h-11 p-1 pl-5 rounded-l-lg  bg-transparent focus:outline-none text-white"
               value={query} // Controlled input bound to query state
               onChange={handleSearchInputChange} // Update query state on input change
+              autoComplete="off"
+              autoCorrect="off"
             />
             <button
               type="submit"

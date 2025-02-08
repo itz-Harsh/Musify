@@ -9,11 +9,12 @@ import { PiSpeakerLowFill } from "react-icons/pi";
 import MusicContext from "../context/MusicContext";
 import ArtistItems from "./Items/ArtistItems";
 import he from "he";
+import { duration } from "@mui/material";
 
 const Player = () => {
   const {
     currentSong,
-    setCurrentSong,
+    playMusic,
     isPlaying,
     setIsPlaying,
     shuffle,
@@ -61,10 +62,14 @@ const Player = () => {
         }
       };
 
+      const handleEndSong = () => nextSong();
+
       audioElement.addEventListener("timeupdate", handleTimeUpdate);
+      audioElement.addEventListener("ended", handleEndSong);
 
       return () => {
         audioElement.removeEventListener("timeupdate", handleTimeUpdate);
+        audioElement.addEventListener("ended", handleEndSong);
       };
     }
   }, [currentSong, volume]);
@@ -82,22 +87,6 @@ const Player = () => {
     localStorage.setItem("volume", newVolume * 100); // Save volume to localStorage
     if (currentSong?.audio) {
       currentSong.audio.volume = newVolume;
-    }
-  };
-
-  const handlePlayPause = () => {
-    if (currentSong?.audio) {
-      const audioElement = currentSong.audio;
-
-      if (audioElement.paused) {
-        audioElement.play().then(() => {
-          setIsPlaying(true);
-          localStorage.setItem("currentSong", JSON.stringify(currentSong));
-        });
-      } else {
-        audioElement.pause();
-        setIsPlaying(false);
-      }
     }
   };
 
@@ -137,8 +126,6 @@ const Player = () => {
     setLikedSongs(updatedLikedSongs);
     localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
   };
-
-
 
   return (
     <div
@@ -230,12 +217,18 @@ const Player = () => {
                         {isPlaying ? (
                           <FaPause
                             className="  p-[0.1rem] text-zinc-200 hover:scale-110 text-xl lg:text-2xl cursor-pointer"
-                            onClick={handlePlayPause}
+                            onClick={
+                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                        
+                            }
                           />
                         ) : (
                           <FaPlay
                             className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-xl lg:text-2xl cursor-pointer"
-                            onClick={handlePlayPause}
+                            onClick={
+                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                              
+                            }
                           />
                         )}
                       </div>
@@ -382,17 +375,25 @@ const Player = () => {
                           className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
                           onClick={prevSong}
                         />
+                        <div>
                         {isPlaying ? (
                           <FaPause
-                            className="hover:text-white  hover:scale-110 text-3xl cursor-pointer"
-                            onClick={handlePlayPause}
+                            className="p-[0.1rem] text-zinc-200 hover:scale-110 text-3xl cursor-pointer"
+                            onClick={
+                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                        
+                            }
                           />
                         ) : (
                           <FaPlay
-                            className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
-                            onClick={handlePlayPause}
+                            className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-3xl cursor-pointer"
+                            onClick={
+                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                              
+                            }
                           />
                         )}
+                        </div>
                         <IoMdSkipForward
                           className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
                           onClick={nextSong}

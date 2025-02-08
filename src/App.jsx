@@ -20,29 +20,33 @@ export default function App() {
 
   const playMusic = async (downloadUrl, name, duration, image, id, artists ) => {
     
-    const audioUrl = downloadUrl[4]?.url || downloadUrl;
-    if (currentSong?.audio instanceof HTMLAudioElement) {
-      currentSong.audio.pause();
-      currentSong.audio.src = ""; // Clear the source to release memory
-      currentSong.audio.load(); // Ensure the browser releases the resource
+    if(currentSong && currentSong.id === id ){
+      if(isPlaying){
+        setIsPlaying(false);
+        currentSong.audio.pause();
+      } 
+      else {
+        setIsPlaying(true);
+        await currentSong.audio.play();
+      }
+    } else {
+      if(currentSong) {
+        currentSong.audio.pause();
+        setIsPlaying(false);
+      }
+      const newAudio = new Audio(downloadUrl || downloadUrl[4].url );
+      setCurrentSong({
+        name,
+        duration,
+        image: image[2]?.url || image,
+        id,
+        audio: newAudio,
+        artists,
+      });
+      setIsPlaying(true);
+      await newAudio.play();
     }
-    
-    const newAudio = new Audio(audioUrl || downloadUrl );
-    newAudio.addEventListener("ended", nextSong);
-    newAudio.addEventListener('ended', nextSong);
 
-    setCurrentSong({
-      name,
-      duration,
-      image: image[2]?.url || image,
-      id,
-      audio: newAudio,
-      artists,
-    });
-  
-    setIsPlaying(true);
-    await newAudio.play();
-  
     saveToLocalStorage({ downloadUrl, id, name, duration, image, artists });
 
     
@@ -102,7 +106,7 @@ export default function App() {
   
    
     if (shuffle) {
-      const randomIndex = Math.floor(Math.random() * songs.length);
+      const randomIndex = (currentIndex + 2) % songs.length;
       const nextTrack = songs[randomIndex];
       if (!nextTrack) return;
   
@@ -113,12 +117,7 @@ export default function App() {
   
     } else {
 
-      if (repeatMode === "one") {
-        const audioSource = currentSong.audio.src; 
-        const { name, duration, image, id, artists } = currentSong;
-        playMusic(audioSource, name, duration, image, id, artists);
-  
-      } else if (repeatMode === "all") {
+      if (repeatMode === "all") {
 
         let nextIndex = (currentIndex + 1) % songs.length;  
         const nextTrack = songs[nextIndex];
@@ -128,6 +127,7 @@ export default function App() {
         const { name, duration, image, id, artists } = nextTrack;
   
         playMusic(audioSource, name, duration, image, id, artists);
+
       } else {
        
         let nextIndex = (currentIndex + 1) % songs.length;
@@ -150,16 +150,12 @@ export default function App() {
   
     let prevIndex;
     if (shuffle) {
-      // Shuffle mode: Pick a random song
-      prevIndex = Math.floor(Math.random() * songs.length);
+      prevIndex = (index - 3) % songs.length;
     } else {
-      // Regular mode: Go to previous song (loop back to last song if at index 0)
       prevIndex = index === 0 ? songs.length - 1 : index - 1;
     }
-  
-    // Extract the song data correctly
     const song = songs[prevIndex];
-    const audioSource = song.downloadUrl ? song.downloadUrl || song.downloadUrl[4]?.url  : song.audio;
+    const audioSource = song.downloadUrl ? song.downloadUrl[4].url || song.downloadUrl : song.audio;
   
     playMusic(audioSource, song.name, song.duration, song.image, song.id, song.artists);
   };
@@ -204,7 +200,6 @@ export default function App() {
           <Route path="/albums/:id" element={<AlbumDetail />} />
           <Route path="/search/:query" element={<SearchResult />} />
 
-          {/* <Route path="/albums/:id" element={<AlbumDetail /> || <SongsList />} /> */}
           <Route path="/playlists/:id" element={<PlaylistDetails />} />
           
           <Route path="/Browse" element={<Browse />} />
