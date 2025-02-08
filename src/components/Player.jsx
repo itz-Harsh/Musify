@@ -399,7 +399,7 @@ const Player = () => {
                           onClick={nextSong}
                         />
                         <PiShuffleBold
-                        className={` hidden lg:block hover:scale-110 text-3xl cursor-pointer ${
+                        className={` hover:scale-110 text-3xl cursor-pointer ${
                           shuffle ? "text-[#fd3a4e]" : ""
                         }`}
                         onClick={toggleShuffle}
