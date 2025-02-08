@@ -399,11 +399,11 @@ const Player = () => {
                           onClick={nextSong}
                         />
                         <PiShuffleBold
-                          className={`hover:text-white hover:scale-110 text-3xl cursor-pointer ${
-                            shuffle ? "text-[#fd3a4e]" : ""
-                          }`}
-                          onClick={toggleShuffle}
-                        />
+                        className={` hidden lg:block hover:scale-110 text-3xl cursor-pointer ${
+                          shuffle ? "text-[#fd3a4e]" : ""
+                        }`}
+                        onClick={toggleShuffle}
+                      />
                       </div>
                       <div className="items-center gap-1 lg:flex hidden relative -translate-y-[6rem] translate-x-[37.39rem]  ">
                         <PiSpeakerLowFill className="text-xl" />
