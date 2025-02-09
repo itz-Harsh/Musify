@@ -18,23 +18,22 @@ export default function App() {
   const [shuffle, setShuffle] = useState(false);
   const [repeatMode, setRepeatMode] = useState("none");
 
-  const playMusic = async (downloadUrl, name, duration, image, id, artists ) => {
-    
-    if(currentSong && currentSong.id === id ){
-      if(isPlaying){
+  const playMusic = async (downloadUrl, name, duration, image, id, artists) => {
+    if (currentSong && currentSong.id === id) {
+      if (isPlaying) {
         setIsPlaying(false);
         currentSong.audio.pause();
-      } 
-      else {
+      } else {
         setIsPlaying(true);
         await currentSong.audio.play();
       }
     } else {
-      if(currentSong) {
+      if (currentSong) {
         currentSong.audio.pause();
         setIsPlaying(false);
       }
-      const newAudio = new Audio(downloadUrl || downloadUrl[4].url );
+  
+      const newAudio = new Audio(downloadUrl || downloadUrl[4]?.url);
       setCurrentSong({
         name,
         duration,
@@ -43,14 +42,63 @@ export default function App() {
         audio: newAudio,
         artists,
       });
+  
       setIsPlaying(true);
       await newAudio.play();
+  
+      // 🎵 Update Notification Panel (Media Session API)
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: name,
+          artist: artists?.map((a) => a.name).join(", "),
+          album: "My Music App",
+          artwork: [
+            { src: image[2]?.url || image, sizes: "512x512", type: "image/png" },
+          ],
+        });
+  
+        // ⏮ Previous Track
+        navigator.mediaSession.setActionHandler("previoustrack", () => {
+          prevSong();
+        });
+  
+        // ⏯ Play/Pause
+        navigator.mediaSession.setActionHandler("play", () => {
+          setIsPlaying(true);
+          newAudio.play();
+        });
+  
+        navigator.mediaSession.setActionHandler("pause", () => {
+          setIsPlaying(false);
+          newAudio.pause();
+        });
+  
+        // ⏭ Next Track
+        navigator.mediaSession.setActionHandler("nexttrack", () => {
+          nextSong();
+        });
+  
+        // 🔄 Seek (Optional)
+        navigator.mediaSession.setActionHandler("seekforward", (event) => {
+          newAudio.currentTime += event.seekOffset || 10; // Skip forward 10s
+        });
+  
+        navigator.mediaSession.setActionHandler("seekbackward", (event) => {
+          newAudio.currentTime -= event.seekOffset || 10; // Rewind 10s
+        });
+  
+        // ⏹ Stop Music
+        navigator.mediaSession.setActionHandler("stop", () => {
+          newAudio.pause();
+          setIsPlaying(false);
+          setCurrentSong(null);
+        });
+      }
     }
-
+  
     saveToLocalStorage({ downloadUrl, id, name, duration, image, artists });
-
-    
   };
+  
   
   const saveToLocalStorage = (song) => {
     let playedSongs = JSON.parse(localStorage.getItem("playedSongs")) || [];
