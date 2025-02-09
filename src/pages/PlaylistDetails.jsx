@@ -14,7 +14,7 @@ const PlaylistDetails = () => {
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setSongs } = useContext(MusicContext);
+  const { setSong } = useContext(MusicContext);
   const [likedPlaylists, setLikedPlaylists] = useState(() => {
     return JSON.parse(localStorage.getItem("likedPlaylists")) || [];
   });
@@ -24,7 +24,7 @@ const PlaylistDetails = () => {
       try {
         const data = await fetchplaylistsByID(id);
         setDetails(data);
-        setSongs(data.data.songs);
+        setSong(data.data.songs);
       } catch (err) {
         setError("Failed to fetch playlist details. Please try again later.");
       } finally {

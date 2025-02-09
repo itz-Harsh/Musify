@@ -12,7 +12,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
     return `${minutes}:${remainingSeconds}`;
   };
 
-  const { playMusic , songs } = useContext(MusicContext);
+  const { playMusic , song } = useContext(MusicContext);
 
   const imageUrl = image[2]?.url || image; 
   const artistNames = Array.isArray(artists?.primary)
@@ -20,12 +20,12 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
     : "Unknown Artist";
 
  
-    downloadUrl = downloadUrl ? downloadUrl[4]?.url ||  downloadUrl: songs.audio;
+    downloadUrl = downloadUrl ? downloadUrl[4]?.url ||  downloadUrl: song.audio;
   return (
     <span
       className="card w-[9.5rem] h-[11.9rem] overflow-clip p-1  rounded-lg cursor-pointer"
       onClick={() =>
-        playMusic(downloadUrl, name, duration, imageUrl, id, artists)
+        playMusic(downloadUrl, name, duration, imageUrl, id, artists , song)
       }
     >
       <div className="">

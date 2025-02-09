@@ -20,13 +20,13 @@ const MyMusic = () => {
   const albumsScrollRef = useRef(null);
   const playlistsScrollRef = useRef(null);
 
-  const { setSongs } = useContext(MusicContext);
+  const { setSong } = useContext(MusicContext);
 
   useEffect(() => {
     const storedLikedSongs =
       JSON.parse(localStorage.getItem("likedSongs")) || [];
     setLikedSongs(storedLikedSongs);
-    setSongs(storedLikedSongs);
+    setSong(storedLikedSongs);
     
     setLikedAlbums(JSON.parse(localStorage.getItem("likedAlbums")) || []);
     setLikedPlaylists(JSON.parse(localStorage.getItem("likedPlaylists")) || []);

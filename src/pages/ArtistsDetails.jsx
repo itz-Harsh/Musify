@@ -18,7 +18,7 @@ const ArtistsDetails = () => {
   const [details, setDetails] = useState({}); // Initialize as an empty object
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setSongs } = useContext(MusicContext);
+  const { setSong } = useContext(MusicContext);
 
   const FollowerCount = (followerCount) => {
     if (!followerCount || isNaN(followerCount)) {
@@ -47,7 +47,7 @@ const ArtistsDetails = () => {
       try {
         const data = await fetchArtistByID(id); // Fetch artist details based on the ID
         setDetails(data);
-        setSongs(data.data.topSongs);
+        setSong(data.data.topSongs);
         console.log(data.data);
       } catch (err) {
         setError("Error fetching artist details");

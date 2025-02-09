@@ -1,17 +1,14 @@
-import MusicContext from "../context/MusicContext"
-import { useContext } from "react"; 
+import { useContext } from "react";
+import MusicContext from "../context/MusicContext";
 
+const Queue = () => {
+  const { songs } = useContext(MusicContext);
 
-const queue = () => {
-    const {songs} = useContext(MusicContext);
-    
-    return (
-    <>
-        <div>
-            
-        </div>
-    </>
-  )
-}
+  return (
+    <div className="fixed right-0 h-full w-[20rem] flex justify-center" >
+        Queue
+    </div>
+  );
+};
 
-export default queue
+export default Queue;

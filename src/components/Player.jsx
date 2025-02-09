@@ -14,6 +14,7 @@ import { duration } from "@mui/material";
 const Player = () => {
   const {
     currentSong,
+    song,
     playMusic,
     isPlaying,
     setIsPlaying,
@@ -62,14 +63,22 @@ const Player = () => {
         }
       };
 
-      const handleEndSong = () => nextSong();
-
+      const handleEndSong = () => {
+        if (!currentSong || !currentSong.id) return; // ✅ Prevents running if currentSong is missing
+        console.log("Auto-next triggered for:", currentSong.name);
+        nextSong();
+      };
+    
+      // ✅ Remove event listeners before adding new ones
+      audioElement.removeEventListener("timeupdate", handleTimeUpdate);
+      audioElement.removeEventListener("ended", handleEndSong);
+    
       audioElement.addEventListener("timeupdate", handleTimeUpdate);
       audioElement.addEventListener("ended", handleEndSong);
-
+    
       return () => {
         audioElement.removeEventListener("timeupdate", handleTimeUpdate);
-        audioElement.addEventListener("ended", handleEndSong);
+        audioElement.removeEventListener("ended", handleEndSong);
       };
     }
   }, [currentSong, volume]);
@@ -218,7 +227,7 @@ const Player = () => {
                           <FaPause
                             className="  p-[0.1rem] text-zinc-200 hover:scale-110 text-xl lg:text-2xl cursor-pointer"
                             onClick={
-                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id , song)
                         
                             }
                           />
@@ -226,7 +235,7 @@ const Player = () => {
                           <FaPlay
                             className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-xl lg:text-2xl cursor-pointer"
                             onClick={
-                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id, song)
                               
                             }
                           />
@@ -380,7 +389,7 @@ const Player = () => {
                           <FaPause
                             className="p-[0.1rem] text-zinc-200 hover:scale-110 text-3xl cursor-pointer"
                             onClick={
-                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id , song)
                         
                             }
                           />
@@ -388,7 +397,7 @@ const Player = () => {
                           <FaPlay
                             className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-3xl cursor-pointer"
                             onClick={
-                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id)
+                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id , song)
                               
                             }
                           />

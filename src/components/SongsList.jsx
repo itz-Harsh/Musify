@@ -4,8 +4,9 @@ import MusicContext from "../context/MusicContext";
 import he from "he";
 
 const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
+
   const [hovering, setHovering] = useState(false);
-  const { songs } = useContext(MusicContext);
+  const { song } = useContext(MusicContext);
 
   const convertTime = (seconds) => {
     if (!seconds || typeof seconds !== "number") {
@@ -23,14 +24,14 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
     ? artists.primary?.map((artist) => artist.name).join(", ")
     : "Unknown Artist";
 
-    downloadUrl = downloadUrl ? downloadUrl[4]?.url  || downloadUrl : songs.audio;
+    downloadUrl = downloadUrl ? downloadUrl[4]?.url  || downloadUrl : song.audio;
 
   const decodeName = (name) => he.decode(name);
- 
+//  console.log(song);
   return (
     <div
       onClick={() =>
-        playMusic(downloadUrl, name, duration, imageUrl, id, artists)
+        playMusic(downloadUrl, name, duration, imageUrl, id, artists , song)
       }
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}

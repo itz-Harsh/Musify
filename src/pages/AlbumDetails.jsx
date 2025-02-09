@@ -22,7 +22,7 @@ const AlbumDetail = () => {
   const [suggetions, setSuggetion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setSongs, currentSong } = useContext(MusicContext);
+  const { setSong, currentSong } = useContext(MusicContext);
 
   const [likedAlbums, setLikedAlbums] = useState(() => {
     return JSON.parse(localStorage.getItem("likedAlbums")) || [];
@@ -60,9 +60,9 @@ const AlbumDetail = () => {
 
         const combineArray = [...albumSongs, ...filteredSuggestedSongs];
 
-        console.log("Combined Songs:", combineArray);
+        // console.log("Combined Songs:", combineArray);
 
-        setSongs(combineArray);
+        setSong(combineArray);
       } catch (err) {
         setError("Error fetching album details");
         console.error(err);

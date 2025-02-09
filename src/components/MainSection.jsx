@@ -17,14 +17,14 @@ import {
 import MusicContext from "../context/MusicContext";
 
 const MainSection = () => {
-  const [songs, setSong] = useState([]);
+  const [trending, setTrending] = useState([]);
   const [latestSongs, setlatestSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artists, setArtists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setSongs } = useContext(MusicContext);
+  const { setSong } = useContext(MusicContext);
   
   const latestSongsScrollRef = useRef(null);
   const songsScrollRef = useRef(null);
@@ -36,9 +36,9 @@ const MainSection = () => {
   };
 
   const recentlyPlayedSongs = getRecentlyPlayedSongs();
-  // useEffect(() => {
-  //   setSongs(recentlyPlayedSongs);
-  // })
+//   useEffect(() => {
+//     setSong(recentlyPlayedSongs);
+// },[]);
 
   const scrollLeft = (scrollRef) => {
     if (scrollRef.current) {
@@ -65,7 +65,7 @@ const MainSection = () => {
     const fetchSongData = async () => {
       try {
         const song = await fetchplaylistsByID(110858205);
-        setSong(song.data.songs);
+        setTrending(song.data.songs);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -128,7 +128,7 @@ const MainSection = () => {
     // Combine arrays and remove duplicates
     const combineArray = [
       ...recentlyPlayedSongs,
-      ...songs,
+      ...trending,
       ...latestSongs
     ];
     const uniqueSongs = combineArray.filter((song, index, self) => 
@@ -137,8 +137,8 @@ const MainSection = () => {
       ))
     );
   
-    setSongs(uniqueSongs);
-  }, [songs , latestSongs , setSongs]);
+    setSong(uniqueSongs);
+  }, [trending , latestSongs , setSong]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -223,7 +223,7 @@ const MainSection = () => {
             className="grid grid-rows-1 sm:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full  px-3 lg:px-0 scroll-smooth"
             ref={songsScrollRef}
           >
-            {songs?.map((song) => (
+            {trending?.map((song) => (
               <SongGrid key={song.id} {...song} />
             ))}
           </div>

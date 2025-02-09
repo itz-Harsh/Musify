@@ -13,12 +13,13 @@ import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const [songs, setSongs] = useState([null]);
+  const [song , setSong ] = useState([null]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
   const [shuffle, setShuffle] = useState(false);
   const [repeatMode, setRepeatMode] = useState("none");
 
-  const playMusic = async (downloadUrl, name, duration, image, id, artists) => {
+  const playMusic = async (downloadUrl, name, duration, image, id, artists , songList) => {
     if (currentSong && currentSong.id === id) {
       if (isPlaying) {
         setIsPlaying(false);
@@ -43,6 +44,11 @@ export default function App() {
       });
       setIsPlaying(true);
       await newAudio.play();
+    }
+
+    if (songList && JSON.stringify(songs) !== JSON.stringify(songList)) {
+      console.log(songList);
+      setSongs(songList);
     }
 
     saveToLocalStorage({ downloadUrl, id, name, duration, image, artists });
@@ -92,10 +98,8 @@ export default function App() {
 
   const nextSong = () => {
     if (currentSong) {
-      const currentIndex = songs.findIndex(
-        (song) => song.id === currentSong.id
-      );
-
+      const currentIndex = songs.indexOf(songs.find(song => song?.id === currentSong.id));
+     
       if (shuffle) {
         const randomIndex = (currentIndex + 2) % songs.length;
         const nextTrack = songs[randomIndex];
@@ -106,7 +110,7 @@ export default function App() {
           : nextTrack.audio;
         const { name, duration, image, id, artists } = nextTrack;
 
-        playMusic(audioSource, name, duration, image, id, artists);
+        playMusic(audioSource, name, duration, image, id, artists , songs);
       } else {
         if (repeatMode === "all") {
           let nextIndex = (currentIndex + 1) % songs.length;
@@ -118,7 +122,7 @@ export default function App() {
             : nextTrack.audio;
           const { name, duration, image, id, artists } = nextTrack;
 
-          playMusic(audioSource, name, duration, image, id, artists);
+          playMusic(audioSource, name, duration, image, id, artists , songs);
         } else {
           let nextIndex = (currentIndex + 1) % songs.length;
           const nextTrack = songs[nextIndex];
@@ -129,7 +133,7 @@ export default function App() {
             : nextTrack.audio;
           const { name, duration, image, id, artists } = nextTrack;
 
-          playMusic(audioSource, name, duration, image, id, artists);
+          playMusic(audioSource, name, duration, image, id, artists , songs);
         }
       }
     }
@@ -178,7 +182,9 @@ export default function App() {
       <MusicContext.Provider
         value={{
           songs,
+          song,
           setSongs,
+          setSong,
           playMusic,
           setIsPlaying,
           isPlaying,
