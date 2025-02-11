@@ -16,6 +16,7 @@
     "@mui/material": "^6.2.1",
     "@react-icons/all-files": "^4.1.0",
     "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.7.9",
     "dom": "^0.0.3",
     "he": "^1.2.0",

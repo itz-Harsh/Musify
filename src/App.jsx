@@ -10,6 +10,7 @@ import Browse from "./pages/Browse";
 import MyMusic from "./pages/myMusic";
 import he from "he";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 export default function App() {
   const [songs, setSongs] = useState([null]);
@@ -178,6 +179,7 @@ export default function App() {
   };
   return (
     <>
+      <SpeedInsights />
       <Analytics />
       <MusicContext.Provider
         value={{
