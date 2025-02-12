@@ -99,10 +99,11 @@ export default function App() {
 
   const nextSong = () => {
     if (currentSong) {
-      const currentIndex = songs.indexOf(songs.find(song => song?.id === currentSong.id));
-     
+      const currentIndex = songs.findIndex(song => song?.id === currentSong.id);
+      if (currentIndex === -1) return; // Ensure currentIndex is valid
+
       if (shuffle) {
-        const randomIndex = (currentIndex + 2) % songs.length;
+        const randomIndex = Math.floor(Math.random() * songs.length);
         const nextTrack = songs[randomIndex];
         if (!nextTrack) return;
 
@@ -111,31 +112,18 @@ export default function App() {
           : nextTrack.audio;
         const { name, duration, image, id, artists } = nextTrack;
 
-        playMusic(audioSource, name, duration, image, id, artists , songs);
+        playMusic(audioSource, name, duration, image, id, artists, songs);
       } else {
-        if (repeatMode === "all") {
-          let nextIndex = (currentIndex + 1) % songs.length;
-          const nextTrack = songs[nextIndex];
-          if (!nextTrack) return;
+        let nextIndex = (currentIndex + 1) % songs.length;
+        const nextTrack = songs[nextIndex];
+        if (!nextTrack) return;
 
-          const audioSource = nextTrack.downloadUrl
-            ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl
-            : nextTrack.audio;
-          const { name, duration, image, id, artists } = nextTrack;
+        const audioSource = nextTrack.downloadUrl
+          ? nextTrack.downloadUrl[4]?.url || nextTrack.downloadUrl
+          : nextTrack.audio;
+        const { name, duration, image, id, artists } = nextTrack;
 
-          playMusic(audioSource, name, duration, image, id, artists , songs);
-        } else {
-          let nextIndex = (currentIndex + 1) % songs.length;
-          const nextTrack = songs[nextIndex];
-          if (!nextTrack) return;
-
-          const audioSource = nextTrack.downloadUrl
-            ? nextTrack.downloadUrl[4].url || nextTrack.downloadUrl
-            : nextTrack.audio;
-          const { name, duration, image, id, artists } = nextTrack;
-
-          playMusic(audioSource, name, duration, image, id, artists , songs);
-        }
+        playMusic(audioSource, name, duration, image, id, artists, songs);
       }
     }
   };

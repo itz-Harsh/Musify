@@ -64,24 +64,19 @@ const Player = () => {
       };
 
       const handleEndSong = () => {
-        if (!currentSong || !currentSong.id) return; // ✅ Prevents running if currentSong is missing
-        console.log("Auto-next triggered for:", currentSong.name);
-        nextSong();
+        if (!currentSong || !currentSong.id) return; // Prevents running if currentSong is missing
+        nextSong(); // Call nextSong when the current song ends
       };
-    
-      // ✅ Remove event listeners before adding new ones
-      audioElement.removeEventListener("timeupdate", handleTimeUpdate);
-      audioElement.removeEventListener("ended", handleEndSong);
-    
+
       audioElement.addEventListener("timeupdate", handleTimeUpdate);
       audioElement.addEventListener("ended", handleEndSong);
-    
+
       return () => {
         audioElement.removeEventListener("timeupdate", handleTimeUpdate);
         audioElement.removeEventListener("ended", handleEndSong);
       };
     }
-  }, [currentSong, volume]);
+  }, [currentSong, volume, nextSong]);
 
   const handleProgressChange = (event) => {
     const newPercentage = parseFloat(event.target.value);
