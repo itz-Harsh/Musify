@@ -8,7 +8,7 @@ import he from "he";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 function Browse() {
-  const genres = ["For You", "Hindi" , "English" , "Punjabi", "Rajasthani" ,  "Tamil" , "Telugu", "Marathi", "Gujarati", "Bengali", "Kannada"];
+  const genres = ["For You", "Hindi" , "English" , "Punjabi", "Rajasthani" ,  "Haryanvi" , "Telugu", "Marathi", "Gujarati", "Bengali", "Kannada"];
   const [selectedGenre, setSelectedGenre] = useState("For You");
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(false);
