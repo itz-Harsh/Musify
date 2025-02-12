@@ -5,6 +5,7 @@ import Navigator from "../components/Navigator";
 import MainSection from "../components/MainSection";
 import { useState, useEffect } from "react";
 
+
 const Home = () => {
   const [loading, setLoading] = useState(true); 
 
@@ -34,6 +35,7 @@ const Home = () => {
   return (
     <>    
        <Navbar />
+     
        <MainSection />
        <Footer />
        <Navigator />
