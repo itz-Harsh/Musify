@@ -60,7 +60,7 @@ export default function App() {
     }
 
     if (songList && JSON.stringify(songs) !== JSON.stringify(songList)) {
-      console.log(songList);
+      // console.log(songList);
       setSongs(songList);
     }
 

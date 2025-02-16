@@ -198,7 +198,7 @@ const Navbar = () => {
               
               <div
                 key={index}
-                className="flex items-center gap-3 bg-zinc-700 p-3 rounded cursor-pointer hover:bg-zinc-600"
+                className="flex items-center gap-3 bg-zinc-800 p-3 rounded cursor-pointer hover:bg-[#313131]"
                 onClick={() => handleSuggestionClick(suggestion)}
               >
                 <img

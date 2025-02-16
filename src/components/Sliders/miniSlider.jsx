@@ -27,7 +27,7 @@ const MiniSlider = ({ albums }) => {
 
       {/* Albums Grid */}
       <div
-        className="grid grid-rows-1 grid-flow-col gap-3 lg:gap-2 overflow-x-auto scroll-hide w-full  px-3 lg:px-0 scroll-smooth"
+        className="grid grid-rows-1 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full px-3 lg:px-0 scroll-smooth"
         ref={scrollRef}
       >
         {albums?.map((album) => (

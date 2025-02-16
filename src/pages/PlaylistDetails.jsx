@@ -8,13 +8,14 @@ import MusicContext from "../context/MusicContext";
 import SongsList from "../components/SongsList";
 import Navigator from "../components/Navigator";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import { FaPlay } from "react-icons/fa";
 
 const PlaylistDetails = () => {
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setSong } = useContext(MusicContext);
+  const { setSong, playMusic } = useContext(MusicContext);
   const [likedPlaylists, setLikedPlaylists] = useState(() => {
     return JSON.parse(localStorage.getItem("likedPlaylists")) || [];
   });
@@ -25,6 +26,7 @@ const PlaylistDetails = () => {
         const data = await fetchplaylistsByID(id);
         setDetails(data);
         setSong(data.data.songs);
+        console.log(data);
       } catch (err) {
         setError("Failed to fetch playlist details. Please try again later.");
       } finally {
@@ -63,7 +65,9 @@ const PlaylistDetails = () => {
     let updatedPlaylists = [...likedPlaylists];
 
     if (updatedPlaylists.some((p) => p.id === playlistData.id)) {
-      updatedPlaylists = updatedPlaylists.filter((p) => p.id !== playlistData.id);
+      updatedPlaylists = updatedPlaylists.filter(
+        (p) => p.id !== playlistData.id
+      );
     } else {
       updatedPlaylists.push({
         id: playlistData.id,
@@ -73,6 +77,36 @@ const PlaylistDetails = () => {
     }
 
     setLikedPlaylists(updatedPlaylists);
+  };
+
+  const playFirstSong = () => {
+    if (playlistData.songs && playlistData.songs.length > 0) {
+      const firstSong = playlistData.songs[0];
+      const audioSource = firstSong.downloadUrl
+        ? firstSong.downloadUrl[4]?.url || firstSong.downloadUrl
+        : firstSong.audio;
+      const { name, duration, image, id, artists } = firstSong;
+
+      playMusic(
+        audioSource,
+        name,
+        duration,
+        image,
+        id,
+        artists,
+        playlistData.songs
+      );
+    }
+  };
+
+  const totalDuration = playlistData.songs
+    .map((song) => song.duration)
+    .reduce((a, b) => a + b, 0);
+
+  const formatDuration = (duration) => {
+    const hours = Math.floor(duration / 3600);
+    const minutes = Math.floor((duration % 3600) / 60);
+    return `${hours}h   ${minutes}m `;
   };
 
   return (
@@ -87,21 +121,55 @@ const PlaylistDetails = () => {
             alt={playlistData.name || "Playlist"}
             className="w-[10rem] lg:w-[15rem] rounded object-cover DetailImg"
           />
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 items-center">
             <h1 className="text-2xl lg:text-3xl font-bold text-white">
               {playlistData.name}
             </h1>
-            <p className="text-sm lg:text-lg">
-              Total Songs: {playlistData.songCount || 0}
+            <p className="text-sm lg:text-lg font-semibold">
+              Total Songs : {playlistData.songCount || 0}
             </p>
+            <p className="text-sm lg:text-lg font-semibold">
+              Total Duration : {formatDuration(totalDuration)}
+            </p>
+            <div className="flex lg:mt-4 gap-4">
+              <span className=" hidden lg:flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#303030] rounded-full cursor-pointer ">
+                <FaPlay
+                  className=" text-2xl text-white active:scale-90"
+                  onClick={playFirstSong}
+                />
+              </span>
+              <button
+              onClick={toggleLikePlaylist}
+              title="Like Playlist"
+              className="hidden mb-[1.4rem] border-[1px] border-[#2c2c2c] h-[3rem] w-[3rem] lg:flex justify-center items-center rounded-full "
+            >
+              {likedPlaylists.some((p) => p.id === playlistData.id) ? (
+                <FaHeart className="text-red-500 text-2xl" />
+              ) : (
+                <FaRegHeart className="text-[#bdbdbd] text-2xl" />
+              )}
+            </button>
+            </div>
           </div>
-          <button onClick={toggleLikePlaylist} title="Like Playlist" className=" mb-[1.4rem] border-[1px] border-[#2c2c2c] h-[3rem] w-[3rem] flex justify-center items-center rounded-full ">
-            {likedPlaylists.some((p) => p.id === playlistData.id) ? (
-              <FaHeart className="text-red-500 text-2xl" />
-            ) : (
-              <FaRegHeart className="text-[#bdbdbd] text-2xl" />
-            )}
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={toggleLikePlaylist}
+              title="Like Playlist"
+              className="lg:hidden mb-[1.4rem] border-[1px] border-[#2c2c2c] h-[3rem] w-[3rem] flex justify-center items-center rounded-full "
+            >
+              {likedPlaylists.some((p) => p.id === playlistData.id) ? (
+                <FaHeart className="text-red-500 text-2xl" />
+              ) : (
+                <FaRegHeart className="text-[#bdbdbd] text-2xl" />
+              )}
+            </button>
+            <span className=" lg:hidden flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#303030] rounded-full cursor-pointer ">
+              <FaPlay
+                className=" text-2xl text-white active:scale-90"
+                onClick={playFirstSong}
+              />
+            </span>
+          </div>
         </div>
 
         <div>

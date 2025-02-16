@@ -3,18 +3,26 @@ import { BiRepeat } from "react-icons/bi";
 import { IoIosClose, IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { PiShuffleBold } from "react-icons/pi";
 import { FaPlay, FaPause, FaHeart, FaRegHeart } from "react-icons/fa";
-import { MdDownload } from "react-icons/md";
+import {
+  MdDownload,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
 import { CiMaximize1 } from "react-icons/ci";
 import { PiSpeakerLowFill } from "react-icons/pi";
 import MusicContext from "../context/MusicContext";
 import ArtistItems from "./Items/ArtistItems";
 import he from "he";
 import { duration } from "@mui/material";
+import { getSuggestionSong } from "../../fetch";
+import SongGrid from "./SongGrid";
+import Navbar from "./Navbar";
 
 const Player = () => {
   const {
     currentSong,
     song,
+    setSong,
     playMusic,
     isPlaying,
     setIsPlaying,
@@ -25,6 +33,7 @@ const Player = () => {
     repeatMode,
     toggleRepeatMode,
     downloadSong,
+    
   } = useContext(MusicContext);
 
   const [volume, setVolume] = useState(() => {
@@ -33,12 +42,26 @@ const Player = () => {
 
   const [isVisible, setIsVisible] = useState(false); // For showing and hiding the player
   const [isMaximized, setisMaximized] = useState(false); // For minimizing the player
-  const [currentTime, setCurrentTime] = useState(0); // Real-time song progress
+  const [currentTime, setCurrentTime] = useState(0);
+  const [suggetions, setSuggetion] = useState([]);
   const [likedSongs, setLikedSongs] = useState(() => {
     return JSON.parse(localStorage.getItem("likedSongs")) || [];
   });
 
   const inputRef = useRef();
+
+  const scrollRef = useRef(null);
+  const scrollLeft = (scrollRef) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft -= 1000; // Scroll left by 800px
+    }
+  };
+
+  const scrollRight = (scrollRef) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft += 1000; // Scroll right by 800px
+    }
+  };
 
   useEffect(() => {
     setIsVisible(!!(currentSong || isPlaying));
@@ -49,6 +72,21 @@ const Player = () => {
     : "Unknown Artist";
 
   useEffect(() => {
+    const fetchSuggestions = async () => {
+      try {
+        if (!currentSong?.id) return;
+        const suggestions = await getSuggestionSong(currentSong.id);
+        
+        setSong(suggestions.data);
+        setSuggetion(suggestions.data);
+        console.log(suggetions);
+      } catch (error) {
+        console.error("Error fetching song suggestions:", error);
+      }
+    };
+
+    fetchSuggestions();
+
     if (currentSong) {
       const audioElement = currentSong.audio;
 
@@ -221,17 +259,29 @@ const Player = () => {
                         {isPlaying ? (
                           <FaPause
                             className="  p-[0.1rem] text-zinc-200 hover:scale-110 text-xl lg:text-2xl cursor-pointer"
-                            onClick={
-                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id , song)
-                        
+                            onClick={() =>
+                              playMusic(
+                                currentSong?.audio.currentSrc,
+                                currentSong?.name,
+                                currentSong?.duration,
+                                currentSong?.image,
+                                currentSong?.id,
+                                song
+                              )
                             }
                           />
                         ) : (
                           <FaPlay
                             className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-xl lg:text-2xl cursor-pointer"
-                            onClick={
-                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id, song)
-                              
+                            onClick={() =>
+                              playMusic(
+                                currentSong?.audio.currentSrc,
+                                currentSong?.name,
+                                currentSong?.duration,
+                                currentSong?.image,
+                                currentSong?.id,
+                                song
+                              )
                             }
                           />
                         )}
@@ -291,151 +341,193 @@ const Player = () => {
           )}
           {isMaximized && (
             <>
-              {/* <Navbar /> */}
-              <div className="flex w-full bottom-0 flex-col p-2 pt-2 lg:h-auto h-[46rem] gap-4 scroll-hide overflow-y-scroll rounded-tl-2xl rounded-tr-2xl Player">
+              <div className="flex w-full bottom-0 flex-col p-2 pt-2 lg:h-[38rem] h-[45rem] gap-4 scroll-hide overflow-y-scroll rounded-tl-2xl rounded-tr-2xl Player scroll-smooth">
                 <div className=" flex w-[97%] justify-end ">
                   <IoIosClose
                     className="  text-white text-[3rem] cursor-pointer"
                     onClick={handleMaximized}
                   />
                 </div>
-                <div className="flex flex-col  lg:h-[35rem]   gap-3 h-screen   ">
-                  <div className=" flex  justify-center items-center">
-                    <img
-                      src={currentSong?.image || " "}
-                      className=" h-[22rem] lg:h-[24.5rem]  rounded-lg object-cover shadow-2xl shadow-zinc-600"
-                    />
-                  </div>
-                  <div className="flex  flex-col  gap-[0.5rem]">
-                    <span className=" text-2xl font-semibold h-auto  justify-start  pl-[2.5rem] flex  overflow-clip  ">
-                    {currentSong?.name
+                <div className=" ">
+                  <div className="flex lg:flex-row flex-col">
+                    <div className=" flex  justify-center items-center lg:pl-[2.5rem]">
+                      <img
+                        src={currentSong?.image || " "}
+                        className=" h-[22rem] lg:h-[17rem]  rounded-lg object-cover shadow-2xl shadow-zinc-600"
+                      />
+                    </div>
+
+                    <div className="flex flex-col justify-center lg:w-[70%] lg:pl-5 p-1  gap-4">
+                      <div className="flex  flex-col  gap-[0.5rem] mt-5 lg:ml-1 ml-[1.5rem]">
+                        <span className=" text-2xl font-semibold h-auto  justify-start   flex  overflow-clip  ">
+                          {currentSong?.name
                             ? he.decode(currentSong.name)
                             : "Empty"}
-                    </span>
-                    <span className="overflow-hidden  flex  w-[95%]  text-base font-medium text-zinc-400 justify-between h-[1.84rem] pl-[2.5rem]    ">
-                      {artistNames}
-
-                      <div className="flex gap-4 items-center">
-                        <button onClick={toggleLikeSong} title="Like Song">
-                          {likedSongs.some(
-                            (song) => song.id === currentSong?.id
-                          ) ? (
-                            <FaHeart className="text-red-500 text-2xl" />
-                          ) : (
-                            <FaRegHeart className="text-white text-2xl" />
-                          )}
-                        </button>
-                        <MdDownload
-                          className="hover:text-[#fd3a4e]  flex place-self-start text-[1.8rem] cursor-pointer text-white"
-                          onClick={downloadSong}
-                          title="Download Song"
-                        />
+                        </span>
+                        <span className="overflow-hidden  flex  w-[98%] mb-1  text-base font-medium text-zinc-400 justify-between h-[1.84rem]      ">
+                          {artistNames}
+                          <span className="flex gap-3 justify-center place-items-center ">
+                            <button
+                              onClick={toggleLikeSong}
+                              title="Like Song"
+                              className=" "
+                            >
+                              {likedSongs.some(
+                                (song) => song.id === currentSong?.id
+                              ) ? (
+                                <FaHeart className="text-red-500 text-2xl" />
+                              ) : (
+                                <FaRegHeart className="text-white text-2xl hover:text-red-500" />
+                              )}
+                            </button>
+                            <MdDownload
+                              className="hover:text-[#fd3a4e]  flex self-center text-[1.8rem] cursor-pointer text-white"
+                              onClick={downloadSong}
+                              title="Download Song"
+                            />
+                          </span>
+                        </span>
                       </div>
-                    </span>
-                  </div>
-                  <div className="flex flex-col justify-center items-center ">
-                    <form className="flex items-center w-full  mb-1 gap-3 p-3 h-[0px]">
-                      <span className="text-white text-xs ">
-                        {formatTime(currentTime)}{" "}
-                      </span>
-                      <input
-                        type="range"
-                        min={0}
-                        max={100}
-                        step="0.1"
-                        ref={inputRef}
-                        value={
-                          currentSong?.audio?.currentTime
-                            ? (currentTime / Number(currentSong.duration)) * 100
-                            : 0
-                        }
-                        onChange={handleProgressChange}
-                        className="h-[3px] flex w-full translate-y-[2px] text-emerald-500 range "
-                      />
-                      <span className="text-white text-xs">
-                        {formatTime(currentSong?.duration || 0)}
-                      </span>
-                    </form>
-                    <div className="flex flex-col  gap-10 justify-center">
-                      <div className="flex  items-center gap-5 bg-zinc800 p-8">
-                        <BiRepeat
-                          className={`text-3xl cursor-pointer ${
-                            repeatMode === "one"
-                              ? "text-[#f84d5e]"
-                              : repeatMode === "all"
-                              ? "text-[#fd3a4e]"
-                              : ""
-                          }`}
-                          onClick={toggleRepeatMode}
-                          title={`Repeat Mode: ${
-                            repeatMode === "none"
-                              ? "Off"
-                              : repeatMode === "one"
-                              ? "Repeat One"
-                              : "Repeat All"
-                          }`}
-                        />
-                        <IoMdSkipBackward
-                          className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
-                          onClick={prevSong}
-                        />
-                        <div>
-                        {isPlaying ? (
-                          <FaPause
-                            className="p-[0.1rem] text-zinc-200 hover:scale-110 text-3xl cursor-pointer"
-                            onClick={
-                              () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id , song)
-                        
-                            }
-                          />
-                        ) : (
-                          <FaPlay
-                            className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-3xl cursor-pointer"
-                            onClick={
-                          () => playMusic(currentSong?.audio.currentSrc, currentSong?.name, currentSong?.duration, currentSong?.image, currentSong?.id , song)
-                              
-                            }
-                          />
-                        )}
-                        </div>
-                        <IoMdSkipForward
-                          className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
-                          onClick={nextSong}
-                        />
-                        <PiShuffleBold
-                        className={` hover:scale-110 text-3xl cursor-pointer ${
-                          shuffle ? "text-[#fd3a4e]" : ""
-                        }`}
-                        onClick={toggleShuffle}
-                      />
-                      </div>
-                      <div className="items-center gap-1 lg:flex hidden relative -translate-y-[6rem] translate-x-[37.39rem]  ">
-                        <PiSpeakerLowFill className="text-xl" />
+                      <form className="flex items-center w-full gap-3 h-[0px]">
+                        <span className="lg:hidden block  text-white text-xs ">
+                          {formatTime(currentTime)}{" "}
+                        </span>
                         <input
                           type="range"
                           min={0}
                           max={100}
-                          step={1}
-                          value={volume}
-                          onChange={handleVolumeChange}
-                          className="volume bg-gray-300 rounded-lg appearance-none cursor-pointer w-[9rem]"
-                          title="Volume"
+                          step="0.1"
+                          ref={inputRef}
+                          value={
+                            currentSong?.audio?.currentTime
+                              ? (currentTime / Number(currentSong.duration)) *
+                                100
+                              : 0
+                          }
+                          onChange={handleProgressChange}
+                          className=" flex w-[110%] translate-y-[2px] text-emerald-500 range  lg:BigRange "
                         />
+                        <span className="lg:hidden block text-white text-xs">
+                          {formatTime(currentSong?.duration || 0)}
+                        </span>
+                      </form>
+                      <div className="flex flex-col items-center">
+                        <div className="flex items-center lg:gap-12 lg:w-[50%] ">
+                        
+                          <div className="flex  items-center gap-5 bg-zinc800 p-8 ">
+                            <BiRepeat
+                              className={`text-3xl cursor-pointer ${
+                                repeatMode === "one"
+                                  ? "text-[#f84d5e]"
+                                  : repeatMode === "all"
+                                  ? "text-[#fd3a4e]"
+                                  : ""
+                              }`}
+                              onClick={toggleRepeatMode}
+                              title={`Repeat Mode: ${
+                                repeatMode === "none"
+                                  ? "Off"
+                                  : repeatMode === "one"
+                                  ? "Repeat One"
+                                  : "Repeat All"
+                              }`}
+                            />
+                            <IoMdSkipBackward
+                              className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
+                              onClick={prevSong}
+                            />
+                            <div>
+                              {isPlaying ? (
+                                <FaPause
+                                  className="p-[0.1rem] text-zinc-200 hover:scale-110 text-3xl cursor-pointer"
+                                  onClick={() =>
+                                    playMusic(
+                                      currentSong?.audio.currentSrc,
+                                      currentSong?.name,
+                                      currentSong?.duration,
+                                      currentSong?.image,
+                                      currentSong?.id,
+                                      song
+                                    )
+                                  }
+                                />
+                              ) : (
+                                <FaPlay
+                                  className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-3xl cursor-pointer"
+                                  onClick={() =>
+                                    playMusic(
+                                      currentSong?.audio.currentSrc,
+                                      currentSong?.name,
+                                      currentSong?.duration,
+                                      currentSong?.image,
+                                      currentSong?.id,
+                                      song
+                                    )
+                                  }
+                                />
+                              )}
+                            </div>
+                            <IoMdSkipForward
+                              className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
+                              onClick={nextSong}
+                            />
+                            <PiShuffleBold
+                              className={` hover:scale-110 text-3xl cursor-pointer ${
+                                shuffle ? "text-[#fd3a4e]" : ""
+                              }`}
+                              onClick={toggleShuffle}
+                            />
+                          </div>
+
+                          
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-col pt-3 -pl-1">
-                    <h2 className="text-3xl font-medium lg:pl-[3.5rem] lg:w-full w-[50%] flex lg:justify-start justify-center">
-                      Artists
-                    </h2>
-                    <div className="grid grid-flow-col justify-between lg:w-max scroll-smooth gap-[1.5rem] p-[2.5rem] overflow-x-auto scroll ">
-                      {currentSong?.artists?.primary.map((artist, index) => (
-                        <ArtistItems
-                          key={`${artist.id || index}`}
-                          {...artist}
-                        />
-                      ))}
+                  <div className="flex flex-col overflow-hidden  p-1">
+                    <div>
+                      <h2>
+                        {suggetions.length >= 0 && (
+                          <div className="flex flex-col justify-center items-center w-full ">
+                            <h2 className="pr-1 m-4 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[2.5rem] lg:ml-[5.5rem] ">
+                              You Might Like
+                            </h2>
+                            <div className="flex justify-center items-center gap-3 w-full">
+                              {/* Left Arrow */}
+                              <MdOutlineKeyboardArrowLeft
+                                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+                                onClick={() => scrollLeft(scrollRef)}
+                              />
+                              <div
+                                className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-[.35rem] w-full  px-3 lg:px-0 scroll-smooth"
+                                ref={scrollRef}
+                              >
+                                {suggetions?.map((song, index) => (
+                                  <SongGrid key={song.id || index} {...song} />
+                                ))}
+                              </div>
+                              {/* Right Arrow */}
+                              <MdOutlineKeyboardArrowRight
+                                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+                                onClick={() => scrollRight(scrollRef)}
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </h2>
+                    </div>
+                    <div className="flex flex-col pt-3 ">
+                      <h2 className="pr-1 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[2rem] lg:ml-[3.5rem] ">
+                        Artists
+                      </h2>
+                      <div className="grid grid-flow-col justify-between w-max scroll-smooth gap-[1.5rem] lg:pl-[2rem] pl-[1rem] overflow-x-scroll scroll-hide ">
+                        {currentSong?.artists?.primary.map((artist, index) => (
+                          <ArtistItems
+                            key={`${artist.id || index}`}
+                            {...artist}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>

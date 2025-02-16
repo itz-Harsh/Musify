@@ -29,7 +29,7 @@ const PlaylistSlider = ({playlists}) => {
   
     
         <div
-          className="grid grid-rows-1 grid-flow-col-dense overflow-x-scroll scroll-hide items-center h-[13rem] gap-4 w-full px-3 scroll-smooth"
+          className="grid grid-rows-1 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-4 w-full  px-3 lg:px-0 scroll-smooth"
           ref={scrollRef}
         >
           {playlists?.map((playlist) => (

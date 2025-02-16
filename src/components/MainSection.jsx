@@ -152,7 +152,7 @@ const MainSection = () => {
           </div>
       {recentlyPlayedSongs.length > 0 && (
         <div className="flex flex-col justify-center items-center w-full">
-        <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
+        <h2 className=" m-4 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[3.5rem] lg:ml-[6.5rem]">
           Recently Played
         </h2>
         <div className="flex justify-center items-center gap-3 w-full scroll-smooth">
@@ -180,7 +180,7 @@ const MainSection = () => {
       
 
       <div className="flex flex-col items-center w-full">
-        <h2 className="pt-4 lg:pt-0 m-4 pl-[0.8rem] lg:-translate-x-[37rem] lg:text-center w-full text-xl sm:text-2xl font-semibold text-zinc-200 lg:ml-[3rem]">
+        <h2 className=" m-4 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[3.5rem] lg:ml-[6.5rem]">
           New Songs
         </h2>
 
@@ -210,7 +210,7 @@ const MainSection = () => {
 
       {/* Today Trending Section */}
       <div className="flex flex-col justify-center items-center w-full">
-        <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
+        <h2 className=" m-4 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[3.5rem] lg:ml-[6.5rem]">
           Today Trending
         </h2>
         <div className="flex justify-center items-center gap-3 w-full">
@@ -239,7 +239,7 @@ const MainSection = () => {
 
       {/* Top Albums Section */}
       <div className="w-full">
-        <h2 className="lg:ml-[3.5rem] m-4 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 lg:pl-3 ">
+        <h2 className=" m-4 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[1rem] lg:ml-[3rem] ">
           Top Albums
         </h2>
         <AlbumSlider albums={albums} />
@@ -248,7 +248,7 @@ const MainSection = () => {
 
       {/* Top Artists Section */}
       <div className="w-full">
-        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 lg:pl-[3rem]">
+        <h2 className="pr-1 m-4 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[1rem] lg:ml-[3.5rem] ">
           Top Artists
         </h2>
         <ArtistSlider artists={artists} />
@@ -256,8 +256,8 @@ const MainSection = () => {
       <br />
 
       {/* Top Playlists Section */}
-      <div className="w-full">
-        <h2 className="m-3 lg:-translate-x-[37rem] lg:text-center text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 lg:pl-[3rem]">
+      <div className="w-full flex flex-col gap-3">
+        <h2 className=" m-[1rem 1rem 0 1rem] text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[1rem] lg:ml-[2.8rem] ">
           Top Playlists
         </h2>
         <PlaylistSlider playlists={playlists} />

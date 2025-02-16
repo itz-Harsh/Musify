@@ -45,6 +45,39 @@ input[type="text"] {
   background-color: #fe4559;
 }
 
+.BigRange {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px; /* Adjust thickness */
+  background: #ffffff20; /* Slightly transparent white */
+  border-radius: 10px;
+  outline: none;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+/* Custom track for Webkit browsers */
+.BigRange::-webkit-slider-runnable-track {
+  height: 6px;
+  background: #ffffffa6;
+  border-radius: 10px;
+}
+
+
+.BigRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #fe4558;
+  border-radius: 50%;
+  margin-top: -4px; 
+  cursor: pointer;
+}
+
+
+
 .Player{
   background: rgb(38,38,38);
 background: linear-gradient(0deg, rgb(15, 15, 15) 0%, rgb(27, 27, 27) 45%, rgb(26, 26, 26) 100%);
