@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AlbumDetail from "./pages/AlbumDetails";
 import Home from "./pages/Home";
 import MusicContext from "./context/MusicContext";
-import { useState } from "react";
 import ArtistsDetails from "./pages/ArtistsDetails";
 import SearchResult from "./pages/searchResult";
 import PlaylistDetails from "./pages/PlaylistDetails";
@@ -10,17 +10,29 @@ import Browse from "./pages/Browse";
 import MyMusic from "./pages/myMusic";
 import he from "he";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Done, DoneAll } from "@mui/icons-material";
+import { MdOutlineCloudDone } from "react-icons/md";
+import { IoIosCheckmarkCircle } from "react-icons/io";
 
 export default function App() {
   const [songs, setSongs] = useState([null]);
-  const [song , setSong ] = useState([null]);
+  const [song, setSong] = useState([null]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
   const [shuffle, setShuffle] = useState(false);
   const [repeatMode, setRepeatMode] = useState("none");
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false); // State for success popup
 
-  const playMusic = async (downloadUrl, name, duration, image, id, artists , songList) => {
+  const playMusic = async (
+    downloadUrl,
+    name,
+    duration,
+    image,
+    id,
+    artists,
+    songList
+  ) => {
     if (currentSong && currentSong.id === id) {
       if (isPlaying) {
         setIsPlaying(false);
@@ -88,6 +100,12 @@ export default function App() {
 
         // Revoke the object URL to release memory
         URL.revokeObjectURL(link.href);
+
+        // Show success popup
+        setShowSuccessPopup(true);
+        setTimeout(() => {
+          setShowSuccessPopup(false);
+        }, 3000); // Hide after 3 seconds
       } catch (error) {
         console.error("Error downloading the song:", error);
         alert("Failed to download the song!");
@@ -99,7 +117,9 @@ export default function App() {
 
   const nextSong = () => {
     if (currentSong) {
-      const currentIndex = songs.findIndex(song => song?.id === currentSong.id);
+      const currentIndex = songs.findIndex(
+        (song) => song?.id === currentSong.id
+      );
       if (currentIndex === -1) return; // Ensure currentIndex is valid
 
       if (shuffle) {
@@ -165,6 +185,7 @@ export default function App() {
   const toggleShuffle = () => {
     setShuffle((prevState) => !prevState);
   };
+
   return (
     <>
       <SpeedInsights />
@@ -192,16 +213,21 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/artists/:id" element={<ArtistsDetails />} />
-
             <Route path="/albums/:id" element={<AlbumDetail />} />
             <Route path="/search/:query" element={<SearchResult />} />
-
             <Route path="/playlists/:id" element={<PlaylistDetails />} />
-
             <Route path="/Browse" element={<Browse />} />
             <Route path="/Music" element={<MyMusic />} />
           </Routes>
         </Router>
+        {showSuccessPopup && (
+          <div className="fixed flex justify-center items-center w-full z-30 top-6">
+            <div className="flex bg-[#2c2c2c] text-white p-3 rounded shadow-xl gap-3">
+            <IoIosCheckmarkCircle className="flex self-center text-xl " />
+              <h2 className="font-semibold">Downloaded</h2>
+            </div>
+          </div>
+        )}
       </MusicContext.Provider>
     </>
   );

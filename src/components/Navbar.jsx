@@ -149,7 +149,7 @@ const Navbar = () => {
           </div>
         </div>
         
-        <div className="lg:flex gap-[2rem] w-[15rem] grey hidden ">
+        <div className="lg:flex gap-[2rem] w-[15rem] grey hidden font-semibold">
         <Link to="/Browse">
           <h2 className="lg:text-xl text-lg">Browse</h2>
         </Link>
