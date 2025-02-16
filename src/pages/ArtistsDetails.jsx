@@ -144,13 +144,13 @@ const ArtistsDetails = () => {
             )}
           </div>
           <div>
-            <h2 className=" m-4 lg:font-bold text-xl lg:text-2xl font-semibold text-zinc-200 w-full lg:ml-[3rem]">
+            <h2 className=" m-4 lg:font-bold text-xl lg:text-2xl font-semibold text-zinc-200 w-[90%] lg:ml-[3rem]">
               Top Albums
             </h2>
             <MiniSlider albums={artistData.topAlbums} />
           </div>
           <div>
-            <h2 className=" m-4 text-xl lg:font-bold lg:text-2xl font-semibold text-zinc-200 w-full lg:ml-[3rem]">
+            <h2 className=" m-4 text-xl lg:font-bold lg:text-2xl font-semibold text-zinc-200 w-[90%] lg:ml-[3rem]">
               Singles
             </h2>
             <AlbumSlider albums={details.data.singles} />
