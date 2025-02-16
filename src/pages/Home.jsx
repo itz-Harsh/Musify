@@ -13,7 +13,7 @@ const Home = () => {
     
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 0));
       } catch (error) {
         console.error("Error loading data:", error);
       } finally {
