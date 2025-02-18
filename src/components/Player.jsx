@@ -341,7 +341,7 @@ const Player = () => {
           )}
           {isMaximized && (
             <>
-              <div className="flex w-full bottom-0 flex-col p-2 pt-2 lg:h-[38rem] h-[45rem] gap-4 scroll-hide overflow-y-scroll rounded-tl-2xl rounded-tr-2xl Player scroll-smooth">
+              <div className="flex w-full bottom-0 flex-col p-2 pt-2 lg:h-[40rem] h-[45rem] gap-4 scroll-hide overflow-y-scroll rounded-tl-2xl rounded-tr-2xl Player scroll-smooth">
                 <div className=" flex w-[97%] justify-end ">
                   <IoIosClose
                     className="  text-white text-[3rem] cursor-pointer"
@@ -520,7 +520,7 @@ const Player = () => {
                       <h2 className="pr-1 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[2rem] lg:ml-[3.5rem] ">
                         Artists
                       </h2>
-                      <div className="grid grid-flow-col justify-between w-full scroll-smooth gap-[1.5rem] lg:pl-[2rem] pl-[1rem] overflow-x-scroll scroll-hide ">
+                      <div className="grid grid-flow-col lg:w-max w-full scroll-smooth lg:gap-[1.5rem] lg:pl-[2rem] pl-[1rem] overflow-x-scroll scroll-hide ">
                         {currentSong?.artists?.primary.map((artist, index) => (
                           <ArtistItems
                             key={`${artist.id || index}`}
