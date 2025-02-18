@@ -5,8 +5,8 @@ const BASE_URL = "https://musify-harsh.vercel.app/"; // Change this to your depl
 
 const pages = [
   { url: "/", changefreq: "daily", priority: 1.0 },
-  { url: "/about", changefreq: "weekly", priority: 0.8 },
-  { url: "/contact", changefreq: "monthly", priority: 0.7 },
+  { url: "/Browse", changefreq: "daily", priority: 1 },
+  { url: "/Music", changefreq: "daily", priority: 1 },
   // Add more pages manually
 ];
 
