@@ -108,19 +108,23 @@ export const fetchAlbumByID = async (ID) => {
 };
 
 export const fetchArtistByID = async (ID) => { 
-    try{
-        const Artists = await fetch(`${api_url}artists?id=${ID}`);
-        const data = await Artists.json();
-        if(!Artists.ok) {
+    try {
+        const response = await fetch(`${api_url}artists?id=${ID}`);
+        const text = await response.text();  // Read raw text first
+        console.log("Raw API Response:", text); // Debugging
+
+        // Ensure it's JSON before parsing
+        const data = JSON.parse(text);
+        if (!response.ok) {
             throw new Error(data.message || 'Failed to Fetch Artist Data');
         }
         return data;
-    }
-    catch{
-        console.log('API Error: ', error );
+    } catch (error) {
+        console.error('API Error:', error);
         throw error;
     }
 };
+
 
 export const searchPlayListByQuery = async (query) => { 
     try{

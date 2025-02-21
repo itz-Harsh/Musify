@@ -626,6 +626,368 @@ export const genreData = {
 
     ]
 };
-    
+
+
+export const artistData = {
+  "results": [
+      {
+        "id": "459320",
+        "name": "Arijit Singh",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Arijit_Singh_004_20241118063717_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Arijit_Singh_004_20241118063717_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Arijit_Singh_004_20241118063717_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/arijit-singh-songs/LlRWpHzy3Hk_"
+      },
+      {
+        "id": "456323",
+        "name": "Pritam",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Pritam_Chakraborty-20170711073326_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Pritam_Chakraborty-20170711073326_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Pritam_Chakraborty-20170711073326_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/pritam-songs/OaFg9HPZgq8_"
+      },
+      {
+        "id": "455130",
+        "name": "Shreya Ghoshal",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Shreya_Ghoshal_007_20241101074144_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Shreya_Ghoshal_007_20241101074144_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Shreya_Ghoshal_007_20241101074144_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/shreya-ghoshal-songs/lIHlwHaxTZ0_"
+      },
+      {
+        "id": "464656",
+        "name": "Armaan Malik",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Armaan_Malik_005_20240819091627_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Armaan_Malik_005_20240819091627_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Armaan_Malik_005_20240819091627_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/armaan-malik-songs/1iZ7Gi0bi1Y_"
+      },
+      {
+        "id": "485956",
+        "name": "Yo Yo Honey Singh",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Yo_Yo_Honey_Singh_002_20221216102650_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Yo_Yo_Honey_Singh_002_20221216102650_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Yo_Yo_Honey_Singh_002_20221216102650_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/yo-yo-honey-singh-songs/06QxyAvVpB4_"
+      },
+      {
+        "id": "456863",
+        "name": "Badshah",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Badshah_006_20241118064015_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Badshah_006_20241118064015_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Badshah_006_20241118064015_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/badshah-songs/d4OwAaEcnD0_"
+      },
+      {
+        "id": "468245",
+        "name": "Diljit Dosanjh",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Diljit_Dosanjh_005_20231025073054_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Diljit_Dosanjh_005_20231025073054_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Diljit_Dosanjh_005_20231025073054_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/diljit-dosanjh-songs/oIVHdWIO5F8_"
+      },
+      {
+        "id": "681966",
+        "name": "AP Dhillon",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/AP_Dhillon_002_20230918073841_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/AP_Dhillon_002_20230918073841_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/AP_Dhillon_002_20230918073841_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/ap-dhillon-songs/fBfisFn5rbc_"
+      },
+      {
+        "id": "881158",
+        "name": "Jubin Nautiyal",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Jubin_Nautiyal_003_20231130204020_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Jubin_Nautiyal_003_20231130204020_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Jubin_Nautiyal_003_20231130204020_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/jubin-nautiyal-songs/uGdfg6zGf4s_"
+      },
+      {
+        "id": "8812560",
+        "name": "Dhanda Nyoliwala",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Dhanda_Nyoliwala_000_20240820133551_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Dhanda_Nyoliwala_000_20240820133551_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Dhanda_Nyoliwala_000_20240820133551_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/dhanda-nyoliwala-songs/QigrV5leMIs_"
+      },
+      {
+        "id": "672167",
+        "name": "Harrdy Sandhu",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Hardy_Sandhu_001_20190913112018_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Hardy_Sandhu_001_20190913112018_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Hardy_Sandhu_001_20190913112018_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/harrdy-sandhu-songs/rO,WF5NKKsQ_"
+      },
+      {
+        "id": "455127",
+        "name": "Udit Narayan",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Udit_Narayan_004_20241029065120_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Udit_Narayan_004_20241029065120_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Udit_Narayan_004_20241029065120_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/udit-narayan-songs/kLtmb7Vh8Rs_"
+      },
+      {
+        "id": "741999",
+        "name": "S. P. Balasubrahmanyam",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/S_P_Balasubrahmanyam_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/S_P_Balasubrahmanyam_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/S_P_Balasubrahmanyam_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/s.-p.-balasubrahmanyam-songs/Ix5AC5h7LSg_"
+      },
+      {
+        "id": "483224",
+        "name": "K. S. Chithra",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/K_S_Chithra_002_20190906071921_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/K_S_Chithra_002_20190906071921_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/K_S_Chithra_002_20190906071921_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/k.-s.-chithra-songs/doElLvdHCyk_"
+      },
+      {
+        "id": "455142",
+        "name": "Kumar Sanu",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Kumar_Sanu_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Kumar_Sanu_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Kumar_Sanu_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/kumar-sanu-songs/fe0z9ZAFgGE_"
+      },
+      {
+        "id": "455663",
+        "name": "Anirudh Ravichander",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Anirudh_Ravichander_002_20240103064558_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Anirudh_Ravichander_002_20240103064558_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Anirudh_Ravichander_002_20240103064558_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/anirudh-ravichander-songs/lBzQd8c-xCY_"
+      },
+      {
+        "id": "455170",
+        "name": "Devi Sri Prasad",
+        "role": "Artist",
+        "image": [
+          {
+            "quality": "50x50",
+            "url": "https://c.saavncdn.com/artists/Devi_Sri_Prasad_007_20240902064823_50x50.jpg"
+          },
+          {
+            "quality": "150x150",
+            "url": "https://c.saavncdn.com/artists/Devi_Sri_Prasad_007_20240902064823_150x150.jpg"
+          },
+          {
+            "quality": "500x500",
+            "url": "https://c.saavncdn.com/artists/Devi_Sri_Prasad_007_20240902064823_500x500.jpg"
+          }
+        ],
+        "type": "artist",
+        "url": "https://www.jiosaavn.com/artist/devi-sri-prasad-songs/M0dlT,PMjDs_"
+      }
+    ]
+};
   
 

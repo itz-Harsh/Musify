@@ -520,7 +520,7 @@ const Player = () => {
                       <h2 className="pr-1 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[2rem] lg:ml-[3.5rem] ">
                         Artists
                       </h2>
-                      <div className="grid grid-flow-col lg:w-max w-full scroll-smooth lg:gap-[1.5rem] lg:pl-[2rem] pl-[1rem] overflow-x-scroll scroll-hide ">
+                      <div className="grid grid-flow-col lg:w-max w-full scroll-smooth gap-[1rem] lg:gap-[1.5rem] lg:pl-[2rem] pl-[1rem] overflow-x-scroll scroll-hide ">
                         {currentSong?.artists?.primary.map((artist, index) => (
                           <ArtistItems
                             key={`${artist.id || index}`}

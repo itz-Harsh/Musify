@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import {
   fetchplaylistsByID,
   searchAlbumByQuery,
-  searchArtistByQuery,
   searchPlayListByQuery,
 } from "../../fetch"; // Assuming the function is imported correctly
 import AlbumSlider from "./Sliders/AlbumSlider";
@@ -15,6 +14,7 @@ import {
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import MusicContext from "../context/MusicContext";
+import { artistData } from "../genreData";
 
 const MainSection = () => {
   const [trending, setTrending] = useState([]);
@@ -97,8 +97,8 @@ const MainSection = () => {
 
     const fetchArtistData = async () => {
       try {
-        const artist = await searchArtistByQuery("top-artists");
-        setArtists(artist.data.results);
+        const artist = await artistData;
+        setArtists(artist.results);
       } catch (err) {
         setError(err.message);
       } finally {
