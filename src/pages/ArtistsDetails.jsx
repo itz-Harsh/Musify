@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // To fetch artist ID from URL
+import { useNavigate, useParams } from "react-router-dom"; // To fetch artist ID from URL
 import Navbar from "../components/Navbar";
 import Player from "../components/Player";
 import { fetchArtistByID } from "../../fetch"; // Assuming the fetch function exists
@@ -12,6 +12,7 @@ import AlbumSlider from "../components/Sliders/AlbumSlider";
 import Navigator from "../components/Navigator";
 import ArtistSlider from "../components/Sliders/ArtistSlider";
 import ArtistItems from "../components/Items/ArtistItems";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ArtistsDetails = () => {
   const { id } = useParams(); // Extract the artist ID from the URL
@@ -19,7 +20,7 @@ const ArtistsDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { setSong } = useContext(MusicContext);
-
+  const naviagte = useNavigate();
   const FollowerCount = (followerCount) => {
     if (!followerCount || isNaN(followerCount)) {
       return "Not available"; // Fallback for invalid or missing data
@@ -53,6 +54,7 @@ const ArtistsDetails = () => {
         setError("Error fetching artist details");
       } finally {
         setLoading(false);
+        
       }
     };
 
@@ -71,7 +73,8 @@ const ArtistsDetails = () => {
 
   if (error) {
     return (
-      <div className="flex h-screen w-screen justify-center items-center">
+      <div className="flex h-screen w-screen justify-center items-center font-semibold">
+        <IoMdArrowRoundBack className="text-2xl m-2 lg:cursor-pointer" onClick={() => naviagte(-1)}/>
         {error}
       </div>
     );
