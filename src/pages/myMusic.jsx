@@ -101,13 +101,13 @@ const MyMusic = () => {
                         alt={album.name}
                         className="rounded-lg imgs p-1"
                       />
-                      <div className="text-[14px] w-full flex flex-col justify-center pl-2 h-[2.5rem]">
+                      <div className="text-[14px] w-full flex flex-col pl-2 h-[2.59rem] overflow-hidden ">
                         <h2 className="font-semibold overflow-x-clip">
                           {album.name}
                         </h2>
-                        <span className="flex gap-1 text-xs overflow-hidden w-max">
+                        <span className="flex gap-1 text-xs overflow-hidden ">
                           by{" "}
-                          <p className=" font-semibold ">
+                          <p className=" font-semibold w-[7.8rem] ">
                             {album.artists.primary
                               .map((artist) => artist.name)
                               .join(", ")}

@@ -16,7 +16,6 @@ import he from "he";
 import { getSuggestionSong } from "../../fetch";
 import SongGrid from "./SongGrid";
 
-
 const Player = () => {
   const {
     currentSong,
@@ -32,7 +31,6 @@ const Player = () => {
     repeatMode,
     toggleRepeatMode,
     downloadSong,
-    
   } = useContext(MusicContext);
 
   const [volume, setVolume] = useState(() => {
@@ -48,6 +46,26 @@ const Player = () => {
   });
 
   const inputRef = useRef();
+
+  const updateProgressBar = () => {
+    if (!currentSong || !currentSong.audio) return;
+    const audio = currentSong.audio;
+    const progress = (audio.currentTime / Number(currentSong.duration)) * 100;
+    if (inputRef.current) {
+      inputRef.current.style.setProperty("--progress", `${progress}%`);
+    }
+  };
+  
+  // Attach timeupdate event
+  useEffect(() => {
+    if (!currentSong || !currentSong.audio) return;
+    const audio = currentSong.audio;
+  
+    audio.addEventListener("timeupdate", updateProgressBar);
+    return () => {
+      audio.removeEventListener("timeupdate", updateProgressBar);
+    };
+  }, [currentSong]);
 
   const scrollRef = useRef(null);
   const scrollLeft = (scrollRef) => {
@@ -75,7 +93,7 @@ const Player = () => {
       try {
         if (!currentSong?.id) return;
         const suggestions = await getSuggestionSong(currentSong.id);
-        
+
         setSong(suggestions.data);
         setSuggetion(suggestions.data);
         // console.log(suggetions);
@@ -90,7 +108,7 @@ const Player = () => {
       const audioElement = currentSong.audio;
 
       audioElement.volume = volume / 100;
-
+      
       const handleTimeUpdate = () => {
         setCurrentTime(audioElement.currentTime); // Update currentTime state
         const duration = Number(currentSong.duration);
@@ -119,7 +137,9 @@ const Player = () => {
     const newPercentage = parseFloat(event.target.value);
     const newTime = (newPercentage / 100) * Number(currentSong.duration);
     currentSong.audio.currentTime = newTime;
-    setCurrentTime(newTime); // Update currentTime to match slider
+    setCurrentTime(newTime);
+
+    // Update currentTime to match slider
   };
 
   const handleVolumeChange = (event) => {
@@ -364,7 +384,7 @@ const Player = () => {
                             : "Empty"}
                         </span>
                         <span className="overflow-hidden  flex  w-[98%] mb-1  text-base font-medium text-zinc-400 justify-between h-[1.84rem]      ">
-                        {he.decode(artistNames)}
+                          {he.decode(artistNames)}
                           <span className="flex gap-3 justify-center place-items-center ">
                             <button
                               onClick={toggleLikeSong}
@@ -404,7 +424,7 @@ const Player = () => {
                               : 0
                           }
                           onChange={handleProgressChange}
-                          className=" flex w-[110%] translate-y-[2px] text-emerald-500 range  lg:BigRange "
+                          className=" flex translate-y-[1px]  range   "
                         />
                         <span className="lg:hidden block text-white text-xs">
                           {formatTime(currentSong?.duration || 0)}
@@ -412,7 +432,6 @@ const Player = () => {
                       </form>
                       <div className="flex flex-col items-center">
                         <div className="flex items-center lg:gap-12 lg:w-[50%] ">
-                        
                           <div className="flex  items-center gap-5 bg-zinc800 p-8 ">
                             <BiRepeat
                               className={`text-3xl cursor-pointer ${
@@ -477,8 +496,6 @@ const Player = () => {
                               onClick={toggleShuffle}
                             />
                           </div>
-
-                          
                         </div>
                       </div>
                     </div>

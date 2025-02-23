@@ -26,55 +26,46 @@ input[type="text"] {
   border: 1px solid #4d4d4d;
 }
 
-.range[type="range"] {
-  display: flex;
-  cursor: pointer;
-  -webkit-appearance: none;
-  height: 2px;
-  width: 10 0%;
-  margin-bottom: 5px;
-  background-color: #f1f1f1c0;
-}
 
-.range[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 10px;
-  height: 10px;
-  
-  border-radius: 30px;
-  background-color: #fe4559;
-}
 
-.BigRange {
+
+
+.range {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 6px; /* Adjust thickness */
-  background: #ffffff20; /* Slightly transparent white */
-  border-radius: 10px;
-  outline: none;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-/* Custom track for Webkit browsers */
-.BigRange::-webkit-slider-runnable-track {
   height: 6px;
-  background: #ffffffa6;
-  border-radius: 10px;
+  background: linear-gradient(to right, #dfdfdf var(--progress, 0%), #252525 var(--progress, 0%));
+  border-radius: 5px;
+  outline: none;
+  border-radius: 4px;
+  position: relative;
+}
+
+/* Track (Entire Background) */
+.range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  border-radius: 4px;
+  position: relative;
 }
 
 
-.BigRange::-webkit-slider-thumb {
+.range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
-  background: #fe4558;
+  width: 15px;
+  height: 15px;
+  background: #161616;
+  border: 2px solid #ffffff;
   border-radius: 50%;
-  margin-top: -4px; 
   cursor: pointer;
+  margin-top: -4px; /* Adjust to center the thumb */
+  position: relative;
+  z-index: 2;
 }
+
 
 
 
@@ -127,14 +118,14 @@ li{
   width: 10px;
   height: 10px;
   border-radius: 30px;
-  background-color: #fe4559;
+  background: #161616;
+  border: 1px solid #ffffff;
 }
 .volume[type="range"] {
   display: flex;
   -webkit-appearance: none;
   height: 2px;
-  
-  background-color: #f1f1f1c0;
+  background-color: #bebebec0;
 }
 .imgs:hover {
   display: block;
