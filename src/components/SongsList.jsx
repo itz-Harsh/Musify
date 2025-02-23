@@ -59,8 +59,8 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
         </h3>
       </div>
       <div className="flex w-full">
-        <p className=" text-[0.60rem] lg:text-[0.75rem] w-[9rem] lg:w-auto text-gray-400">
-          {artistNames}
+        <p className=" text-[0.60rem] lg:text-[0.75rem] h-[2rem] flex items-center w-[11rem] overflow-clip lg:w-auto text-gray-400">
+          {he.decode(artistNames)}
         </p>
       </div>
 
