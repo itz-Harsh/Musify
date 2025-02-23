@@ -51,9 +51,7 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
       <div className="flex w-full pl-5 ">
         <h3
           autoCorrect=""
-          className={` text-[0.75rem] lg:text-[0.875rem] font-medium text-white ${
-            id === currentSong?.id && "text-[#46c7b6ff]"
-          }`}
+          className={` text-[0.75rem] lg:text-[0.875rem] font-medium text-white `}
         >
           {decodeName(name)}
         </h3>
