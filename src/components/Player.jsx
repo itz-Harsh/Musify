@@ -47,25 +47,25 @@ const Player = () => {
 
   const inputRef = useRef();
 
-  const updateProgressBar = () => {
-    if (!currentSong || !currentSong.audio) return;
-    const audio = currentSong.audio;
-    const progress = (audio.currentTime / Number(currentSong.duration)) * 100;
-    if (inputRef.current) {
-      inputRef.current.style.setProperty("--progress", `${progress}%`);
-    }
-  };
-  
-  // Attach timeupdate event
   useEffect(() => {
-    if (!currentSong || !currentSong.audio) return;
+    if (!currentSong) return;
+    
     const audio = currentSong.audio;
-  
-    audio.addEventListener("timeupdate", updateProgressBar);
-    return () => {
-      audio.removeEventListener("timeupdate", updateProgressBar);
+    setCurrentTime(audio.currentTime); 
+    
+    const updateProgress = () => {
+      setCurrentTime(audio.currentTime);
+      const progress = (audio.currentTime / Number(currentSong.duration)) * 100;
+      inputRef.current.style.setProperty("--progress", `${progress}%`);
     };
-  }, [currentSong]);
+  
+    audio.addEventListener("timeupdate", updateProgress);
+  
+    return () => {
+      audio.removeEventListener("timeupdate", updateProgress);
+    };
+  }, [currentSong, isPlaying]); 
+  
 
   const scrollRef = useRef(null);
   const scrollLeft = (scrollRef) => {
@@ -218,6 +218,9 @@ const Player = () => {
                       ? (currentTime / Number(currentSong.duration)) * 100
                       : 0
                   }
+                  style={{
+                    background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong.duration) * 100}%, #252525 ${currentTime / Number(currentSong.duration) * 100}%)`,
+                  }}
                   onChange={handleProgressChange}
                   className=" h-[3px] flex w-full text-emerald-500 range  "
                 />
@@ -423,6 +426,9 @@ const Player = () => {
                                 100
                               : 0
                           }
+                          style={{
+                            background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong.duration) * 100}%, #252525 ${currentTime / Number(currentSong.duration) * 100}%)`,
+                          }}
                           onChange={handleProgressChange}
                           className=" flex translate-y-[1px]  range   "
                         />
