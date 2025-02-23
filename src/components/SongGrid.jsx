@@ -41,7 +41,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
         <span className="font-semibold overflow-clip w-[9rem] h-[1.2rem] pr-2">{name
                                     ? he.decode(name)
                                     : "Empty"}</span>
-        <span className="flex gap-1">by<p className="font-semibold">{artistNames}</p></span>
+        <span className="flex gap-1">by<p className="font-semibold">{he.decode(artistNames)}</p></span>
       </div>
         </div>
   

@@ -194,8 +194,8 @@ const MainSection = () => {
             className="grid grid-rows-1 lg:grid-rows-2 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full px-3 lg:px-0 scroll-smooth"
             ref={latestSongsScrollRef}
           >
-            {latestSongs?.map((song) => (
-              <SongGrid key={song.id} {...song} />
+            {latestSongs?.map((song , index) => (
+              <SongGrid key={song.id || index } {...song} />
             ))}
           </div>
           {/* Right Arrow */}

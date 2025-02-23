@@ -13,10 +13,9 @@ import { PiSpeakerLowFill } from "react-icons/pi";
 import MusicContext from "../context/MusicContext";
 import ArtistItems from "./Items/ArtistItems";
 import he from "he";
-import { duration } from "@mui/material";
 import { getSuggestionSong } from "../../fetch";
 import SongGrid from "./SongGrid";
-import Navbar from "./Navbar";
+
 
 const Player = () => {
   const {
@@ -79,7 +78,7 @@ const Player = () => {
         
         setSong(suggestions.data);
         setSuggetion(suggestions.data);
-        console.log(suggetions);
+        // console.log(suggetions);
       } catch (error) {
         console.error("Error fetching song suggestions:", error);
       }
@@ -227,7 +226,7 @@ const Player = () => {
                         </span>
 
                         <span className="text-xs h-1 text-gray-400">
-                          {artistNames}
+                          {he.decode(artistNames)}
                         </span>
                       </div>
                     </div>
@@ -365,7 +364,7 @@ const Player = () => {
                             : "Empty"}
                         </span>
                         <span className="overflow-hidden  flex  w-[98%] mb-1  text-base font-medium text-zinc-400 justify-between h-[1.84rem]      ">
-                          {artistNames}
+                        {he.decode(artistNames)}
                           <span className="flex gap-3 justify-center place-items-center ">
                             <button
                               onClick={toggleLikeSong}

@@ -49,7 +49,7 @@ const ArtistsDetails = () => {
         const data = await fetchArtistByID(id); // Fetch artist details based on the ID
         setDetails(data);
         setSong(data.data.topSongs);
-        console.log(data.data);
+        // console.log(data.data);
       } catch (err) {
         setError("Error fetching artist details");
       } finally {
