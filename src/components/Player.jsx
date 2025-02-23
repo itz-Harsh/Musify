@@ -48,14 +48,14 @@ const Player = () => {
   const inputRef = useRef();
 
   useEffect(() => {
-    if (!currentSong) return;
     
-    const audio = currentSong.audio;
+    
+    const audio = currentSong?.audio;
     setCurrentTime(audio.currentTime); 
     
     const updateProgress = () => {
       setCurrentTime(audio.currentTime);
-      const progress = (audio.currentTime / Number(currentSong.duration)) * 100;
+      const progress = (audio.currentTime / Number(currentSong?.duration)) * 100;
       inputRef.current.style.setProperty("--progress", `${progress}%`);
     };
   
