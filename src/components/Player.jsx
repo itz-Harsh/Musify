@@ -48,7 +48,7 @@ const Player = () => {
   const inputRef = useRef();
 
   useEffect(() => {
-    
+    if (!currentSong) return;
     
     const audio = currentSong?.audio;
     setCurrentTime(audio.currentTime); 
@@ -219,7 +219,7 @@ const Player = () => {
                       : 0
                   }
                   style={{
-                    background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong.duration) * 100}%, #252525 ${currentTime / Number(currentSong.duration) * 100}%)`,
+                    background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong?.duration) * 100}%, #252525 ${currentTime / Number(currentSong?.duration) * 100}%)`,
                   }}
                   onChange={handleProgressChange}
                   className=" h-[3px] flex w-full text-emerald-500 range  "
@@ -427,7 +427,7 @@ const Player = () => {
                               : 0
                           }
                           style={{
-                            background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong.duration) * 100}%, #252525 ${currentTime / Number(currentSong.duration) * 100}%)`,
+                            background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong?.duration) * 100}%, #252525 ${currentTime / Number(currentSong?.duration) * 100}%)`,
                           }}
                           onChange={handleProgressChange}
                           className=" flex translate-y-[1px]  range   "
