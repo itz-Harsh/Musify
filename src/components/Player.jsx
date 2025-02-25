@@ -187,6 +187,48 @@ const Player = () => {
     setLikedSongs(updatedLikedSongs);
     localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
   };
+    useEffect(() => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentSong?.name || "Unknown Title",
+        artist: he.decode(artistNames),
+        album: "Musify",
+        artwork: [
+          { src: currentSong?.image || "", sizes: "96x96", type: "image/png" },
+          { src: currentSong?.image || "", sizes: "128x128", type: "image/png" },
+          { src: currentSong?.image || "", sizes: "192x192", type: "image/png" },
+          { src: currentSong?.image || "", sizes: "256x256", type: "image/png" },
+          { src: currentSong?.image || "", sizes: "384x384", type: "image/png" },
+          { src: currentSong?.image || "", sizes: "512x512", type: "image/png" },
+        ],
+      });
+
+      navigator.mediaSession.setActionHandler("play", () => {
+        playMusic(
+          currentSong?.audio.currentSrc,
+          currentSong?.name,
+          currentSong?.duration,
+          currentSong?.image,
+          currentSong?.id,
+          song
+        );
+      });
+
+      navigator.mediaSession.setActionHandler("pause", () => {
+        playMusic(
+          currentSong?.audio.currentSrc,
+          currentSong?.name,
+          currentSong?.duration,
+          currentSong?.image,
+          currentSong?.id,
+          song
+        );
+      });
+
+      navigator.mediaSession.setActionHandler("previoustrack", prevSong);
+      navigator.mediaSession.setActionHandler("nexttrack", nextSong);
+    }
+  }, [currentSong, artistNames, playMusic, prevSong, nextSong,song]);
 
   return (
     <div
