@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { getSearchData, getSongbyQuery } from "../../fetch";
 import MusicContext from "../context/MusicContext";
-
+import he from "he";
 const Navbar = () => {
   const { playMusic } = useContext(MusicContext); // Ensure correct usage
   const [query, setQuery] = useState([]); // State to handle the search query
@@ -17,7 +17,7 @@ const Navbar = () => {
     try {
       const result = await getSearchData(query);
       const song = await getSongbyQuery(query, 5);
-
+      console.log(song);
       const allSuggestions = [];
       if (song?.data?.results) {
         allSuggestions.push(
@@ -172,8 +172,8 @@ const Navbar = () => {
               id="search"
               placeholder="Search for Songs, Artists, and Playlists"
               className="flex-grow h-11 p-1 pl-5 rounded-l-lg  bg-transparent focus:outline-none text-white"
-              value={query} // Controlled input bound to query state
-              onChange={handleSearchInputChange} // Update query state on input change
+              value={query} 
+              onChange={handleSearchInputChange} 
               autoComplete="off"
               autoCorrect="off"
             />
@@ -186,7 +186,7 @@ const Navbar = () => {
           </div>
 
           
-          {/* Suggestions Dropdown */}
+        
           <div
             className={`suggestionSection lg:shadow-xl  lg:shadow-black absolute scroll-hide top-[2.74rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg  w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
               suggestions.length > 0
@@ -207,7 +207,7 @@ const Navbar = () => {
                   className="h-[3rem] w-[3rem] rounded"
                 />
                 <div className="flex flex-col overflow-hidden">
-                  <span className="text-sm truncate ">{suggestion.name}</span>
+                  <span className="text-sm truncate ">{he.decode(suggestion.name)}</span>
                   <span className="text-gray-500 text-xs">
                     {suggestion.type}
                   </span>

@@ -40,8 +40,8 @@ export const getSearchData = async (e) => {
 
 
 export const getSongbyQuery = async (e , limit) => {
-    try{
-        const song = await fetch(`${api_url}search/songs?query=${e}&${limit}`);
+    try{ 
+        const song = await fetch(`${api_url}search/songs?query=${e}&limit=${limit}`);
         const data = await song.json();
         if(!song.ok) {
             throw new Error(data.message || 'Failed to Fetch Artist Data');
@@ -55,7 +55,7 @@ export const getSongbyQuery = async (e , limit) => {
 };
 export const getArtistbyQuery = async (e , limit) => {
     try{
-        const song = await fetch(`${api_url}search/artists?query=${e}&${limit}`);
+        const song = await fetch(`${api_url}search/artists?query=${e}&limit=${limit}`);
         const data = await song.json();
         if(!song.ok) {
             throw new Error(data.message || 'Failed to Fetch Artist Data');

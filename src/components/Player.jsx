@@ -187,10 +187,11 @@ const Player = () => {
     setLikedSongs(updatedLikedSongs);
     localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
   };
+    const name = currentSong?.name || "Unknown Title";
     useEffect(() => {
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: currentSong?.name || "Unknown Title",
+        title: he.decode(name),
         artist: he.decode(artistNames),
         album: "Musify",
         artwork: [
