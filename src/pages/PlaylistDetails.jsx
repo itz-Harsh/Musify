@@ -113,7 +113,7 @@ const PlaylistDetails = () => {
     <>
       <Navbar />
 
-      <div className="flex flex-col mt-[11rem] lg:mt-[6rem] text-zinc-300">
+      <div className="flex flex-col mt-[11rem] lg:mt-[6rem] ">
         {/* Playlist Header */}
         <div className="flex items-center lg:pl-[2rem] lg:flex-row flex-col gap-[1rem] lg:gap-[2rem]">
           <img
@@ -122,7 +122,7 @@ const PlaylistDetails = () => {
             className="w-[10rem] lg:w-[15rem] rounded object-cover DetailImg"
           />
           <div className="flex flex-col gap-1 items-center">
-            <h1 className="text-2xl lg:text-3xl font-bold text-white">
+            <h1 className="text-2xl lg:text-3xl font-bold ">
               {playlistData.name}
             </h1>
             <p className="text-sm lg:text-lg font-semibold">
@@ -132,21 +132,21 @@ const PlaylistDetails = () => {
               Total Duration : {formatDuration(totalDuration)}
             </p>
             <div className="flex lg:mt-4 gap-4">
-              <span className=" hidden lg:flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#303030] rounded-full cursor-pointer ">
+              <span className=" hidden lg:flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#8f8f8f6e]  rounded-full cursor-pointer ">
                 <FaPlay
-                  className=" text-2xl text-white active:scale-90"
+                  className=" text-xl icon active:scale-90"
                   onClick={playFirstSong}
                 />
               </span>
               <button
               onClick={toggleLikePlaylist}
               title="Like Playlist"
-              className="hidden mb-[1.4rem] border-[1px] border-[#2c2c2c] h-[3rem] w-[3rem] lg:flex justify-center items-center rounded-full "
+              className="hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] lg:flex justify-center items-center rounded-full "
             >
               {likedPlaylists.some((p) => p.id === playlistData.id) ? (
                 <FaHeart className="text-red-500 text-2xl" />
               ) : (
-                <FaRegHeart className="text-[#bdbdbd] text-2xl" />
+                <FaRegHeart className="icon text-2xl" />
               )}
             </button>
             </div>
@@ -155,17 +155,17 @@ const PlaylistDetails = () => {
             <button
               onClick={toggleLikePlaylist}
               title="Like Playlist"
-              className="lg:hidden mb-[1.4rem] border-[1px] border-[#2c2c2c] h-[3rem] w-[3rem] flex justify-center items-center rounded-full "
+              className="lg:hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] flex justify-center items-center rounded-full "
             >
               {likedPlaylists.some((p) => p.id === playlistData.id) ? (
                 <FaHeart className="text-red-500 text-2xl" />
               ) : (
-                <FaRegHeart className="text-[#bdbdbd] text-2xl" />
+                <FaRegHeart className="icon text-2xl" />
               )}
             </button>
-            <span className=" lg:hidden flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#303030] rounded-full cursor-pointer ">
+            <span className=" lg:hidden flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#8f8f8f6e] rounded-full cursor-pointer ">
               <FaPlay
-                className=" text-2xl text-white active:scale-90"
+                className=" text-xl icon active:scale-90"
                 onClick={playFirstSong}
               />
             </span>
@@ -173,7 +173,7 @@ const PlaylistDetails = () => {
         </div>
 
         <div>
-          <h2 className="lg:mt-8   mt-2 mb-2 ml-2 text-2xl font-semibold text-white">
+          <h2 className="lg:mt-8   mt-2 mb-2 ml-2 text-2xl font-semibold ">
             Top Songs
           </h2>
           <div className="flex flex-col">

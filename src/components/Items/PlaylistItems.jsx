@@ -4,13 +4,13 @@ const PlaylistItems = ({name , image , id}) => {
 
 
   // Ensure image is an array with at least 3 elements, or provide a fallback image
-  const imageUrl = image[2]?.url;
+  const imageUrl = image[2]?.url || image;
 
   return (
     <Link
       to={`/playlists/${id}`}
-      className="w-[7rem]   flex flex-col justify-center items-center gap-3 rounded-lg"
-    >
+      className="w-[7.9rem]   flex flex-col justify-center items-center gap-3 rounded-lg"
+    > 
       <img
         src={imageUrl || "/Unknown.png"}
         alt={name}

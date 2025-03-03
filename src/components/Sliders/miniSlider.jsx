@@ -21,7 +21,7 @@ const MiniSlider = ({ albums }) => {
     <div className="flex justify-center items-center gap-3">
       {/* Left Arrow */}
       <MdOutlineKeyboardArrowLeft
-        className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b] hidden lg:block hover:text-white"
+        className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] arrow-btn hidden lg:block "
         onClick={scrollLeft}
       />
 
@@ -40,7 +40,7 @@ const MiniSlider = ({ albums }) => {
 
       {/* Right Arrow */}
       <MdOutlineKeyboardArrowRight
-        className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b] hidden lg:block hover:text-white"
+        className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] arrow-btn hidden lg:block "
         onClick={scrollRight}
       />
     </div>

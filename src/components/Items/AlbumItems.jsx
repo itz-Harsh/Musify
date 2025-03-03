@@ -8,7 +8,7 @@ const AlbumItems = ({ name, artists, id, image }) => {
     : "";
 
   // Ensure image is an array with at least 3 elements, or provide a fallback image
-  const imageUrl = image[2].url;
+  const imageUrl = image[2].url || image;
 
   return (
     <Link

@@ -87,7 +87,7 @@ const ArtistsDetails = () => {
     <>
       <Navbar />
       <div className=" mb-10">
-        <div className="mt-[8rem] lg:mt-[6rem]  flex flex-col justify-center gap-[1rem] text-zinc-300   pt-5 ">
+        <div className="mt-[8rem] lg:mt-[6rem]  flex flex-col justify-center gap-[1rem]  pt-5 ">
           <div className="pl-[2rem] flex gap-5 items-center">
             <img
               src={artistImage}
@@ -96,7 +96,7 @@ const ArtistsDetails = () => {
             />
 
             <div className="flex flex-col gap-2 ">
-              <h1 className="text-2xl font-bold text-white mt-5 flex ">
+              <h1 className="text-2xl font-bold mt-5 flex ">
                 {artistData.name}
                 {artistData.isVerified && (
                   <div className="flex ">
@@ -132,7 +132,7 @@ const ArtistsDetails = () => {
           <div className="gap-4 flex flex-col">
             {details.data.similarArtists.length > 0 && (
               <>
-                <h2 className=" lg:font-bold text-xl lg:text-2xl font-semibold text-zinc-200 pl-[1.5rem] lg:pl-[3rem] pb-[1rem] ">
+                <h2 className=" lg:font-bold text-xl lg:text-2xl font-semibold pl-[1.5rem] lg:pl-[3rem] pb-[1rem] ">
                   Similar Artists
                 </h2>
                 <div className="grid grid-flow-col lg:w-max pr-10  gap-4 pl-[1.2rem] lg:pl-[3rem] overflow-x-scroll scroll-hide ">
@@ -147,13 +147,13 @@ const ArtistsDetails = () => {
             )}
           </div>
           <div>
-            <h2 className=" m-4 lg:font-bold text-xl lg:text-2xl font-semibold text-zinc-200 w-[90%] lg:ml-[3rem]">
+            <h2 className=" m-4 lg:font-bold text-xl lg:text-2xl font-semibold  w-[90%] lg:ml-[3rem]">
               Top Albums
             </h2>
             <MiniSlider albums={artistData.topAlbums} />
           </div>
           <div>
-            <h2 className=" m-4 text-xl lg:font-bold lg:text-2xl font-semibold text-zinc-200 w-[90%] lg:ml-[3rem]">
+            <h2 className=" m-4 text-xl lg:font-bold lg:text-2xl font-semibold  w-[90%] lg:ml-[3rem]">
               Singles
             </h2>
             <AlbumSlider albums={details.data.singles} />

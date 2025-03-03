@@ -114,7 +114,7 @@ const AlbumDetail = () => {
     <>
       <Navbar />
 
-      <div className="flex flex-col   gap-[2rem] lg:gap-[2rem] text-zinc-300 pt-[10rem] lg:pt-[6rem]   ">
+      <div className="flex flex-col   gap-[2rem] lg:gap-[2rem]  pt-[10rem] lg:pt-[6rem]   ">
         <div className="flex items-center pl-[2rem] ">
           <img
             src={details.data.image[2].url}
@@ -124,9 +124,9 @@ const AlbumDetail = () => {
 
           <div className="flex flex-col pl-[2rem]">
             <div>
-              <h1 className="text-xl lg:text-2xl font-medium lg:font-semibold text-white">
+              <h2 className="text-xl lg:text-2xl font-medium lg:font-semibold ">
                 {details.data.name}
-              </h1>
+              </h2>
               <pre className="font-sans font-semibold text-sm lg:text-lg">
                 {details.data.songCount} Songs by{" "}
                 <Link to={`/artists/${artistId}`} className="hover:underline">
@@ -137,12 +137,12 @@ const AlbumDetail = () => {
             <button
               onClick={toggleLikeAlbum}
               title="Like Album"
-              className=" border-[1px] mt-3 border-[#2c2c2c] h-[3rem] w-[3rem] flex justify-center items-center rounded-full  "
+              className=" border-[1px] mt-3 border-[#8f8f8f6e] h-[3rem] w-[3rem] flex justify-center items-center rounded-full  "
             >
               {likedAlbums.some((album) => album.id === albumdata.id) ? (
                 <FaHeart className="text-red-500 text-2xl" />
               ) : (
-                <FaRegHeart className="text-[#b6b6b6] text-2xl" />
+                <FaRegHeart className="text-2xl icon" />
               )}
             </button>
           </div>
@@ -158,13 +158,13 @@ const AlbumDetail = () => {
 
         {suggetions.length >= 0 && (
           <div className="flex flex-col justify-center items-center w-full mb-[5rem]">
-            <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold text-zinc-200 pl-3 sm:pl-[3rem] w-full">
+            <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold  pl-3 sm:pl-[3rem] w-full">
               You Might Like
             </h2>
             <div className="flex justify-center items-center gap-3 w-full">
               {/* Left Arrow */}
               <MdOutlineKeyboardArrowLeft
-                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] arrow-btn  hidden lg:block  "
                 onClick={() => scrollLeft(scrollRef)}
               />
               <div
@@ -177,7 +177,7 @@ const AlbumDetail = () => {
               </div>
               {/* Right Arrow */}
               <MdOutlineKeyboardArrowRight
-                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] arrow-btn hidden lg:block  "
                 onClick={() => scrollRight(scrollRef)}
               />
             </div>

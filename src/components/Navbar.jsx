@@ -3,6 +3,8 @@ import { useState, useContext } from "react";
 import { getSearchData, getSongbyQuery } from "../../fetch";
 import MusicContext from "../context/MusicContext";
 import he from "he";
+import Theme from "../../theme";
+import { IoSearchOutline } from "react-icons/io5";
 const Navbar = () => {
   const { playMusic } = useContext(MusicContext); // Ensure correct usage
   const [query, setQuery] = useState([]); // State to handle the search query
@@ -124,29 +126,26 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar flex flex-col lg:gap-10 lg:flex-row lg:items-center top-0 z-20 fixed w-full pl-1 pr-1 lg:pl-2 lg:pr-2   lg:h-[4.5em]">
+    <nav className="navbar flex flex-col lg:gap-10 lg:flex-row lg:items-center top-0 z-20 fixed w-full pl-1 pr-1 lg:px-2   lg:h-[4.5em]">
       {/* Logo */}
       <div className="flex  items-center gap-[4rem] mb-2 lg:mb-0 w-fit">
-        <div className="flex items-center gap-[4rem]  ">
+        <div className="flex items-center lg:gap-[4rem] gap-5  ">
           <Link to="/" className="flex items-center ">
-            <img
-              src="/White_musify.svg"
-              alt="Musify"
-              className="h-[3.6rem] lg:h-[4rem]"
-            />
+            <span className="bg"></span>
             <div className="">
-              <span className="Musi text-zinc-300 font-extrabold text-2xl lg:text-3xl">
+              <span className="Musi text-zinc-600 font-extrabold text-2xl lg:text-3xl">
                 Musi
               </span>
-              <span className="fy text-zinc-600 font-extrabold text-2xl lg:text-3xl">
+              <span className="fy text-zinc-200 font-extrabold text-2xl lg:text-3xl">
                 fy
               </span>
             </div>
           </Link>
 
-          <div className="text-xl pl-6 w-max flex self-center lg:hidden text-[#cecece]  font-semibold ">
+          <div className="text-xl pl-6 w-max flex self-center lg:hidden font-semibold ">
             {getGreeting()}
           </div>
+          <Theme />
         </div>
         
         <div className="lg:flex gap-[2rem] w-[15rem] grey hidden font-semibold">
@@ -159,7 +158,7 @@ const Navbar = () => {
       </div>
       </div>
       
-
+      
       <div className="flex-grow  ">
         <form
           onSubmit={handleSearchSubmit}
@@ -171,7 +170,7 @@ const Navbar = () => {
               name="search"
               id="search"
               placeholder="Search for Songs, Artists, and Playlists"
-              className="flex-grow h-11 p-1 pl-5 rounded-l-lg  bg-transparent focus:outline-none text-white"
+              className="flex-grow h-11 p-1 pl-5 rounded-l-lg  bg-transparent focus:outline-none "
               value={query} 
               onChange={handleSearchInputChange} 
               autoComplete="off"
@@ -179,16 +178,16 @@ const Navbar = () => {
             />
             <button
               type="submit"
-              className="bg-white h-11 w-11 rounded-r-lg flex items-center justify-center"
+              className="search-btn h-11 w-11 rounded-r-lg flex items-center justify-center"
             >
-              <img src="/search.svg" alt="search" className="h-6 w-6" />
+              <IoSearchOutline className="text-2xl search" />
             </button>
           </div>
 
           
         
           <div
-            className={`suggestionSection lg:shadow-xl  lg:shadow-black absolute scroll-hide top-[2.74rem] lg:top-[4.5rem] left-0 lg:left-auto bg-[#1B1B1B] text-white p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg  w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
+            className={`suggestionSection lg:shadow-xl   absolute scroll-hide top-[2.74rem] lg:top-[4.5rem] left-0 lg:left-auto   p-3 grid grid-cols-2 lg:grid-cols-3 gap-3 rounded-lg  w-full max-h-[20rem] overflow-auto transition-transform duration-200 ${
               suggestions.length > 0
                 ? "visible opacity-100 left-1 "
                 : "invisible opacity-0"
@@ -198,7 +197,7 @@ const Navbar = () => {
               
               <div
                 key={index}
-                className="flex items-center gap-3 bg-zinc-800 p-3 rounded cursor-pointer hover:bg-[#313131]"
+                className="flex items-center gap-3  p-3 rounded cursor-pointer hoover "
                 onClick={() => handleSuggestionClick(suggestion)}
               >
                 <img
@@ -208,7 +207,7 @@ const Navbar = () => {
                 />
                 <div className="flex flex-col overflow-hidden">
                   <span className="text-sm truncate ">{he.decode(suggestion.name)}</span>
-                  <span className="text-gray-500 text-xs">
+                  <span className=" text-xs">
                     {suggestion.type}
                   </span>
                 </div>

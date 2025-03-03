@@ -35,7 +35,7 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
       }
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className="overflow-clip h-[3.5rem] w-full song-item flex justify-between items-center p-2 border-b-[1px] border-zinc-800 song-info"
+      className="overflow-clip h-[3.5rem] w-full song-item flex justify-between items-center p-2 song-info"
     >
       <div className="relative cursor-pointer">
         <img
@@ -44,26 +44,26 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
           className="w-[5rem] object-cover transition-all duration-700"
         />
         {hovering && (
-          <GoPlay className="  transition-all duration-700 absolute inset-0 hidden lg:flex items-center justify-center w-[2.35rem] h-[2.35rem] text-zinc-400 opacity-95 backdrop-brightness-[0.3]" />
+          <GoPlay className="  transition-all duration-700 absolute inset-0 hidden lg:flex items-center justify-center w-[2.35rem] h-[2.35rem]  opacity-65 backdrop-brightness-[0.6] icon " />
         )}
       </div>
 
       <div className="flex w-full pl-5 ">
         <h3
           autoCorrect=""
-          className={` text-[0.75rem] lg:text-[0.875rem] font-medium text-white `}
+          className={` overflow-clip text-[0.75rem] lg:text-[0.875rem] h-[1.3rem] font-medium  `}
         >
           {decodeName(name)}
         </h3>
       </div>
       <div className="flex w-full">
-        <p className=" text-[0.60rem] lg:text-[0.75rem] h-[2rem] flex items-center w-[11rem] overflow-clip lg:w-auto text-gray-400">
+        <p className=" text-[0.60rem] lg:text-[0.75rem] h-[1rem] mr-3 overflow-clip lg:w-auto ">
           {he.decode(artistNames)}
         </p>
       </div>
 
       <div className="song-duration mr-2">
-        <span className=" text-[0.60rem] lg:text-[0.75rem] text-gray-300">
+        <span className=" text-[0.60rem] lg:text-[0.75rem] ">
           {convertTime(duration)}
         </span>
       </div>

@@ -49,23 +49,23 @@ const Player = () => {
 
   useEffect(() => {
     if (!currentSong) return;
-    
+
     const audio = currentSong?.audio;
-    setCurrentTime(audio.currentTime); 
-    
+    setCurrentTime(audio.currentTime);
+
     const updateProgress = () => {
       setCurrentTime(audio.currentTime);
-      const progress = (audio.currentTime / Number(currentSong?.duration)) * 100;
+      const progress =
+        (audio.currentTime / Number(currentSong?.duration)) * 100;
       inputRef.current.style.setProperty("--progress", `${progress}%`);
     };
-  
+
     audio.addEventListener("timeupdate", updateProgress);
-  
+
     return () => {
       audio.removeEventListener("timeupdate", updateProgress);
     };
-  }, [currentSong, isPlaying]); 
-  
+  }, [currentSong, isPlaying]);
 
   const scrollRef = useRef(null);
   const scrollLeft = (scrollRef) => {
@@ -108,7 +108,7 @@ const Player = () => {
       const audioElement = currentSong.audio;
 
       audioElement.volume = volume / 100;
-      
+
       const handleTimeUpdate = () => {
         setCurrentTime(audioElement.currentTime); // Update currentTime state
         const duration = Number(currentSong.duration);
@@ -187,8 +187,8 @@ const Player = () => {
     setLikedSongs(updatedLikedSongs);
     localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
   };
-    const name = currentSong?.name || "Unknown Title";
-    useEffect(() => {
+  const name = currentSong?.name || "Unknown Title";
+  useEffect(() => {
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: he.decode(name),
@@ -196,11 +196,31 @@ const Player = () => {
         album: "Musify",
         artwork: [
           { src: currentSong?.image || "", sizes: "96x96", type: "image/png" },
-          { src: currentSong?.image || "", sizes: "128x128", type: "image/png" },
-          { src: currentSong?.image || "", sizes: "192x192", type: "image/png" },
-          { src: currentSong?.image || "", sizes: "256x256", type: "image/png" },
-          { src: currentSong?.image || "", sizes: "384x384", type: "image/png" },
-          { src: currentSong?.image || "", sizes: "512x512", type: "image/png" },
+          {
+            src: currentSong?.image || "",
+            sizes: "128x128",
+            type: "image/png",
+          },
+          {
+            src: currentSong?.image || "",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: currentSong?.image || "",
+            sizes: "256x256",
+            type: "image/png",
+          },
+          {
+            src: currentSong?.image || "",
+            sizes: "384x384",
+            type: "image/png",
+          },
+          {
+            src: currentSong?.image || "",
+            sizes: "512x512",
+            type: "image/png",
+          },
         ],
       });
 
@@ -229,8 +249,8 @@ const Player = () => {
       navigator.mediaSession.setActionHandler("previoustrack", prevSong);
       navigator.mediaSession.setActionHandler("nexttrack", nextSong);
     }
-  }, [currentSong, artistNames, playMusic, prevSong, nextSong,song]);
-
+  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song]);
+  const theme = document.documentElement.getAttribute("data-theme");
   return (
     <div
       className={` ${isVisible ? "lg:flex " : "hidden"}
@@ -247,9 +267,7 @@ const Player = () => {
           {!isMaximized && (
             <>
               <form className="flex items-center w-full mb-4 gap-3 h-[0px]">
-                <span className="text-white text-xs ">
-                  {formatTime(currentTime)}{" "}
-                </span>
+                <span className=" text-xs ">{formatTime(currentTime)} </span>
                 <input
                   type="range"
                   min={0}
@@ -262,12 +280,18 @@ const Player = () => {
                       : 0
                   }
                   style={{
-                    background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong?.duration) * 100}%, #252525 ${currentTime / Number(currentSong?.duration) * 100}%)`,
+                    background: `linear-gradient(to right, ${
+                      theme === "dark" ? "#ddd" : "#09090B"
+                    } ${
+                      (currentTime / Number(currentSong?.duration)) * 100
+                    }%, ${theme === "dark" ? "#252525" : "#dddddd"} ${
+                      (currentTime / Number(currentSong?.duration)) * 100
+                    }%)`,
                   }}
                   onChange={handleProgressChange}
-                  className=" h-[3px] flex w-full text-emerald-500 range  "
+                  className="range"
                 />
-                <span className="text-white text-xs">
+                <span className=" text-xs">
                   {formatTime(currentSong?.duration || 0)}
                 </span>
               </form>
@@ -291,7 +315,7 @@ const Player = () => {
                             : "Empty"}
                         </span>
 
-                        <span className="text-xs h-1 text-gray-400">
+                        <span className="text-xs h-1 ">
                           {he.decode(artistNames)}
                         </span>
                       </div>
@@ -300,7 +324,7 @@ const Player = () => {
                   <div className="flex flex-col lg:items-center gap-5   p-2">
                     <div className="flex gap-5 justify-end lg:justify-center items-center">
                       <BiRepeat
-                        className={`text-2xl hidden lg:block cursor-pointer ${
+                        className={`icon text-2xl hidden lg:block cursor-pointer ${
                           repeatMode === "one"
                             ? "text-[#f84d5e]"
                             : repeatMode === "all"
@@ -317,13 +341,13 @@ const Player = () => {
                         }`}
                       />
                       <IoMdSkipBackward
-                        className=" hidden lg:block hover:scale-110 text-2xl cursor-pointer"
+                        className="icon hidden lg:block hover:scale-110 text-2xl cursor-pointer"
                         onClick={prevSong}
                       />
-                      <div className="  bg-[#292929] active:bg-[#1d1d1d] rounded-full p-2">
+                      <div className=" rounded-full p-2">
                         {isPlaying ? (
                           <FaPause
-                            className="  p-[0.1rem] text-zinc-200 hover:scale-110 text-xl lg:text-2xl cursor-pointer"
+                            className="  p-[0.1rem] icon hover:scale-110 text-xl lg:text-2xl cursor-pointer"
                             onClick={() =>
                               playMusic(
                                 currentSong?.audio.currentSrc,
@@ -337,7 +361,7 @@ const Player = () => {
                           />
                         ) : (
                           <FaPlay
-                            className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-xl lg:text-2xl cursor-pointer"
+                            className=" icon p-[0.1rem] hover:scale-110 text-xl lg:text-2xl cursor-pointer"
                             onClick={() =>
                               playMusic(
                                 currentSong?.audio.currentSrc,
@@ -352,11 +376,11 @@ const Player = () => {
                         )}
                       </div>
                       <IoMdSkipForward
-                        className=" hidden lg:block hover:scale-110 text-2xl cursor-pointer"
+                        className="icon hidden lg:block hover:scale-110 text-2xl cursor-pointer"
                         onClick={nextSong}
                       />
                       <PiShuffleBold
-                        className={` hidden lg:block hover:scale-110 text-2xl cursor-pointer ${
+                        className={`icon hidden lg:block hover:scale-110 text-2xl cursor-pointer ${
                           shuffle ? "text-[#fd3a4e]" : ""
                         }`}
                         onClick={toggleShuffle}
@@ -375,7 +399,7 @@ const Player = () => {
                       )}
                     </button>
                     <MdDownload
-                      className="hover:text-[#fd3a4e]  text-2xl cursor-pointer"
+                      className="hover:text-[#fd3a4e] icon  text-2xl cursor-pointer"
                       onClick={downloadSong}
                       title="Download Song"
                     />
@@ -388,14 +412,21 @@ const Player = () => {
                         step={1}
                         value={volume}
                         onChange={handleVolumeChange}
-                        className="volume bg-gray-300 rounded-lg appearance-none cursor-pointer w-[80px]"
+                        className="volume icon rounded-lg appearance-none cursor-pointer w-[80px] h-1"
+                        style={{
+                          background: `linear-gradient(to right, ${
+                            theme === "dark" ? "#ddd" : "#09090B"
+                          } ${volume}%, ${
+                            theme === "dark" ? "#252525" : "#dddddd"
+                          } ${volume}%)`,
+                        }}
                         title="Volume"
                       />
                     </div>
                     <div className="flex">
                       <CiMaximize1
                         title="Maximize"
-                        className=" p-1 text-white hover:text-[#fd3a4e] text-2xl rounded hover:bg-zinc-800 cursor-pointer"
+                        className="icon p-1 text-2xl rounded icon cursor-pointer"
                         onClick={handleMaximized}
                       />
                     </div>
@@ -409,7 +440,7 @@ const Player = () => {
               <div className="flex w-full bottom-0 flex-col p-2 pt-2 lg:h-[40rem] h-[45rem] gap-4 scroll-hide overflow-y-scroll rounded-tl-2xl rounded-tr-2xl Player scroll-smooth">
                 <div className=" flex w-[97%] justify-end ">
                   <IoIosClose
-                    className="  text-white text-[3rem] cursor-pointer"
+                    className="  icon text-[3rem] cursor-pointer"
                     onClick={handleMaximized}
                   />
                 </div>
@@ -418,7 +449,7 @@ const Player = () => {
                     <div className=" flex  justify-center items-center lg:pl-[2.5rem]">
                       <img
                         src={currentSong?.image || " "}
-                        className=" h-[22rem] lg:h-[17rem]  rounded-lg object-cover shadow-2xl shadow-zinc-600"
+                        className=" h-[22rem] lg:h-[17rem]  rounded-lg object-cover shadow-2xl profile"
                       />
                     </div>
 
@@ -429,7 +460,7 @@ const Player = () => {
                             ? he.decode(currentSong.name)
                             : "Empty"}
                         </span>
-                        <span className="overflow-hidden  flex  w-[98%] mb-1  text-base font-medium text-zinc-400 justify-between h-[1.84rem]      ">
+                        <span className="overflow-hidden  flex  w-[98%] mb-1  text-base font-medium  justify-between h-[1.84rem]      ">
                           {he.decode(artistNames)}
                           <span className="flex gap-3 justify-center place-items-center ">
                             <button
@@ -442,11 +473,11 @@ const Player = () => {
                               ) ? (
                                 <FaHeart className="text-red-500 text-2xl" />
                               ) : (
-                                <FaRegHeart className="text-white text-2xl hover:text-red-500" />
+                                <FaRegHeart className="icon text-2xl hover:text-red-500" />
                               )}
                             </button>
                             <MdDownload
-                              className="hover:text-[#fd3a4e]  flex self-center text-[1.8rem] cursor-pointer text-white"
+                              className="hover:text-[#fd3a4e]  flex self-center text-[1.8rem] cursor-pointer icon"
                               onClick={downloadSong}
                               title="Download Song"
                             />
@@ -454,7 +485,7 @@ const Player = () => {
                         </span>
                       </div>
                       <form className="flex items-center w-full gap-3 h-[0px]">
-                        <span className="lg:hidden block  text-white text-xs ">
+                        <span className="lg:hidden block  text-xs ">
                           {formatTime(currentTime)}{" "}
                         </span>
                         <input
@@ -470,20 +501,28 @@ const Player = () => {
                               : 0
                           }
                           style={{
-                            background: `linear-gradient(to right, #dfdfdf ${currentTime / Number(currentSong?.duration) * 100}%, #252525 ${currentTime / Number(currentSong?.duration) * 100}%)`,
+                            background: `linear-gradient(to right, ${
+                              theme === "dark" ? "#ddd" : "#252525"
+                            } ${
+                              (currentTime / Number(currentSong?.duration)) *
+                              100
+                            }%, ${theme === "dark" ? "#252525" : "#dddddd"} ${
+                              (currentTime / Number(currentSong?.duration)) *
+                              100
+                            }%)`,
                           }}
                           onChange={handleProgressChange}
-                          className=" flex translate-y-[1px]  range   "
+                          className="range"
                         />
-                        <span className="lg:hidden block text-white text-xs">
+                        <span className="lg:hidden block  text-xs">
                           {formatTime(currentSong?.duration || 0)}
                         </span>
                       </form>
                       <div className="flex flex-col items-center">
                         <div className="flex items-center lg:gap-12 lg:w-[50%] ">
-                          <div className="flex  items-center gap-5 bg-zinc800 p-8 ">
+                          <div className="flex  items-center gap-5 p-8 ">
                             <BiRepeat
-                              className={`text-3xl cursor-pointer ${
+                              className={`icon text-3xl cursor-pointer ${
                                 repeatMode === "one"
                                   ? "text-[#f84d5e]"
                                   : repeatMode === "all"
@@ -500,13 +539,13 @@ const Player = () => {
                               }`}
                             />
                             <IoMdSkipBackward
-                              className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
+                              className="icon hover:scale-110 text-3xl cursor-pointer"
                               onClick={prevSong}
                             />
                             <div>
                               {isPlaying ? (
                                 <FaPause
-                                  className="p-[0.1rem] text-zinc-200 hover:scale-110 text-3xl cursor-pointer"
+                                  className="p-[0.1rem] icon hover:scale-110 text-3xl cursor-pointer"
                                   onClick={() =>
                                     playMusic(
                                       currentSong?.audio.currentSrc,
@@ -520,7 +559,7 @@ const Player = () => {
                                 />
                               ) : (
                                 <FaPlay
-                                  className=" text-zinc-200 p-[0.1rem] hover:scale-110 text-3xl cursor-pointer"
+                                  className=" icon p-[0.1rem] hover:scale-110 text-3xl cursor-pointer"
                                   onClick={() =>
                                     playMusic(
                                       currentSong?.audio.currentSrc,
@@ -535,11 +574,11 @@ const Player = () => {
                               )}
                             </div>
                             <IoMdSkipForward
-                              className="hover:text-white hover:scale-110 text-3xl cursor-pointer"
+                              className="icon hover:scale-110 text-3xl cursor-pointer"
                               onClick={nextSong}
                             />
                             <PiShuffleBold
-                              className={` hover:scale-110 text-3xl cursor-pointer ${
+                              className={` hover:scale-110 text-3xl cursor-pointer icon ${
                                 shuffle ? "text-[#fd3a4e]" : ""
                               }`}
                               onClick={toggleShuffle}
@@ -554,13 +593,13 @@ const Player = () => {
                       <h2>
                         {suggetions.length >= 0 && (
                           <div className="flex flex-col justify-center items-center w-full ">
-                            <h2 className="pr-1 m-4 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[2.5rem] lg:ml-[5.5rem] ">
+                            <h2 className="pr-1 m-4 text-xl lg:text-2xl font-semibold w-full ml-[2.5rem] lg:ml-[5.5rem] ">
                               You Might Like
                             </h2>
                             <div className="flex justify-center items-center gap-3 w-full">
                               {/* Left Arrow */}
                               <MdOutlineKeyboardArrowLeft
-                                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+                                className="text-3xl hover:scale-125 cursor-pointer h-[9rem]   hidden lg:block arrow-btn"
                                 onClick={() => scrollLeft(scrollRef)}
                               />
                               <div
@@ -573,7 +612,7 @@ const Player = () => {
                               </div>
                               {/* Right Arrow */}
                               <MdOutlineKeyboardArrowRight
-                                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] text-[#1b1b1b]  hidden lg:block hover:text-white"
+                                className="text-3xl hover:scale-125  cursor-pointer h-[9rem] hidden lg:block arrow-btn"
                                 onClick={() => scrollRight(scrollRef)}
                               />
                             </div>
@@ -582,7 +621,7 @@ const Player = () => {
                       </h2>
                     </div>
                     <div className="flex flex-col pt-3 ">
-                      <h2 className="pr-1 text-xl lg:text-2xl font-semibold text-zinc-200 w-full ml-[2rem] lg:ml-[3.5rem] ">
+                      <h2 className="pr-1 text-xl lg:text-2xl font-semibold  w-full ml-[2rem] lg:ml-[3.5rem] ">
                         Artists
                       </h2>
                       <div className="grid grid-flow-col lg:w-max w-full scroll-smooth gap-[1rem] lg:gap-[1.5rem] lg:pl-[2rem] pl-[1rem] overflow-x-scroll scroll-hide ">

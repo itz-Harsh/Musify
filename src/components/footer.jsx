@@ -3,13 +3,13 @@ import { Link } from "react-router";
 const Footer = () => {
   return (
     <>
-    <div className=" lg:h-[15rem] h-auto w-full flex gap-10 border-t-[1px] p-10 border-zinc-800">
+    <div className=" lg:h-[15rem] h-auto w-full flex gap-10  p-10 footer">
       <div className="ml-[4rem] flex flex-col ">
         <div className="flex items-center ml-[-10px]">
-        <img src="/White_musify.svg" alt="Musify" className=" h-[3rem] lg:h-[4rem] " />
+        <span className="bg"></span>
         <div className="gap-1">
-          <span className="Musi text-zinc-300 font-extrabold text-2xl lg:text-3xl ">Musi</span>
-          <span className="fy  text-zinc-600 font-extrabold text-2xl lg:text-3xl ">fy</span>
+          <span className="Musi  font-extrabold text-2xl lg:text-3xl ">Musi</span>
+          <span className="fy font-extrabold text-2xl lg:text-3xl ">fy</span>
         </div>
         </div>
 

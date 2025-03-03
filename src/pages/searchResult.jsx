@@ -73,21 +73,21 @@ const SearchResult = () => {
         <h2 className="text-2xl font-semibold ml-[1rem] lg:ml-[3rem] flex flex-col gap-3">
            Search Results for  "{query}" <p className="text-xl">Songs</p>
         </h2>
-        <div className="flex justify-center items-center gap-3 w-full">
+        <div className="flex justify-center items-center gap w-full">
           {/* Left Arrow */}
           <MdOutlineKeyboardArrowLeft
-            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-900 hidden lg:block hover:text-white"
+            className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem]   hidden lg:block arrow-btn"
             onClick={() => scrollLeft(scrollLeft)}
           />
           <div
             className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 w-full lg:w-max px-3 lg:px-1 scroll-smooth"
             ref={scrollRef}
           >
-            {songResults.length > 0 ? ( songResults.map((song) => <SongGrid key={song.id} {...song} />) ) : ( <div className="text-center col-span-full text-gray-500"> No results found. </div> )}
+            {songResults.length > 0 ? ( songResults.map((song) => <SongGrid key={song.id} {...song} />) ) : ( <div className="text-center col-span-full "> No results found. </div> )}
           </div>
           {/* Right Arrow */}
           <MdOutlineKeyboardArrowRight
-            className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer text-zinc-400 hidden lg:block hover:text-white"
+            className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem]   hidden lg:block arrow-btn"
             onClick={() => scrollRight(scrollRight)}
           />
         </div>
