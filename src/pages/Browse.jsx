@@ -74,7 +74,7 @@ function Browse() {
             className={`flex font-semibold  items-center cursor-pointer w-auto p-1 list-none border border-zinc-700  text-center px-5 text-base  rounded-3xl transition-all duration-75
               ${
                 selectedGenre === genre
-                  ? "search-btn arrow-btn " // Selected Button Style
+                  ? "search-btn arrow-btnn " // Selected Button Style
                   : " navigator "
               }`}
           >

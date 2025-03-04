@@ -76,7 +76,7 @@ body::-webkit-scrollbar{
 }
 
 /* Buttons & Icons */
-.arrow-btn {
+.arrow-btn , .arrow-btnn  {
   color: var(--bg-color);
 }
 
