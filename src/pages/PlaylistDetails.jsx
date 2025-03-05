@@ -28,7 +28,7 @@ const PlaylistDetails = () => {
         setDetails(data);
         setList(data.data.songs);
 
-        console.log(list);
+        // console.log(list);
       } catch (err) {
         setError("Failed to fetch playlist details. Please try again later.");
       } finally {

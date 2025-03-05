@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Player from "../components/Player";
 import Navigator from "../components/Navigator";
 import SongsList from "../components/SongsList";
-import MusicContext from "../context/MusicContext";
+
 import { FaHeart } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
@@ -23,7 +23,6 @@ const MyMusic = () => {
   const albumsScrollRef = useRef(null);
   const playlistsScrollRef = useRef(null);
 
-  // const { setSong } = useContext(MusicContext);
 
   useEffect(() => {
     const storedLikedSongs =
@@ -33,7 +32,7 @@ const MyMusic = () => {
     
     setLikedAlbums(JSON.parse(localStorage.getItem("likedAlbums")) || []);
     setLikedPlaylists(JSON.parse(localStorage.getItem("likedPlaylists")) || []);
-    console.log(likedPlaylists);
+    // console.log(likedPlaylists);
   }, []);
 
   const scrollLeft = (ref) => {

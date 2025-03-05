@@ -124,8 +124,7 @@ export const fetchAlbumByID = async (ID) => {
 export const fetchArtistByID = async (ID) => { 
     try {
         const response = await fetch(`${api_url}artists?id=${ID}`);
-        const text = await response.text();  // Read raw text first
-        console.log("Raw API Response:", text); // Debugging
+        const text = await response.text(); 
 
         // Ensure it's JSON before parsing
         const data = JSON.parse(text);
