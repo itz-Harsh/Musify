@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import {
   fetchplaylistsByID,
   searchAlbumByQuery,
@@ -13,7 +13,6 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import MusicContext from "../context/MusicContext";
 import { artistData } from "../genreData";
 
 const MainSection = () => {
@@ -24,8 +23,7 @@ const MainSection = () => {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setSong } = useContext(MusicContext);
-  
+  const [list , setList ] = useState({});
   const latestSongsScrollRef = useRef(null);
   const songsScrollRef = useRef(null);
   const scrollRef = useRef(null);
@@ -137,8 +135,8 @@ const MainSection = () => {
       ))
     );
   
-    setSong(uniqueSongs);
-  }, [trending , latestSongs , setSong]);
+    setList(uniqueSongs);
+  }, [trending , latestSongs ]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -166,7 +164,7 @@ const MainSection = () => {
             ref={scrollRef}
           >
             {recentlyPlayedSongs?.map((song, index) => (
-              <SongGrid key={song.id || index} {...song} />
+              <SongGrid key={song.id || index} {...song} song={list}/>
             ))}
           </div>
           {/* Right Arrow */}
@@ -195,7 +193,7 @@ const MainSection = () => {
             ref={latestSongsScrollRef}
           >
             {latestSongs?.map((song , index) => (
-              <SongGrid key={song.id || index } {...song} />
+              <SongGrid key={song.id || index } {...song} song={list}/>
             ))}
           </div>
           {/* Right Arrow */}
@@ -224,7 +222,7 @@ const MainSection = () => {
             ref={songsScrollRef}
           >
             {trending?.map((song) => (
-              <SongGrid key={song.id} {...song} />
+              <SongGrid key={song.id} {...song} song={list}/>
             ))}
           </div>
           {/* Right Arrow */}

@@ -19,6 +19,7 @@ const ArtistsDetails = () => {
   const [details, setDetails] = useState({}); // Initialize as an empty object
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [list , setList ] = useState({});
   const { setSong } = useContext(MusicContext);
   const naviagte = useNavigate();
   const FollowerCount = (followerCount) => {
@@ -48,8 +49,8 @@ const ArtistsDetails = () => {
       try {
         const data = await fetchArtistByID(id); // Fetch artist details based on the ID
         setDetails(data);
-        setSong(data.data.topSongs);
-        // console.log(data.data);
+        setList(data.data.topSongs);
+
       } catch (err) {
         setError("Error fetching artist details");
       } finally {
@@ -123,7 +124,7 @@ const ArtistsDetails = () => {
             <h2 className="text-2xl font-bold pl-[1.5rem] block">Top Songs</h2>
             <div className="p-2 w-full overflow-y-scroll scroll-hide ">
               {artistData.topSongs.map((album) => (
-                <SongsList key={album.id} {...album} />
+                <SongsList key={album.id} {...album} song={list} />
               ))}
             </div>
           </div>

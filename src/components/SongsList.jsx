@@ -3,10 +3,10 @@ import { useContext, useState } from "react";
 import MusicContext from "../context/MusicContext";
 import he from "he";
 
-const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
+const SongsList = ({ name, artists, duration, downloadUrl, image, id , song }) => {
 
   const [hovering, setHovering] = useState(false);
-  const { song } = useContext(MusicContext);
+  // const { song } = useContext(MusicContext);
 
   const convertTime = (seconds) => {
     if (!seconds || typeof seconds !== "number") {
@@ -17,7 +17,7 @@ const SongsList = ({ name, artists, duration, downloadUrl, image, id }) => {
     return `${minutes}:${remainingSeconds}`;
   };
 
-  const { isPlaying, currentSong, playMusic } = useContext(MusicContext);
+  const {  playMusic } = useContext(MusicContext);
 
   const imageUrl = image[2]?.url || image; // Safely access the image URL
   const artistNames = Array.isArray(artists?.primary)

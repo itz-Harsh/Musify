@@ -2,7 +2,7 @@ import { useContext } from "react";
 import MusicContext from "../context/MusicContext";
 import he from "he";
 
-const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
+const SongGrid = ({ name, artists, duration, downloadUrl, image, id , song }) => {
   const convertTime = (seconds) => {
     if (!seconds || typeof seconds !== "number") {
       return "0:00"; // Fallback for invalid duration
@@ -12,7 +12,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id }) => {
     return `${minutes}:${remainingSeconds}`;
   };
 
-  const { playMusic , song } = useContext(MusicContext);
+  const { playMusic } = useContext(MusicContext);
 
   const imageUrl = image[2]?.url || image; 
   const artistNames = Array.isArray(artists?.primary)

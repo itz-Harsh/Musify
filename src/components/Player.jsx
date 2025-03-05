@@ -40,6 +40,7 @@ const Player = () => {
   const [isVisible, setIsVisible] = useState(false); // For showing and hiding the player
   const [isMaximized, setisMaximized] = useState(false); // For minimizing the player
   const [currentTime, setCurrentTime] = useState(0);
+  const [list , setList ] = useState({});
   const [suggetions, setSuggetion] = useState([]);
   const [likedSongs, setLikedSongs] = useState(() => {
     return JSON.parse(localStorage.getItem("likedSongs")) || [];
@@ -94,7 +95,7 @@ const Player = () => {
         if (!currentSong?.id) return;
         const suggestions = await getSuggestionSong(currentSong.id);
 
-        setSong(suggestions.data);
+        setList(suggestions.data);
         setSuggetion(suggestions.data);
         // console.log(suggetions);
       } catch (error) {
@@ -607,7 +608,7 @@ const Player = () => {
                                 ref={scrollRef}
                               >
                                 {suggetions?.map((song, index) => (
-                                  <SongGrid key={song.id || index} {...song} />
+                                  <SongGrid key={song.id || index} {...song} song={list} />
                                 ))}
                               </div>
                               {/* Right Arrow */}

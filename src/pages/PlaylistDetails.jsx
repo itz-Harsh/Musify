@@ -14,8 +14,9 @@ const PlaylistDetails = () => {
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
+  const [list , setList ] = useState({});
   const [error, setError] = useState(null);
-  const { setSong, playMusic } = useContext(MusicContext);
+  const { playMusic } = useContext(MusicContext);
   const [likedPlaylists, setLikedPlaylists] = useState(() => {
     return JSON.parse(localStorage.getItem("likedPlaylists")) || [];
   });
@@ -25,8 +26,9 @@ const PlaylistDetails = () => {
       try {
         const data = await fetchplaylistsByID(id);
         setDetails(data);
-        setSong(data.data.songs);
-        console.log(data);
+        setList(data.data.songs);
+
+        console.log(list);
       } catch (err) {
         setError("Failed to fetch playlist details. Please try again later.");
       } finally {
@@ -179,7 +181,7 @@ const PlaylistDetails = () => {
           <div className="flex flex-col">
             {playlistData.songs && playlistData.songs.length > 0 ? (
               playlistData.songs.map((song) => (
-                <SongsList key={song.id} {...song} />
+                <SongsList key={song.id} {...song} song={list} />
               ))
             ) : (
               <p className="text-center text-gray-500 w-full">

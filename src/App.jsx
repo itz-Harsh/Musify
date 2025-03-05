@@ -60,7 +60,6 @@ export default function App() {
     }
 
     if (songList && JSON.stringify(songs) !== JSON.stringify(songList)) {
-      // console.log(songList);
       setSongs(songList);
     }
 
@@ -132,7 +131,7 @@ export default function App() {
           : nextTrack.audio;
         const { name, duration, image, id, artists } = nextTrack;
 
-        playMusic(audioSource, name, duration, image, id, artists, songs);
+        playMusic(audioSource, name, duration, image, id, artists);
       } else {
         let nextIndex = (currentIndex + 1) % songs.length;
         const nextTrack = songs[nextIndex];
@@ -143,7 +142,7 @@ export default function App() {
           : nextTrack.audio;
         const { name, duration, image, id, artists } = nextTrack;
 
-        playMusic(audioSource, name, duration, image, id, artists, songs);
+        playMusic(audioSource, name, duration, image, id, artists);
       }
     }
   };

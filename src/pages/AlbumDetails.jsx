@@ -21,6 +21,7 @@ const AlbumDetail = () => {
   const [details, setDetails] = useState(null);
   const [suggetions, setSuggetion] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [list , setList ] = useState({});
   const [error, setError] = useState(null);
   const { setSong, currentSong } = useContext(MusicContext);
 
@@ -62,7 +63,7 @@ const AlbumDetail = () => {
 
         // console.log("Combined Songs:", combineArray);
 
-        setSong(combineArray);
+        setList(combineArray);
       } catch (err) {
         setError("Error fetching album details");
         console.error(err);
@@ -151,7 +152,7 @@ const AlbumDetail = () => {
         <div className="flex flex-col h-auto gap-4 ">
           <div className="overflow-y-scroll scroll-smooth scroll-hide  pt-3 ">
             {details.data.songs?.map((song) => (
-              <SongsList key={song.id} {...song} />
+              <SongsList key={song.id} {...song} song={list} />
             ))}
           </div>
         </div>
@@ -172,7 +173,7 @@ const AlbumDetail = () => {
                 ref={scrollRef}
               >
                 {suggetions?.map((song, index) => (
-                  <SongGrid key={song.id || index} {...song} />
+                  <SongGrid key={song.id || index} {...song} song={list}/>
                 ))}
               </div>
               {/* Right Arrow */}

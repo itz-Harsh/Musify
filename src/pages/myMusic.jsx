@@ -16,19 +16,20 @@ import AlbumItems from "../components/Items/AlbumItems";
 const MyMusic = () => {
   const [likedSongs, setLikedSongs] = useState([]);
   const [likedAlbums, setLikedAlbums] = useState([]);
+  const [list , setList ] = useState({});
   const [likedPlaylists, setLikedPlaylists] = useState([]);
 
   // Separate refs for albums and playlists
   const albumsScrollRef = useRef(null);
   const playlistsScrollRef = useRef(null);
 
-  const { setSong } = useContext(MusicContext);
+  // const { setSong } = useContext(MusicContext);
 
   useEffect(() => {
     const storedLikedSongs =
       JSON.parse(localStorage.getItem("likedSongs")) || [];
     setLikedSongs(storedLikedSongs);
-    setSong(storedLikedSongs);
+    setList(storedLikedSongs);
     
     setLikedAlbums(JSON.parse(localStorage.getItem("likedAlbums")) || []);
     setLikedPlaylists(JSON.parse(localStorage.getItem("likedPlaylists")) || []);
@@ -72,6 +73,7 @@ const MyMusic = () => {
                         name={song.name}
                         duration={song.duration}
                         downloadUrl={song.audio}
+                        song={list}
                       />
                     )
                 )}
