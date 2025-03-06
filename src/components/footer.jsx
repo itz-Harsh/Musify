@@ -18,7 +18,7 @@ const Footer = () => {
             <pre className="lg:text-sm text-xs">Made with ReactJS by Harsh. </pre>
         <ul className="flex gap-4 ">
             <li><a href="https://github.com/itz-Harsh/Musify.git" className="hover:underline text-[13px] lg:text-[15px]" target=" "><pre>Source Code</pre></a></li>
-            <li><a href="https://www.instagram.com/harshs1125/" className="hover:underline text-[13px] lg:text-[15px]" target=" "><pre>Instagram</pre></a></li>
+            <li><a href="https://www.instagram.com/_harsh_str/" className="hover:underline text-[13px] lg:text-[15px]" target=" "><pre>Instagram</pre></a></li>
 
         </ul>
         </div></div>
