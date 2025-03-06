@@ -47,20 +47,32 @@ const ArtistsDetails = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const data = await fetchArtistByID(id); // Fetch artist details based on the ID
+        let response = await fetch(`https://jsaavn-api.vercel.app/api/artists?id=${id}`);
+        
+        if (!response.ok) {
+          response = await fetch(`https://saavn.dev/api/artists?id=${id}`);
+        }
+  
+        if (!response.ok) {
+          throw new Error("Both APIs failed");
+        }
+  
+        const data = await response.json();
+        console.log(data);
         setDetails(data);
         setList(data.data.topSongs);
-
+  
       } catch (err) {
+        console.error(err);
         setError("Error fetching artist details");
       } finally {
         setLoading(false);
-        
       }
     };
-
+  
     fetchDetails();
-  }, [id]); // Fetch details whenever the ID changes
+  }, [id]);
+
 
   if (loading) {
     return (
