@@ -2,15 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; // To fetch artist ID from URL
 import Navbar from "../components/Navbar";
 import Player from "../components/Player";
-import { fetchArtistByID } from "../../fetch"; // Assuming the fetch function exists
 import SongsList from "../components/SongsList";
 import Footer from "../components/footer";
 import MiniSlider from "../components/Sliders/miniSlider";
-import { useContext } from "react";
-import MusicContext from "../context/MusicContext";
 import AlbumSlider from "../components/Sliders/AlbumSlider";
 import Navigator from "../components/Navigator";
-import ArtistSlider from "../components/Sliders/ArtistSlider";
 import ArtistItems from "../components/Items/ArtistItems";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
@@ -20,7 +16,6 @@ const ArtistsDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [list , setList ] = useState({});
-  const { setSong } = useContext(MusicContext);
   const naviagte = useNavigate();
   const FollowerCount = (followerCount) => {
     if (!followerCount || isNaN(followerCount)) {

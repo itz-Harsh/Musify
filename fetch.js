@@ -16,8 +16,8 @@ export const getSuggestionSong = async (id) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 
@@ -33,8 +33,8 @@ export const getSearchData = async (e) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 
@@ -49,8 +49,8 @@ export const getSongbyQuery = async (e , limit) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 export const getArtistbyQuery = async (e , limit) => {
@@ -63,8 +63,8 @@ export const getArtistbyQuery = async (e , limit) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 
@@ -100,8 +100,8 @@ export const searchArtistByQuery = async (query) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
         
     }
 };
@@ -116,8 +116,8 @@ export const fetchAlbumByID = async (ID) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 
@@ -149,8 +149,8 @@ export const searchPlayListByQuery = async (query) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 
@@ -164,8 +164,8 @@ export const fetchplaylistsByID = async (ID) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 
@@ -179,8 +179,8 @@ export const fetchSongSuggestionsByID = async (ID) => {
         return data;
     }
     catch{
-        console.log('API Error: ', error );
-        throw error;
+        console.log('API Error: ', Error );
+        throw Error;
     }
 };
 
