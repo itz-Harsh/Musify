@@ -396,7 +396,7 @@ const Player = () => {
                       ) ? (
                         <FaHeart className="text-red-500" />
                       ) : (
-                        <FaRegHeart className="text-white" />
+                        <FaRegHeart className="icon" />
                       )}
                     </button>
                     <MdDownload
