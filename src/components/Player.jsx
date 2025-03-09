@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, useEffect, useCallback } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import { BiRepeat } from "react-icons/bi";
 import { IoIosClose, IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { IoShareSocial } from "react-icons/io5";
@@ -177,10 +177,9 @@ const Player = () => {
     return `${minutes}:${seconds}`;
   };
 
-  
-  const toggleLikeSong = useCallback(() => {
+  const toggleLikeSong = () => {
     if (!currentSong) return;
-  
+
     // Extract only necessary properties
     const songData = {
       id: currentSong.id,
@@ -190,69 +189,59 @@ const Player = () => {
       image: currentSong.image,
       artists: currentSong.artists,
     };
-  
-    setLikedSongs((prevLikedSongs) => {
-      const isLiked = prevLikedSongs.some((song) => song.id === currentSong.id);
-      const updatedLikedSongs = isLiked
-        ? prevLikedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
-        : [...prevLikedSongs, songData]; // Add cleaned song data
-  
-      localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
-      return updatedLikedSongs;
-    });
-  }, [currentSong, setLikedSongs]);
-  
+
+    const updatedLikedSongs = likedSongs.some(
+      (song) => song.id === currentSong.id
+    )
+      ? likedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
+      : [...likedSongs, songData]; // Add cleaned song data
+
+    setLikedSongs(updatedLikedSongs);
+    localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
+  };
   const name = currentSong?.name || "Unknown Title";
-  
   useEffect(() => {
-    if (!("mediaSession" in navigator) || !currentSong) return;
-  
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: he.decode(name),
-      artist: he.decode(artistNames),
-      album: "Musify",
-      artwork: [
-        {
-          src: currentSong?.image || "/Unknown.png",
-          sizes: "500x500",
-          type: "image/png",
-        },
-      ],
-    });
-  
-    navigator.mediaSession.setActionHandler("play", () => {
-      playMusic(
-        currentSong?.audio.currentSrc,
-        currentSong?.name,
-        currentSong?.duration,
-        currentSong?.image,
-        currentSong?.id,
-        song
-      );
-    });
-  
-    navigator.mediaSession.setActionHandler("pause", () => {
-      playMusic(
-        currentSong?.audio.currentSrc,
-        currentSong?.name,
-        currentSong?.duration,
-        currentSong?.image,
-        currentSong?.id,
-        song
-      );
-    });
-  
-    navigator.mediaSession.setActionHandler("previoustrack", prevSong);
-    navigator.mediaSession.setActionHandler("nexttrack", nextSong);
-  
-    // ✅ Use "seekbackward" as a Like button
-    navigator.mediaSession.setActionHandler("seekbackward", toggleLikeSong);
-  
-    return () => {
-      navigator.mediaSession.setActionHandler("seekbackward", null);
-    };
-  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song, name, toggleLikeSong]);
-  
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: he.decode(name),
+        artist: he.decode(artistNames),
+        album: "Musify",
+        artwork: [
+          {
+            src: currentSong?.image || "/Unknown.png",
+            sizes: "500x500",
+            type: "image/png",
+          },
+        ],
+      });
+
+      navigator.mediaSession.setActionHandler("play", () => {
+        playMusic(
+          currentSong?.audio.currentSrc,
+          currentSong?.name,
+          currentSong?.duration,
+          currentSong?.image,
+          currentSong?.id,
+          song
+        );
+      });
+
+      navigator.mediaSession.setActionHandler("pause", () => {
+        playMusic(
+          currentSong?.audio.currentSrc,
+          currentSong?.name,
+          currentSong?.duration,
+          currentSong?.image,
+          currentSong?.id,
+          song
+        );
+      });
+
+      navigator.mediaSession.setActionHandler("previoustrack", prevSong);
+      navigator.mediaSession.setActionHandler("nexttrack", nextSong);
+
+    }
+  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song, name ]);
   const theme = document.documentElement.getAttribute("data-theme");
   return (
     <div
@@ -522,7 +511,7 @@ const Player = () => {
                         </span>
                       </form>
                       <div className="flex flex-col items-center">
-                        <div className="flex items-center justify-end w-full lg:gap-[20rem] gap-[1.1rem] ">
+                        <div className="flex items-center justify-end w-full lg:gap-[20rem] gap-[1rem] ">
                           <div className="flex  items-center gap-5 p-8 lg:w-[36%] justify-end ">
                             <BiRepeat
                               className={`icon text-3xl cursor-pointer ${
