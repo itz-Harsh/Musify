@@ -22,7 +22,7 @@ Musify is a web music app built using React.js , React Router, and an JioSaavn u
 
 ### Homepage
 
-![Homepage](/public/HomePage2.png)
+![Homepage](/public/HomePage.png)
 
 ### Browse
 
@@ -44,22 +44,10 @@ Musify is a web music app built using React.js , React Router, and an JioSaavn u
 ### Search Section
 ![Search](/public/SearchSection.png)
 
-## Mobile View
-![Homepage](/public/Mobile/HomePage.png)
+## Mobile View Player
 
-![Browse](/public/Mobile/BrowsePage.png)
 
-![Liked](/public/Mobile/MyMusic.png)
 
-![Album Details](/public/Mobile/AlbumPage.png)
-
-![Playlist](/public/Mobile/PlaylistsPage.png)
-
-![Artist Details](/public/Mobile/ArtistPage.png)
-
-![Search](/public/Mobile/SearchSection.png)
-
-![Search result](/public/Mobile/SearchPage.png)
 
 
 ## Installation
