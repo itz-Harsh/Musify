@@ -11,8 +11,6 @@ import MyMusic from "./pages/myMusic";
 import he from "he";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { Done, DoneAll } from "@mui/icons-material";
-import { MdOutlineCloudDone } from "react-icons/md";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
 export default function App() {
@@ -120,6 +118,7 @@ export default function App() {
         (song) => song?.id === currentSong.id
       );
       if (currentIndex === -1) return; // Ensure currentIndex is valid
+      
 
       if (shuffle) {
         const randomIndex = Math.floor(Math.random() * songs.length);

@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, useEffect } from "react";
+import { useContext, useRef, useState, useEffect, useCallback } from "react";
 import { BiRepeat } from "react-icons/bi";
 import { IoIosClose, IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { IoShareSocial } from "react-icons/io5";
@@ -177,9 +177,10 @@ const Player = () => {
     return `${minutes}:${seconds}`;
   };
 
-  const toggleLikeSong = () => {
+  
+  const toggleLikeSong = useCallback(() => {
     if (!currentSong) return;
-
+  
     // Extract only necessary properties
     const songData = {
       id: currentSong.id,
@@ -189,79 +190,69 @@ const Player = () => {
       image: currentSong.image,
       artists: currentSong.artists,
     };
-
-    const updatedLikedSongs = likedSongs.some(
-      (song) => song.id === currentSong.id
-    )
-      ? likedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
-      : [...likedSongs, songData]; // Add cleaned song data
-
-    setLikedSongs(updatedLikedSongs);
-    localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
-  };
+  
+    setLikedSongs((prevLikedSongs) => {
+      const isLiked = prevLikedSongs.some((song) => song.id === currentSong.id);
+      const updatedLikedSongs = isLiked
+        ? prevLikedSongs.filter((song) => song.id !== currentSong.id) // Remove song if already liked
+        : [...prevLikedSongs, songData]; // Add cleaned song data
+  
+      localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs));
+      return updatedLikedSongs;
+    });
+  }, [currentSong, setLikedSongs]);
+  
   const name = currentSong?.name || "Unknown Title";
+  
   useEffect(() => {
-    if ("mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: he.decode(name),
-        artist: he.decode(artistNames),
-        album: "Musify",
-        artwork: [
-          { src: currentSong?.image || "", sizes: "96x96", type: "image/png" },
-          {
-            src: currentSong?.image || "",
-            sizes: "128x128",
-            type: "image/png",
-          },
-          {
-            src: currentSong?.image || "",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: currentSong?.image || "",
-            sizes: "256x256",
-            type: "image/png",
-          },
-          {
-            src: currentSong?.image || "",
-            sizes: "384x384",
-            type: "image/png",
-          },
-          {
-            src: currentSong?.image || "",
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
-      });
-
-      navigator.mediaSession.setActionHandler("play", () => {
-        playMusic(
-          currentSong?.audio.currentSrc,
-          currentSong?.name,
-          currentSong?.duration,
-          currentSong?.image,
-          currentSong?.id,
-          song
-        );
-      });
-
-      navigator.mediaSession.setActionHandler("pause", () => {
-        playMusic(
-          currentSong?.audio.currentSrc,
-          currentSong?.name,
-          currentSong?.duration,
-          currentSong?.image,
-          currentSong?.id,
-          song
-        );
-      });
-
-      navigator.mediaSession.setActionHandler("previoustrack", prevSong);
-      navigator.mediaSession.setActionHandler("nexttrack", nextSong);
-    }
-  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song, name]);
+    if (!("mediaSession" in navigator) || !currentSong) return;
+  
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: he.decode(name),
+      artist: he.decode(artistNames),
+      album: "Musify",
+      artwork: [
+        {
+          src: currentSong?.image || "/Unknown.png",
+          sizes: "500x500",
+          type: "image/png",
+        },
+      ],
+    });
+  
+    navigator.mediaSession.setActionHandler("play", () => {
+      playMusic(
+        currentSong?.audio.currentSrc,
+        currentSong?.name,
+        currentSong?.duration,
+        currentSong?.image,
+        currentSong?.id,
+        song
+      );
+    });
+  
+    navigator.mediaSession.setActionHandler("pause", () => {
+      playMusic(
+        currentSong?.audio.currentSrc,
+        currentSong?.name,
+        currentSong?.duration,
+        currentSong?.image,
+        currentSong?.id,
+        song
+      );
+    });
+  
+    navigator.mediaSession.setActionHandler("previoustrack", prevSong);
+    navigator.mediaSession.setActionHandler("nexttrack", nextSong);
+  
+    // ✅ Use "seekbackward" as a Like button
+    navigator.mediaSession.setActionHandler("seekbackward", toggleLikeSong);
+  
+    return () => {
+      navigator.mediaSession.setActionHandler("seekbackward", null);
+    };
+  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song, name, toggleLikeSong]);
+  
   const theme = document.documentElement.getAttribute("data-theme");
   return (
     <div
@@ -336,11 +327,11 @@ const Player = () => {
                   <div className="flex flex-col lg:items-center gap-5   p-2">
                     <div className="flex gap-5 justify-end lg:justify-center items-center">
                       <BiRepeat
-                        className={`icon text-2xl hidden lg:block cursor-pointer ${
+                        className={` text-2xl hidden lg:block cursor-pointer ${
                           repeatMode === "one"
-                            ? "text-[#f84d5e]"
+                            ? "text-[#ff6d7c]"
                             : repeatMode === "all"
-                            ? "text-[#fd3a4e]"
+                            ? "text-[#ff3448]"
                             : ""
                         }`}
                         onClick={toggleRepeatMode}
@@ -392,7 +383,7 @@ const Player = () => {
                         onClick={nextSong}
                       />
                       <PiShuffleBold
-                        className={`icon hidden lg:block hover:scale-110 text-2xl cursor-pointer ${
+                        className={` hidden lg:block hover:scale-110 text-2xl cursor-pointer ${
                           shuffle ? "text-[#fd3a4e]" : ""
                         }`}
                         onClick={toggleShuffle}
@@ -531,7 +522,7 @@ const Player = () => {
                         </span>
                       </form>
                       <div className="flex flex-col items-center">
-                        <div className="flex items-center justify-end w-full lg:gap-[20rem] gap-[1.2rem] ">
+                        <div className="flex items-center justify-end w-full lg:gap-[20rem] gap-[1.1rem] ">
                           <div className="flex  items-center gap-5 p-8 lg:w-[36%] justify-end ">
                             <BiRepeat
                               className={`icon text-3xl cursor-pointer ${
