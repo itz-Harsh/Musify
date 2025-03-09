@@ -3,6 +3,7 @@
 Musify is a web music app built using React.js , React Router, and an JioSaavn unofficial music API. The user interface is styled with Tailwind CSS.
 
 <br/>
+
 ## Features
 
 - Browse and listen to a wide variety of music.
