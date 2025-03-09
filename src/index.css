@@ -304,3 +304,28 @@ li:hover{
 .hoover:hover{
   background: var(--card-border)
 }
+
+
+
+
+
+
+.toggle-btn {
+
+  color: var(--text-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.lyrics-content {
+
+  text-align: center;
+  margin-top: 15px;
+  padding: 10px 20px 0 20px;
+  background: var(--card-bg) ;
+
+  border-radius: 8px solid var(--card-border);
+  overflow-y: auto;
+}

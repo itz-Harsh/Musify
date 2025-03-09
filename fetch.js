@@ -68,11 +68,18 @@ export const getArtistbyQuery = async (e , limit) => {
     }
 };
 
-export const getSongbyId = async (e) => {
+export const getSongById = async (songId) => {
     try {
-        return await fetch(`${api_url}songs/` + e);
-    } catch {
-        console.log(e);
+        const response = await fetch(`${api_url}songs/${songId}`);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(`Failed to fetch song: ${response.status} ${response.statusText}`);
+        }
+
+        return data;
+    } catch (error) {
+        console.error("Error fetching song:", error);
+        throw error; 
     }
 };
 
@@ -185,5 +192,20 @@ export const fetchSongSuggestionsByID = async (ID) => {
 };
 
 
-
+export const LyricsByID = async (ID ) =>{
+    try{
+        const Lyrics = await fetch(`${api_url}songs/${ID}/lyrics`);
+        const data = await Lyrics.json();
+        if(!Lyrics.ok) {
+            throw new Error(data.message || 'Failed to Fetch Artist Data');
+        }
+        return data;
+    } 
+    catch{
+        console.log('API Error: ', Error );
+        throw Error;
+    }
+    
+    
+}
 

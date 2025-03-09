@@ -4,11 +4,8 @@ import Navbar from "../components/Navbar";
 import SongsList from "../components/SongsList";
 import Player from "../components/Player";
 import { fetchAlbumByID, getSuggestionSong } from "../../fetch";
-import { useContext } from "react";
-import MusicContext from "../context/MusicContext";
 import Footer from "../components/footer";
 import Navigator from "../components/Navigator";
-import ArtistItems from "../components/Items/ArtistItems";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import SongGrid from "../components/SongGrid";
 import { useRef } from "react";
@@ -23,7 +20,7 @@ const AlbumDetail = () => {
   const [loading, setLoading] = useState(true);
   const [list , setList ] = useState({});
   const [error, setError] = useState(null);
-  const { setSong, currentSong } = useContext(MusicContext);
+
 
   const [likedAlbums, setLikedAlbums] = useState(() => {
     return JSON.parse(localStorage.getItem("likedAlbums")) || [];
@@ -46,6 +43,7 @@ const AlbumDetail = () => {
       try {
         const data = await fetchAlbumByID(id);
         setDetails(data);
+        // console.log(data);
 
         const sugid = data?.data?.songs[0]?.id;
         const suggestions = await getSuggestionSong(sugid);

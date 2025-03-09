@@ -1,6 +1,7 @@
 import { useContext, useRef, useState, useEffect } from "react";
 import { BiRepeat } from "react-icons/bi";
 import { IoIosClose, IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
+import { IoShareSocial } from "react-icons/io5";
 import { PiShuffleBold } from "react-icons/pi";
 import { FaPlay, FaPause, FaHeart, FaRegHeart } from "react-icons/fa";
 import {
@@ -13,17 +14,16 @@ import { PiSpeakerLowFill } from "react-icons/pi";
 import MusicContext from "../context/MusicContext";
 import ArtistItems from "./Items/ArtistItems";
 import he from "he";
-import { getSuggestionSong } from "../../fetch";
+import { getSongById, getSuggestionSong } from "../../fetch";
 import SongGrid from "./SongGrid";
+import { Link } from "react-router";
 
 const Player = () => {
   const {
     currentSong,
     song,
-    setSong,
     playMusic,
     isPlaying,
-    setIsPlaying,
     shuffle,
     nextSong,
     prevSong,
@@ -36,11 +36,11 @@ const Player = () => {
   const [volume, setVolume] = useState(() => {
     return Number(localStorage.getItem("volume")) || 100;
   });
-
   const [isVisible, setIsVisible] = useState(false); // For showing and hiding the player
   const [isMaximized, setisMaximized] = useState(false); // For minimizing the player
   const [currentTime, setCurrentTime] = useState(0);
-  const [list , setList ] = useState({});
+  const [detail, setDetails] = useState({});
+  const [list, setList] = useState({});
   const [suggetions, setSuggetion] = useState([]);
   const [likedSongs, setLikedSongs] = useState(() => {
     return JSON.parse(localStorage.getItem("likedSongs")) || [];
@@ -90,6 +90,18 @@ const Player = () => {
     : "Unknown Artist";
 
   useEffect(() => {
+    const albumDetail = async () => {
+      const result = await getSongById(currentSong.id);
+      setDetails(result.data[0]);
+      // console.log(detail);
+    };
+    if (currentSong?.id) {
+      albumDetail();
+      
+    }
+  }, [currentSong ]);
+
+  useEffect(() => {
     const fetchSuggestions = async () => {
       try {
         if (!currentSong?.id) return;
@@ -97,7 +109,6 @@ const Player = () => {
 
         setList(suggestions.data);
         setSuggetion(suggestions.data);
-        // console.log(suggetions);
       } catch (error) {
         console.error("Error fetching song suggestions:", error);
       }
@@ -250,7 +261,7 @@ const Player = () => {
       navigator.mediaSession.setActionHandler("previoustrack", prevSong);
       navigator.mediaSession.setActionHandler("nexttrack", nextSong);
     }
-  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song]);
+  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song, name]);
   const theme = document.documentElement.getAttribute("data-theme");
   return (
     <div
@@ -520,8 +531,8 @@ const Player = () => {
                         </span>
                       </form>
                       <div className="flex flex-col items-center">
-                        <div className="flex items-center lg:gap-12 lg:w-[50%] ">
-                          <div className="flex  items-center gap-5 p-8 ">
+                        <div className="flex items-center justify-end w-full lg:gap-[20rem] gap-[1.2rem] ">
+                          <div className="flex  items-center gap-5 p-8 lg:w-[36%] justify-end ">
                             <BiRepeat
                               className={`icon text-3xl cursor-pointer ${
                                 repeatMode === "one"
@@ -584,8 +595,19 @@ const Player = () => {
                               }`}
                               onClick={toggleShuffle}
                             />
+                            
                           </div>
+                              
+                            <IoShareSocial className="icon text-3xl cursor-pointer lg:mr-4 " 
+                              onClick={() => navigator.share({
+                                title: currentSong.name,
+                                text: `Listen to ${currentSong.name} on Musify`,
+                                url: `${window.location.origin}/albums/${detail.album.id}`,
+                              })}
+                            />
+                        
                         </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -608,7 +630,11 @@ const Player = () => {
                                 ref={scrollRef}
                               >
                                 {suggetions?.map((song, index) => (
-                                  <SongGrid key={song.id || index} {...song} song={list} />
+                                  <SongGrid
+                                    key={song.id || index}
+                                    {...song}
+                                    song={list}
+                                  />
                                 ))}
                               </div>
                               {/* Right Arrow */}
@@ -632,6 +658,33 @@ const Player = () => {
                             {...artist}
                           />
                         ))}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col lg:flex-row gap-[2rem] ">
+                      <div className="flex flex-col ">
+                        <h2 className="pr-1 text-xl lg:text-2xl font-semibold  w-full ml-[2rem] lg:ml-[3.5rem] ">
+                          From Album ...
+                        </h2>
+                        <Link
+                          to={`/albums/${detail.album.id}`}
+                          className="card  w-[12.5rem] h-fit overflow-clip  border-[0.1px]  p-1  rounded-lg lg:mx-[2rem] mt-[1rem] "
+                        >
+                          <div className="p-1">
+                            <img
+                              src={currentSong.image || "/Unknown.png"}
+                              alt={name}
+                              className="rounded-lg "
+                            />
+                          </div>
+                          <div className="w-full flex flex-col justify-center pl-2">
+                            <span className="font-semibold text-[1.1rem] overflow-x-clip ">
+                              {detail.album.name
+                                ? he.decode(detail.album.name)
+                                : ""}
+                            </span>
+                          </div>
+                        </Link>
                       </div>
                     </div>
                   </div>
