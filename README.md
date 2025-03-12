@@ -72,7 +72,7 @@ npm run dev
 
 Visit [http://localhost:5173](http://localhost:5173) in your browser to explore Musify.
 
-## Api
+## API
 
 fork and deploy your own repo of `https://github.com/sumitkolhe/jiosaavn-api` 
 
