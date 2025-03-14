@@ -1,8 +1,8 @@
 import { useContext, useRef, useState, useEffect } from "react";
-import { BiRepeat } from "react-icons/bi";
 import { IoIosClose, IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { IoShareSocial } from "react-icons/io5";
 import { PiShuffleBold } from "react-icons/pi";
+import { LuRepeat, LuRepeat1 } from "react-icons/lu";
 import { FaPlay, FaPause, FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   MdDownload,
@@ -97,9 +97,8 @@ const Player = () => {
     };
     if (currentSong?.id) {
       albumDetail();
-      
     }
-  }, [currentSong ]);
+  }, [currentSong]);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -239,10 +238,18 @@ const Player = () => {
 
       navigator.mediaSession.setActionHandler("previoustrack", prevSong);
       navigator.mediaSession.setActionHandler("nexttrack", nextSong);
-
     }
-  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song, name ]);
+  }, [currentSong, artistNames, playMusic, prevSong, nextSong, song, name]);
   const theme = document.documentElement.getAttribute("data-theme");
+
+  if (currentSong) {
+    if (repeatMode === "one") {
+      currentSong.audio.loop = true;
+    } else {
+      currentSong.audio.loop = false;
+    }
+  }
+
   return (
     <div
       className={` ${isVisible ? "lg:flex " : "hidden"}
@@ -315,23 +322,25 @@ const Player = () => {
                   </div>
                   <div className="flex flex-col lg:items-center gap-5   p-2">
                     <div className="flex gap-5 justify-end lg:justify-center items-center">
-                      <BiRepeat
-                        className={` text-2xl hidden lg:block cursor-pointer ${
-                          repeatMode === "one"
-                            ? "text-[#ff6d7c]"
-                            : repeatMode === "all"
-                            ? "text-[#ff3448]"
-                            : ""
-                        }`}
-                        onClick={toggleRepeatMode}
-                        title={`Repeat Mode: ${
-                          repeatMode === "none"
-                            ? "Off"
-                            : repeatMode === "one"
-                            ? "Repeat One"
-                            : "Repeat All"
-                        }`}
-                      />
+                      {repeatMode === "none" ? (
+                        <LuRepeat
+                          className={` text-2xl hidden lg:block cursor-pointer hover:text-[#ff3448] `}
+                          onClick={toggleRepeatMode}
+                          title={`Repeat Mode: ${
+                            repeatMode === "none" ? "none" : "one"
+                          }`}
+                        />
+                      ) : (
+                        <LuRepeat1
+                          className={
+                            " text-2xl hidden lg:block cursor-pointer text-[#ff3448]"
+                          }
+                          onClick={toggleRepeatMode}
+                          title={`Repeat Mode: ${
+                            repeatMode === "none" ? "none" : "one"
+                          }`}
+                        />
+                      )}
                       <IoMdSkipBackward
                         className="icon hidden lg:block hover:scale-110 text-2xl cursor-pointer"
                         onClick={prevSong}
@@ -513,23 +522,25 @@ const Player = () => {
                       <div className="flex flex-col items-center">
                         <div className="flex items-center justify-end w-full lg:gap-[20rem] gap-[1rem] ">
                           <div className="flex  items-center gap-5 p-8 lg:w-[36%] justify-end ">
-                            <BiRepeat
-                              className={`icon text-3xl cursor-pointer ${
-                                repeatMode === "one"
-                                  ? "text-[#f84d5e]"
-                                  : repeatMode === "all"
-                                  ? "text-[#fd3a4e]"
-                                  : ""
-                              }`}
-                              onClick={toggleRepeatMode}
-                              title={`Repeat Mode: ${
-                                repeatMode === "none"
-                                  ? "Off"
-                                  : repeatMode === "one"
-                                  ? "Repeat One"
-                                  : "Repeat All"
-                              }`}
-                            />
+                            {repeatMode === "none" ? (
+                              <LuRepeat
+                                className={` text-2xl hidden lg:block cursor-pointer hover:text-[#ff3448] `}
+                                onClick={toggleRepeatMode}
+                                title={`Repeat Mode: ${
+                                  repeatMode === "none" ? "none" : "one"
+                                }`}
+                              />
+                            ) : (
+                              <LuRepeat1
+                                className={
+                                  " text-2xl hidden lg:block cursor-pointer text-[#ff3448]"
+                                }
+                                onClick={toggleRepeatMode}
+                                title={`Repeat Mode: ${
+                                  repeatMode === "none" ? "none" : "one"
+                                }`}
+                              />
+                            )}
                             <IoMdSkipBackward
                               className="icon hover:scale-110 text-3xl cursor-pointer"
                               onClick={prevSong}
@@ -575,19 +586,19 @@ const Player = () => {
                               }`}
                               onClick={toggleShuffle}
                             />
-                            
                           </div>
-                              
-                            <IoShareSocial className="icon text-3xl cursor-pointer lg:mr-4 " 
-                              onClick={() => navigator.share({
+
+                          <IoShareSocial
+                            className="icon text-3xl cursor-pointer lg:mr-4 "
+                            onClick={() =>
+                              navigator.share({
                                 title: currentSong.name,
                                 text: `Listen to ${currentSong.name} on Musify`,
                                 url: `${window.location.origin}/albums/${detail.album.id}`,
-                              })}
-                            />
-                        
+                              })
+                            }
+                          />
                         </div>
-                        
                       </div>
                     </div>
                   </div>

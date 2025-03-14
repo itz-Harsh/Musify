@@ -174,11 +174,11 @@ export default function App() {
 
   const toggleRepeatMode = () => {
     setRepeatMode((prevState) => {
-      if (prevState === "none") return "one"; // Change to repeat the current song
-      if (prevState === "one") return "all"; // Change to repeat the entire playlist
-      return "none"; // No repeat
+      if (prevState === "none") return "one";
+      return "none";
     });
   };
+
 
   const toggleShuffle = () => {
     setShuffle((prevState) => !prevState);
