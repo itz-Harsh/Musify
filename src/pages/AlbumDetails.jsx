@@ -13,14 +13,14 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import { IoShareSocial } from "react-icons/io5";
 const AlbumDetail = () => {
   const { id } = useParams(); // Extract the album ID from the URL
   const [details, setDetails] = useState(null);
   const [suggetions, setSuggetion] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [list , setList ] = useState({});
+  const [list, setList] = useState({});
   const [error, setError] = useState(null);
-
 
   const [likedAlbums, setLikedAlbums] = useState(() => {
     return JSON.parse(localStorage.getItem("likedAlbums")) || [];
@@ -133,17 +133,34 @@ const AlbumDetail = () => {
                 </Link>{" "}
               </pre>
             </div>
-            <button
-              onClick={toggleLikeAlbum}
-              title="Like Album"
-              className=" border-[1px] mt-3 border-[#8f8f8f6e] h-[3rem] w-[3rem] flex justify-center items-center rounded-full  "
-            >
-              {likedAlbums.some((album) => album.id === albumdata.id) ? (
-                <FaHeart className="text-red-500 text-2xl" />
-              ) : (
-                <FaRegHeart className="text-2xl icon" />
-              )}
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={toggleLikeAlbum}
+                title="Like Album"
+                className=" border-[1px] mt-3 border-[#8f8f8f6e] h-[3rem] w-[3rem] flex justify-center items-center rounded-full  "
+              >
+                {likedAlbums.some((album) => album.id === albumdata.id) ? (
+                  <FaHeart className="text-red-500 text-2xl" />
+                ) : (
+                  <FaRegHeart className="text-2xl icon" />
+                )}
+              </button>
+              <button
+                className=" border-[1px] mt-3 border-[#8f8f8f6e] flex justify-center items-center h-[3rem] w-[3rem]  rounded-full  "
+                title="Share"
+              >
+                <IoShareSocial
+                  className="icon text-[1.8rem] mr-[0.1rem]"
+                  onClick={() =>
+                    navigator.share({
+                      title: details.data.name,
+                      text: `Listen on Musify`,
+                      url: `${window.location.origin}/albums/${id}`,
+                    })
+                  }
+                />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -171,7 +188,7 @@ const AlbumDetail = () => {
                 ref={scrollRef}
               >
                 {suggetions?.map((song, index) => (
-                  <SongGrid key={song.id || index} {...song} song={list}/>
+                  <SongGrid key={song.id || index} {...song} song={list} />
                 ))}
               </div>
               {/* Right Arrow */}

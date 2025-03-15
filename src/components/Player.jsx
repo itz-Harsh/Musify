@@ -456,10 +456,11 @@ const Player = () => {
 
                     <div className="flex flex-col justify-center lg:w-[70%] lg:pl-5 p-1  gap-4">
                       <div className="flex  flex-col  gap-[0.5rem] mt-5 lg:ml-1 ml-[1.5rem]">
-                        <span className=" text-2xl font-semibold h-auto  justify-start   flex  overflow-clip  ">
+                        <span className=" text-2xl font-semibold h-auto  justify-between  flex  overflow-clip  ">
                           {currentSong?.name
                             ? he.decode(currentSong.name)
                             : "Empty"}
+
                         </span>
                         <span className="overflow-hidden  flex  w-[98%] mb-1  text-base font-medium  justify-between h-[1.84rem]      ">
                           {he.decode(artistNames)}
@@ -519,12 +520,12 @@ const Player = () => {
                           {formatTime(currentSong?.duration || 0)}
                         </span>
                       </form>
-                      <div className="flex flex-col items-center">
-                        <div className="flex items-center justify-end w-full lg:gap-[20rem] gap-[1rem] ">
-                          <div className="flex  items-center gap-5 p-8 lg:w-[36%] justify-end ">
+                      <div className="flex flex-col items-center ">
+                        <div className="flex items-center justify-end lg:w-full lg:gap-[20rem] gap-[0.5rem] ">
+                          <div className="flex  items-center gap-5 p-8 w-full lg:w-[36%] justify-end ">
                             {repeatMode === "none" ? (
                               <LuRepeat
-                                className={` text-2xl hidden lg:block cursor-pointer hover:text-[#ff3448] `}
+                                className={` text-2xl  cursor-pointer lg:hover:text-[#ff3448] `}
                                 onClick={toggleRepeatMode}
                                 title={`Repeat Mode: ${
                                   repeatMode === "none" ? "none" : "one"
@@ -533,7 +534,7 @@ const Player = () => {
                             ) : (
                               <LuRepeat1
                                 className={
-                                  " text-2xl hidden lg:block cursor-pointer text-[#ff3448]"
+                                  " text-2xl cursor-pointer text-[#ff3448]"
                                 }
                                 onClick={toggleRepeatMode}
                                 title={`Repeat Mode: ${
@@ -589,7 +590,7 @@ const Player = () => {
                           </div>
 
                           <IoShareSocial
-                            className="icon text-3xl cursor-pointer lg:mr-4 "
+                            className="icon text-3xl hidden lg:block cursor-pointer  mr-4 "
                             onClick={() =>
                               navigator.share({
                                 title: currentSong.name,
