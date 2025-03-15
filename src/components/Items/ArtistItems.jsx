@@ -12,7 +12,7 @@ const ArtistItems = ({ name, artists, id, image }) => {
   return (
     <Link
       to={`/artists/${id}`}
-      className="w-[7rem] lg:w-[8rem] h-[12rem] drop-shadow-lg overflow-y-clip flex flex-col justify-center items-center gap-3 rounded-lg"
+      className="w-[7rem] lg:w-[8rem] h-[10.5rem] drop-shadow-lg overflow-y-clip flex flex-col justify-center items-center gap-3 rounded-lg"
     >
       <img
         src={imageUrl || "/Unknown.png"}
