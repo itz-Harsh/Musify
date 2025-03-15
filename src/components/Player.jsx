@@ -479,7 +479,7 @@ const Player = () => {
                               )}
                             </button>
                             <MdDownload
-                              className="hover:text-[#fd3a4e]  flex self-center text-[1.8rem] cursor-pointer icon"
+                              className="lg:hover:text-[#fd3a4e] active:text-[#fd3a4e]  flex self-center text-[1.8rem] cursor-pointer icon"
                               onClick={downloadSong}
                               title="Download Song"
                             />
@@ -543,13 +543,13 @@ const Player = () => {
                               />
                             )}
                             <IoMdSkipBackward
-                              className="icon hover:scale-110 text-3xl cursor-pointer"
+                              className="icon lg:hover:scale-110 text-3xl cursor-pointer"
                               onClick={prevSong}
                             />
                             <div>
                               {isPlaying ? (
                                 <FaPause
-                                  className="p-[0.1rem] icon hover:scale-110 text-3xl cursor-pointer"
+                                  className="p-[0.1rem] icon lg:hover:scale-110 text-3xl cursor-pointer"
                                   onClick={() =>
                                     playMusic(
                                       currentSong?.audio.currentSrc,
@@ -563,7 +563,7 @@ const Player = () => {
                                 />
                               ) : (
                                 <FaPlay
-                                  className=" icon p-[0.1rem] hover:scale-110 text-3xl cursor-pointer"
+                                  className=" icon p-[0.1rem] lg:hover:scale-110 text-3xl cursor-pointer"
                                   onClick={() =>
                                     playMusic(
                                       currentSong?.audio.currentSrc,
@@ -578,12 +578,12 @@ const Player = () => {
                               )}
                             </div>
                             <IoMdSkipForward
-                              className="icon hover:scale-110 text-3xl cursor-pointer"
+                              className="icon lg:hover:scale-110 text-3xl cursor-pointer"
                               onClick={nextSong}
                             />
                             <PiShuffleBold
-                              className={` hover:scale-110 text-3xl cursor-pointer icon ${
-                                shuffle ? "text-[#fd3a4e]" : ""
+                              className={` text-3xl cursor-pointer  ${
+                                shuffle ? " text-[#fd3a4e] " : ""
                               }`}
                               onClick={toggleShuffle}
                             />
