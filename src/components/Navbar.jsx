@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import { getSearchData, getSongbyQuery, getSuggestionSong } from "../../fetch";
+import { getArtistbyQuery, getSearchData, getSongbyQuery, getSuggestionSong } from "../../fetch";
 import MusicContext from "../context/MusicContext";
 import he from "he";
 import Theme from "../../theme";
@@ -8,6 +8,7 @@ import { IoSearchOutline } from "react-icons/io5";
 const Navbar = () => {
   const { playMusic } = useContext(MusicContext);
   const [query, setQuery] = useState([]);
+  let List = [];
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
   const fetchSuggestions = async (query) => {
@@ -19,7 +20,8 @@ const Navbar = () => {
     try {
       const result = await getSearchData(query);
       const song = await getSongbyQuery(query, 5);
-      // console.log(song);
+      const artist = await getArtistbyQuery(query , 5);
+      // console.log(artist);
       const allSuggestions = [];
       if (song?.data?.results) {
         allSuggestions.push(
@@ -29,7 +31,7 @@ const Navbar = () => {
             id: item.id,
             duration: item.duration,
             artist: item.artists,
-            image: item.image?.[2]?.url,
+            image: item.image[2].url,
             downloadUrl: item.downloadUrl[4].url,
           }))
         );
@@ -51,17 +53,17 @@ const Navbar = () => {
             type: "Playlist",
             name: item.title,
             id: item.id,
-            image: item.image?.[2]?.url,
+            image: item.image[2].url,
           }))
         );
       }
-      if (result?.data?.artists?.results) {
+      if (artist?.data.results) {
         allSuggestions.push(
-          ...result.data.artists.results.map((item) => ({
-            type: "Artist",
-            name: item.title,
+          ...artist.data.results.map((item) => ({
+            type: item.type,
+            name: item.name,
             id: item.id,
-            image: item.image?.[2]?.url,
+            image: item.image[2].url,
           }))
         );
       }
@@ -96,46 +98,44 @@ const Navbar = () => {
       : "Good Evening";
   };
 
+  const GetData = async(suggestion) => {
+      const response = await getSuggestionSong(suggestion.id);
+      const suggestedSongs = response.data || []; 
+      return [suggestion, ...suggestedSongs];
+  }
+
   const handleSuggestionClick = async (suggestion) => {
-    try {
-        const response = await getSuggestionSong(suggestion.id);
-        const suggestedSongs = response.data || []; 
-
-        const Flist = [suggestion, ...suggestedSongs];
-
-        console.log(Flist); 
-
-        switch (suggestion.type) {
-            case "Song":
-                playMusic(
-                    suggestion.downloadUrl,
-                    suggestion.name,
-                    suggestion.duration,
-                    suggestion.image,
-                    suggestion.id,
-                    suggestion.artist,
-                    Flist 
-                );
-                break;
-            case "Album":
-                navigate(`/albums/${suggestion.id}`);
-                break;
-            case "Artist":
-                navigate(`/artists/${suggestion.id}`);
-                break;
-            case "Playlist":
-                navigate(`/playlists/${suggestion.id}`);
-                break;
-            default:
-                console.warn("Unknown suggestion type:", suggestion.type);
-        }
-    } catch (error) {
-        console.error("Error fetching song suggestions:", error);
+  if (suggestion.type === "Song") {
+    List = await GetData(suggestion); 
+  }
+    switch (suggestion.type) {
+      case "Song":
+        playMusic(
+          suggestion.downloadUrl,
+          suggestion.name,
+          suggestion.duration,
+          suggestion.image,
+          suggestion.id,
+          suggestion.artist,
+          List
+        );
+        break;
+      case "Album":
+        navigate(`/albums/${suggestion.id}`);
+        break;
+      case "artist":
+        navigate(`/artists/${suggestion.id}`);
+        break;
+      case "Playlist":
+        navigate(`/playlists/${suggestion.id}`);
+        break;
+      default:
+        console.warn("Unknown suggestion type:", suggestion.type);
     }
 
     setQuery("");
     setSuggestions([]); // Clear suggestions
-};
+  };
 
   return (
     <nav className="navbar flex flex-col lg:gap-10 lg:flex-row lg:items-center top-0 z-20 fixed w-full pl-1 pr-1 lg:px-2   lg:h-[4.5rem]">
