@@ -3,7 +3,7 @@ import { Link } from "react-router";
 const Footer = () => {
   return (
     <>
-    <div className=" lg:h-[15rem] h-auto w-full flex gap-10  p-10 footer">
+    <div className=" lg:h-[15rem] h-auto w-full flex gap-10  p-10 footer mb-[3rem]">
       <div className="ml-[4rem] flex flex-col ">
         <div className="flex items-center ml-[-10px]">
         <span className="bg"></span>

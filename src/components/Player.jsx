@@ -381,7 +381,7 @@ const Player = () => {
                         onClick={nextSong}
                       />
                       <PiShuffleBold
-                        className={` hidden lg:block hover:scale-110 text-2xl cursor-pointer ${
+                        className={` hidden lg:block hover:text-[#fd3a4e] text-2xl cursor-pointer ${
                           shuffle ? "text-[#fd3a4e]" : ""
                         }`}
                         onClick={toggleShuffle}
@@ -582,7 +582,7 @@ const Player = () => {
                               onClick={nextSong}
                             />
                             <PiShuffleBold
-                              className={` text-3xl cursor-pointer  ${
+                              className={` text-3xl cursor-pointer  lg:hover:text-[#fd3a4e] ${
                                 shuffle ? " text-[#fd3a4e] " : ""
                               }`}
                               onClick={toggleShuffle}
@@ -590,7 +590,7 @@ const Player = () => {
                           </div>
 
                           <IoShareSocial
-                            className="icon text-3xl hidden lg:block cursor-pointer  mr-4 "
+                            className="icon text-3xl hidden lg:block cursor-pointer  lg:hover:scale-105 mr-4 "
                             onClick={() =>
                               navigator.share({
                                 title: currentSong.name,

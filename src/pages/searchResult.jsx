@@ -46,53 +46,52 @@ const SearchResult = () => {
     fetchSearchResult();
   }, [query]); // Added `query` as a dependency
 
-  // Function to scroll left
+
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        left: -400, // Adjust scroll amount
-        behavior: "smooth",
-      });
+      scrollRef.current.scrollLeft -= 800; // Scroll left by 800px
     }
   };
 
-  // Function to scroll right
   const scrollRight = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        left: 400, // Adjust scroll amount
-        behavior: "smooth",
-      });
+      scrollRef.current.scrollLeft += 800; // Scroll right by 800px
     }
   };
-
   return (
     <>
       <Navbar />
-      <div className="mt-[8rem] lg:mt-[6rem]  p-1 gap-5 flex flex-col">
+      <div className="mt-[8rem] lg:mt-[6rem]  pb-[4rem] gap-5 flex flex-col">
         <h2 className="text-2xl font-semibold ml-[1rem] lg:ml-[3rem] flex flex-col gap-3">
            Search Results for  "{query}" <p className="text-xl">Songs</p>
         </h2>
-        <div className="flex justify-center items-center gap w-full">
-          {/* Left Arrow */}
-          <MdOutlineKeyboardArrowLeft
-            className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem]   hidden lg:block arrow-btn"
-            onClick={() => scrollLeft(scrollLeft)}
-          />
-          <div
-            className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 w-full lg:w-max px-3 lg:px-1 scroll-smooth"
-            ref={scrollRef}
-          >
-            {songResults.length > 0 ? ( songResults.map((song) => <SongGrid key={song.id} {...song} />) ) : ( <div className="text-center col-span-full "> No results found. </div> )}
-          </div>
-          {/* Right Arrow */}
-          <MdOutlineKeyboardArrowRight
-            className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem]   hidden lg:block arrow-btn"
-            onClick={() => scrollRight(scrollRight)}
-          />
-        </div>
 
-       
+        <div className="flex justify-center items-center gap-3">
+              {/* Left Arrow */}
+              <MdOutlineKeyboardArrowLeft
+                className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] arrow-btn hidden lg:block "
+                onClick={scrollLeft}
+              />
+        
+              {/* Albums Grid */}
+              <div
+                className="grid grid-rows-1 grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full px-3 lg:px-0 scroll-smooth"
+                ref={scrollRef}
+              >
+                
+                {songResults.length > 0 ? ( songResults.map((song) => <SongGrid key={song.id} {...song} />) ) : ( <div className="text-center col-span-full "> No results found. </div> )}
+
+
+
+              </div>
+        
+              {/* Right Arrow */}
+              <MdOutlineKeyboardArrowRight
+                className="text-3xl  w-[2rem] hover:scale-125 transition-all duration-300 ease-in-out cursor-pointer h-[9rem] arrow-btn hidden lg:block "
+                onClick={scrollRight}
+              />
+            </div>
+
          {AlbumResults.length > 0 && (
           <>
             <p className="text-xl font-semibold  ml-[1rem] lg:ml-[3rem]">Albums</p>

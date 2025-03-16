@@ -3,15 +3,7 @@ import MusicContext from "../context/MusicContext";
 import he from "he";
 
 const SongGrid = ({ name, artists, duration, downloadUrl, image, id , song }) => {
-  const convertTime = (seconds) => {
-    if (!seconds || typeof seconds !== "number") {
-      return "0:00"; // Fallback for invalid duration
-    }
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = (seconds % 60).toString().padStart(2, "0");
-    return `${minutes}:${remainingSeconds}`;
-  };
-
+  
   const { playMusic } = useContext(MusicContext);
 
   const imageUrl = image[2]?.url || image; 
@@ -23,7 +15,7 @@ const SongGrid = ({ name, artists, duration, downloadUrl, image, id , song }) =>
     downloadUrl = downloadUrl ? downloadUrl[4]?.url ||  downloadUrl: song.audio;
   return (
     <span
-      className="card w-[9.5rem] h-[11.9rem] overflow-clip p-1  rounded-lg cursor-pointer"
+      className="card w-[9.5rem] h-[11.9rem] overflow-clip p-1  rounded-lg cursor-pointer shadow-md"
       onClick={() =>
         playMusic(downloadUrl, name, duration, imageUrl, id, artists , song)
       }
