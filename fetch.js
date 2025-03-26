@@ -1,5 +1,5 @@
 
-const api_url = 'https://jsaavn-api.vercel.app/api/';
+const api_url = 'https://saavn.dev/api/';
 if (!api_url) {
     console.log("Error Fetching API");
 };
