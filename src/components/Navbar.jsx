@@ -98,16 +98,16 @@ const Navbar = () => {
       : "Good Evening";
   };
 
-  const GetData = async(suggestion) => {
-      const response = await getSuggestionSong(suggestion.id);
-      const suggestedSongs = response.data || []; 
-      return [suggestion, ...suggestedSongs];
-  }
+  // const GetData = async(suggestion) => {
+  //     const response = await getSuggestionSong(suggestion.id);
+  //     const suggestedSongs = response.data || []; 
+  //     return [suggestion, ...suggestedSongs];
+  // }
 
   const handleSuggestionClick = async (suggestion) => {
-  if (suggestion.type === "Song") {
-    List = await GetData(suggestion); 
-  }
+  // if (suggestion.type === "Song") {
+  //   List = await GetData(suggestion); 
+  // }
     switch (suggestion.type) {
       case "Song":
         playMusic(
@@ -117,7 +117,7 @@ const Navbar = () => {
           suggestion.image,
           suggestion.id,
           suggestion.artist,
-          List
+          // List
         );
         break;
       case "Album":
