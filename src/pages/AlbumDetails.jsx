@@ -45,23 +45,23 @@ const AlbumDetail = () => {
         setDetails(data);
         // console.log(data);
 
-        const sugid = data?.data?.songs[0]?.id;
-        const suggestions = await getSuggestionSong(sugid);
-        setSuggetion(suggestions.data);
+        // const sugid = data?.data?.songs[0]?.id;
+        // const suggestions = await getSuggestionSong(sugid);
+        // setSuggetion(suggestions.data);
 
         const albumSongs = data.data.songs;
-        const suggestedSongs = suggestions.data;
+        // const suggestedSongs = suggestions.data;
 
-        const filteredSuggestedSongs = suggestedSongs.filter(
-          (suggestedSong) =>
-            !albumSongs.some((albumSong) => albumSong.id === suggestedSong.id)
-        );
+        // const filteredSuggestedSongs = suggestedSongs.filter(
+        //   (suggestedSong) =>
+        //     !albumSongs.some((albumSong) => albumSong.id === suggestedSong.id)
+        // );
 
-        const combineArray = [...albumSongs, ...filteredSuggestedSongs];
+        // const combineArray = [...albumSongs, ...filteredSuggestedSongs];
 
         // console.log("Combined Songs:", combineArray);
 
-        setList(combineArray);
+        setList(albumSongs);
       } catch (err) {
         setError("Error fetching album details");
         console.error(err);
@@ -172,34 +172,39 @@ const AlbumDetail = () => {
           </div>
         </div>
 
-        {suggetions.length >= 0 && (
-          <div className="flex flex-col justify-center items-center w-full mb-[5rem]">
-            <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold  pl-3 sm:pl-[3rem] w-full">
-              You Might Like
-            </h2>
-            <div className="flex justify-center items-center gap-3 w-full">
+       {/* {suggetions.length >= 0 && (
+          {/* <div className="flex flex-col justify-center items-center w-full mb-[5rem]"> */}
+            {/* <h2 className=" lg:ml-[3rem] lg:-translate-x-[37rem] lg:text-center m-4 text-xl sm:text-2xl font-semibold  pl-3 sm:pl-[3rem] w-full"> */}
+              {/* You Might Like */}
+            {/* </h2> */}
+            {/* <div className="flex justify-center items-center gap-3 w-full"> */}
               {/* Left Arrow */}
-              <MdOutlineKeyboardArrowLeft
-                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] arrow-btn  hidden lg:block  "
-                onClick={() => scrollLeft(scrollRef)}
-              />
-              <div
-                className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full  px-3 lg:px-0 scroll-smooth"
-                ref={scrollRef}
-              >
-                {suggetions?.map((song, index) => (
-                  <SongGrid key={song.id || index} {...song} song={list} />
-                ))}
-              </div>
+              {/* <MdOutlineKeyboardArrowLeft */}
+                {/* className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] arrow-btn  hidden lg:block  " */}
+                {/* onClick={() => scrollLeft(scrollRef)} */}
+              {/* /> */}
+              {/* <div */}
+                {/* className="grid grid-rows-1  grid-flow-col justify-start overflow-x-scroll scroll-hide items-center gap-3 lg:gap-2 w-full  px-3 lg:px-0 scroll-smooth" */}
+                {/* ref={scrollRef} */}
+              {/* > */}
+                {/* {suggetions?.map((song, index) => ( */}
+                  {/* <SongGrid key={song.id || index} {...song} song={list} /> */}
+                {/* ))} */}
+              {/* </div> */}
               {/* Right Arrow */}
-              <MdOutlineKeyboardArrowRight
-                className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] arrow-btn hidden lg:block  "
-                onClick={() => scrollRight(scrollRef)}
-              />
-            </div>
-          </div>
-        )}
-      </div>
+              {/* <MdOutlineKeyboardArrowRight */}
+                {/* className="text-3xl hover:scale-125 transition-all duration-200 ease-in-out cursor-pointer h-[9rem] arrow-btn hidden lg:block  " */}
+                {/* onClick={() => scrollRight(scrollRef)} */}
+              {/* /> */}
+            {/* </div> */}
+          {/* </div> */}
+        {/* )}/ */}
+ 
+
+
+
+
+        </div> 
 
       <Player />
       <Navigator />

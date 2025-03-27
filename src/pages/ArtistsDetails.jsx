@@ -42,11 +42,11 @@ const ArtistsDetails = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        let response = await fetch(`https://jsaavn-api.vercel.app/api/artists?id=${id}`);
+        // let response = await fetch(`https://jsaavn-api.vercel.app/api/artists?id=${id}`);
         
-        if (!response.ok) {
-          response = await fetch(`https://saavn.dev/api/artists?id=${id}`);
-        }
+        // if (!response.ok) {
+          let response = await fetch(`https://saavn.dev/api/artists?id=${id}`);
+        // }
   
         if (!response.ok) {
           throw new Error("Both APIs failed");
