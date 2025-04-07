@@ -43,8 +43,8 @@ function Browse() {
 
     try {
       setLoading(true);
-      // const response = await fetch(`https://jsaavn-api.vercel.app/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
-      const response = await fetch(`https://saavn.dev/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
+      const response = await fetch(`https://jiosaavn-api-lime.vercel.app/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
+      // const response = await fetch(`https://saavn.dev/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
       
       const data = await response.json();
      

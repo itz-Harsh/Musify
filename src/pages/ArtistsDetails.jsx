@@ -45,7 +45,7 @@ const ArtistsDetails = () => {
         let response = await fetch(`https://jiosaavn-api-lime.vercel.app/api/artists?id=${id}`);
         
          if (!response.ok) {
-          let response = await fetch(`https://saavn.dev/api/artists?id=${id}`);
+          response = await fetch(`https://saavn.dev/api/artists?id=${id}`);
         }
   
         if (!response.ok) {

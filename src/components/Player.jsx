@@ -101,16 +101,16 @@ const Player = () => {
   }, [currentSong]);
 
   useEffect(() => {
-    // const fetchSuggestions = async () => {
-    //     if (!currentSong?.id) return;
-    //     const suggestions = await getSuggestionSong(currentSong.id);
+    const fetchSuggestions = async () => {
+        if (!currentSong?.id) return;
+        const suggestions = await getSuggestionSong(currentSong.id);
 
-    //     setList(suggestions.data);
-    //     setSuggetion(suggestions.data);
+        setList(suggestions.data);
+        setSuggetion(suggestions.data);
      
-    // };
+    };
 
-    // fetchSuggestions();
+    fetchSuggestions();
 
     if (currentSong) {
       const audioElement = currentSong.audio;
@@ -602,14 +602,14 @@ const Player = () => {
                   </div>
                   <div className="flex flex-col overflow-hidden  p-1">
                     <div>
-                        {/* {suggetions.length >= 0 && (
+                       {suggetions.length >= 0 && (
                           <div className="flex flex-col justify-center items-center w-full ">
                             <h2 className="pr-1 m-4 text-xl lg:text-2xl font-semibold w-full ml-[2.5rem] lg:ml-[5.5rem] ">
                               You Might Like
                             </h2>
                             <div className="flex justify-center items-center gap-3 w-full">
                               {/* Left Arrow */}
-                              {/* <MdOutlineKeyboardArrowLeft
+                               <MdOutlineKeyboardArrowLeft
                                 className="text-3xl hover:scale-125 cursor-pointer h-[9rem]   hidden lg:block arrow-btn"
                                 onClick={() => scrollLeft(scrollRef)}
                               />
@@ -621,26 +621,26 @@ const Player = () => {
                                   <SongGrid
                                     key={song.id || index}
                                     {...song}
-                                    song={list}
-                                  /> */}
-                                {/* ))} */}
-                              {/* </div> */}
+                                     song={list}
+                                  /> 
+                                ))}
+                              </div>
                               {/* Right Arrow */}
-                              {/* <MdOutlineKeyboardArrowRight
+                             <MdOutlineKeyboardArrowRight
                                 className="text-3xl hover:scale-125  cursor-pointer h-[9rem] hidden lg:block arrow-btn"
                                 onClick={() => scrollRight(scrollRef)}
                               />
-                            </div> */}
-                          {/* </div> */}
-                        {/* )} */}
-                       {/* */} 
+                            </div> 
+                          </div>
+                        )}
+                       
                     </div>
                     <div className="flex flex-col pt-3 ">
                       <h2 className="pr-1 text-xl lg:text-2xl font-semibold  w-full ml-[2rem] lg:ml-[3.5rem] lg:m-3 ">
                         Artists
                       </h2>
                       <div className="grid grid-flow-col lg:w-max w-full scroll-smooth gap-[1rem] lg:gap-[1.5rem] lg:pl-[2rem] pl-[1rem] overflow-x-scroll scroll-hide ">
-                        {currentSong?.artists?.primary.map((artist, index) => (
+                        {currentSong.artists.primary.map((artist, index) => (
                           <ArtistItems
                             key={`${artist.id || index}`}
                             {...artist}
@@ -679,7 +679,7 @@ const Player = () => {
                 </div>
               </div>
             </>
-          )}{" "}
+          )}
         </div>
       </div>
     </div>
