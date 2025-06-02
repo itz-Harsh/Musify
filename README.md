@@ -76,11 +76,4 @@ Visit [http://localhost:5173](http://localhost:5173) in your browser to explore 
 
 fork and deploy your own repo of `https://github.com/sumitkolhe/jiosaavn-api` 
 
-## Contributing
-
-Contributions are welcome! Please follow our [Contribution Guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
