@@ -1,5 +1,5 @@
 
-const api_url = 'https://jiosaavnapi-harsh.vercel.app/';
+const api_url = 'https://jiosaavnapi-harsh.vercel.app/api/';
 if (!api_url) {
     console.log("Error Fetching API");
 };
