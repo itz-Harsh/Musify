@@ -42,7 +42,7 @@ const ArtistsDetails = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        let response = await fetch(`https://jiosaavn-api-lime.vercel.app/api/artists?id=${id}`);
+        let response = await fetch(`https://jiosaavnapi-harsh.vercel.app/api/artists?id=${id}`);
         
          if (!response.ok) {
           response = await fetch(`https://saavn.dev/api/artists?id=${id}`);
