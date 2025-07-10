@@ -89,14 +89,6 @@ const Navbar = () => {
     }
   };
 
-  const getGreeting = () => {
-    const hours = new Date().getHours();
-    return hours < 12
-      ? "Good Morning"
-      : hours < 18
-      ? "Good Afternoon"
-      : "Good Evening";
-  };
 
   const GetData = async(suggestion) => {
       const response = await getSuggestionSong(suggestion.id);
