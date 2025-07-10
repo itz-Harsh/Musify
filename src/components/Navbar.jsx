@@ -141,7 +141,7 @@ const Navbar = () => {
     <nav className="navbar flex flex-col lg:gap-10 lg:flex-row lg:items-center top-0 z-20 fixed w-full pl-1 pr-1 lg:px-2   lg:h-[4.5rem]">
       {/* Logo */}
       <div className="flex  items-center gap-[4rem] mb-2 lg:mb-0 w-fit">
-        <div className="flex items-center lg:gap-[4rem] gap-5  h-[61px]">
+        <div className="flex items-center lg:gap-[4rem] lg:w-auto w-screen pr-[2rem] lg:justify-normal justify-between gap-5  h-[61px]">
           <Link to="/" className="flex items-center ">
             <span className="bg"></span>
             <div className="">
@@ -154,9 +154,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="text-xl pl-6 w-max flex self-center lg:hidden font-semibold ">
-            {getGreeting()}
-          </div>
+          
           <Theme />
         </div>
 

@@ -1,0 +1,75 @@
+.theme-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+/* Main switch container */
+.theme-switch {
+  width: 95px;
+  height: 40px;
+  background: linear-gradient(to right, #ffcc70, #ff5e62); /* Light by default */
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: background 0.5s ease;
+  font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Night theme gradient */
+.theme-switch.dark {
+  background: linear-gradient(to right, #283e51, #485563);
+}
+
+.theme-labels {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.label.active {
+  color: #fff;
+}
+
+/* Slider circle */
+.slider {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.4s ease;
+  z-index: 2;
+}
+
+.theme-switch.dark .slider {
+  left: calc(100% - 35px); /* 220 - 50 - 10(padding + margin) */
+}
+
+.slider-icon {
+  font-size: 24px;
+  color: #ff5e62;
+}
+
+.theme-switch.dark .slider-icon {
+  color: #90caf9;
+}
