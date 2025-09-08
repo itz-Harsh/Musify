@@ -42,7 +42,8 @@ const ArtistsDetails = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        let response = await fetch(`https://jiosaavnapi-harsh.vercel.app/api/artists?id=${id}`);
+        const apiurl = import.meta.env.VITE_API_URL;
+        let response = await fetch(`${apiurl}artists?id=${id}`);
         
          if (!response.ok) {
           response = await fetch(`https://saavn.dev/api/artists?id=${id}`);

@@ -1,5 +1,6 @@
 
-const api_url = 'https://jiosaavnapi-harsh.vercel.app/api/';
+const api_url = import.meta.env.VITE_API_URL;
+console.log("API URL:", api_url);
 if (!api_url) {
     console.log("Error Fetching API");
 };
@@ -164,21 +165,6 @@ export const searchPlayListByQuery = async (query) => {
 export const fetchplaylistsByID = async (ID) => { 
     try{
         const playlists = await fetch(`${api_url}playlists?id=${ID}&limit=40`);
-        const data = await playlists.json();
-        if(!playlists.ok) {
-            throw new Error(data.message || 'Failed to Fetch Artist Data');
-        }
-        return data;
-    }
-    catch{
-        console.log('API Error: ', Error );
-        throw Error;
-    }
-};
-
-export const fetchSongSuggestionsByID = async (ID) => { 
-    try{
-        const playlists = await fetch(`${api_url}?id=${ID}&limit=30`);
         const data = await playlists.json();
         if(!playlists.ok) {
             throw new Error(data.message || 'Failed to Fetch Artist Data');

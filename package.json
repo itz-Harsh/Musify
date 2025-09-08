@@ -19,6 +19,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.7.9",
     "dom": "^0.0.3",
+    "dotenv": "^17.2.2",
     "he": "^1.2.0",
     "install": "^0.13.0",
     "prop-types": "^15.8.1",
