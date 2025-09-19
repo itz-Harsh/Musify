@@ -43,7 +43,7 @@ function Browse() {
 
     try {
       setLoading(true);
-      const response = await fetch(`https://jiosaavnapi-harsh.vercel.app/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
+      const response = await fetch(`https://jiosaavn-api-stableone.vercel.app/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
       // const response = await fetch(`https://saavn.dev/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
       
       const data = await response.json();
