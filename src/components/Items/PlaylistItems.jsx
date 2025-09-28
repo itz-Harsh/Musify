@@ -9,7 +9,7 @@ const PlaylistItems = ({name , image , id}) => {
   return (
     <Link
       to={`/playlists/${id}`}
-      className="w-[7.9rem]   flex flex-col justify-center items-center gap-3 rounded-lg"
+      className="lg:w-[9.5rem] w-[5.5rem]   flex flex-col justify-center items-center gap-3 rounded-lg"
     > 
       <img
         src={imageUrl || "/Unknown.png"}

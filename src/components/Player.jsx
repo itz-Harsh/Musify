@@ -250,19 +250,19 @@ const Player = () => {
   return (
     <div
       className={` ${isVisible ? "lg:flex " : "hidden"}
-      fixed bottom-14 lg:bottom-0 left-0 w-screen z-20 flex   justify-center items-center   `}
+      fixed bottom-14 lg:bottom-0 left-0 w-screen z-20 flex    justify-center items-center  `}
     >
       <div
-        className={`flex flex-col h-auto w-screen bg-auto rounded-tl-xl rounded-tr-xl  relative transition-all ease-in-out duration-500  ${
+        className={`flex flex-col  w-screen bg-auto rounded-tl-xl rounded-tr-xl  relative transition-all ease-in-out duration-500  ${
           isMaximized
             ? "  pt-[26rem] backdrop-brightness-[0.4]"
-            : "lg:h-[6rem] h-auto p-4 Player"
+            : "lg:h-[5.4rem] px-4 py-2 Player"
         }`}
       >
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full ">
           {!isMaximized && (
             <>
-              <form className="flex items-center w-full mb-4 gap-3 h-[0px]">
+              <form className="flex items-center w-full lg:mb-2 mb-1 gap-3 h-[10px] ">
                 <span className=" text-xs ">{formatTime(currentTime)} </span>
                 <input
                   type="range"
@@ -291,18 +291,17 @@ const Player = () => {
                   {formatTime(currentSong?.duration || 0)}
                 </span>
               </form>
-              <div className="h-[3rem] w-full">
-                <div className="flex justify-between items-center  mb-4">
+              <div className=" h-[3rem] w-full">
+                <div className="flex justify-between items-center  ">
                   <div
                     className="flex w-full  lg:w-auto"
                     onClick={handleMaximized}
                   >
-                    <div className="flex items-center gap-3 ">
+                    <div className=" flex items-center gap-3 ">
                       <img
                         src={currentSong?.image || " "}
                         alt={currentSong?.name || ""}
-                        width={55}
-                        className="rounded"
+                        className="rounded w-10 lg:w-14"
                       />
                       <div className="flex flex-col overflow-y-clip p-1 w-[14rem] h-[2.9rem]">
                         <span className=" w-fit h-[1.5rem] overflow-hidden">
@@ -316,6 +315,7 @@ const Player = () => {
                         </span>
                       </div>
                     </div>
+
                   </div>
                   <div className="flex flex-col lg:items-center gap-5   p-2">
                     <div className="flex gap-5 justify-end lg:justify-center items-center">

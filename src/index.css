@@ -30,7 +30,8 @@
   --suggest : #141414;
   --card-bg: #0d0d0e;
   --card-border: #333333c0;
-  --player-bg: linear-gradient(0deg, #09090B 0%, #09090B 45%, #09090B 100%);
+  --player-bg: linear-gradient(90deg, #18191a 0% , #161515 60%,  #0f0f0f 100%);
+  
   --navbar-bg: #09090B;
   --scrollbar-bg: #2e2e2e;
   --scrollbar-thumb: #313131;

@@ -14,6 +14,8 @@ function Browse() {
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
 
+  const api_url = import.meta.env.VITE_API_URL;
+
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -43,7 +45,7 @@ function Browse() {
 
     try {
       setLoading(true);
-      const response = await fetch(`https://jiosaavn-api-stableone.vercel.app/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
+      const response = await fetch(`${api_url}search/playlists?query=${genre.toLowerCase()}&limit=30`);
       // const response = await fetch(`https://saavn.dev/api/search/playlists?query=${genre.toLowerCase()}&limit=30`);
       
       const data = await response.json();
