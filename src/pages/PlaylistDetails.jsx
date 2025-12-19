@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Player from "../components/Player";
 import { fetchplaylistsByID } from "../../fetch";
@@ -7,12 +7,13 @@ import Footer from "../components/footer";
 import MusicContext from "../context/MusicContext";
 import SongsList from "../components/SongsList";
 import Navigator from "../components/Navigator";
-import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import { FaHeart, FaRegHeart, FaTrashCan } from "react-icons/fa6";
 import { FaPlay } from "react-icons/fa";
+
 
 const PlaylistDetails = () => {
   const { id, idx } = useParams();
-
+  const navigate = useNavigate();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
@@ -28,8 +29,8 @@ const PlaylistDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState("");
 
-  /* ---------------- Fetch playlist ---------------- */
 
+  
   useEffect(() => {
     const fetchDetails = async () => {
       try {
@@ -102,7 +103,6 @@ const PlaylistDetails = () => {
   }
 
   const saveText = () => {
-    // localStorage.setItem(storageKey, text);
     const load = JSON.parse(localStorage.getItem("spotx"));
     load[idx].name = text;
     localStorage.setItem("spotx",JSON.stringify(load));
@@ -110,7 +110,6 @@ const PlaylistDetails = () => {
     setIsEditing(false);
   };
 
-  /* ---------------- Actions ---------------- */
 
   const toggleLikePlaylist = () => {
     let updated = [...likedPlaylists];
@@ -156,7 +155,17 @@ const PlaylistDetails = () => {
     return `${h}h ${m}m`;
   };
 
-  /* ---------------- JSX ---------------- */
+const deleteAtIndex = (index) => {
+  const idxNum = Number(index);   // 🔥 FIX
+
+  const arr = JSON.parse(localStorage.getItem("spotx")) || [];
+  const updated = arr.filter((_, i) => i !== idxNum);
+
+  localStorage.setItem("spotx", JSON.stringify(updated));
+  navigate("/Music");
+};
+
+
 
   return (
     <>
@@ -218,7 +227,13 @@ const PlaylistDetails = () => {
                   )}
                 </button>
               ) : (
-                ""
+                <button
+                  onClick={() => deleteAtIndex(idx)}
+                  title="Like Playlist"
+                  className="hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] lg:flex justify-center items-center rounded-full "
+                >
+                  <FaTrashCan />
+                </button>
               )}
             </div>
           </div>
@@ -236,7 +251,13 @@ const PlaylistDetails = () => {
                 )}
               </button>
             ) : (
-              ""
+              <button
+                  onClick={() => deleteAtIndex(idx)}
+                  title="Like Playlist"
+                  className="lg:hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] flex justify-center items-center rounded-full "
+                >
+                  <FaTrashCan />
+                </button>
             )}
 
             <span className=" lg:hidden flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#8f8f8f6e] rounded-full cursor-pointer ">
