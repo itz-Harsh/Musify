@@ -74,6 +74,8 @@ const MyMusic = () => {
 
     // 3️⃣ Save back as array
     localStorage.setItem("spotx", JSON.stringify(stored));
+    window.location.reload();
+
   } catch (err) {
     console.error("API Error:", err);
   }
