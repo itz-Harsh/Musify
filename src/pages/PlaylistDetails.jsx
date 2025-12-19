@@ -11,38 +11,79 @@ import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { FaPlay } from "react-icons/fa";
 
 const PlaylistDetails = () => {
-  const { id } = useParams();
+  const { id, idx } = useParams();
+
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
-  const [list , setList ] = useState({});
+  const [list, setList] = useState([]);
   const [error, setError] = useState(null);
+
   const { playMusic } = useContext(MusicContext);
+
   const [likedPlaylists, setLikedPlaylists] = useState(() => {
     return JSON.parse(localStorage.getItem("likedPlaylists")) || [];
   });
+
+  // editable title state
+  const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState("");
+
+  /* ---------------- Fetch playlist ---------------- */
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const data = await fetchplaylistsByID(id);
-        setDetails(data);
+        setDetails(data.data);
         setList(data.data.songs);
-
-        // console.log(list);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch playlist details. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchDetails();
-  }, [id]);
+    const spotx = () => {
+      try {
+        const data = JSON.parse(localStorage.getItem("spotx"));
+        setDetails(data[idx]);
+        setList(data[idx].songs);
+      } catch {
+        setError("Failed to fetch playlist details. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    id ? fetchDetails() : spotx();
+  }, [id, idx]);
+
+  /* ---------------- Persist likes ---------------- */
 
   useEffect(() => {
-    // Update localStorage when likedPlaylists changes
     localStorage.setItem("likedPlaylists", JSON.stringify(likedPlaylists));
   }, [likedPlaylists]);
+
+  /* ---------------- Derived data ---------------- */
+
+  const playlistData = details || {};
+  const playlistImage =
+    playlistData.image?.[2]?.url || playlistData.image || "/default-image.png";
+
+  /* ---------------- Editable title logic ---------------- */
+
+  const storageKey = id
+    ? `playlist-title-${id}`
+    : `playlist-title-local-${idx}`;
+
+  useEffect(() => {
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      setText(saved);
+    } else if (playlistData?.name) {
+      setText(playlistData.name);
+    }
+  }, [storageKey, playlistData?.name]);
 
   if (loading) {
     return (
@@ -60,56 +101,62 @@ const PlaylistDetails = () => {
     );
   }
 
-  const playlistData = details.data || {};
-  const playlistImage = playlistData.image?.[2]?.url || "/default-image.png"; // Fallback image
+  const saveText = () => {
+    // localStorage.setItem(storageKey, text);
+    const load = JSON.parse(localStorage.getItem("spotx"));
+    load[idx].name = text;
+    localStorage.setItem("spotx",JSON.stringify(load));
+
+    setIsEditing(false);
+  };
+
+  /* ---------------- Actions ---------------- */
 
   const toggleLikePlaylist = () => {
-    let updatedPlaylists = [...likedPlaylists];
+    let updated = [...likedPlaylists];
 
-    if (updatedPlaylists.some((p) => p.id === playlistData.id)) {
-      updatedPlaylists = updatedPlaylists.filter(
-        (p) => p.id !== playlistData.id
-      );
+    if (updated.some((p) => p.id === playlistData.id)) {
+      updated = updated.filter((p) => p.id !== playlistData.id);
     } else {
-      updatedPlaylists.push({
+      updated.push({
         id: playlistData.id,
         name: playlistData.name,
-        image: playlistImage, // Store the image as well
+        image: playlistImage,
       });
     }
 
-    setLikedPlaylists(updatedPlaylists);
+    setLikedPlaylists(updated);
   };
 
   const playFirstSong = () => {
-    if (playlistData.songs && playlistData.songs.length > 0) {
-      const firstSong = playlistData.songs[0];
-      const audioSource = firstSong.downloadUrl
-        ? firstSong.downloadUrl[4]?.url || firstSong.downloadUrl
-        : firstSong.audio;
-      const { name, duration, image, id, artists } = firstSong;
+    if (!playlistData.songs?.length) return;
 
-      playMusic(
-        audioSource,
-        name,
-        duration,
-        image,
-        id,
-        artists,
-        playlistData.songs
-      );
-    }
+    const song = playlistData.songs[0];
+    const audioSource =
+      song.downloadUrl?.[4]?.url || song.downloadUrl || song.audio;
+
+    playMusic(
+      audioSource,
+      song.name,
+      song.duration,
+      song.image,
+      song.id,
+      song.artists,
+      playlistData.songs
+    );
   };
 
   const totalDuration = playlistData.songs
-    .map((song) => song.duration)
+    ?.map((s) => s.duration)
     .reduce((a, b) => a + b, 0);
 
-  const formatDuration = (duration) => {
-    const hours = Math.floor(duration / 3600);
-    const minutes = Math.floor((duration % 3600) / 60);
-    return `${hours}h   ${minutes}m `;
+  const formatDuration = (d) => {
+    const h = Math.floor(d / 3600);
+    const m = Math.floor((d % 3600) / 60);
+    return `${h}h ${m}m`;
   };
+
+  /* ---------------- JSX ---------------- */
 
   return (
     <>
@@ -124,11 +171,29 @@ const PlaylistDetails = () => {
             className="w-[10rem] lg:w-[15rem] rounded object-cover DetailImg"
           />
           <div className="flex flex-col gap-1 items-center">
-            <h1 className="text-2xl lg:text-3xl font-bold ">
-              {playlistData.name}
+            <h1
+              className={`text-2xl lg:text-3xl font-bold ${
+                id ? "" : "cursor-pointer"
+              }`}
+              onDoubleClick={() => {
+                if (!id) setIsEditing(true);
+              }}
+            >
+              {!isEditing || id ? (
+                text
+              ) : (
+                <input
+                  autoFocus
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  onBlur={saveText}
+                  onKeyDown={(e) => e.key === "Enter" && saveText()}
+                  className="bg-transparent outline-none text-center"
+                />
+              )}
             </h1>
             <p className="text-sm lg:text-lg font-semibold">
-              Total Songs : {playlistData.songCount || 0}
+              Total Songs : {playlistData.songCount || list.length}
             </p>
             <p className="text-sm lg:text-lg font-semibold">
               Total Duration : {formatDuration(totalDuration)}
@@ -140,31 +205,40 @@ const PlaylistDetails = () => {
                   onClick={playFirstSong}
                 />
               </span>
-              <button
-              onClick={toggleLikePlaylist}
-              title="Like Playlist"
-              className="hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] lg:flex justify-center items-center rounded-full "
-            >
-              {likedPlaylists.some((p) => p.id === playlistData.id) ? (
-                <FaHeart className="text-red-500 text-2xl" />
+              {id ? (
+                <button
+                  onClick={toggleLikePlaylist}
+                  title="Like Playlist"
+                  className="hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] lg:flex justify-center items-center rounded-full "
+                >
+                  {likedPlaylists.some((p) => p.id === playlistData.id) ? (
+                    <FaHeart className="text-red-500 text-2xl" />
+                  ) : (
+                    <FaRegHeart className="icon text-2xl" />
+                  )}
+                </button>
               ) : (
-                <FaRegHeart className="icon text-2xl" />
+                ""
               )}
-            </button>
             </div>
           </div>
           <div className="flex gap-3">
-            <button
-              onClick={toggleLikePlaylist}
-              title="Like Playlist"
-              className="lg:hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] flex justify-center items-center rounded-full "
-            >
-              {likedPlaylists.some((p) => p.id === playlistData.id) ? (
-                <FaHeart className="text-red-500 text-2xl" />
-              ) : (
-                <FaRegHeart className="icon text-2xl" />
-              )}
-            </button>
+            {id ? (
+              <button
+                onClick={toggleLikePlaylist}
+                title="Like Playlist"
+                className="lg:hidden mb-[1.4rem] border-[1px] border-[#8f8f8f6e] h-[3rem] w-[3rem] flex justify-center items-center rounded-full "
+              >
+                {likedPlaylists.some((p) => p.id === playlistData.id) ? (
+                  <FaHeart className="text-red-500 text-2xl" />
+                ) : (
+                  <FaRegHeart className="icon text-2xl" />
+                )}
+              </button>
+            ) : (
+              ""
+            )}
+
             <span className=" lg:hidden flex justify-center items-center h-[3rem] w-[3rem] border-[1px] border-[#8f8f8f6e] rounded-full cursor-pointer ">
               <FaPlay
                 className=" text-xl icon active:scale-90"

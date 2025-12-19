@@ -214,6 +214,7 @@ export default function App() {
             <Route path="/albums/:id" element={<AlbumDetail />} />
             <Route path="/search/:query" element={<SearchResult />} />
             <Route path="/playlists/:id" element={<PlaylistDetails />} />
+            <Route path="/playlist/:idx" element={<PlaylistDetails />} />
             <Route path="/Browse" element={<Browse />} />
             <Route path="/Music" element={<MyMusic />} />
           </Routes>
