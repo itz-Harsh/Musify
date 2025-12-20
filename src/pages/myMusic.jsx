@@ -103,15 +103,20 @@ const MyMusic = () => {
     setInputvalue("");
     setShowInput(false);
   };
-
+  const theme = localStorage.getItem("theme");
   return (
     <>
       <Navbar />
       <div className="flex flex-col mb-[12rem] gap-[2rem] body">
         {loading ? (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-            <div className="bg-white rounded-xl p-4 shadow-xl">
+            <div className={
+              theme === "dark"
+              ? "bg-[#111114] text-white rounded-xl p-3 shadow-xl text-center "
+              : "bg-white rounded-xl p-3 shadow-xl text-center"
+             }>
               <img src="/Loading.gif" alt="Loading..." />
+              Loading...
             </div>
           </div>
         ) : (
