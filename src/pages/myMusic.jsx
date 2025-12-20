@@ -64,12 +64,12 @@ const MyMusic = () => {
       // 1️⃣ Read existing array from localStorage
       const stored = JSON.parse(localStorage.getItem("spotx")) || [];
 
-      const exists = stored.some((p) => p.image === s.image);
+      const exists = stored.some((p) => p.name === s.name);
 
       if (!exists) {
         stored.push({
           date: s.year,
-          name: `Spotify Playlist ${stored.length + 1}`,
+          name: s.name,
           image: s.image,
           idx: stored.length,
           songs: s.songs,
